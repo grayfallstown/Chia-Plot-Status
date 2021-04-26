@@ -16,7 +16,8 @@
 
 ## Installation
 
-- [Download](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.0-beta/ChiaPlotStatus.zip)
+- Go the [releases]("https://github.com/grayfallstown/Chia-Plot-Status/releases/") page
+- Download ChiaPlotStatus under Assets
 - Unpack
 - Run ChiaPlotStatus.exe (Hint: At first run Windows will warn you that this was published by an unknown developer)
 
