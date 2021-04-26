@@ -20,20 +20,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-/**
- * Folders einrichten
- * Folders in Settings speichern
- *
- * Charts based on phase time by tmpdir and date
- * Estimate Plots per day per tmp dir combination
- * Estimate Plots per day full system
- *
- * Mark dead Plotting Processes (save properties and startdate, not only logfile)
- */
-
 namespace ChiaPlotStatus
 {
+    /**
+     * The entire UI code
+     */
     public partial class MainWindow : Window
     {
         private readonly PlotManager PlotManager = new PlotManager();
@@ -130,8 +121,9 @@ namespace ChiaPlotStatus
             if (Directory.Exists(folder) && !PlotManager.LogDirectories.Contains(folder))
             {
                 PlotManager.AddLogFolder(folder);
-                Load();
+                folderListView.Items.Refresh();
                 SaveConfig();
+                Load();
             }
         }
 
@@ -141,8 +133,9 @@ namespace ChiaPlotStatus
             if (Directory.Exists(folder))
             {
                 PlotManager.RemoveLogFolder(folder);
-                Load();
+                folderListView.Items.Refresh();
                 SaveConfig();
+                Load();
             }
         }
 
