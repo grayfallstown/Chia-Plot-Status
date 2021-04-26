@@ -1,4 +1,4 @@
-![Chia Plot Status Logo](./Screenshot.jpg)
+![Chia Plot Status Logo](./Icon - Color changed.jpg)
 
 # Chia Plot Status
 
