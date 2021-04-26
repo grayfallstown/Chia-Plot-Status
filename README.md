@@ -31,4 +31,4 @@ MIT opensource licence, free to keep or change.
 
 ## Thanks to
 
-[charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](./Icon - Readme.txt)
+[charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Icon%20-%20Readme.txt)
