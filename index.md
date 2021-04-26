@@ -1,37 +1,31 @@
-## Welcome to GitHub Pages
+<p align="center">
+  <img width="200" alt="Chia Plot Status Log" src="https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Icon%20-%20Color%20changed.svg">
+</p>
 
-You can use the [editor on GitHub](https://github.com/grayfallstown/Chia-Plot-Status/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# [Chia](https://www.chia.net/) Plot Status
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![Screenshot](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Screenshot.jpg)
 
-### Markdown
+## Features
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+ - Show Progress of running plots
+ - Show estimated time to completion based on your already finished plots best matching your current plot config
+ - Show important information from log file in easy to read table
+ - Multiple folders with log files supported
+ - Multiple plots per log file supported (plot create --num n)
 
-```markdown
-Syntax highlighted code block
+## Download
 
-# Header 1
-## Header 2
-### Header 3
+[Download latest version proud-gardener](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.0-beta/ChiaPlotStatus.zip)
 
-- Bulleted
-- List
+## Working with many distributed plotting rigs
 
-1. Numbered
-2. List
+Either mount the log folders of all rigs as network shares or collect them by your favorite means.
 
-**Bold** and _Italic_ and `Code` text
+## Open Source
 
-[Link](url) and ![Image](src)
-```
+MIT opensource licence, free to keep or change.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Thanks to
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/grayfallstown/Chia-Plot-Status/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+[charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Icon%20-%20Readme.txt)
