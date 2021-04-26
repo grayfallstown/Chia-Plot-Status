@@ -1,0 +1,77 @@
+﻿<Window x:Class="ChiaPlotStatus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChiaPlotStatus"
+        mc:Ignorable="d"
+        FontSize="10"
+        Title="Chia Plot Status" Height="450" Width="800">
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom" FontSize="10">
+            <TextBlock>
+                <Hyperlink NavigateUri="https://github.com/grayfallstown/Chia-Plot-Status">
+                    Chia Plot Status on Github
+                </Hyperlink>
+                Logo made by
+                <Hyperlink NavigateUri="https://freeicons.io/profile/740">
+                    charlie
+                </Hyperlink>
+                On
+                <Hyperlink NavigateUri="https://freeicons.io">
+                    freeicons.io
+                </Hyperlink>
+                under
+                <Hyperlink NavigateUri="https://creativecommons.org/licenses/by/3.0/">
+                    License Creative Commons(Attribution 3.0 unported)
+                </Hyperlink>
+            </TextBlock>
+        </StatusBar>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Icon - Color changed.jpg" MaxHeight="40" Margin="10" />
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <ListView Name="folderListView">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn>
+                                        <GridViewColumnHeader>
+                                            <TextBlock FontWeight="Bold" Margin="3">Folders with log files</TextBlock>
+                                        </GridViewColumnHeader>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" Width="400"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumnHeader>
+                                            <Button Name="btnAddFolder" Click="AddFolder">Add</Button>
+                                        </GridViewColumnHeader>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Remove" Click="RemoveFolder" Tag="{Binding}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock FontWeight="Bold" Margin="3">Font Size</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name="btnIncreaseFontSize" Click="IncreaseFontSize" Width="20" Height="20">+</Button>
+                        <Button Name="btnDecreaseFontSize" Click="DecreaseFontSize" Width="20" Height="20">-</Button>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <DataGrid x:Name="dataGrid"
+                    IsReadOnly="True"
+                    AutoGenerateColumns="True">
+            </DataGrid>
+        </StackPanel>
+    </DockPanel>
+</Window>
