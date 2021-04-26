@@ -1,10 +1,10 @@
 <p align="center">
-  <img width="200" alt="Chia Plot Status Log" src="https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Icon%20-%20Color%20changed.svg">
+  <img width="200" alt="Chia Plot Status Log" src="https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Icon%20-%20Color%20changed.svg?raw=true">
 </p>
 
 # [Chia](https://www.chia.net/) Plot Status
 
-![Screenshot](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Screenshot.jpg)
+![Screenshot](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Screenshot.jpg?raw=true)
 
 ## Features
 
