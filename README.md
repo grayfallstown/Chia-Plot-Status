@@ -1,4 +1,9 @@
-![Chia Plot Status Logo](./Icon - Color changed.jpg)
+![Chia Plot Status Logo](./Icon%20-%20Color%20changed.jpg)
+
+<p align="center">
+  <img width="200" src="./Icon%20-%20Color%20changed.svg">
+</p>
+
 
 # Chia Plot Status
 
