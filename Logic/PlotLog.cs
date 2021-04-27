@@ -1,4 +1,6 @@
-﻿namespace ChiaPlotStatus
+﻿using System;
+
+namespace ChiaPlotStatus
 {
     /**
      * Stores informations about a plotting process.
@@ -11,7 +13,7 @@
         // public string DestDrive { get; set; }
         public int Errors { get; set; }
         public float PercentDone { get; set; }
-        public string ETA { get; set; }
+        public int ETA { get; set; }
         public int CurrentBucket { get; set; }
         public int Phase1Table { get; set; }
         public int Phase2Table { get; set; }
@@ -67,5 +69,69 @@
             }
             PercentDone = (part + subpart) / 22 * 100;
         }
+
+        public void UpdateEta(PlottingStatistics stats)
+        {
+            this.ETA = 0;
+            if (this.Buckets == 0)
+            {
+                // log too short to know anything yet
+                return;
+            }
+            int currentPhase = 1;
+            if (Math.Abs(this.PercentDone - 100f) < 0.00001)
+            {
+                return;
+            }
+            else
+            {
+                if (this.Phase3Seconds > 0)
+                {
+                    currentPhase = 4;
+                }
+                else if (this.Phase2Seconds > 0)
+                {
+                    currentPhase = 3;
+                }
+                else if (this.Phase1Seconds > 0)
+                {
+                    currentPhase = 2;
+                }
+            }
+            if (currentPhase <= 4)
+            {
+                this.ETA += stats.Phase4AvgTimeNeed;
+            }
+            if (currentPhase <= 3)
+            {
+                float factor = 1;
+                if (currentPhase == 3)
+                {
+                    factor = (float)(this.Phase3Table - 1) / 7;
+                    factor += (this.CurrentBucket / this.Buckets);
+                }
+                this.ETA += (int)(factor * stats.Phase3AvgTimeNeed);
+            }
+            if (currentPhase <= 2)
+            {
+                float factor = 1;
+                if (currentPhase == 2)
+                {
+                    factor = (float)((7 - this.Phase3Table) - 1) / 7;
+                    factor += (this.CurrentBucket / this.Buckets);
+                }
+                this.ETA += (int)(factor * stats.Phase2AvgTimeNeed);
+            }
+            if (currentPhase == 1)
+            {
+                var factor = (float)(this.Phase3Table - 1) / 7;
+                if (this.Buckets != 0)
+                {
+                    factor += (this.CurrentBucket / this.Buckets);
+                }
+                this.ETA += (int)(factor * stats.Phase1AvgTimeNeed);
+            }
+        }
+
     }
 }

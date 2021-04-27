@@ -16,7 +16,7 @@ namespace ChiaPlotStatus
     class PlotManager
     {
         public List<string> LogDirectories { get; } = new List<string>();
-        private ConcurrentDictionary<string, PlotLogFile> PlotLogFiles { get; } = new ConcurrentDictionary<string, PlotLogFile>();
+        private Dictionary<string, PlotLogFile> PlotLogFiles { get; } = new Dictionary<string, PlotLogFile>();
         public PlottingStatisticsIdRelevanceWeights Weights { get; } = new PlottingStatisticsIdRelevanceWeights();
         public PlottingStatisticsHolder Statistics { get; set; }
 
@@ -35,7 +35,7 @@ namespace ChiaPlotStatus
             {
                 var folder = plotLogFile.LogFolder + "\\";
                 if (string.Equals(folder, path))
-                   PlotLogFiles.TryRemove(plotLogFile.LogFile, out _);
+                   PlotLogFiles.Remove(plotLogFile.LogFile);
             }
         }
 
@@ -50,13 +50,16 @@ namespace ChiaPlotStatus
 
         private void SearchForNewLogFiles()
         {
-            Parallel.ForEach(LogDirectories, (directory) =>
+            foreach (var directory in LogDirectories)
             {
                 foreach (var filePath in Directory.GetFiles(directory))
                 {
-                    PlotLogFiles.GetOrAdd(filePath, (_) => new PlotLogFile(filePath));
+                    if (!PlotLogFiles.ContainsKey(filePath))
+                    {
+                        PlotLogFiles[filePath] = new PlotLogFile(filePath);
+                    }
                 }
-            });
+            }
         }
 
         private ConcurrentBag<PlotLog> ParseTheLogs()
@@ -98,97 +101,11 @@ namespace ChiaPlotStatus
             Statistics = new PlottingStatisticsHolder(result, Weights);
             Parallel.ForEach(result, (plotLog) =>
             {
-            // foreach (var plotLog in result) {
                 PlottingStatistics stats = Statistics.GetMostRelevantStatistics(plotLog);
-                if (stats == null)
-                {
-                    plotLog.ETA = "N/A";
-                }  else
-                {
-                    plotLog.ETA = CalcEta(plotLog, stats);
-                }
-            // }
+                plotLog.UpdateEta(stats);
             });
         }
 
-        private string CalcEta(PlotLog plotLog, PlottingStatistics stats)
-        {
-            if (plotLog.Buckets == 0)
-            {
-                // log too short to know anything yet
-                return "N/A";
-            }
-            int currentPhase = 1;
-            int eta = 0;
-            if (Math.Abs(plotLog.PercentDone - 100f) < 0.00001)
-            {
-                return "done";
-            }
-            else
-            {
-                if (plotLog.Phase3Seconds > 0)
-                {
-                    currentPhase = 4;
-                }
-                else if (plotLog.Phase2Seconds > 0)
-                {
-                    currentPhase = 3;
-                }
-                else if (plotLog.Phase1Seconds > 0)
-                {
-                    currentPhase = 2;
-                }
-            }
-            if (currentPhase <= 4)
-            {
-                eta += stats.Phase4AvgTimeNeed;
-            }
-            if (currentPhase <= 3)
-            {
-                float factor = 1;
-                if (currentPhase == 3)
-                {
-                    factor = (float) (plotLog.Phase3Table - 1) / 7;
-                    factor += (plotLog.CurrentBucket / plotLog.Buckets);
-                }
-                eta += (int) (factor * stats.Phase3AvgTimeNeed);
-            }
-            if (currentPhase <= 2)
-            {
-                float factor = 1;
-                if (currentPhase == 2)
-                {
-                    factor = (float)((7 - plotLog.Phase3Table) - 1) / 7;
-                    factor += (plotLog.CurrentBucket / plotLog.Buckets);
-                }
-                eta += (int)(factor * stats.Phase2AvgTimeNeed);
-            }
-            if (currentPhase == 1)
-            {
-                var factor = (float)(plotLog.Phase3Table - 1) / 7;
-                if (plotLog.Buckets != 0)
-                {
-                    factor += (plotLog.CurrentBucket / plotLog.Buckets);
-                }
-                eta += (int)(factor * stats.Phase1AvgTimeNeed);
-            }
-
-            TimeSpan time = TimeSpan.FromSeconds(eta);
-            var result = time.ToString(@"hh\:mm\:ss");
-            return result;
-        }
     }
 
 }
-
-
-/**
- * Map<string, {
- *      List<Plot>
- *      avgPhase1
- *      avgPhase2
- *      avgPhase3
- *      avgPhase4
- * }
- *
- */

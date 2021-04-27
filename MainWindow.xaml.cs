@@ -95,15 +95,16 @@ namespace ChiaPlotStatus
         {
             Task.Run(() =>
             {
-                var plotLogs = PlotManager.PollPlotLogs();
                 Dispatcher.Invoke(() => {
-                    dataGrid.ItemsSource = plotLogs;
+                    var plotLogs = PlotManager.PollPlotLogs();
+                    var plotLogUis = new List<PlotLogUI>();
+                    foreach (var plotLog in plotLogs)
+                    {
+                        plotLogUis.Add(new PlotLogUI(plotLog));
+                    }
+                    dataGrid.ItemsSource = plotLogUis;
                     dataGrid.Items.Refresh();
                 });
-
-                // not recommended to do, just for fun
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
             });
         }
 

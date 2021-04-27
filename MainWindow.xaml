@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         FontSize="10"
         Title="Chia Plot Status" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+    </Window.Resources>
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom" FontSize="10">
             <TextBlock>
@@ -68,10 +73,146 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <DataGrid x:Name="dataGrid"
-                    IsReadOnly="True"
-                    AutoGenerateColumns="True">
-            </DataGrid>
+            <ListView Name="dataGrid">
+                <ListView.Resources>
+                    <DataTemplate x:Key="Templ">
+                        <TextBlock HorizontalAlignment="Right" Text="{Binding}"/>
+                    </DataTemplate>
+                    <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Plot Information">
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Tmp1Drive}" Header="Tmp1">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Left" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Tmp2Drive}" Header="Tmp2">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Left" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Errors}" Header="Errors">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Progress}" Header="Progress">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ETA}" Header="ETA">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Phase}" Header="Current Phase">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=CurrentTable}" Header="Current Table">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=CurrentBucket}" Header="Current Bucket">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Phase1Time}" Header="Phase 1">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Phase2Time}" Header="Phase 2">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Phase3Time}" Header="Phase 3">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Phase4Time}" Header="Phase 4">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=TotalTime}" Header="Total Time">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Buffer}" Header="Buffer">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Buckets}" Header="Buckets">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Threads}" Header="Threads">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Right" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=LogFolder}" Header="Log Folder">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Left" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=LogFile}" Header="Log File">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextAlignment="Left" Text="{Binding}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
     </DockPanel>
 </Window>

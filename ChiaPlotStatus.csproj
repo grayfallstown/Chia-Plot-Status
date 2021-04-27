@@ -7,6 +7,7 @@
     <ApplicationIcon>Icon - Color changed.ico</ApplicationIcon>
     <ApplicationManifest>ChiaPlotStatus.manifest</ApplicationManifest>
     <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>grayfallstown.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
