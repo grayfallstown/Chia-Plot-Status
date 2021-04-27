@@ -80,6 +80,12 @@ namespace ChiaPlotStatus
                     case var _ when totalTimeRg.IsMatch(line):
                         CurrentPlotLog().TotalSeconds = int.Parse(totalTimeRg.Matches(line)[0].Groups[1].Value);
                         break;
+                    case var _ when approximateWorkingSpace.IsMatch(line):
+                        CurrentPlotLog().ApproximateWorkingSpace = approximateWorkingSpace.Matches(line)[0].Groups[1].Value;
+                        break;
+                    case var _ when finalFileSize.IsMatch(line):
+                        CurrentPlotLog().FinalFileSize = finalFileSize.Matches(line)[0].Groups[1].Value;
+                        break;
                     case var _ when writePloblemRg.IsMatch(line):
                         CurrentPlotLog().Errors++;
                         break;
@@ -124,8 +130,18 @@ namespace ChiaPlotStatus
 
         private PlotLog NextPlotLog()
         {
-            PlotLogs.Add(new PlotLog());
-            return PlotLogs[0];
+            var oldPlotLog = CurrentPlotLog();
+            var newPlotLog = new PlotLog();
+            // when plot create --num n is used parameters stay the same
+            newPlotLog.Buckets = oldPlotLog.Buckets;
+            newPlotLog.Threads = oldPlotLog.Threads;
+            newPlotLog.Buffer = oldPlotLog.Buffer;
+            newPlotLog.Tmp1Drive = oldPlotLog.Tmp1Drive;
+            newPlotLog.Tmp2Drive = oldPlotLog.Tmp2Drive;
+            newPlotLog.LogFile = oldPlotLog.LogFile;
+            newPlotLog.LogFolder = oldPlotLog.LogFolder;
+            PlotLogs.Add(newPlotLog);
+            return newPlotLog;
         }
 
 
@@ -148,7 +164,9 @@ namespace ChiaPlotStatus
         static Regex phase3Table = new Regex("^Compressing tables (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
         static Regex tmpFolders = new Regex("^Starting plotting progress into temporary dirs: (.*) and (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
         static Regex writePloblemRg = new Regex("^Only wrote \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+        static Regex approximateWorkingSpace = new Regex("^Approximate working space used (without final file): (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+        static Regex finalFileSize = new Regex("^Final File size: (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
-
+        // Approximate working space used (without final file)
     }
 }

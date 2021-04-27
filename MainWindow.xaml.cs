@@ -38,13 +38,12 @@ namespace ChiaPlotStatus
             InitializeComponent();
             DataContext = this;
 
-            //PlotManager.AddLogFolder(DEFAULT_LOG_FOLDER);
             LoadConfig();
             folderListView.ItemsSource = PlotManager.LogDirectories;
 
             var dueTime = TimeSpan.FromSeconds(0);
             var interval = TimeSpan.FromSeconds(30);
-            _ = RunPeriodicAsync(Load, dueTime, interval, CancellationToken.None);
+            _ = RunPeriodicAsync(LoadPlotLogs, dueTime, interval, CancellationToken.None);
         }
 
         public void LoadConfig()
@@ -91,20 +90,17 @@ namespace ChiaPlotStatus
             }
         }
 
-        public void Load()
+        public void LoadPlotLogs()
         {
-            Task.Run(() =>
-            {
-                Dispatcher.Invoke(() => {
-                    var plotLogs = PlotManager.PollPlotLogs();
-                    var plotLogUis = new List<PlotLogUI>();
-                    foreach (var plotLog in plotLogs)
-                    {
-                        plotLogUis.Add(new PlotLogUI(plotLog));
-                    }
-                    dataGrid.ItemsSource = plotLogUis;
-                    dataGrid.Items.Refresh();
-                });
+            Dispatcher.Invoke(() => {
+                var plotLogs = PlotManager.PollPlotLogs();
+                var plotLogUis = new List<PlotLogUI>();
+                foreach (var plotLog in plotLogs)
+                {
+                    plotLogUis.Add(new PlotLogUI(plotLog));
+                }
+                dataGrid.ItemsSource = plotLogUis;
+                dataGrid.Items.Refresh();
             });
         }
 
@@ -124,7 +120,7 @@ namespace ChiaPlotStatus
                 PlotManager.AddLogFolder(folder);
                 folderListView.Items.Refresh();
                 SaveConfig();
-                Load();
+                LoadPlotLogs();
             }
         }
 
@@ -136,7 +132,7 @@ namespace ChiaPlotStatus
                 PlotManager.RemoveLogFolder(folder);
                 folderListView.Items.Refresh();
                 SaveConfig();
-                Load();
+                LoadPlotLogs();
             }
         }
 
@@ -158,17 +154,13 @@ namespace ChiaPlotStatus
                                                TimeSpan interval,
                                                CancellationToken token)
         {
-            // Initial wait time before we begin the periodic loop.
             if (dueTime > TimeSpan.Zero)
                 await Task.Delay(dueTime, token);
 
-            // Repeat this loop until cancelled.
             while (!token.IsCancellationRequested)
             {
-                // Call our onTick function.
                 onTick?.Invoke();
 
-                // Wait to repeat again.
                 if (interval > TimeSpan.Zero)
                     await Task.Delay(interval, token);
             }

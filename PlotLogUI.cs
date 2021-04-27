@@ -3,7 +3,7 @@
 namespace ChiaPlotStatus
 {
     /**
-     * Stores informations about a plotting process.
+     * Stores readable informations about a plotting process.
      * This is the object shown in the ui table.
      */
     class PlotLogUI
@@ -29,6 +29,8 @@ namespace ChiaPlotStatus
         public string PlotName { get; set; }
         public string LogFolder { get; set; }
         public string LogFile { get; set; }
+        public string ApproximateWorkingSpace { get; set; }
+        public string FinalFileSize { get; set; }
 
         public PlotLogUI(PlotLog plotLog)
         {
@@ -64,6 +66,8 @@ namespace ChiaPlotStatus
             this.Phase3Time = formatTime(plotLog.Phase3Seconds);
             this.Phase4Time = formatTime(plotLog.Phase4Seconds);
             this.TotalTime = formatTime(plotLog.TotalSeconds);
+            this.ApproximateWorkingSpace = plotLog.ApproximateWorkingSpace;
+            this.FinalFileSize = plotLog.FinalFileSize;
             this.Buckets = plotLog.Buckets.ToString();
             this.Threads = plotLog.Threads.ToString();
             this.Buffer = plotLog.Buffer + " MB";

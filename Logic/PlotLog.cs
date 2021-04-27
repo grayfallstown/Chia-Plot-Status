@@ -31,11 +31,17 @@ namespace ChiaPlotStatus
         public string PlotName { get; set; }
         public string LogFolder { get; set; }
         public string LogFile { get; set; }
+        public string ApproximateWorkingSpace { get; set; }
+        public string FinalFileSize { get; set; }
 
         public void UpdatePercentDone()
         {
             float part = 0;
-            // 22 parts total
+            // 22 parts total:
+            // 7 tables in phase 1
+            // 7 tables in phase 2
+            // 7 tables in phase 3
+            // 1 phase 4
             float subpart = 0;
             if (Phase4Seconds > 0)
             {
@@ -107,8 +113,7 @@ namespace ChiaPlotStatus
                 float factor = 1;
                 if (currentPhase == 3)
                 {
-                    factor = (float)(this.Phase3Table - 1) / 7;
-                    factor += (this.CurrentBucket / this.Buckets);
+                    factor = (float)(((float)this.Phase3Table - 1) + ((float)this.CurrentBucket / this.Buckets)) / 7;
                 }
                 this.ETA += (int)(factor * stats.Phase3AvgTimeNeed);
             }
@@ -117,19 +122,14 @@ namespace ChiaPlotStatus
                 float factor = 1;
                 if (currentPhase == 2)
                 {
-                    factor = (float)((7 - this.Phase3Table) - 1) / 7;
-                    factor += (this.CurrentBucket / this.Buckets);
+                    factor = (float)(((float)(7- this.Phase2Table) - 1) + ((float)this.CurrentBucket / this.Buckets)) / 7;
                 }
                 this.ETA += (int)(factor * stats.Phase2AvgTimeNeed);
             }
             if (currentPhase == 1)
             {
-                var factor = (float)(this.Phase3Table - 1) / 7;
-                if (this.Buckets != 0)
-                {
-                    factor += (this.CurrentBucket / this.Buckets);
-                }
-                this.ETA += (int)(factor * stats.Phase1AvgTimeNeed);
+                var factor = (float)(((float)this.Phase3Table - 1) + ((float)this.CurrentBucket / this.Buckets)) / 7;
+                this.ETA += (int)(factor * stats.Phase2AvgTimeNeed);
             }
         }
 

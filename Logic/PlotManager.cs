@@ -96,14 +96,15 @@ namespace ChiaPlotStatus
             return result;
         }
 
-        private void HandleStatistics(List<PlotLog> result)
+        private void HandleStatistics(List<PlotLog> plotLogs)
         {
-            Statistics = new PlottingStatisticsHolder(result, Weights);
-            Parallel.ForEach(result, (plotLog) =>
+            Statistics = new PlottingStatisticsHolder(plotLogs, Weights);
+            //Parallel.ForEach(result, (plotLog) =>
+            foreach (var plotLog in plotLogs)
             {
                 PlottingStatistics stats = Statistics.GetMostRelevantStatistics(plotLog);
                 plotLog.UpdateEta(stats);
-            });
+            }
         }
 
     }
