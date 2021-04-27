@@ -16,7 +16,7 @@
 
 ## Download
 
-[Download latest version proud-gardener](./Setup.exe)
+[Download latest version patient-farmer](./Setup.exe)
 
 ## Working with many distributed plotting rigs
 
