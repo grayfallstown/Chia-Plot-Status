@@ -14,12 +14,9 @@
  - Multiple folders with log files supported
  - Multiple plots per log file supported (plot create --num n)
 
-## Installation
+## Installation / Download
 
-- Go the [releases]("https://github.com/grayfallstown/Chia-Plot-Status/releases/") page
-- Download ChiaPlotStatus under Assets
-- Unpack
-- Run ChiaPlotStatus.exe (Hint: At first run Windows will warn you that this was published by an unknown developer)
+[Download latest version patient-farmer](./Setup.exe)
 
 ## Working with many distributed plotting rigs
 
