@@ -28,9 +28,6 @@ namespace ChiaPlotStatus
     public partial class MainWindow : Window
     {
         private readonly PlotManager PlotManager = new PlotManager();
-        private readonly string DEFAULT_LOG_FOLDER = Environment.GetFolderPath(
-                                        Environment.SpecialFolder.UserProfile)
-                                            + @"\.chia\mainnet\plotter\";
 
         public MainWindow()
         {

@@ -211,6 +211,13 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
+                            <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=StartDate}" Header="Started">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock TextAlignment="Left" Text="{Binding}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=LogFolder}" Header="Log Folder">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>

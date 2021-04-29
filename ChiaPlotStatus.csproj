@@ -8,6 +8,7 @@
     <ApplicationManifest>ChiaPlotStatus.manifest</ApplicationManifest>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>grayfallstown.pfx</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
 
   <ItemGroup>
