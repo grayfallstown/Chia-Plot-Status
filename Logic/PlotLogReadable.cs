@@ -6,59 +6,62 @@ namespace ChiaPlotStatus
      * Stores readable informations about a plotting process.
      * This is the object shown in the ui table.
      */
-    class PlotLogUI
+    public class PlotLogReadable
     {
-        public string Tmp1Drive { get; set; }
-        public string Tmp2Drive { get; set; }
-        public int Errors { get; set; }
-        public string Progress { get; set; }
-        public string ETA { get; set; }
-        public string CurrentTable { get; set; }
-        public string CurrentBucket { get; set; }
-        public string Phase { get; set; }
-        public string Phase1Time { get; set; }
-        public string Phase2Time { get; set; }
-        public string Phase3Time { get; set; }
-        public string Phase4Time { get; set; }
-        public string TotalTime { get; set; }
-        public string PlotSize { get; set; }
-        public string Threads { get; set; }
-        public string Buffer { get; set; }
-        public string Buckets { get; set; }
-        public string StartDate { get; set; }
-        public string PlotName { get; set; }
-        public string LogFolder { get; set; }
-        public string LogFile { get; set; }
-        public string ApproximateWorkingSpace { get; set; }
-        public string FinalFileSize { get; set; }
+        public string Tmp1Drive { get; set; } = "";
+        public string Tmp2Drive { get; set; } = "";
+        public string Errors { get; set; } = "";
+        public string Progress { get; set; } = "";
+        public string ETA { get; set; } = "";
+        public string CurrentTable { get; set; } = "";
+        public string CurrentBucket { get; set; } = "";
+        public string CurrentPhase { get; set; } = "";
+        public string Phase1Time { get; set; } = "";
+        public string Phase2Time { get; set; } = "";
+        public string Phase3Time { get; set; } = "";
+        public string Phase4Time { get; set; } = "";
+        public string TotalTime { get; set; } = "";
+        public string PlotSize { get; set; } = "";
+        public string Threads { get; set; } = "";
+        public string Buffer { get; set; } = "";
+        public string Buckets { get; set; } = "";
+        public string StartDate { get; set; } = "";
+        public string PlotName { get; set; } = "";
+        public string LogFolder { get; set; } = "";
+        public string LogFile { get; set; } = "";
+        public string ApproximateWorkingSpace { get; set; } = "";
+        public string FinalFileSize { get; set; } = "";
 
-        public PlotLogUI(PlotLog plotLog)
+        public PlotLogReadable(PlotLog plotLog)
         {
             this.Tmp1Drive = plotLog.Tmp1Drive;
             this.Tmp2Drive = plotLog.Tmp2Drive;
-            this.Errors = plotLog.Errors;
+            if (plotLog.Errors > 0)
+            {
+                this.Errors = plotLog.Errors.ToString();
+            }
             this.Progress = string.Format("{0:0.00}", plotLog.PercentDone) + "%";
             if (string.Equals(this.Progress, "NaN%")) this.Progress = "";
-            this.Phase = "1";
+            this.CurrentPhase = "1";
             if (plotLog.Phase1Seconds > 0)
             {
-                this.Phase = "2";
+                this.CurrentPhase = "2";
             }
             if (plotLog.Phase2Seconds > 0)
             {
-                this.Phase = "3";
+                this.CurrentPhase = "3";
             }
             if (plotLog.Phase3Seconds > 0)
             {
-                this.Phase = "4";
+                this.CurrentPhase = "4";
             }
             if (plotLog.Phase4Seconds > 0)
             {
-                this.Phase = "";
+                this.CurrentPhase = "";
             }
             else
             {
-                this.Phase += "/4";
+                this.CurrentPhase += "/4";
             }
             this.ETA = formatTime(plotLog.ETA);
             this.Phase1Time = formatTime(plotLog.Phase1Seconds);
@@ -76,7 +79,7 @@ namespace ChiaPlotStatus
             this.PlotName = plotLog.PlotName;
             this.LogFolder = plotLog.LogFolder;
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
-            switch (this.Phase)
+            switch (this.CurrentPhase)
             {
                 case "1/4":
                     this.CurrentTable = plotLog.Phase1Table + "/7 ↑";
@@ -116,7 +119,6 @@ namespace ChiaPlotStatus
             else
             {
                 return TimeSpan.FromSeconds(seconds).ToString(@"ss\s");
-
             }
         }
     }

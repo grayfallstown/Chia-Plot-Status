@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChiaPlottStatus.GUI.Models;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,12 +16,13 @@ namespace ChiaPlotStatus
      */
     public class PlotManager
     {
-        public List<string> LogDirectories { get; } = new List<string>();
+        public Settings Settings { get; }
         private Dictionary<string, PlotLogFile> PlotLogFiles { get; } = new Dictionary<string, PlotLogFile>();
         public PlottingStatisticsIdRelevanceWeights Weights { get; } = new PlottingStatisticsIdRelevanceWeights();
         public PlottingStatisticsHolder Statistics { get; set; }
 
-        public PlotManager() {
+        public PlotManager(Settings settings) {
+            this.Settings = settings;
             Statistics = new PlottingStatisticsHolder(new List<PlotLog>(), Weights);
         }
 
@@ -33,12 +35,12 @@ namespace ChiaPlotStatus
 
         public void AddLogFolder(string path)
         {
-            LogDirectories.Add(path);
+            Settings.LogDirectories.Add(path);
         }
 
         public void RemoveLogFolder(string path)
         {
-            LogDirectories.Remove(path);
+            Settings.LogDirectories.Remove(path);
             // drop plotlogs from that folder
             foreach (var plotLogFile in PlotLogFiles.Values)
             {
@@ -59,7 +61,7 @@ namespace ChiaPlotStatus
 
         private void SearchForNewLogFiles()
         {
-            foreach (var directory in LogDirectories)
+            foreach (var directory in Settings.LogDirectories)
             {
                 foreach (var filePath in Directory.GetFiles(directory))
                 {

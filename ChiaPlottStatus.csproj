@@ -14,4 +14,7 @@
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.999-cibuild0013850-beta" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0013850-beta" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GUI\Models\" />
+  </ItemGroup>
 </Project>

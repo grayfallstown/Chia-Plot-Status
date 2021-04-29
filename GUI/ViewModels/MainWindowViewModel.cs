@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using ChiaPlotStatus;
+using ChiaPlottStatus.GUI.Models;
 using ChiaPlottStatusAvalonia.Views;
 using ReactiveUI;
 using System;
@@ -16,9 +17,8 @@ namespace ChiaPlottStatusAvalonia.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public PlotManager PlotManager { get; } = new PlotManager();
-        public ObservableCollection<PlotLogUI> PlotLogs { get; } = new ObservableCollection<PlotLogUI>();
-        public ObservableCollection<string> LogDirectories { get; } = new ObservableCollection<string>();
+        public PlotManager PlotManager { get; internal set; }
+        public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
         public ReactiveCommand<Unit, Unit> AddFolderCommand { get; set; }
         public ReactiveCommand<string, Unit> RemoveFolderCommand { get; set; }
 
@@ -30,8 +30,11 @@ namespace ChiaPlottStatusAvalonia.ViewModels
 
         public void InitializeChiaPlotStatus()
         {
-            PlotManager.AddDefaultLogFolder();
-            UpdateLogDirectories();
+            Settings Settings = new Settings(System.Reflection.Assembly.GetExecutingAssembly().Location + ".config.json");
+            Settings.Load();
+            PlotManager = new(Settings);
+            if (PlotManager.Settings.LogDirectories.Count == 0)
+                PlotManager.AddDefaultLogFolder();
             LoadPlotLogs();
         }
 
@@ -39,7 +42,7 @@ namespace ChiaPlottStatusAvalonia.ViewModels
         {
             PlotLogs.Clear();
             foreach (var plotLog in PlotManager.PollPlotLogs())
-                PlotLogs.Add(new PlotLogUI(plotLog));
+                PlotLogs.Add(new PlotLogReadable(plotLog));
         }
 
         public void InitializeButtons()
@@ -62,30 +65,19 @@ namespace ChiaPlottStatusAvalonia.ViewModels
 
         public void AddFolder(string folder)
         {
-            if (Directory.Exists(folder) && !PlotManager.LogDirectories.Contains(folder))
+            if (Directory.Exists(folder) && !PlotManager.Settings.LogDirectories.Contains(folder))
             {
                 PlotManager.AddLogFolder(folder);
-                // SaveConfig(); // TODO
+                PlotManager.Settings.Persist();
                 LoadPlotLogs();
-                UpdateLogDirectories();
             }
         }
 
         public void RemoveFolder(string folder)
         {
             PlotManager.RemoveLogFolder(folder);
-            // TODO: SaveConfig();
+            PlotManager.Settings.Persist();
             LoadPlotLogs();
-            UpdateLogDirectories();
-        }
-
-        public void UpdateLogDirectories()
-        {
-            LogDirectories.Clear();
-            foreach(var folder in PlotManager.LogDirectories)
-            {
-                LogDirectories.Add(folder);
-            }
         }
 
     }
