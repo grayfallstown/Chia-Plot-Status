@@ -89,6 +89,9 @@ namespace ChiaPlotStatus
                     case var _ when writePloblemRg.IsMatch(line):
                         CurrentPlotLog().Errors++;
                         break;
+                    case var _ when readPloblemRg.IsMatch(line):
+                        CurrentPlotLog().Errors++;
+                        break;
                     case var _ when tmpFolders.IsMatch(line):
                         var match = tmpFolders.Matches(line)[0];
                         var plotLog = CurrentPlotLog();
@@ -164,6 +167,7 @@ namespace ChiaPlotStatus
         static Regex phase3Table = new Regex("^Compressing tables (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
         static Regex tmpFolders = new Regex("^Starting plotting progress into temporary dirs: (.*) and (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
         static Regex writePloblemRg = new Regex("^Only wrote \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+        static Regex readPloblemRg = new Regex("^Only read \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
         static Regex approximateWorkingSpace = new Regex("^Approximate working space used \\(without final file\\): (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
         static Regex finalFileSize = new Regex("^Final File size: (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
