@@ -61,15 +61,21 @@
 					<TextBlock Text="font buttons"></TextBlock>
 				</StackPanel>
 				-->
+				<StackPanel Grid.Row="0" Grid.Column="3">
+					<TextBox Name="SearchBox" Watermark="Search" Text="{Binding Search, Mode=TwoWay}" KeyUp="OnKeyPressUp" />
+				</StackPanel>
+				<StackPanel Grid.Row="1" Grid.Column="3">
+				</StackPanel>
 			</Grid>
 
 
 		    <!---		<Button Content="Add New Person" Margin="5" Command="{Binding AddNewPerson}"/> -->
 			<ScrollViewer>
-				<DataGrid Items="{Binding PlotLogs}" IsReadOnly="true">
+				<DataGrid Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="600">
 					<DataGrid.Columns>
 						<DataGridTextColumn Header="Tmp1" Binding="{Binding Tmp1Drive}" />
 						<DataGridTextColumn Header="Tmp2" Binding="{Binding Tmp2Drive}" />
+						<DataGridTextColumn Header="Started" Binding="{Binding StartDate}" />
 						<DataGridTemplateColumn  Header="Errors">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >

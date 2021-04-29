@@ -18,7 +18,10 @@ namespace ChiaPlottStatusAvalonia.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         public PlotManager PlotManager { get; internal set; }
+
         public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
+        public string? Search { get; set; } = null;
+
         public ReactiveCommand<Unit, Unit> AddFolderCommand { get; set; }
         public ReactiveCommand<string, Unit> RemoveFolderCommand { get; set; }
 
@@ -26,6 +29,7 @@ namespace ChiaPlottStatusAvalonia.ViewModels
         {
             InitializeChiaPlotStatus();
             InitializeButtons();
+            InitializeSearchBox();
         }
 
         public void InitializeChiaPlotStatus()
@@ -41,17 +45,28 @@ namespace ChiaPlottStatusAvalonia.ViewModels
         public void LoadPlotLogs()
         {
             PlotLogs.Clear();
-            foreach (var plotLog in PlotManager.PollPlotLogs())
-                PlotLogs.Add(new PlotLogReadable(plotLog));
+            foreach (var plotLogReadable in PlotManager.PollPlotLogReadables(Search))
+                PlotLogs.Add(plotLogReadable);
+            Debug.WriteLine(PlotLogs.Count);
         }
 
         public void InitializeButtons()
         {
             AddFolderCommand = ReactiveCommand.Create(AddFolder);
             RemoveFolderCommand = ReactiveCommand.Create<string>(RemoveFolder);
-            MainWindow.Instance.BtnClickWOrkaround = (folder) =>
+            MainWindow.Instance.BtnClickWorkaround = (folder) =>
             {
                 RemoveFolder(folder);
+                return true;
+            };
+        }
+
+        public void InitializeSearchBox()
+        {
+            MainWindow.Instance.TextChangeWorkaround = (text) =>
+            {
+                Search = text;
+                LoadPlotLogs();
                 return true;
             };
         }

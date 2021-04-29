@@ -1,4 +1,5 @@
 ﻿using ChiaPlottStatus.GUI.Models;
+using ChiaPlottStatus.Logic.Utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -50,12 +51,26 @@ namespace ChiaPlotStatus
             }
         }
 
-        public List<PlotLog> PollPlotLogs()
+        public List<PlotLog> PollPlotLogs(string? searchString)
         {
             SearchForNewLogFiles();
             ConcurrentBag<PlotLog> plotLogs = ParseTheLogs();
-            List<PlotLog> result = SortPlotLogs(plotLogs);
+            List<PlotLog> result = Filter(searchString, plotLogs.ToList());
+            SortPlotLogs(result);
             HandleStatistics(result);
+            return result;
+        }
+
+        public List<PlotLogReadable> PollPlotLogReadables(string? searchString)
+        {
+            SearchForNewLogFiles();
+            List<PlotLog> plotLogs = ParseTheLogs().ToList();
+            HandleStatistics(plotLogs);
+            SortPlotLogs(plotLogs);
+            List<PlotLogReadable> result = new List<PlotLogReadable>();
+            foreach (var plotLog in plotLogs)
+                result.Add(new PlotLogReadable(plotLog));
+            result = Filter(searchString, result);
             return result;
         }
 
@@ -86,10 +101,14 @@ namespace ChiaPlotStatus
             return plotLogs;
         }
 
-        private static List<PlotLog> SortPlotLogs(ConcurrentBag<PlotLog> plotLogs)
+        private List<T> Filter<T>(string? searchString, List<T> plotLogs)
         {
-            var result = plotLogs.ToList();
-            result.Sort((a, b) =>
+            return SearchFilter.Search<T>(searchString, plotLogs);
+        }
+
+        private static void SortPlotLogs(List<PlotLog> plotLogs)
+        {
+            plotLogs.Sort((a, b) =>
             {
                 if (a.PercentDone > b.PercentDone)
                 {
@@ -104,7 +123,6 @@ namespace ChiaPlotStatus
                     return string.CompareOrdinal(a.Tmp1Drive, b.Tmp1Drive);
                 }
             });
-            return result;
         }
 
         private void HandleStatistics(List<PlotLog> plotLogs)
