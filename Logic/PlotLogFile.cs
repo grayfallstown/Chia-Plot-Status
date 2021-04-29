@@ -14,7 +14,7 @@ namespace ChiaPlotStatus
      * (multiple PlotLogs per file if plot create --num n is used)
      * Tails the log file if it is still being written. Call Parse() before each access
      */
-    class PlotLogFile
+    public class PlotLogFile
     {
         private TailLineEmitter TailLineEmitter { get; set; }
         private List<PlotLog> PlotLogs { get; set; } = new List<PlotLog>();

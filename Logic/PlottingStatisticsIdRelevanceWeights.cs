@@ -10,7 +10,7 @@ namespace ChiaPlotStatus
      * When trying to find the best matched finished PlotLogs for a given
      * PlotLog this is used to define relevance.
      */
-    class PlottingStatisticsIdRelevanceWeights
+    public class PlottingStatisticsIdRelevanceWeights
     {
         /**
          * k32, k33, k34...

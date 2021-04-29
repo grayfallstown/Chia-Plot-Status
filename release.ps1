@@ -1,4 +1,4 @@
-dotnet build -c Release
+# dotnet build -c Release
 rm -r release\
 mkdir release\
 mkdir release\ChiaPlotStatus\

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChiaPlotStatus
 {
-    delegate void TailLineEmitterCallback(string line);
+    public delegate void TailLineEmitterCallback(string line);
 
     /**
      * Opens a given File for read even if it is currently written by a different process and
@@ -16,11 +16,11 @@ namespace ChiaPlotStatus
      * the file is reached it pauses until ReadMore() is called again and it tries to continues
      * reading from the spot it paused at.
      */
-    class TailLineEmitter
+    public class TailLineEmitter
     {
         StreamReader StreamReader { get; set; }
         TailLineEmitterCallback Callback { get; set; }
-        int CurrentLine { get; set; }
+        int CurrentLine { get; set; } = 0;
         private string file;
 
         public TailLineEmitter(string file, TailLineEmitterCallback callback)
@@ -43,7 +43,7 @@ namespace ChiaPlotStatus
         {
             try
             {
-                string line = "";
+                string? line = "";
                 do
                 {
                     line = this.StreamReader.ReadLine();

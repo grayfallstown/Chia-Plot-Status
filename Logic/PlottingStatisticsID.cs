@@ -10,7 +10,7 @@ namespace ChiaPlotStatus
     /**
      * Key used to determine best matches / relevance on finished plotting processes for a given PlotLog
      */
-    class PlottingStatisticsID
+    public class PlottingStatisticsID
     {
         public string LogFolder { get; set; }
         public string Tmp1Drive { get; set; }

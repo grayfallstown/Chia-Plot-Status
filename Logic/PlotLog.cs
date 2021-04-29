@@ -6,7 +6,7 @@ namespace ChiaPlotStatus
      * Stores informations about a plotting process.
      * This is the object shown in the ui table.
      */
-    class PlotLog
+    public class PlotLog
     {
         public string Tmp1Drive { get; set; }
         public string Tmp2Drive { get; set; }

@@ -12,7 +12,7 @@ namespace ChiaPlotStatus
      * Collects Statistics on plotting processes such as avarage time spend on phases.
      * Used for ETA.
      */
-    class PlottingStatistics
+    public class PlottingStatistics
     {
         public int Phase1AvgTimeNeed { get; }
         public int Phase1Completed { get; }

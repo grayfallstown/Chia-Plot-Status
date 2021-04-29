@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChiaPlotStatus", "ChiaPlotStatus.csproj", "{D050BE0B-5505-4B37-8294-6630E4F0CF21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChiaPlottStatus", "ChiaPlottStatus.csproj", "{17E4A93C-4D85-41EF-8591-672EB7C36CB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D050BE0B-5505-4B37-8294-6630E4F0CF21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D050BE0B-5505-4B37-8294-6630E4F0CF21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D050BE0B-5505-4B37-8294-6630E4F0CF21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D050BE0B-5505-4B37-8294-6630E4F0CF21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17E4A93C-4D85-41EF-8591-672EB7C36CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17E4A93C-4D85-41EF-8591-672EB7C36CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17E4A93C-4D85-41EF-8591-672EB7C36CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17E4A93C-4D85-41EF-8591-672EB7C36CB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C57186F5-F019-4FFB-B5A4-C31FCF451D96}
+		SolutionGuid = {75F20C1E-B71F-4C68-9945-E3C53E1C74D1}
 	EndGlobalSection
 EndGlobal

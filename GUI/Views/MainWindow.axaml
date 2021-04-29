@@ -1,0 +1,195 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ChiaPlottStatusAvalonia.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+        x:Class="ChiaPlottStatusAvalonia.Views.MainWindow"
+        Icon="/Assets/Logo.jpg"
+        Title="ChiaPlottStatusAvalonia">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	<Window.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="FontSize" Value="10"/>
+		</Style>
+		<Style Selector="DataGrid.folders">
+			<Setter Property="FontSize" Value="10"/>
+		</Style>
+		<Style Selector="DataGrid.folders TextBlock">
+			<Setter Property="Margin" Value="0"/>
+		</Style>
+		<Style Selector="DataGrid.folders Button">
+			<Setter Property="Margin" Value="0"/>
+		</Style>
+		<Style Selector="DataGrid TextBlock">
+			<Setter Property="Margin" Value="1"/>
+			<Setter Property="FontSize" Value="10"/>
+		</Style>
+	</Window.Styles>
+
+	<ScrollViewer>
+	    <StackPanel>
+			<Grid ColumnDefinitions="100,3*,4*" RowDefinitions="Auto,Auto,Auto"  Margin="4">
+				<Image Source="/Assets/Logo.jpg" Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
+				<StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+					<DataGrid Name="FolderGrid" Items="{Binding LogDirectories}" Classes="folders">
+						<DataGrid.Columns>
+							<DataGridTemplateColumn Width="30">
+								<DataGridTemplateColumn.Header>
+									<Button Width="30" HorizontalAlignment="Center" Command="{Binding AddFolderCommand}" Content="  +"></Button>
+								</DataGridTemplateColumn.Header>
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate >
+										<Button Width="27" HorizontalAlignment="Center" Command="{Binding RemoveFolderCommand}"
+												CommandParameter="{Binding}" Click="RemoveFolderWorkaround" Tag="{Binding RemoveFolderCommand}"
+												Content=" -"></Button>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTextColumn Header="Log Folders" Binding="{Binding}" Width="400" />
+						</DataGrid.Columns>
+					</DataGrid>
+				</StackPanel>
+				<!--
+				<StackPanel Grid.Row="0" Grid.Column="2">
+					<TextBlock Text="font size"></TextBlock>
+				</StackPanel>
+				<StackPanel Grid.Row="1" Grid.Column="2">
+					<TextBlock Text="font buttons"></TextBlock>
+				</StackPanel>
+				-->
+			</Grid>
+
+
+		    <!---		<Button Content="Add New Person" Margin="5" Command="{Binding AddNewPerson}"/> -->
+			<ScrollViewer>
+				<DataGrid Items="{Binding PlotLogs}" IsReadOnly="true">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="Tmp1" Binding="{Binding Tmp1Drive}" />
+						<DataGridTextColumn Header="Tmp2" Binding="{Binding Tmp2Drive}" />
+						<DataGridTemplateColumn  Header="Errors">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding Errors}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Progress">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding Progress}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="ETA">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding ETA}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Current Phase">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding CurrentPhase}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Current Table">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding CurrentTable}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Current Bucket">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding CurrentBucket}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Phase 1">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding Phase1Time}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Phase 2">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding Phase2Time}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Phase 3">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding Phase3Time}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Phase 4">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding Phase4Time}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Total">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding TotalTime}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Buffer">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding Buffer}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Buckets">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding Buckets}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Threads">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding Threads}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Tmp File Size">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding ApproximateWorkingSpace}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Final Size">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<TextBlock Text="{Binding FinalFileSize}" HorizontalAlignment="Right" ></TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTextColumn Header="Log Folder" Binding="{Binding LogFolder}" />
+						<DataGridTextColumn Header="Log File" Binding="{Binding LogFile}" />
+					</DataGrid.Columns>
+				</DataGrid>
+			</ScrollViewer>
+			<TextBlock>
+				Logo made by charlie on freeicons.io under License Creative Commons(Attribution 3.0 unported)
+			</TextBlock>
+	    </StackPanel>
+	</ScrollViewer>
+</Window>

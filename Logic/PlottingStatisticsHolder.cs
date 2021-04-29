@@ -13,7 +13,7 @@ namespace ChiaPlotStatus
      * Collects Statistics on finished plotting processes and can give you
      * a statistic most relevant to your PlogLog
      */
-    class PlottingStatisticsHolder
+    public class PlottingStatisticsHolder
     {
         private readonly ConcurrentBag<PlotLog> AllPlotLogs = new ConcurrentBag<PlotLog>();
         private readonly PlottingStatisticsIdRelevanceWeights weights;

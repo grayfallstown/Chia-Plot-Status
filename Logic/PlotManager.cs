@@ -13,14 +13,23 @@ namespace ChiaPlotStatus
      * Core Object of this tool.
      * Knows everything, does everything.
      */
-    class PlotManager
+    public class PlotManager
     {
         public List<string> LogDirectories { get; } = new List<string>();
         private Dictionary<string, PlotLogFile> PlotLogFiles { get; } = new Dictionary<string, PlotLogFile>();
         public PlottingStatisticsIdRelevanceWeights Weights { get; } = new PlottingStatisticsIdRelevanceWeights();
         public PlottingStatisticsHolder Statistics { get; set; }
 
-        public PlotManager() { }
+        public PlotManager() {
+            Statistics = new PlottingStatisticsHolder(new List<PlotLog>(), Weights);
+        }
+
+        public void AddDefaultLogFolder()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                                            + @"\.chia\mainnet\plotter\";
+            AddLogFolder(path);
+        }
 
         public void AddLogFolder(string path)
         {
