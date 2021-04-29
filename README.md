@@ -16,7 +16,7 @@
 
 ## Installation / Download
 
-[Download latest version patient-farmer](./Setup.exe)
+[Download latest version patient-farmer](https://grayfallstown.github.io/Chia-Plot-Status/Setup.exe)
 
 ## Working with many distributed plotting rigs
 
