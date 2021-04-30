@@ -1,1 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.07 47.29"><defs><style>.cls-1{fill:none;stroke:#00c900;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>Asset 11</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_2-2" data-name="Layer 2"><path class="cls-1" d="M6.59,28.09A6,6,0,0,0,13.06,18c-2.41-1.54-9.72-.91-11.7-.71a.41.41,0,0,0-.34.53C1.67,19.65,4.18,26.55,6.59,28.09Z"/><line class="cls-1" x1="7.19" y1="21.45" x2="20.03" y2="29.65"/><path class="cls-1" d="M33.48,28.09A6,6,0,0,1,27,18c2.41-1.54,9.72-.91,11.7-.71a.41.41,0,0,1,.34.53C38.4,19.65,35.89,26.55,33.48,28.09Z"/><line class="cls-1" x1="32.88" y1="21.45" x2="20.03" y2="29.65"/><line class="cls-1" x1="20.23" y1="38.26" x2="20.23" y2="9.26"/><path class="cls-1" d="M37.72,46.29l-6.44-4.14a20.23,20.23,0,0,0-21.87,0L3,46.29"/><path class="cls-1" d="M14.13,11.39a6,6,0,0,0,12,0c0-2.86-4.46-8.68-5.69-10.24a.41.41,0,0,0-.63,0C18.59,2.71,14.13,8.53,14.13,11.39Z"/></g></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.07 47.29">
+	<defs>
+		<style>
+		* {
+			fill: transparent;
+			stroke: transparent;
+			fill-opacity: 0;
+			stroke-opacity: 0;
+		}
+		.cls-1{
+			stroke-opacity: 100;
+			stroke:#00c900;
+			stroke-linecap:round;
+			stroke-linejoin:round;
+			stroke-width:2px;
+		}
+		</style>
+	</defs>
+	<title>Asset 11</title>
+	<g id="Layer_2" data-name="Layer 2">
+		<g id="Layer_2-2" data-name="Layer 2">
+			<path class="cls-1" d="M6.59,28.09A6,6,0,0,0,13.06,18c-2.41-1.54-9.72-.91-11.7-.71a.41.41,0,0,0-.34.53C1.67,19.65,4.18,26.55,6.59,28.09Z"/>
+			<line class="cls-1" x1="7.19" y1="21.45" x2="20.03" y2="29.65"/>
+			<path class="cls-1" d="M33.48,28.09A6,6,0,0,1,27,18c2.41-1.54,9.72-.91,11.7-.71a.41.41,0,0,1,.34.53C38.4,19.65,35.89,26.55,33.48,28.09Z"/>
+			<line class="cls-1" x1="32.88" y1="21.45" x2="20.03" y2="29.65"/>
+			<line class="cls-1" x1="20.23" y1="38.26" x2="20.23" y2="9.26"/>
+			<path class="cls-1" d="M37.72,46.29l-6.44-4.14a20.23,20.23,0,0,0-21.87,0L3,46.29"/>
+			<path class="cls-1" d="M14.13,11.39a6,6,0,0,0,12,0c0-2.86-4.46-8.68-5.69-10.24a.41.41,0,0,0-.63,0C18.59,2.71,14.13,8.53,14.13,11.39Z"/>
+		</g>
+	</g>
+</svg>

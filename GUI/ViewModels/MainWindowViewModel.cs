@@ -1,5 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Threading;
 using ChiaPlotStatus;
 using ChiaPlottStatus.GUI.Models;
 using ChiaPlottStatusAvalonia.Views;
@@ -8,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Reactive;
 using System.Text;
@@ -43,6 +46,53 @@ namespace ChiaPlottStatusAvalonia.ViewModels
             InitializeButtons();
             InitializeSearchBox();
             KeepGridScrollbarOnScreen();
+            InitializeThemeSwitcher();
+        }
+
+        private void InitializeThemeSwitcher()
+        {
+            MainWindow.Instance.ThemeSwitchWorkaround = (theme) =>
+            {
+                PlotManager.Settings.Theme = theme;
+                PlotManager.Settings.Persist();
+                // TODO: persist
+                var light = new StyleInclude(new Uri("resm:Styles?assembly=ControlCatalog"))
+                {
+                    Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default")
+                };
+                var dark = new StyleInclude(new Uri("resm:Styles?assembly=ControlCatalog"))
+                {
+                    Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseDark.xaml?assembly=Avalonia.Themes.Default")
+                };
+
+                switch (theme)
+                {
+                    case "Dark":
+                        var background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.FromArgb(200, 22, 22, 23));
+                        MainWindow.Instance.Styles[0] = dark;
+                        MainWindow.Instance.Find<ComboBox>("Themes").SelectedIndex = 1;
+                        MainWindow.Instance.Find<TextBox>("SearchBox").Foreground = Avalonia.Media.Brushes.LightGray;
+                        MainWindow.Instance.Find<ComboBox>("Themes").Foreground = Avalonia.Media.Brushes.LightGray;
+                        MainWindow.Instance.Find<DataGrid>("LogDataGrid").Background = background;
+                        MainWindow.Instance.Background = background;
+                        break;
+                    default:
+                        background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.FromArgb(200, 255, 255, 255));
+                        MainWindow.Instance.Styles[0] = light;
+                        MainWindow.Instance.Find<ComboBox>("Themes").SelectedIndex = 0;
+                        MainWindow.Instance.Find<TextBox>("SearchBox").Foreground = Avalonia.Media.Brushes.Black;
+                        MainWindow.Instance.Find<ComboBox>("Themes").Foreground = Avalonia.Media.Brushes.Black;
+                        MainWindow.Instance.Find<DataGrid>("LogDataGrid").Background = background;
+                        MainWindow.Instance.Background = background;
+                        break;
+                }
+                MainWindow.Instance.Find<TextBox>("SearchBox").FontSize = (double) PlotManager.Settings.FontSize;
+                return true;
+            };
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+               MainWindow.Instance.ThemeSwitchWorkaround(PlotManager.Settings.Theme);
+           });
         }
 
         private void KeepGridScrollbarOnScreen()
@@ -154,6 +204,7 @@ namespace ChiaPlottStatusAvalonia.ViewModels
             double height = MainWindow.Instance.Height - 600;
             MainWindow.Instance.Find<DataGrid>("PlotLogGrid").Height = height;
         }
+
 
     }
 }

@@ -5,13 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
         x:Class="ChiaPlottStatusAvalonia.Views.MainWindow"
-        Icon="/Assets/Logo.jpg"
+        Icon="/Assets/Logo.png"
+        TransparencyLevelHint="Transparent"
+		Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
         Title="ChiaPlottStatusAvalonia">
 
 	<Window.DataContext>
 		<vm:MainWindowViewModel/>
 	</Window.DataContext>
 	<Window.Styles>
+        <Style Selector="DataGridColumnHeader">
+            <Setter Property="Background" Value="Gray" />
+        </Style>
+        <Style Selector="DataGridRow">
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style Selector="TextBlock">
+            <Setter Property="FontSize" Value="10" />
+        </Style>
+        <Style Selector="ToolTip TextBlock">
+            <Setter Property="Foreground" Value="Gray" />
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="Margin" Value="4" />
+        </Style>
+        <Style Selector="DataGridRow TextBlock">
+            <Setter Property="Margin" Value="0" />
+        </Style>
 		<Style Selector="TextBlock">
 			<!-- <Setter Property="FontSize" Value="{Binding ElementName=WindowContext, Path=DataContext.PlotManager.Settings.FontSize, Mode=TwoWay}"/> -->
 			<Setter Property="FontSize" Value="10"/>
@@ -43,8 +64,19 @@
 
 	<ScrollViewer Name="WindowContext">
 		<StackPanel>
+		<Panel>
+			<ExperimentalAcrylicBorder IsHitTestVisible="False">
+				<ExperimentalAcrylicBorder.Material>
+					<ExperimentalAcrylicMaterial
+						BackgroundSource="Digger"
+						TintColor="Black"
+						TintOpacity="0.2"
+						MaterialOpacity="0.25" />
+				</ExperimentalAcrylicBorder.Material>
+			</ExperimentalAcrylicBorder>
+		</Panel>
 			<Grid ColumnDefinitions="100,3*,4*" RowDefinitions="Auto,Auto,Auto"  Margin="4">
-				<Image Source="/Assets/Logo.jpg" Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
+				<Image Source="/Assets/Logo.png" Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
 				<StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
 					<DataGrid Name="FolderGrid" Items="{Binding PlotManager.Settings.LogDirectories}" Classes="folders">
 						<DataGrid.Columns>
@@ -74,7 +106,13 @@
 				</StackPanel>
 				-->
 				<StackPanel Grid.Row="0" Grid.Column="3">
-					<TextBox Name="SearchBox" Watermark="Search" Text="{Binding Search, Mode=TwoWay}" KeyUp="OnKeyPressUp" />
+					<ComboBox Name="Themes" Width="120" SelectedIndex="0">
+						<ComboBoxItem>Light</ComboBoxItem>
+						<ComboBoxItem>Dark</ComboBoxItem>
+					</ComboBox>
+				</StackPanel>
+				<StackPanel Grid.Row="0" Grid.Column="4">
+					<TextBox Name="SearchBox" Width="300" Watermark="Search" Text="{Binding Search, Mode=TwoWay}" KeyUp="OnKeyPressUp" />
 				</StackPanel>
 			</Grid>
 

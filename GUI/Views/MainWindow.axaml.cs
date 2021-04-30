@@ -3,11 +3,12 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.Styling;
 using ReactiveUI;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Reactive;
-using static Avalonia.Controls.AutoCompleteBox;
 
 namespace ChiaPlottStatusAvalonia.Views
 {
@@ -17,6 +18,7 @@ namespace ChiaPlottStatusAvalonia.Views
         public Func<string, bool> BtnClickWorkaround { get; set; }
         public Func<string, bool> TextChangeWorkaround { get; set; }
         public Func<string, bool> SortChangeWorkaround { get; set; }
+        public Func<string, bool> ThemeSwitchWorkaround { get; set; }
 
         public MainWindow()
         {
@@ -25,6 +27,7 @@ namespace ChiaPlottStatusAvalonia.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
+            ThemeSwitcher();
         }
 
         private void InitializeComponent()
@@ -61,11 +64,25 @@ namespace ChiaPlottStatusAvalonia.Views
             string headerText = (string) header.Content;
             Debug.WriteLine(headerText);
             SortChangeWorkaround(headerText);
-            // header.DataContext.BindCommand;
 
         }
 
-        
+        public void ThemeSwitcher()
+        {
+            var themes = this.Find<ComboBox>("Themes");
+            themes.SelectionChanged += (sender, e) =>
+            {
+                switch (themes.SelectedIndex)
+                {
+                    case 1:
+                        ThemeSwitchWorkaround("Dark");
+                        break;
+                    default:
+                        ThemeSwitchWorkaround("Light");
+                        break;
+                }
+            };
+        }
 
     }
 }
