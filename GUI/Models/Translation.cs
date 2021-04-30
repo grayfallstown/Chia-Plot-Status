@@ -34,10 +34,37 @@ namespace ChiaPlottStatus.GUI.Models
     {
         public string Name { get; set; }
         public Tooltips Tooltips { get; set; }
-        public string Columns { get; set; }
+        public Columns Columns { get; set; }
     }
 
     public class Tooltips
+    {
+        public string Tmp1Drive { get; set; } = "";
+        public string Tmp2Drive { get; set; } = "";
+        public string Errors { get; set; } = "";
+        public string Progress { get; set; } = "";
+        public string ETA { get; set; } = "";
+        public string CurrentTable { get; set; } = "";
+        public string CurrentBucket { get; set; } = "";
+        public string CurrentPhase { get; set; } = "";
+        public string Phase1Time { get; set; } = "";
+        public string Phase2Time { get; set; } = "";
+        public string Phase3Time { get; set; } = "";
+        public string Phase4Time { get; set; } = "";
+        public string TotalTime { get; set; } = "";
+        public string PlotSize { get; set; } = "";
+        public string Threads { get; set; } = "";
+        public string Buffer { get; set; } = "";
+        public string Buckets { get; set; } = "";
+        public string StartDate { get; set; } = "";
+        public string PlotName { get; set; } = "";
+        public string LogFolder { get; set; } = "";
+        public string LogFile { get; set; } = "";
+        public string ApproximateWorkingSpace { get; set; } = "";
+        public string FinalFileSize { get; set; } = "";
+    }
+
+    public class Columns
     {
         public string Tmp1Drive { get; set; } = "";
         public string Tmp2Drive { get; set; } = "";

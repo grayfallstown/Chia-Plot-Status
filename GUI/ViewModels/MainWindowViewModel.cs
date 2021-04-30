@@ -27,6 +27,8 @@ namespace ChiaPlottStatusAvalonia.ViewModels
 
         public ReactiveCommand<Unit, Unit> AddFolderCommand { get; set; }
         public ReactiveCommand<string, Unit> RemoveFolderCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> IncreaseFontSizeCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> DecreaseFontSizeCommand { get; set; }
 
         public MainWindowViewModel()
         {
@@ -64,6 +66,18 @@ namespace ChiaPlottStatusAvalonia.ViewModels
                 RemoveFolder(folder);
                 return true;
             };
+
+            IncreaseFontSizeCommand = ReactiveCommand.Create(() =>
+            {
+                this.PlotManager.Settings.FontSize += 0.3;
+                this.PlotManager.Settings.Persist();
+            });
+
+            DecreaseFontSizeCommand = ReactiveCommand.Create(() =>
+            {
+                this.PlotManager.Settings.FontSize -= 0.3;
+                this.PlotManager.Settings.Persist();
+            });
         }
 
         public void InitializeSearchBox()

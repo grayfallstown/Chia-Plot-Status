@@ -1,5 +1,31 @@
 ﻿Name: English
 
+
+Columns:
+    Tmp1Drive: "Tmp1"
+    Tmp2Drive: "Tmp1"
+    Errors: "Errors"
+    Progress: "Progress"
+    ETA: "ETA"
+    CurrentTable: "Cur. Table"
+    CurrentBucket: "Cur. Bucket"
+    CurrentPhase: "Cur. Phase"
+    Phase1Time: "Phase 1 🕐"
+    Phase2Time: "Phase 2 🕐"
+    Phase3Time: "Phase 3 🕐"
+    Phase4Time: "Phase 4 🕐"
+    TotalTime: "Total 🕐"
+    PlotSize: "K-Size"
+    Threads: "Threads"
+    Buffer: "Buffer"
+    Buckets: "Buckets"
+    StartDate: "Started"
+    PlotName: "Plot Name"
+    LogFolder: "Log Folder"
+    LogFile: "Log File"
+    ApproximateWorkingSpace: "Workingspace"
+    FinalFileSize: "Final Size"
+
 Tooltips:
     Tmp1Drive: null
     Tmp2Drive: null

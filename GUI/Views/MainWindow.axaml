@@ -13,6 +13,7 @@
 	</Window.DataContext>
 	<Window.Styles>
 		<Style Selector="TextBlock">
+			<!-- <Setter Property="FontSize" Value="{Binding ElementName=WindowContext, Path=DataContext.PlotManager.Settings.FontSize, Mode=TwoWay}"/> -->
 			<Setter Property="FontSize" Value="10"/>
 		</Style>
 		<Style Selector="DataGrid.folders">
@@ -64,11 +65,12 @@
 					</DataGrid>
 				</StackPanel>
 				<!--
-				<StackPanel Grid.Row="0" Grid.Column="2">
+				<StackPanel Grid.Row="1" Grid.Column="2">
 					<TextBlock Text="font size"></TextBlock>
 				</StackPanel>
-				<StackPanel Grid.Row="1" Grid.Column="2">
-					<TextBlock Text="font buttons"></TextBlock>
+				<StackPanel Grid.Row="2" Grid.Column="2">
+					<Button Content="+" Command="{Binding IncreaseFontSizeCommand}"></Button>
+					<Button Content="-" Command="{Binding DecreaseFontSizeCommand}"></Button>
 				</StackPanel>
 				-->
 				<StackPanel Grid.Row="0" Grid.Column="3">
@@ -78,18 +80,13 @@
 				</StackPanel>
 			</Grid>
 
-			<TextBlock Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}} Path=DataContext.Language.Tooltips.LogFile}"></TextBlock>
-			<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.LogFile}"></TextBlock>
-			<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.LogFile}"></TextBlock>
-			<TextBlock Text="{Binding Language.Tooltips.LogFile}"></TextBlock>
-			<TextBlock Text="{Binding Language.Tooltips}"></TextBlock>
-			<TextBlock Text="{Binding Language.Name}"></TextBlock>
-
-		    <!---		<Button Content="Add New Person" Margin="5" Command="{Binding AddNewPerson}"/> -->
 			<ScrollViewer>
 				<DataGrid Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="600" Name="LogDataGrid">
 					<DataGrid.Columns>
-						<DataGridTemplateColumn  Header="Tmp1">
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Tmp1Drive}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<StackPanel>
@@ -98,7 +95,10 @@
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Tmp2">
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Tmp2Drive}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<StackPanel>
@@ -106,8 +106,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Started">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.StartDate}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<StackPanel>
@@ -121,7 +124,10 @@
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Errors">
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Errors}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<StackPanel>
@@ -134,8 +140,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Progress">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Progress}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -148,8 +157,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="ETA">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.ETA}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -163,7 +175,10 @@
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Current Phase">
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.CurrentPhase}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -176,8 +191,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Current Table">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.CurrentTable}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -190,8 +208,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Current Bucket">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.CurrentBucket}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -205,7 +226,10 @@
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Phase 1">
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase1Time}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -218,8 +242,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Phase 2">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase1Time}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -232,8 +259,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Phase 3">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase3Time}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -246,8 +276,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Phase 4">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase4Time}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -260,8 +293,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Total">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.TotalTime}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -274,8 +310,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Buffer">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Buffer}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -288,8 +327,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Buckets">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Buckets}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -302,10 +344,13 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Threads">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Threads}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate >
+								<DataTemplate>
 									<StackPanel>
 										<ToolTip.Tip>
 											<StackPanel>
@@ -316,8 +361,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Tmp File Size">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.ApproximateWorkingSpace}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -330,8 +378,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Final Size">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.FinalFileSize}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -344,8 +395,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Log Folder">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.LogFolder}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
@@ -358,8 +412,11 @@
 									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn >
-						<DataGridTemplateColumn  Header="Log File">
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.LogFile}" HorizontalAlignment="Left" ></TextBlock>
+							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
 									<StackPanel>
