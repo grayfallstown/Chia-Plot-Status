@@ -43,7 +43,7 @@ namespace ChiaPlotStatus
                         break;
                     case var _ when threadsRg.IsMatch(line):
                         CurrentPlotLog().Threads = int.Parse(threadsRg.Matches(line)[0].Groups[1].Value);
-                       break;
+                        break;
                     case var _ when startDateRg.IsMatch(line):
                         CurrentPlotLog().StartDate = startDateRg.Matches(line)[0].Groups[1].Value;
                         break;

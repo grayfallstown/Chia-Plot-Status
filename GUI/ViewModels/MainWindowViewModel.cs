@@ -22,11 +22,16 @@ namespace ChiaPlottStatusAvalonia.ViewModels
         public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
         public string? Search { get; set; } = null;
 
+        public Language Language { get; set; }
+        public Dictionary<string, Language> Languages { get; set; }
+
         public ReactiveCommand<Unit, Unit> AddFolderCommand { get; set; }
         public ReactiveCommand<string, Unit> RemoveFolderCommand { get; set; }
 
         public MainWindowViewModel()
         {
+            Languages = Translation.LoadLanguages();
+            Language = Languages["English"];
             InitializeChiaPlotStatus();
             InitializeButtons();
             InitializeSearchBox();

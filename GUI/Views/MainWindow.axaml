@@ -8,9 +8,9 @@
         Icon="/Assets/Logo.jpg"
         Title="ChiaPlottStatusAvalonia">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+	<Window.DataContext>
+		<vm:MainWindowViewModel/>
+	</Window.DataContext>
 	<Window.Styles>
 		<Style Selector="TextBlock">
 			<Setter Property="FontSize" Value="10"/>
@@ -28,10 +28,20 @@
 			<Setter Property="Margin" Value="1"/>
 			<Setter Property="FontSize" Value="10"/>
 		</Style>
+		<Style Selector="ToolTip">
+			<Setter Property="MaxWidth" Value="600"/>
+			<Setter Property="MaxHeight" Value="600"/>
+		</Style>
+		<Style Selector="ToolTip TextBlock">
+			<Setter Property="MaxWidth" Value="600"/>
+			<Setter Property="MaxHeight" Value="600"/>
+			<Setter Property="FontSize" Value="9.3"/>
+			<Setter Property="TextWrapping" Value="Wrap"/>
+		</Style>
 	</Window.Styles>
 
-	<ScrollViewer>
-	    <StackPanel>
+	<ScrollViewer Name="WindowContext">
+		<StackPanel>
 			<Grid ColumnDefinitions="100,3*,4*" RowDefinitions="Auto,Auto,Auto"  Margin="4">
 				<Image Source="/Assets/Logo.jpg" Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
 				<StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
@@ -68,128 +78,301 @@
 				</StackPanel>
 			</Grid>
 
+			<TextBlock Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}} Path=DataContext.Language.Tooltips.LogFile}"></TextBlock>
+			<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.LogFile}"></TextBlock>
+			<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.LogFile}"></TextBlock>
+			<TextBlock Text="{Binding Language.Tooltips.LogFile}"></TextBlock>
+			<TextBlock Text="{Binding Language.Tooltips}"></TextBlock>
+			<TextBlock Text="{Binding Language.Name}"></TextBlock>
 
 		    <!---		<Button Content="Add New Person" Margin="5" Command="{Binding AddNewPerson}"/> -->
 			<ScrollViewer>
-				<DataGrid Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="600">
+				<DataGrid Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="600" Name="LogDataGrid">
 					<DataGrid.Columns>
-						<DataGridTextColumn Header="Tmp1" Binding="{Binding Tmp1Drive}" />
-						<DataGridTextColumn Header="Tmp2" Binding="{Binding Tmp2Drive}" />
-						<DataGridTextColumn Header="Started" Binding="{Binding StartDate}" />
+						<DataGridTemplateColumn  Header="Tmp1">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<StackPanel>
+										<TextBlock Text="{Binding Tmp1Drive}" HorizontalAlignment="Left" ></TextBlock>
+									</StackPanel>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Tmp2">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<StackPanel>
+										<TextBlock Text="{Binding Tmp2Drive}" HorizontalAlignment="Left" ></TextBlock>
+									</StackPanel>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Started">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.StartDate}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding StartDate}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Errors">
 							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate >
-									<TextBlock Text="{Binding Errors}" HorizontalAlignment="Right" ></TextBlock>
+								<DataTemplate>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Errors}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding Errors}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Progress">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding Progress}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Progress}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding Progress}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="ETA">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding ETA}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.ETA}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding ETA}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Current Phase">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding CurrentPhase}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.CurrentPhase}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding CurrentPhase}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Current Table">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding CurrentTable}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.CurrentTable}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding CurrentTable}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Current Bucket">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding CurrentBucket}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.CurrentBucket}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding CurrentBucket}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Phase 1">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding Phase1Time}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase1Time}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding Phase1Time}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Phase 2">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding Phase2Time}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase2Time}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding Phase2Time}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Phase 3">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding Phase3Time}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase3Time}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding Phase3Time}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Phase 4">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding Phase4Time}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase4Time}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding Phase4Time}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Total">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding TotalTime}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.TotalTime}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding TotalTime}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Buffer">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding Buffer}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Buffer}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding Buffer}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Buckets">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding Buckets}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Buckets}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding Buckets}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Threads">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding Threads}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Threads}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding Threads}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Tmp File Size">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding ApproximateWorkingSpace}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.ApproximateWorkingSpace}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding ApproximateWorkingSpace}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
 						<DataGridTemplateColumn  Header="Final Size">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate >
-									<TextBlock Text="{Binding FinalFileSize}" HorizontalAlignment="Right" ></TextBlock>
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.FinalFileSize}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding FinalFileSize}" HorizontalAlignment="Right" ></TextBlock>
+									</StackPanel>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn >
-						<DataGridTextColumn Header="Log Folder" Binding="{Binding LogFolder}" />
-						<DataGridTextColumn Header="Log File" Binding="{Binding LogFile}" />
+						<DataGridTemplateColumn  Header="Log Folder">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.LogFolder}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding LogFolder}" HorizontalAlignment="Left" ></TextBlock>
+									</StackPanel>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
+						<DataGridTemplateColumn  Header="Log File">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate >
+									<StackPanel>
+										<ToolTip.Tip>
+											<StackPanel>
+												<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.LogFile}"></TextBlock>
+											</StackPanel>
+										</ToolTip.Tip>
+										<TextBlock Text="{Binding LogFile}" HorizontalAlignment="Left" ></TextBlock>
+									</StackPanel>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn >
 					</DataGrid.Columns>
 				</DataGrid>
 			</ScrollViewer>

@@ -1,0 +1,65 @@
+﻿Name: English
+
+Tooltips:
+    Tmp1Drive: null
+    Tmp2Drive: null
+    Errors: >
+        Errors that occured in the plotting process while reading from or writing data to disk.
+        The chia plotter will retry in case of such an error after a short time. One is not that bad.
+        If you use external harddrives or network attached Storage this usally means the connection
+        dropped. Reattach the device and chia will continue. If the error count keeps rising you need to troubleshoot.
+    Progress: >
+        Shows the progression defined by the number of steps done vs the number of steps left to completion.
+        The number of steps tells you nothing about how long the process will take to completion.
+    ETA: >
+        An estimate on how long it will take for the plot to complete. It is based on the plots progress and all
+        the data extracted from your finished plots. It will try to use the data of those plots that match the
+        configuration of that plot most closely to make a better prediction if you mix hard disks, ssd, internal
+        and external drives and even network attached storage.
+    CurrentTable: >
+        The table number currently worked on. On phase 1 and 3 it will start with table 1 and work its way up to 7. In
+        Phase 2 it will start with table 7 and work its way back to table 1. An arrow shows in which way it currently
+        progresses.
+    CurrentBucket: >
+        The Chia plotter will work through each table in the phases 1 to 3 and will process each bucket in each table.
+        This shows which bucket in the current table is currently worked on.
+    CurrentPhase: >
+        Shows in which of the four phases the plotting process is. It does not go back to a previous phase.
+    Phase1Time: >
+        The time this plot process took to complete phase 1
+    Phase2Time: >
+        The time this plot process took to complete phase 2
+    Phase3Time: >
+        The time this plot process took to complete phase 3
+    Phase4Time: >
+        The time this plot process took to complete phase 4
+    TotalTime: >
+        The time this plot process took to complete
+    PlotSize: >
+        The k-size of the plot. Usally 32, which produces a 100GB plot file. Apparently there is very little
+        reason to use a larger k-size for now.
+    Threads: >
+        The number of threads used to complete phase 1. As of now the other phases are not multithreaded
+        and will only use one cpu core, tweaking this only affects phase 1
+    Buffer: >
+        This buffer size the plotter uses. It is used to sort the data within the buckets in memory.
+        It will resort to a different sort algorithm which is slower on most tables. Too small buffer
+        sizes will slow down the plotter, too large ones will bring no additional benefit, but lower
+        the number on plotting processes you can run in parallel with the ram installed in your
+        system.
+    Buckets: >
+        The number of parts a table will be split into. Each bucket is sorted individually. Each bucket
+        gets written in its own file.
+    StartDate: >
+        When the plotting process was started.
+    PlotName: >
+        Name of the final plot file.
+    LogFolder: >
+        The folder in which this log file in stored. If you have multiple log folder for multiple rigs,
+        this tells you which rig it is from.
+    LogFile: >
+        The name of the logfile.
+    ApproximateWorkingSpace: >
+        An estimate on how much temporary space was used during the creation of the plot.
+    FinalFileSize: >
+        The size of the finished plot file. Varies little over the same k-size.
