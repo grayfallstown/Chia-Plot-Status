@@ -42,6 +42,18 @@ namespace ChiaPlottStatusAvalonia.ViewModels
             InitializeChiaPlotStatus();
             InitializeButtons();
             InitializeSearchBox();
+            KeepGridScrollbarOnScreen();
+        }
+
+        private void KeepGridScrollbarOnScreen()
+        {
+            MainWindow.Instance.WhenAnyValue(x => x.Height)
+                .Subscribe(x =>
+                {
+                    var dataGrid = MainWindow.Instance.Find<DataGrid>("LogDataGrid");
+                    if (dataGrid != null)
+                        dataGrid.Height = x - 130;
+                });
         }
 
         public void InitializeChiaPlotStatus()

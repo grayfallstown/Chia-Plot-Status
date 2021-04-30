@@ -65,5 +65,7 @@ namespace ChiaPlottStatusAvalonia.Views
 
         }
 
+        
+
     }
 }

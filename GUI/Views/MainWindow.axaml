@@ -78,7 +78,7 @@
 				</StackPanel>
 			</Grid>
 
-			<DataGrid Name="LogDataGrid" Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="600" CanUserSortColumns="True">
+			<DataGrid Name="LogDataGrid" Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="80" CanUserSortColumns="true">
 				<DataGrid.Columns>
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.Header>
