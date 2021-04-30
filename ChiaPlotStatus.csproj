@@ -3,6 +3,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>grayfallstown.pfx</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />

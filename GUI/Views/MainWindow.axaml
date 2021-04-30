@@ -7,7 +7,6 @@
         x:Class="ChiaPlottStatusAvalonia.Views.MainWindow"
         Icon="/Assets/Logo.png"
         TransparencyLevelHint="Transparent"
-		Background="Transparent"
         ExtendClientAreaToDecorationsHint="False"
         Title="ChiaPlottStatusAvalonia">
 

@@ -68,22 +68,16 @@ namespace ChiaPlottStatusAvalonia.ViewModels
                 switch (theme)
                 {
                     case "Dark":
-                        var background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.FromArgb(200, 22, 22, 23));
                         MainWindow.Instance.Styles[0] = dark;
                         MainWindow.Instance.Find<ComboBox>("Themes").SelectedIndex = 1;
                         MainWindow.Instance.Find<TextBox>("SearchBox").Foreground = Avalonia.Media.Brushes.LightGray;
                         MainWindow.Instance.Find<ComboBox>("Themes").Foreground = Avalonia.Media.Brushes.LightGray;
-                        MainWindow.Instance.Find<DataGrid>("LogDataGrid").Background = background;
-                        MainWindow.Instance.Background = background;
                         break;
                     default:
-                        background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.FromArgb(200, 255, 255, 255));
                         MainWindow.Instance.Styles[0] = light;
                         MainWindow.Instance.Find<ComboBox>("Themes").SelectedIndex = 0;
                         MainWindow.Instance.Find<TextBox>("SearchBox").Foreground = Avalonia.Media.Brushes.Black;
                         MainWindow.Instance.Find<ComboBox>("Themes").Foreground = Avalonia.Media.Brushes.Black;
-                        MainWindow.Instance.Find<DataGrid>("LogDataGrid").Background = background;
-                        MainWindow.Instance.Background = background;
                         break;
                 }
                 MainWindow.Instance.Find<TextBox>("SearchBox").FontSize = (double) PlotManager.Settings.FontSize;
