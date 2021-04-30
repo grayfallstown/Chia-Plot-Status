@@ -17,10 +17,13 @@ namespace ChiaPlottStatusAvalonia.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public PlotManager PlotManager { get; internal set; }
+        public ChiaPlotStatus.ChiaPlotStatus PlotManager { get; internal set; }
 
         public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
         public string? Search { get; set; } = null;
+        public string SortProperty { get; set; } = "Progress";
+        public bool SortAsc { get; set; } = true;
+        public ObservableCollection<string> SortProperties = new();
 
         public Language Language { get; set; }
         public Dictionary<string, Language> Languages { get; set; }
@@ -32,6 +35,8 @@ namespace ChiaPlottStatusAvalonia.ViewModels
 
         public MainWindowViewModel()
         {
+            foreach (var property in typeof(PlotLogReadable).GetProperties())
+                SortProperties.Add(property.Name);
             Languages = Translation.LoadLanguages();
             Language = Languages["English"];
             InitializeChiaPlotStatus();
@@ -52,9 +57,8 @@ namespace ChiaPlottStatusAvalonia.ViewModels
         public void LoadPlotLogs()
         {
             PlotLogs.Clear();
-            foreach (var plotLogReadable in PlotManager.PollPlotLogReadables(Search))
-                PlotLogs.Add(plotLogReadable);
-            Debug.WriteLine(PlotLogs.Count);
+            foreach (var plotLog in PlotManager.PollPlotLogs(Search, SortProperty, SortAsc))
+                PlotLogs.Add(plotLog.Item2);
         }
 
         public void InitializeButtons()
@@ -64,6 +68,25 @@ namespace ChiaPlottStatusAvalonia.ViewModels
             MainWindow.Instance.BtnClickWorkaround = (folder) =>
             {
                 RemoveFolder(folder);
+                return true;
+            };
+
+            MainWindow.Instance.SortChangeWorkaround = (headerText) =>
+            {
+                var oldSortProperty = SortProperty;
+                foreach (var property in typeof(Columns).GetProperties())
+                {
+                    string translation = (string)property.GetValue(Language.Columns);
+                    if (string.Equals(headerText, translation))
+                    {
+                        SortProperty = property.Name;
+                        break;
+                    }
+                }
+                if (string.Equals(SortProperty, oldSortProperty))
+                    SortAsc = !SortAsc;
+                Debug.WriteLine("SearchProperty: " + SortProperty + ", ASC: " + SortAsc);
+                LoadPlotLogs();
                 return true;
             };
 
@@ -112,6 +135,12 @@ namespace ChiaPlottStatusAvalonia.ViewModels
             PlotManager.RemoveLogFolder(folder);
             PlotManager.Settings.Persist();
             LoadPlotLogs();
+        }
+
+        public void SetGridHeight()
+        {
+            double height = MainWindow.Instance.Height - 600;
+            MainWindow.Instance.Find<DataGrid>("PlotLogGrid").Height = height;
         }
 
     }

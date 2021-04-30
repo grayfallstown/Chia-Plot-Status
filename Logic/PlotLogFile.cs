@@ -109,7 +109,7 @@ namespace ChiaPlotStatus
                 var cPlotLog = CurrentPlotLog();
                 cPlotLog.LogFile = this.LogFile;
                 cPlotLog.LogFolder = this.LogFolder;
-                cPlotLog.UpdatePercentDone();
+                cPlotLog.UpdateProgress();
             });
         }
 

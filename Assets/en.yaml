@@ -3,18 +3,18 @@
 
 Columns:
     Tmp1Drive: "Tmp1"
-    Tmp2Drive: "Tmp1"
+    Tmp2Drive: "Tmp2"
     Errors: "Errors"
     Progress: "Progress"
     ETA: "ETA"
     CurrentTable: "Cur. Table"
     CurrentBucket: "Cur. Bucket"
     CurrentPhase: "Cur. Phase"
-    Phase1Time: "Phase 1 🕐"
-    Phase2Time: "Phase 2 🕐"
-    Phase3Time: "Phase 3 🕐"
-    Phase4Time: "Phase 4 🕐"
-    TotalTime: "Total 🕐"
+    Phase1Seconds: "Phase 1 🕐"
+    Phase2Seconds: "Phase 2 🕐"
+    Phase3Seconds: "Phase 3 🕐"
+    Phase4Seconds: "Phase 4 🕐"
+    TotalSeconds: "Total 🕐"
     PlotSize: "K-Size"
     Threads: "Threads"
     Buffer: "Buffer"
@@ -31,7 +31,7 @@ Tooltips:
     Tmp2Drive: null
     Errors: >
         Errors that occured in the plotting process while reading from or writing data to disk.
-        The chia plotter will retry in case of such an error after a short time. One is not that bad.
+        The chia plotter will retry in case of such an error after a short Seconds. One is not that bad.
         If you use external harddrives or network attached Storage this usally means the connection
         dropped. Reattach the device and chia will continue. If the error count keeps rising you need to troubleshoot.
     Progress: >
@@ -51,16 +51,16 @@ Tooltips:
         This shows which bucket in the current table is currently worked on.
     CurrentPhase: >
         Shows in which of the four phases the plotting process is. It does not go back to a previous phase.
-    Phase1Time: >
-        The time this plot process took to complete phase 1
-    Phase2Time: >
-        The time this plot process took to complete phase 2
-    Phase3Time: >
-        The time this plot process took to complete phase 3
-    Phase4Time: >
-        The time this plot process took to complete phase 4
-    TotalTime: >
-        The time this plot process took to complete
+    Phase1Seconds: >
+        The Seconds this plot process took to complete phase 1
+    Phase2Seconds: >
+        The Seconds this plot process took to complete phase 2
+    Phase3Seconds: >
+        The Seconds this plot process took to complete phase 3
+    Phase4Seconds: >
+        The Seconds this plot process took to complete phase 4
+    TotalSeconds: >
+        The Seconds this plot process took to complete
     PlotSize: >
         The k-size of the plot. Usally 32, which produces a 100GB plot file. Apparently there is very little
         reason to use a larger k-size for now.

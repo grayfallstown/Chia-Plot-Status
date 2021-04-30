@@ -16,11 +16,11 @@ namespace ChiaPlotStatus
         public string CurrentTable { get; set; } = "";
         public string CurrentBucket { get; set; } = "";
         public string CurrentPhase { get; set; } = "";
-        public string Phase1Time { get; set; } = "";
-        public string Phase2Time { get; set; } = "";
-        public string Phase3Time { get; set; } = "";
-        public string Phase4Time { get; set; } = "";
-        public string TotalTime { get; set; } = "";
+        public string Phase1Seconds { get; set; } = "";
+        public string Phase2Seconds { get; set; } = "";
+        public string Phase3Seconds { get; set; } = "";
+        public string Phase4Seconds { get; set; } = "";
+        public string TotalSeconds { get; set; } = "";
         public string PlotSize { get; set; } = "";
         public string Threads { get; set; } = "";
         public string Buffer { get; set; } = "";
@@ -40,7 +40,7 @@ namespace ChiaPlotStatus
             {
                 this.Errors = plotLog.Errors.ToString();
             }
-            this.Progress = string.Format("{0:0.00}", plotLog.PercentDone) + "%";
+            this.Progress = string.Format("{0:0.00}", plotLog.Progress) + "%";
             if (string.Equals(this.Progress, "NaN%")) this.Progress = "";
             this.CurrentPhase = "1";
             if (plotLog.Phase1Seconds > 0)
@@ -63,12 +63,12 @@ namespace ChiaPlotStatus
             {
                 this.CurrentPhase += "/4";
             }
-            this.ETA = formatTime(plotLog.ETA);
-            this.Phase1Time = formatTime(plotLog.Phase1Seconds);
-            this.Phase2Time = formatTime(plotLog.Phase2Seconds);
-            this.Phase3Time = formatTime(plotLog.Phase3Seconds);
-            this.Phase4Time = formatTime(plotLog.Phase4Seconds);
-            this.TotalTime = formatTime(plotLog.TotalSeconds);
+            this.ETA = formatSeconds(plotLog.ETA);
+            this.Phase1Seconds = formatSeconds(plotLog.Phase1Seconds);
+            this.Phase2Seconds = formatSeconds(plotLog.Phase2Seconds);
+            this.Phase3Seconds = formatSeconds(plotLog.Phase3Seconds);
+            this.Phase4Seconds = formatSeconds(plotLog.Phase4Seconds);
+            this.TotalSeconds = formatSeconds(plotLog.TotalSeconds);
             this.ApproximateWorkingSpace = plotLog.ApproximateWorkingSpace;
             this.FinalFileSize = plotLog.FinalFileSize;
             this.Buckets = plotLog.Buckets.ToString();
@@ -90,13 +90,16 @@ namespace ChiaPlotStatus
                 case "3/4":
                     this.CurrentTable = plotLog.Phase3Table + "/7 ↑";
                     break;
+                case "4/4":
+                    this.CurrentTable = "4/4";
+                    break;
                 default:
                     this.CurrentTable ="";
                     break;
             }
         }
 
-        private string formatTime(int seconds)
+        private string formatSeconds(int seconds)
         {
             if (seconds == 0)
             {

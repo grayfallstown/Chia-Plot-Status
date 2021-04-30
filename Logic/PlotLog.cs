@@ -12,7 +12,7 @@ namespace ChiaPlotStatus
         public string Tmp2Drive { get; set; }
         // public string DestDrive { get; set; }
         public int Errors { get; set; }
-        public float PercentDone { get; set; }
+        public float Progress { get; set; }
         public int ETA { get; set; }
         public int CurrentBucket { get; set; }
         public int Phase1Table { get; set; }
@@ -34,7 +34,7 @@ namespace ChiaPlotStatus
         public string ApproximateWorkingSpace { get; set; }
         public string FinalFileSize { get; set; }
 
-        public void UpdatePercentDone()
+        public void UpdateProgress()
         {
             float part = 0;
             // 22 parts total:
@@ -73,7 +73,7 @@ namespace ChiaPlotStatus
                 part = 7 - (totalTablesIn1 - Phase1Table);
                 subpart = (float)CurrentBucket / Buckets;
             }
-            PercentDone = (part + subpart) / 22 * 100;
+            Progress = (part + subpart) / 22 * 100;
         }
 
         public void UpdateEta(PlottingStatistics stats)
@@ -85,7 +85,7 @@ namespace ChiaPlotStatus
                 return;
             }
             int currentPhase = 1;
-            if (Math.Abs(this.PercentDone - 100f) < 0.00001)
+            if (Math.Abs(this.Progress - 100f) < 0.00001)
             {
                 return;
             }

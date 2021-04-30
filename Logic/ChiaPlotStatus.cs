@@ -15,14 +15,14 @@ namespace ChiaPlotStatus
      * Core Object of this tool.
      * Knows everything, does everything.
      */
-    public class PlotManager
+    public class ChiaPlotStatus
     {
         public Settings Settings { get; }
         private Dictionary<string, PlotLogFile> PlotLogFiles { get; } = new Dictionary<string, PlotLogFile>();
         public PlottingStatisticsIdRelevanceWeights Weights { get; } = new PlottingStatisticsIdRelevanceWeights();
         public PlottingStatisticsHolder Statistics { get; set; }
 
-        public PlotManager(Settings settings) {
+        public ChiaPlotStatus(Settings settings) {
             this.Settings = settings;
             Statistics = new PlottingStatisticsHolder(new List<PlotLog>(), Weights);
         }
@@ -51,26 +51,16 @@ namespace ChiaPlotStatus
             }
         }
 
-        public List<PlotLog> PollPlotLogs(string? searchString)
+        public List<(PlotLog, PlotLogReadable)> PollPlotLogs(string? searchString, string sortPropertyName, bool sortAsc)
         {
             SearchForNewLogFiles();
             ConcurrentBag<PlotLog> plotLogs = ParseTheLogs();
-            List<PlotLog> result = Filter(searchString, plotLogs.ToList());
-            SortPlotLogs(result);
-            HandleStatistics(result);
-            return result;
-        }
-
-        public List<PlotLogReadable> PollPlotLogReadables(string? searchString)
-        {
-            SearchForNewLogFiles();
-            List<PlotLog> plotLogs = ParseTheLogs().ToList();
-            HandleStatistics(plotLogs);
-            SortPlotLogs(plotLogs);
-            List<PlotLogReadable> result = new List<PlotLogReadable>();
+            HandleStatistics(plotLogs.ToList());
+            List<(PlotLog, PlotLogReadable)> plusReadable = new();
             foreach (var plotLog in plotLogs)
-                result.Add(new PlotLogReadable(plotLog));
-            result = Filter(searchString, result);
+                plusReadable.Add((plotLog, new PlotLogReadable(plotLog)));
+            List<(PlotLog, PlotLogReadable)> result = Filter(searchString, plusReadable);
+            SortPlotLogs(sortPropertyName, sortAsc, result);
             return result;
         }
 
@@ -101,28 +91,14 @@ namespace ChiaPlotStatus
             return plotLogs;
         }
 
-        private List<T> Filter<T>(string? searchString, List<T> plotLogs)
+        private List<(PlotLog, PlotLogReadable)> Filter(string? searchString, List<(PlotLog, PlotLogReadable)> plotLogs)
         {
-            return SearchFilter.Search<T>(searchString, plotLogs);
+            return SearchFilter.Search<PlotLog, PlotLogReadable>(searchString, plotLogs);
         }
 
-        private static void SortPlotLogs(List<PlotLog> plotLogs)
+        private static void SortPlotLogs(string propertyName, bool sortAsc, List<(PlotLog, PlotLogReadable)> plotLogs)
         {
-            plotLogs.Sort((a, b) =>
-            {
-                if (a.PercentDone > b.PercentDone)
-                {
-                    return 1;
-                }
-                else if (a.PercentDone < b.PercentDone)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return string.CompareOrdinal(a.Tmp1Drive, b.Tmp1Drive);
-                }
-            });
+            Sorter.Sort(propertyName, sortAsc, plotLogs);
         }
 
         private void HandleStatistics(List<PlotLog> plotLogs)

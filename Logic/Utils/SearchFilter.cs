@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChiaPlottStatus.Logic.Utils
 {
-    public class SearchFilter
+    public static class SearchFilter
     {
 
         /**
@@ -56,5 +56,29 @@ namespace ChiaPlottStatus.Logic.Utils
             }
             return result;
         }
+
+
+        public static List<(A, B)> Search<A, B>(string? searchString, List<(A, B)> items)
+        {
+            if (items.Count == 0 || string.IsNullOrEmpty(searchString))
+            {
+                return items;
+            }
+            List<A> itemsA = new();
+            List<B> itemsB = new();
+            foreach (var item in items)
+            {
+                itemsA.Add(item.Item1);
+                itemsB.Add(item.Item2);
+            }
+            itemsA = Search(searchString, itemsA);
+            itemsB = Search(searchString, itemsB);
+            List<(A, B)> result = new();
+            foreach (var item in items)
+                if (itemsA.Contains(item.Item1) || itemsB.Contains(item.Item2))
+                    result.Add(item);
+            return result;
+        }
+
     }
 }

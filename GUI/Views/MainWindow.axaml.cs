@@ -5,7 +5,9 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using ReactiveUI;
 using System;
+using System.Diagnostics;
 using System.Reactive;
+using static Avalonia.Controls.AutoCompleteBox;
 
 namespace ChiaPlottStatusAvalonia.Views
 {
@@ -14,6 +16,7 @@ namespace ChiaPlottStatusAvalonia.Views
         public static MainWindow? Instance { get; private set; }
         public Func<string, bool> BtnClickWorkaround { get; set; }
         public Func<string, bool> TextChangeWorkaround { get; set; }
+        public Func<string, bool> SortChangeWorkaround { get; set; }
 
         public MainWindow()
         {
@@ -51,5 +54,16 @@ namespace ChiaPlottStatusAvalonia.Views
         {
             TextChangeWorkaround(((TextBox)sender).Text);
         }
+
+        public void LogDataGridHeaderClick(object sender, RoutedEventArgs e)
+        {
+            Button header = ((Button)sender);
+            string headerText = (string) header.Content;
+            Debug.WriteLine(headerText);
+            SortChangeWorkaround(headerText);
+            // header.DataContext.BindCommand;
+
+        }
+
     }
 }
