@@ -16,7 +16,9 @@
 
 ## Download
 
-[Download latest version patient-farmer](./Setup.exe)
+Windows: [Download latest version busy-harvester](./Setup.exe)
+
+Mac and Linux: ChiaPlotStatus should be compatible with [mono](https://www.mono-project.com/) (currently untested) [Download](./ChiaPlotStatus.zip)
 
 ## Working with many distributed plotting rigs
 
