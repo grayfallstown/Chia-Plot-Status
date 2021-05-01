@@ -5,6 +5,7 @@
 # [Chia](https://www.chia.net/) Plot Status
 
 ![Screenshot](./Screenshot.jpg)
+![Screenshot](./Screenshot-Dark.jpg)
 
 ## Features
 
