@@ -12,6 +12,7 @@ namespace ChiaPlotStatus
         public string Tmp2Drive { get; set; } = "";
         public string Errors { get; set; } = "";
         public string Progress { get; set; } = "";
+        public string TimeRemaining { get; set; } = "";
         public string ETA { get; set; } = "";
         public string CurrentTable { get; set; } = "";
         public string CurrentBucket { get; set; } = "";
@@ -63,7 +64,8 @@ namespace ChiaPlotStatus
             {
                 this.CurrentPhase += "/4";
             }
-            this.ETA = formatSeconds(plotLog.ETA);
+            this.TimeRemaining = formatSeconds(plotLog.TimeRemaining);
+            this.ETA = formatDateTime(plotLog.ETA);
             this.Phase1Seconds = formatSeconds(plotLog.Phase1Seconds);
             this.Phase2Seconds = formatSeconds(plotLog.Phase2Seconds);
             this.Phase3Seconds = formatSeconds(plotLog.Phase3Seconds);
@@ -123,6 +125,16 @@ namespace ChiaPlotStatus
             {
                 return TimeSpan.FromSeconds(seconds).ToString(@"ss\s");
             }
+        }
+
+        private string formatDateTime(DateTime? dateTime)
+        {
+            // decided agains local date format for now
+            if (dateTime == null)
+                return "";
+            else
+                // forced to make it non nullable or it does not find ToString(format)
+                return ((DateTime)dateTime).ToString("MM/dd/yyyy H:mm");
         }
     }
 }

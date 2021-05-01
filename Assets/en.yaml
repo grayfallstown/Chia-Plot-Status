@@ -6,6 +6,7 @@ Columns:
     Tmp2Drive: "Tmp2"
     Errors: "Errors"
     Progress: "Progress"
+    TimeRemaining: "Remaining 🕐"
     ETA: "ETA"
     CurrentTable: "Cur. Table"
     CurrentBucket: "Cur. Bucket"
@@ -41,11 +42,16 @@ Tooltips:
     Progress: >
         Shows the progression defined by the number of steps done vs the number of steps left to completion.
         The number of steps tells you nothing about how long the process will take to completion.
-    ETA: >
+    TimeRemaining: >
         An estimate on how long it will take for the plot to complete. It is based on the plots progress and all
         the data extracted from your finished plots. It will try to use the data of those plots that match the
         configuration of that plot most closely to make a better prediction if you mix hard disks, ssd, internal
         and external drives and even network attached storage.
+    ETA: >
+        An estimate on when the plotting process completes formatted MM/dd/yyyy H:mm. It is based on the plots
+        progress and all the data extracted from your finished plots. It will try to use the data of those plots
+        that match the configuration of that plot most closely to make a better prediction if you mix hard disks,
+        ssd, internal and external drives and even network attached storage.
     CurrentTable: >
         The table number currently worked on. On phase 1 and 3 it will start with table 1 and work its way up to 7. In
         Phase 2 it will start with table 7 and work its way back to table 1. An arrow shows in which way it currently
