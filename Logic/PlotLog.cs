@@ -8,8 +8,8 @@ namespace ChiaPlotStatus
      */
     public class PlotLog
     {
-        public string Tmp1Drive { get; set; } = "";
-        public string Tmp2Drive { get; set; } = "";
+        public string? Tmp1Drive { get; set; }
+        public string? Tmp2Drive { get; set; }
         // public string DestDrive { get; set; }
         public int Errors { get; set; } = 0;
         public float Progress { get; set; } = 0;
@@ -74,6 +74,9 @@ namespace ChiaPlotStatus
                 subpart = (float)CurrentBucket / Buckets;
             }
             Progress = (part + subpart) / 22 * 100;
+            if (Double.IsNaN(Progress))
+                Progress = 0;
+
         }
 
         public void UpdateEta(PlottingStatistics stats)

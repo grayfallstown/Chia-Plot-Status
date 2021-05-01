@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,8 @@ namespace ChiaPlotStatus
      */
     public class PlotLogFile
     {
-        private TailLineEmitter TailLineEmitter { get; set; }
-        private List<PlotLog> PlotLogs { get; set; } = new List<PlotLog>();
+        private TailLineEmitter TailLineEmitter { get; }
+        private List<PlotLog> PlotLogs { get; } = new List<PlotLog>();
         public string LogFile;
         public string LogFolder;
 
@@ -137,7 +138,8 @@ namespace ChiaPlotStatus
             var newPlotLog = new PlotLog();
             // when plot create --num n is used parameters stay the same
             newPlotLog.Buckets = oldPlotLog.Buckets;
-            newPlotLog.Threads = oldPlotLog.Threads;
+            Debug.WriteLine("Buckets: " + newPlotLog.Buckets);
+            //newPlotLog.Threads = oldPlotLog.Threads;
             newPlotLog.Buffer = oldPlotLog.Buffer;
             newPlotLog.Tmp1Drive = oldPlotLog.Tmp1Drive;
             newPlotLog.Tmp2Drive = oldPlotLog.Tmp2Drive;

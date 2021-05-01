@@ -192,7 +192,8 @@ namespace ChiaPlottStatusAvalonia.ViewModels
                 Task.Run(async () =>
                 {
                     var result = await picker.ShowAsync(MainWindow.Instance);
-                    exporter.ToJson(result, RawExport);
+                    if (result != null)
+                        exporter.ToJson(result, RawExport);
                 });
             });
 
@@ -220,7 +221,8 @@ namespace ChiaPlottStatusAvalonia.ViewModels
                 Task.Run(async () =>
                 {
                     var result = await picker.ShowAsync(MainWindow.Instance);
-                    exporter.ToYaml(result, RawExport);
+                    if (result != null)
+                        exporter.ToYaml(result, RawExport);
                 });
             });
 
@@ -248,7 +250,8 @@ namespace ChiaPlottStatusAvalonia.ViewModels
                 Task.Run(async () =>
                 {
                     var result = await picker.ShowAsync(MainWindow.Instance);
-                    exporter.ToCsv(result, RawExport);
+                    if (result != null)
+                        exporter.ToCsv(result, RawExport);
                 });
             });
         }

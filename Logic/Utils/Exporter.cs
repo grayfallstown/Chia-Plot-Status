@@ -34,11 +34,16 @@ namespace ChiaPlotStatus.Logic.Utils
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.WriteIndented = true;
             string? json = null;
-            if (raw)
-                json = JsonSerializer.Serialize(this.plotLogs, options);
-            else
-                json = JsonSerializer.Serialize(this.plotLogReadables, options);
-            File.WriteAllText(file, json);
+            try {
+                if (raw)
+                    json = JsonSerializer.Serialize(this.plotLogs, options);
+                else
+                    json = JsonSerializer.Serialize(this.plotLogReadables, options);
+                File.WriteAllText(file, json);
+            } catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
         }
 
         public void ToYaml(string file, bool raw)
