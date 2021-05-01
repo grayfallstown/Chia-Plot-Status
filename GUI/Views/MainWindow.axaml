@@ -77,7 +77,7 @@
 			<Grid ColumnDefinitions="100,3*,4*" RowDefinitions="Auto,Auto,Auto"  Margin="4">
 				<Image Source="/Assets/Logo.png" Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
 				<StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
-					<DataGrid Name="FolderGrid" Items="{Binding PlotManager.Settings.LogDirectories}" Classes="folders">
+					<DataGrid Name="FolderGrid" Height="100" MaxHeight="100" Items="{Binding PlotManager.Settings.LogDirectories}" Classes="folders">
 						<DataGrid.Columns>
 							<DataGridTemplateColumn Width="30">
 								<DataGridTemplateColumn.Header>
