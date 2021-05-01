@@ -8,31 +8,31 @@ namespace ChiaPlotStatus
      */
     public class PlotLog
     {
-        public string Tmp1Drive { get; set; }
-        public string Tmp2Drive { get; set; }
+        public string Tmp1Drive { get; set; } = "";
+        public string Tmp2Drive { get; set; } = "";
         // public string DestDrive { get; set; }
-        public int Errors { get; set; }
-        public float Progress { get; set; }
-        public int ETA { get; set; }
-        public int CurrentBucket { get; set; }
-        public int Phase1Table { get; set; }
-        public int Phase2Table { get; set; }
-        public int Phase3Table { get; set; }
-        public int Phase1Seconds { get; set; }
-        public int Phase2Seconds { get; set; }
-        public int Phase3Seconds { get; set; }
-        public int Phase4Seconds { get; set; }
-        public int TotalSeconds { get; set; }
-        public int PlotSize { get; set; }
-        public int Threads { get; set; }
-        public int Buffer { get; set; }
-        public int Buckets { get; set; }
-        public string StartDate { get; set; }
-        public string PlotName { get; set; }
-        public string LogFolder { get; set; }
-        public string LogFile { get; set; }
-        public string ApproximateWorkingSpace { get; set; }
-        public string FinalFileSize { get; set; }
+        public int Errors { get; set; } = 0;
+        public float Progress { get; set; } = 0;
+        public int ETA { get; set; } = 0;
+        public int CurrentBucket { get; set; } = 0;
+        public int Phase1Table { get; set; } = 0;
+        public int Phase2Table { get; set; } = 0;
+        public int Phase3Table { get; set; } = 0;
+        public int Phase1Seconds { get; set; } = 0;
+        public int Phase2Seconds { get; set; } = 0;
+        public int Phase3Seconds { get; set; } = 0;
+        public int Phase4Seconds { get; set; } = 0;
+        public int TotalSeconds { get; set; } = 0;
+        public int PlotSize { get; set; } = 0;
+        public int Threads { get; set; } = 0;
+        public int Buffer { get; set; } = 0;
+        public int Buckets { get; set; } = 0;
+        public string StartDate { get; set; } = "";
+        public string PlotName { get; set; } = "";
+        public string LogFolder { get; set; } = "";
+        public string LogFile { get; set; } = "";
+        public string ApproximateWorkingSpace { get; set; } = "";
+        public string FinalFileSize { get; set; } = "";
 
         public void UpdateProgress()
         {
