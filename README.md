@@ -5,6 +5,7 @@
 # [Chia](https://www.chia.net/) Plot Status
 
 ![Screenshot](./Screenshot.jpg)
+![Screenshot](./Screenshot-Dark.jpg)
 
 ## Features
 
@@ -17,7 +18,7 @@
 
 ## Installation / Download
 
-[Download latest version busy-harvester](https://grayfallstown.github.io/Chia-Plot-Status/Setup.exe)
+[Download latest version overgrown-field](https://grayfallstown.github.io/Chia-Plot-Status/Setup.exe)
 
 ## Working with many distributed plotting rigs
 

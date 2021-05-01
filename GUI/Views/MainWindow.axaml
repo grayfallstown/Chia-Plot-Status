@@ -14,50 +14,38 @@
 		<vm:MainWindowViewModel/>
 	</Window.DataContext>
 	<Window.Styles>
-        <Style Selector="CheckBox">
-            <Setter Property="Foreground" Value="LightGray" />
-        </Style>
-
-        <Style Selector="CheckBox TextBlock">
-            <Setter Property="Foreground" Value="LightGray" />
-        </Style>
-        <Style Selector="CheckBox:checked">
-            <Setter Property="Foreground" Value="LightGray" />
-        </Style>
         <Style Selector="DataGridColumnHeader">
-            <Setter Property="Background" Value="Gray" />
         </Style>
-        <Style Selector="DataGridRow">
-            <Setter Property="Margin" Value="0" />
-        </Style>
-        <Style Selector="TextBlock">
-            <Setter Property="FontSize" Value="10" />
+		<Style Selector="DataGridColumnHeader > Button">
+			<Setter Property="BorderThickness" Value="0" />
+		</Style>
+		<Style Selector="StackPanel.Export > Border">
+			<Setter Property="Margin" Value="0" />
+			<Setter Property="Padding" Value="2" />
+		</Style>
+		<Style Selector="StackPanel.Export Button">
+			<Setter Property="Height" Value="25" />
+			<Setter Property="Margin" Value="0" />
+			<Setter Property="Padding" Value="2" />
+		</Style>
+		<Style Selector="DataGridRow">
+            <Setter Property="Margin" Value="2" />
         </Style>
         <Style Selector="ToolTip TextBlock">
-            <Setter Property="Foreground" Value="Gray" />
-        </Style>
-        <Style Selector="ComboBox">
-            <Setter Property="Margin" Value="4" />
-        </Style>
-        <Style Selector="DataGridRow TextBlock">
-            <Setter Property="Margin" Value="0" />
         </Style>
 		<Style Selector="TextBlock">
 			<!-- <Setter Property="FontSize" Value="{Binding ElementName=WindowContext, Path=DataContext.PlotManager.Settings.FontSize, Mode=TwoWay}"/> -->
 			<Setter Property="FontSize" Value="10"/>
 		</Style>
 		<Style Selector="DataGrid.folders">
-			<Setter Property="FontSize" Value="10"/>
 		</Style>
 		<Style Selector="DataGrid.folders TextBlock">
-			<Setter Property="Margin" Value="0"/>
 		</Style>
 		<Style Selector="DataGrid.folders Button">
-			<Setter Property="Margin" Value="0"/>
 		</Style>
 		<Style Selector="DataGrid TextBlock">
-			<Setter Property="Margin" Value="0"/>
-			<Setter Property="FontSize" Value="10"/>
+			<Setter Property="Margin" Value="4, 1"/>
+			<Setter Property="FontSize" Value="12"/>
 		</Style>
 		<Style Selector="ToolTip">
 			<Setter Property="MaxWidth" Value="600"/>
@@ -66,22 +54,23 @@
 		<Style Selector="ToolTip TextBlock">
 			<Setter Property="MaxWidth" Value="600"/>
 			<Setter Property="MaxHeight" Value="600"/>
-			<Setter Property="FontSize" Value="9.3"/>
+			<Setter Property="FontSize" Value="10.3"/>
 			<Setter Property="TextWrapping" Value="Wrap"/>
 		</Style>
 		<Style Selector="ComboBox">
-			<Setter Property="BorderThickness" Value="0" />
-			<Setter Property="Background" Value="{DynamicResource ThemeBorderLowBrush}" />
-			<Setter Property="Padding" Value="10" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+			<Setter Property="Padding" Value="6" />
+			<Setter Property="FontSize" Value="12" />
 		</Style>
 		<Style Selector="ComboBox /template/ Border">
 			<Setter Property="CornerRadius" Value="5" />
 		</Style>
 		<Style Selector="ComboBox:pointerover /template/ Border">
-			<Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
 		</Style>
 		<Style Selector="ComboBox:pointerover:focus /template/ Border">
-			<Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
 		</Style>
 
 		<Style Selector="ComboBoxItem">
@@ -91,27 +80,35 @@
 			<Setter Property="Foreground" Value="{DynamicResource HighlightForegroundBrush}" />
 		</Style>
 		<Style Selector="TextBox">
-			<Setter Property="FontFamily" Value="Ubuntu" />
-			<Setter Property="BorderThickness" Value="0" />
+			<!-- <Setter Property="FontFamily" Value="Ubuntu" /> -->
+			<Setter Property="BorderThickness" Value="1" />
 			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
-			<Setter Property="Background" Value="{DynamicResource ThemeBorderLowBrush}" />
-			<Setter Property="Padding" Value="10" />
-			<Setter Property="Margin" Value="0 5" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+			<Setter Property="Padding" Value="6" />
+			<Setter Property="Margin" Value="0 2" />
+			<Setter Property="FontSize" Value="12" />
+		</Style>
+		<Style Selector="TextBox TextBlock">
+			<Setter Property="FontSize" Value="12" />
 		</Style>
 		<Style Selector="TextBox /template/ Border">
 			<Setter Property="CornerRadius" Value="5" />
 		</Style>
 		<Style Selector="TextBox:pointerover /template/ Border">
-			<Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
 		</Style>
 		<Style Selector="TextBox:focus /template/ Border">
-			<Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
 		</Style>
 		<Style Selector="CheckBox">
-			<Setter Property="Background" Value="{DynamicResource ThemeBorderLowBrush}" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+		</Style>
+		<Style Selector="CheckBox /template/ Border">
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
 		</Style>
 		<Style Selector="CheckBox:pointerover">
-			<Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
 		</Style>
 	</Window.Styles>
 
@@ -128,20 +125,20 @@
 				</ExperimentalAcrylicBorder.Material>
 			</ExperimentalAcrylicBorder>
 		</Panel>
-			<Grid ColumnDefinitions="100,3*,4*" RowDefinitions="Auto,Auto,Auto"  Margin="4">
+			<StackPanel Orientation="Horizontal">
 				<Image Source="/Assets/Logo.png" Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
 				<StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
 					<DataGrid Name="FolderGrid" Height="100" MaxHeight="100" Items="{Binding PlotManager.Settings.LogDirectories}" Classes="folders">
 						<DataGrid.Columns>
-							<DataGridTemplateColumn Width="30">
+							<DataGridTemplateColumn Width="60">
 								<DataGridTemplateColumn.Header>
-									<Button Width="30" HorizontalAlignment="Center" Command="{Binding AddFolderCommand}" Content="  +"></Button>
+									<Button Width="60" Command="{Binding AddFolderCommand}" Content="Add"></Button>
 								</DataGridTemplateColumn.Header>
 								<DataGridTemplateColumn.CellTemplate>
 									<DataTemplate >
-										<Button Width="27" HorizontalAlignment="Center" Command="{Binding RemoveFolderCommand}"
+										<Button Command="{Binding RemoveFolderCommand}"
 												CommandParameter="{Binding}" Click="RemoveFolderWorkaround" Tag="{Binding RemoveFolderCommand}"
-												Content=" -"></Button>
+												Content="Remove"></Button>
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
@@ -158,49 +155,52 @@
 					<Button Content="-" Command="{Binding DecreaseFontSizeCommand}"></Button>
 				</StackPanel>
 				-->
-				<StackPanel Grid.Row="0" Grid.Column="3">
-					<ComboBox Name="Themes" Width="120" SelectedIndex="0">
+				<StackPanel Orientation="Vertical">
+					<TextBox Name="SearchBox" Width="300" Watermark="Search" Text="{Binding Search, Mode=TwoWay}" KeyUp="OnKeyPressUp" />
+					<ComboBox Name="Themes">
 						<ComboBoxItem>Light</ComboBoxItem>
 						<ComboBoxItem>Dark</ComboBoxItem>
 					</ComboBox>
+					<StackPanel Classes="Export" Orientation="Horizontal">
+						<Border>
+							<Button Content="Json" Command="{Binding ExportJsonCommand}">
+								<ToolTip.Tip>
+									<StackPanel>
+										<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.JsonExport}"></TextBlock>
+									</StackPanel>
+								</ToolTip.Tip>
+							</Button>
+						</Border>
+						<Border>
+							<Button Content="Yaml" Command="{Binding ExportYamlCommand}">
+								<ToolTip.Tip>
+									<StackPanel>
+										<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.YamlExport}"></TextBlock>
+									</StackPanel>
+								</ToolTip.Tip>
+							</Button>
+						</Border>
+						<Border>
+							<Button Content="CSV" Command="{Binding ExportCsvCommand}">
+								<ToolTip.Tip>
+									<StackPanel>
+										<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.CsvExport}"></TextBlock>
+									</StackPanel>
+								</ToolTip.Tip>
+							</Button>
+						</Border>
+						<Border>
+							<CheckBox Content="Raw Export" IsChecked="{Binding RawExport}">
+								<ToolTip.Tip>
+									<StackPanel>
+										<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.RawExport}"></TextBlock>
+									</StackPanel>
+								</ToolTip.Tip>
+							</CheckBox>
+						</Border>
+					</StackPanel>
 				</StackPanel>
-				<StackPanel Grid.Row="0" Grid.Column="4">
-					<TextBox Name="SearchBox" Width="300" Watermark="Search" Text="{Binding Search, Mode=TwoWay}" KeyUp="OnKeyPressUp" />
-				</StackPanel>
-				<StackPanel Grid.Row="1" Grid.Column="3">
-
-				</StackPanel>
-				<StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal">
-					<Button Content="Json" Command="{Binding ExportJsonCommand}" Margin="2">
-						<ToolTip.Tip>
-							<StackPanel>
-								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.JsonExport}"></TextBlock>
-							</StackPanel>
-						</ToolTip.Tip>
-					</Button>
-					<Button Content="Yaml" Command="{Binding ExportYamlCommand}" Margin="2">
-						<ToolTip.Tip>
-							<StackPanel>
-								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.YamlExport}"></TextBlock>
-							</StackPanel>
-						</ToolTip.Tip>
-					</Button>
-					<Button Content="CSV" Command="{Binding ExportCsvCommand}" Margin="2">
-						<ToolTip.Tip>
-							<StackPanel>
-								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.CsvExport}"></TextBlock>
-							</StackPanel>
-						</ToolTip.Tip>
-					</Button>
-					<CheckBox Content="Raw Export" IsChecked="{Binding RawExport}" Margin="2">
-						<ToolTip.Tip>
-							<StackPanel>
-								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.RawExport}"></TextBlock>
-							</StackPanel>
-						</ToolTip.Tip>
-					</CheckBox>
-				</StackPanel>
-			</Grid>
+			</StackPanel>
 
 			<DataGrid Name="LogDataGrid" Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="80" CanUserSortColumns="true">
 				<DataGrid.Columns>
