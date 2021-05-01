@@ -10,7 +10,7 @@ namespace ChiaPlotStatus
     {
         public string? Tmp1Drive { get; set; }
         public string? Tmp2Drive { get; set; }
-        public string DestDrive { get; set; }
+        public string? DestDrive { get; set; }
         public int Errors { get; set; } = 0;
         public float Progress { get; set; } = 0;
         public int TimeRemaining { get; set; } = 0;
@@ -29,6 +29,7 @@ namespace ChiaPlotStatus
         public int Buffer { get; set; } = 0;
         public int Buckets { get; set; } = 0;
         public DateTime? StartDate { get; set; }
+        public DateTime? FinishDate { get; set; }
         public string PlotName { get; set; } = "";
         public string LogFolder { get; set; } = "";
         public string LogFile { get; set; } = "";

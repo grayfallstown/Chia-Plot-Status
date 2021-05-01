@@ -28,6 +28,7 @@ namespace ChiaPlotStatus
         public string Buffer { get; set; } = "";
         public string Buckets { get; set; } = "";
         public string StartDate { get; set; } = "";
+        public string FinishDate { get; set; } = "";
         public string PlotName { get; set; } = "";
         public string LogFolder { get; set; } = "";
         public string LogFile { get; set; } = "";
@@ -67,6 +68,7 @@ namespace ChiaPlotStatus
             }
             this.ETA = formatDateTime(plotLog.ETA);
             this.StartDate = formatDateTime(plotLog.StartDate);
+            this.FinishDate = formatDateTime(plotLog.FinishDate);
             this.TimeRemaining = formatSeconds(plotLog.TimeRemaining);
             this.Phase1Seconds = formatSeconds(plotLog.Phase1Seconds);
             this.Phase2Seconds = formatSeconds(plotLog.Phase2Seconds);

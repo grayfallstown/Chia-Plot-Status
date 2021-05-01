@@ -81,7 +81,10 @@ namespace ChiaPlotStatus
                         CurrentPlotLog().Phase4Seconds = int.Parse(phase4Rg.Matches(line)[0].Groups[1].Value);
                         break;
                     case var _ when totalTimeRg.IsMatch(line):
-                        CurrentPlotLog().TotalSeconds = int.Parse(totalTimeRg.Matches(line)[0].Groups[1].Value);
+                        var curPlot = CurrentPlotLog();
+                        curPlot.TotalSeconds = int.Parse(totalTimeRg.Matches(line)[0].Groups[1].Value);
+                        if (curPlot.StartDate != null)
+                            curPlot.FinishDate = ((DateTime)curPlot.StartDate).AddSeconds(curPlot.TotalSeconds);
                         break;
                     case var _ when approximateWorkingSpace.IsMatch(line):
                         CurrentPlotLog().ApproximateWorkingSpace = approximateWorkingSpace.Matches(line)[0].Groups[1].Value;

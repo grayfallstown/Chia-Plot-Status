@@ -263,7 +263,24 @@
 								</StackPanel>
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn >
+					</DataGridTemplateColumn>
+					<DataGridTemplateColumn>
+						<DataGridTemplateColumn.Header>
+							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.FinishDate}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+						</DataGridTemplateColumn.Header>
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<ToolTip.Tip>
+										<StackPanel>
+											<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.FinishDate}"></TextBlock>
+										</StackPanel>
+									</ToolTip.Tip>
+									<TextBlock Text="{Binding FinishDate}" HorizontalAlignment="Right" ></TextBlock>
+								</StackPanel>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Errors}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>

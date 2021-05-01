@@ -63,6 +63,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string Buffer { get; set; } = "";
         public string Buckets { get; set; } = "";
         public string StartDate { get; set; } = "";
+        public string FinishDate { get; set; } = "";
         public string PlotName { get; set; } = "";
         public string LogFolder { get; set; } = "";
         public string LogFile { get; set; } = "";
@@ -92,6 +93,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string Buffer { get; set; } = "";
         public string Buckets { get; set; } = "";
         public string StartDate { get; set; } = "";
+        public string FinishDate { get; set; } = "";
         public string PlotName { get; set; } = "";
         public string LogFolder { get; set; } = "";
         public string LogFile { get; set; } = "";

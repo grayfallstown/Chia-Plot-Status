@@ -22,6 +22,7 @@ Columns:
     Buffer: "Buffer"
     Buckets: "Buckets"
     StartDate: "Started"
+    FinishDate: "Finished"
     PlotName: "Plot Name"
     LogFolder: "Log Folder"
     LogFile: "Log File"
@@ -90,6 +91,8 @@ Tooltips:
         gets written in its own file.
     StartDate: >
         When the plotting process was started.
+    FinishDate: >
+        When the plotting process finished.
     PlotName: >
         Name of the final plot file.
     LogFolder: >
