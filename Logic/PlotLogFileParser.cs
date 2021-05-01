@@ -16,14 +16,14 @@ namespace ChiaPlotStatus
      * (multiple PlotLogs per file if plot create --num n is used)
      * Tails the log file if it is still being written. Call Parse() before each access
      */
-    public class PlotLogFile
+    public class PlotLogFileParser
     {
         private TailLineEmitter TailLineEmitter { get; }
         private List<PlotLog> PlotLogs { get; } = new List<PlotLog>();
         public string LogFile;
         public string LogFolder;
 
-        public PlotLogFile(string path)
+        public PlotLogFileParser(string path)
         {
             this.LogFile = path;
             this.LogFolder = path.Substring(0, path.LastIndexOf("\\"));

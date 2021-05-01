@@ -18,7 +18,7 @@ namespace ChiaPlotStatus
     public class ChiaPlotStatus
     {
         public Settings Settings { get; }
-        private Dictionary<string, PlotLogFile> PlotLogFiles { get; } = new Dictionary<string, PlotLogFile>();
+        private Dictionary<string, PlotLogFileParser> PlotLogFiles { get; } = new Dictionary<string, PlotLogFileParser>();
         public PlottingStatisticsIdRelevanceWeights Weights { get; } = new PlottingStatisticsIdRelevanceWeights();
         public PlottingStatisticsHolder Statistics { get; set; }
 
@@ -75,7 +75,7 @@ namespace ChiaPlotStatus
                 {
                     if (!PlotLogFiles.ContainsKey(filePath) && LooksLikeAPlotLog(filePath))
                     {
-                        PlotLogFiles[filePath] = new PlotLogFile(filePath);
+                        PlotLogFiles[filePath] = new PlotLogFileParser(filePath);
                     }
                 }
             }
