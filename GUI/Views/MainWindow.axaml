@@ -215,7 +215,7 @@
 								</StackPanel>
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn >
+					</DataGridTemplateColumn>
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Tmp2Drive}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
@@ -228,6 +228,25 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
+					<!--
+					<DataGridTemplateColumn>
+						<DataGridTemplateColumn.Header>
+							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.DestDrive}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+						</DataGridTemplateColumn.Header>
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<ToolTip.Tip>
+										<StackPanel>
+											<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.DestDrive}"></TextBlock>
+										</StackPanel>
+									</ToolTip.Tip>
+									<TextBlock Text="{Binding DestDrive}" HorizontalAlignment="Left" ></TextBlock>
+								</StackPanel>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+					-->
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.StartDate}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>

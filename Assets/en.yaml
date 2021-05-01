@@ -4,6 +4,7 @@
 Columns:
     Tmp1Drive: "Tmp1"
     Tmp2Drive: "Tmp2"
+    DestDrive: "Destination"
     Errors: "Errors"
     Progress: "Progress"
     TimeRemaining: "Remaining 🕐"
@@ -34,6 +35,7 @@ Tooltips:
     RawExport: "Export shown data as plain unformatted numbers."
     Tmp1Drive: null
     Tmp2Drive: null
+    DestDrive: "Directory where the plot file was/will be written to."
     Errors: >
         Errors that occured in the plotting process while reading from or writing data to disk.
         The chia plotter will retry in case of such an error after a short Seconds. One is not that bad.

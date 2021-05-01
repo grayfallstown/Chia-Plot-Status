@@ -10,6 +10,7 @@ namespace ChiaPlotStatus
     {
         public string Tmp1Drive { get; set; } = "";
         public string Tmp2Drive { get; set; } = "";
+        public string DestDrive { get; set; }
         public string Errors { get; set; } = "";
         public string Progress { get; set; } = "";
         public string TimeRemaining { get; set; } = "";
@@ -72,6 +73,7 @@ namespace ChiaPlotStatus
             this.Phase4Seconds = formatSeconds(plotLog.Phase4Seconds);
             this.TotalSeconds = formatSeconds(plotLog.TotalSeconds);
             this.ApproximateWorkingSpace = plotLog.ApproximateWorkingSpace;
+            this.DestDrive = plotLog.DestDrive;
             this.FinalFileSize = plotLog.FinalFileSize;
             this.Buckets = plotLog.Buckets.ToString();
             this.Threads = plotLog.Threads.ToString();

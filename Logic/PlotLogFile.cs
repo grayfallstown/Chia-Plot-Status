@@ -84,6 +84,9 @@ namespace ChiaPlotStatus
                     case var _ when approximateWorkingSpace.IsMatch(line):
                         CurrentPlotLog().ApproximateWorkingSpace = approximateWorkingSpace.Matches(line)[0].Groups[1].Value;
                         break;
+                    case var _ when destinationDirectory.IsMatch(line):
+                        CurrentPlotLog().DestDrive = destinationDirectory.Matches(line)[0].Groups[1].Value;
+                        break;
                     case var _ when finalFileSize.IsMatch(line):
                         CurrentPlotLog().FinalFileSize = finalFileSize.Matches(line)[0].Groups[1].Value;
                         break;
@@ -171,6 +174,7 @@ namespace ChiaPlotStatus
         static Regex readPloblemRg = new Regex("^Only read \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
         static Regex approximateWorkingSpace = new Regex("^Approximate working space used \\(without final file\\): (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
         static Regex finalFileSize = new Regex("^Final File size: (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+        static Regex destinationDirectory = new Regex("^Final Directory is: (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
         // Approximate working space used (without final file)
     }

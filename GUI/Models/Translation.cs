@@ -45,6 +45,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string RawExport { get; set; } = "";
         public string Tmp1Drive { get; set; } = "";
         public string Tmp2Drive { get; set; } = "";
+        public string DestDrive { get; set; } = "";
         public string Errors { get; set; } = "";
         public string Progress { get; set; } = "";
         public string TimeRemaining { get; set; } = "";
@@ -73,6 +74,7 @@ namespace ChiaPlotStatus.GUI.Models
     {
         public string Tmp1Drive { get; set; } = "";
         public string Tmp2Drive { get; set; } = "";
+        public string DestDrive { get; set; } = "";
         public string Errors { get; set; } = "";
         public string Progress { get; set; } = "";
         public string TimeRemaining { get; set; } = "";
