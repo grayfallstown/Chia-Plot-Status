@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChiaPlottStatusAvalonia.ViewModels
+namespace ChiaPlotStatus.ViewModels
 {
     public class ViewModelBase : ReactiveObject
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 
-namespace ChiaPlottStatus.GUI.Models
+namespace ChiaPlotStatus.GUI.Models
 {
     public static class Translation
     {

@@ -1,9 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using ChiaPlottStatusAvalonia.ViewModels;
+using ChiaPlotStatus.ViewModels;
 using System;
 
-namespace ChiaPlottStatusAvalonia
+namespace ChiaPlotStatus
 {
     public class ViewLocator : IDataTemplate
     {

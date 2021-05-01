@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ChiaPlottStatus.GUI.Models
+namespace ChiaPlotStatus.GUI.Models
 {
     public class Settings
     {

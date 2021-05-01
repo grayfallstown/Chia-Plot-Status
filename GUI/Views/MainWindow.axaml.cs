@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Reactive;
 
-namespace ChiaPlottStatusAvalonia.Views
+namespace ChiaPlotStatus.Views
 {
     public class MainWindow : Window
     {
@@ -62,7 +62,6 @@ namespace ChiaPlottStatusAvalonia.Views
         {
             Button header = ((Button)sender);
             string headerText = (string) header.Content;
-            Debug.WriteLine(headerText);
             SortChangeWorkaround(headerText);
 
         }

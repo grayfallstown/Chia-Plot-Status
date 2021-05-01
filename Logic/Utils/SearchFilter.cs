@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChiaPlottStatus.Logic.Utils
+namespace ChiaPlotStatus.Logic.Utils
 {
     public static class SearchFilter
     {

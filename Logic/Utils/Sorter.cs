@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ChiaPlottStatus.Logic.Utils
+namespace ChiaPlotStatus.Logic.Utils
 {
     public static class Sorter
     {
@@ -25,7 +25,6 @@ namespace ChiaPlottStatus.Logic.Utils
             foreach (var prop in propertiesB)
                 if (string.Equals(propertyName, prop.Name))
                     propertyB = prop;
-            Debug.WriteLine("SortPropertyName: " + propertyName);
 
             PropertyInfo? property = propertyA;
             bool sortOverLeftTupleItem = true;
@@ -36,10 +35,6 @@ namespace ChiaPlottStatus.Logic.Utils
             }
             if (property == null)
                 property = propertiesA[0];
-            if (sortOverLeftTupleItem)
-                Debug.WriteLine("Sorting over left tuple item");
-            else
-                Debug.WriteLine("Sorting over right tuple item");
             items.Sort((a, b) =>
             {
                 int sortIndex = 0;
@@ -59,20 +54,16 @@ namespace ChiaPlottStatus.Logic.Utils
                 switch (typeCode)
                 {
                     case TypeCode.Int32:
-                        Debug.Write("Comparing ints");
                         sortIndex = compare((int?)valueA, (int?)valueB);
                         break;
                     case TypeCode.Single:
-                        Debug.Write("Comparing single (ints)");
                         sortIndex = compare((Single?)valueA, (Single?)valueB);
                         break;
                     case TypeCode.Decimal:
                     case TypeCode.Double:
-                        Debug.Write("Comparing decimals");
                         sortIndex = compare((Decimal?)valueA, (Decimal?)valueB);
                         break;
                     case TypeCode.String:
-                        Debug.Write("Comparing strings");
                         string valueAStr = "";
                         string valueBStr = "";
                         if (valueA != null)
@@ -90,7 +81,6 @@ namespace ChiaPlottStatus.Logic.Utils
                 }
                 return sortIndex;
             });
-            Debug.WriteLine("Sort Done");
         }
 
         private static int compare(Single? a, Single? b)

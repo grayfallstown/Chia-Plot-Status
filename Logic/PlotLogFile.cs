@@ -138,7 +138,6 @@ namespace ChiaPlotStatus
             var newPlotLog = new PlotLog();
             // when plot create --num n is used parameters stay the same
             newPlotLog.Buckets = oldPlotLog.Buckets;
-            Debug.WriteLine("Buckets: " + newPlotLog.Buckets);
             //newPlotLog.Threads = oldPlotLog.Threads;
             newPlotLog.Buffer = oldPlotLog.Buffer;
             newPlotLog.Tmp1Drive = oldPlotLog.Tmp1Drive;

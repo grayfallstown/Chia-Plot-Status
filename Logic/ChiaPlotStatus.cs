@@ -1,5 +1,5 @@
-﻿using ChiaPlottStatus.GUI.Models;
-using ChiaPlottStatus.Logic.Utils;
+﻿using ChiaPlotStatus.GUI.Models;
+using ChiaPlotStatus.Logic.Utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

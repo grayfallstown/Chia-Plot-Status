@@ -4,8 +4,8 @@ using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Threading;
 using ChiaPlotStatus;
 using ChiaPlotStatus.Logic.Utils;
-using ChiaPlottStatus.GUI.Models;
-using ChiaPlottStatusAvalonia.Views;
+using ChiaPlotStatus.GUI.Models;
+using ChiaPlotStatus.Views;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -17,11 +17,11 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChiaPlottStatusAvalonia.ViewModels
+namespace ChiaPlotStatus.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public ChiaPlotStatus.ChiaPlotStatus PlotManager { get; internal set; }
+        public ChiaPlotStatus PlotManager { get; internal set; }
 
         public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
         public List<(PlotLog, PlotLogReadable)> PlotLogTuples { get; set; } = new();
@@ -151,7 +151,7 @@ namespace ChiaPlottStatusAvalonia.ViewModels
                 }
                 if (string.Equals(SortProperty, oldSortProperty))
                     SortAsc = !SortAsc;
-                Debug.WriteLine("SearchProperty: " + SortProperty + ", ASC: " + SortAsc);
+                // Debug.WriteLine("SearchProperty: " + SortProperty + ", ASC: " + SortAsc);
                 LoadPlotLogs();
                 return true;
             };

@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using ChiaPlottStatusAvalonia.ViewModels;
-using ChiaPlottStatusAvalonia.Views;
+using ChiaPlotStatus.ViewModels;
+using ChiaPlotStatus.Views;
 
-namespace ChiaPlottStatusAvalonia
+namespace ChiaPlotStatus
 {
     public class App : Application
     {
