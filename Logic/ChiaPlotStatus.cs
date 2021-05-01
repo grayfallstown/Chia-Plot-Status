@@ -69,15 +69,27 @@ namespace ChiaPlotStatus
 
         private void SearchForNewLogFiles()
         {
+            List<string> directoriesToDrop = new();
             foreach (var directory in Settings.LogDirectories)
             {
-                foreach (var filePath in Directory.GetFiles(directory))
+                if (Directory.Exists(directory))
                 {
-                    if (!PlotLogFiles.ContainsKey(filePath) && LooksLikeAPlotLog(filePath))
+                    // when a logfolder gets deleted that was added to Settings Chia Plot Status failed to start
+                    foreach (var filePath in Directory.GetFiles(directory))
                     {
-                        PlotLogFiles[filePath] = new PlotLogFileParser(filePath);
+                        if (!PlotLogFiles.ContainsKey(filePath) && LooksLikeAPlotLog(filePath))
+                        {
+                            PlotLogFiles[filePath] = new PlotLogFileParser(filePath);
+                        }
                     }
+                } else
+                {
+                    directoriesToDrop.Add(directory);
                 }
+            }
+            foreach (var directory in directoriesToDrop)
+            {
+                Settings.LogDirectories.Remove(directory);
             }
         }
 
