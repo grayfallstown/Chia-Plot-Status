@@ -63,6 +63,10 @@ namespace ChiaPlotStatus.Logic.Utils
                     case TypeCode.Double:
                         sortIndex = compare((Decimal?)valueA, (Decimal?)valueB);
                         break;
+                    case TypeCode.DateTime:
+                    case TypeCode.Object:
+                        sortIndex = compare((DateTime?)valueA, (DateTime?)valueB);
+                        break;
                     case TypeCode.String:
                         string valueAStr = "";
                         string valueBStr = "";
@@ -73,6 +77,7 @@ namespace ChiaPlotStatus.Logic.Utils
                         sortIndex = string.Compare(valueAStr, valueBStr);
                         break;
                     default:
+                        Debug.WriteLine("TypeCode " + typeCode);
                         break;
                 }
                 if (!sortAsc)
@@ -114,6 +119,21 @@ namespace ChiaPlotStatus.Logic.Utils
         }
 
         private static int compare(int? a, int? b)
+        {
+            if (a == null && b != null)
+                return +1;
+            if (a != null && b == null)
+                return -1;
+            if (a == null && b == null)
+                return 0;
+            if (a > b)
+                return +1;
+            if (a < b)
+                return -1;
+            return 0;
+        }
+
+        private static int compare(DateTime? a, DateTime? b)
         {
             if (a == null && b != null)
                 return +1;

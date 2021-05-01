@@ -138,7 +138,7 @@ namespace ChiaPlotStatus
             if (this.TimeRemaining > 0)
             {
                 DateTime dt = DateTime.Now;
-                dt.AddSeconds(this.TimeRemaining);
+                dt = dt.AddSeconds(this.TimeRemaining);
                 this.ETA = dt;
             }
             else

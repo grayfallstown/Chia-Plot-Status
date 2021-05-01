@@ -50,7 +50,7 @@ Tooltips:
         configuration of that plot most closely to make a better prediction if you mix hard disks, ssd, internal
         and external drives and even network attached storage.
     ETA: >
-        An estimate on when the plotting process completes formatted MM/dd/yyyy H:mm. It is based on the plots
+        An estimate on when the plotting process completes formatted MM/dd HH:mm. It is based on the plots
         progress and all the data extracted from your finished plots. It will try to use the data of those plots
         that match the configuration of that plot most closely to make a better prediction if you mix hard disks,
         ssd, internal and external drives and even network attached storage.

@@ -136,7 +136,7 @@ namespace ChiaPlotStatus
                 return "";
             else
                 // forced to make it non nullable or it does not find ToString(format)
-                return ((DateTime)dateTime).ToString("MM/dd/yyyy H:mm");
+                return ((DateTime)dateTime).ToString("MM/dd HH:mm");
         }
     }
 }
