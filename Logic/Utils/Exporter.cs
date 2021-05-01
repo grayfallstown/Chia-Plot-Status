@@ -15,15 +15,15 @@ namespace ChiaPlotStatus.Logic.Utils
 {
     public class Exporter
     {
-        private List<(PlotLog, PlotLogReadable)> plotLogTuples;
+        private List<(PlotLog, PlotLogReadable)> plotLogTuples = new();
         private List<PlotLog> plotLogs = new();
         private List<PlotLogReadable> plotLogReadables = new();
 
-        public Exporter(List<(PlotLog, PlotLogReadable)> plotLogs)
+        public Exporter(IEnumerable<(PlotLog, PlotLogReadable)> plotLogs)
         {
-            this.plotLogTuples = plotLogs;
-            foreach (var tuple in this.plotLogTuples)
+            foreach (var tuple in plotLogs)
             {
+                this.plotLogTuples.Add(tuple);
                 this.plotLogs.Add(tuple.Item1);
                 this.plotLogReadables.Add(tuple.Item2);
             }

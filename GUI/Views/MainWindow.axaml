@@ -14,6 +14,15 @@
 		<vm:MainWindowViewModel/>
 	</Window.DataContext>
 	<Window.Styles>
+        <Style Selector="CheckBox">
+            <Setter Property="Foreground" Value="LightGray" />
+        </Style>
+        <Style Selector="CheckBox TextBlock">
+            <Setter Property="Foreground" Value="LightGray" />
+        </Style>
+        <Style Selector="CheckBox:checked">
+            <Setter Property="Foreground" Value="LightGray" />
+        </Style>
         <Style Selector="DataGridColumnHeader">
             <Setter Property="Background" Value="Gray" />
         </Style>
@@ -112,6 +121,39 @@
 				</StackPanel>
 				<StackPanel Grid.Row="0" Grid.Column="4">
 					<TextBox Name="SearchBox" Width="300" Watermark="Search" Text="{Binding Search, Mode=TwoWay}" KeyUp="OnKeyPressUp" />
+				</StackPanel>
+				<StackPanel Grid.Row="1" Grid.Column="3">
+
+				</StackPanel>
+				<StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal">
+					<Button Content="Json" Command="{Binding ExportJsonCommand}" Margin="2">
+						<ToolTip.Tip>
+							<StackPanel>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.JsonExport}"></TextBlock>
+							</StackPanel>
+						</ToolTip.Tip>
+					</Button>
+					<Button Content="Yaml" Command="{Binding ExportYamlCommand}" Margin="2">
+						<ToolTip.Tip>
+							<StackPanel>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.YamlExport}"></TextBlock>
+							</StackPanel>
+						</ToolTip.Tip>
+					</Button>
+					<Button Content="CSV" Command="{Binding ExportCsvCommand}" Margin="2">
+						<ToolTip.Tip>
+							<StackPanel>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.CsvExport}"></TextBlock>
+							</StackPanel>
+						</ToolTip.Tip>
+					</Button>
+					<CheckBox Content="Raw Export" IsChecked="{Binding RawExport}" Margin="2">
+						<ToolTip.Tip>
+							<StackPanel>
+								<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.RawExport}"></TextBlock>
+							</StackPanel>
+						</ToolTip.Tip>
+					</CheckBox>
 				</StackPanel>
 			</Grid>
 

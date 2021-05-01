@@ -39,6 +39,10 @@ namespace ChiaPlottStatus.GUI.Models
 
     public class Tooltips
     {
+        public string JsonExport { get; set; } = "";
+        public string YamlExport { get; set; } = "";
+        public string CsvExport { get; set; } = "";
+        public string RawExport { get; set; } = "";
         public string Tmp1Drive { get; set; } = "";
         public string Tmp2Drive { get; set; } = "";
         public string Errors { get; set; } = "";

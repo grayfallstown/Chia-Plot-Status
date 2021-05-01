@@ -27,6 +27,10 @@ Columns:
     FinalFileSize: "Final Size"
 
 Tooltips:
+    JsonExport: "Export shown data to Json. Check <Raw Export> if you want plain unformatted numbers."
+    YamlExport: "Export shown data to Yaml. Check <Raw Export> if you want plain unformatted numbers."
+    CsvExport: "Export shown data to Csv. Check <Raw Export> if you want plain unformatted numbers."
+    RawExport: "Export shown data as plain unformatted numbers."
     Tmp1Drive: null
     Tmp2Drive: null
     Errors: >

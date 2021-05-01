@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Threading;
 using ChiaPlotStatus;
+using ChiaPlotStatus.Logic.Utils;
 using ChiaPlottStatus.GUI.Models;
 using ChiaPlottStatusAvalonia.Views;
 using ReactiveUI;
@@ -23,6 +24,7 @@ namespace ChiaPlottStatusAvalonia.ViewModels
         public ChiaPlotStatus.ChiaPlotStatus PlotManager { get; internal set; }
 
         public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
+        public List<(PlotLog, PlotLogReadable)> PlotLogTuples { get; set; } = new();
         public string? Search { get; set; } = null;
         public string SortProperty { get; set; } = "Progress";
         public bool SortAsc { get; set; } = true;
@@ -31,6 +33,10 @@ namespace ChiaPlottStatusAvalonia.ViewModels
         public Language Language { get; set; }
         public Dictionary<string, Language> Languages { get; set; }
 
+        public ReactiveCommand<Unit, Unit> ExportJsonCommand { get; set; }
+        public bool RawExport { get; set; } = false;
+        public ReactiveCommand<Unit, Unit> ExportYamlCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> ExportCsvCommand { get; set; }
         public ReactiveCommand<Unit, Unit> AddFolderCommand { get; set; }
         public ReactiveCommand<string, Unit> RemoveFolderCommand { get; set; }
         public ReactiveCommand<Unit, Unit> IncreaseFontSizeCommand { get; set; }
@@ -113,8 +119,12 @@ namespace ChiaPlottStatusAvalonia.ViewModels
         public void LoadPlotLogs()
         {
             PlotLogs.Clear();
+            PlotLogTuples = new();
             foreach (var plotLog in PlotManager.PollPlotLogs(Search, SortProperty, SortAsc))
+            {
                 PlotLogs.Add(plotLog.Item2);
+                PlotLogTuples.Add(plotLog);
+            }
         }
 
         public void InitializeButtons()
@@ -156,6 +166,90 @@ namespace ChiaPlottStatusAvalonia.ViewModels
             {
                 this.PlotManager.Settings.FontSize -= 0.3;
                 this.PlotManager.Settings.Persist();
+            });
+
+            ExportJsonCommand = ReactiveCommand.Create(() =>
+            {
+                Exporter exporter = new Exporter(PlotLogTuples);
+                SaveFileDialog picker = new SaveFileDialog();
+                picker.Title = "Save as Json";
+                if (RawExport)
+                    picker.InitialFileName = "ChiaPlotStatus-raw.json";
+                else
+                    picker.InitialFileName = "ChiaPlotStatus.json";
+                picker.Filters = new List<FileDialogFilter>
+                {
+                    new FileDialogFilter
+                    {
+                        Name = "Json (.json)", Extensions = new List<string> {"json"}
+                    },
+                    new FileDialogFilter
+                    {
+                        Name = "All files",
+                        Extensions = new List<string> {"*"}
+                    }
+                };
+                Task.Run(async () =>
+                {
+                    var result = await picker.ShowAsync(MainWindow.Instance);
+                    exporter.ToJson(result, RawExport);
+                });
+            });
+
+            ExportYamlCommand = ReactiveCommand.Create(() =>
+            {
+                Exporter exporter = new Exporter(PlotLogTuples);
+                SaveFileDialog picker = new SaveFileDialog();
+                picker.Title = "Save as Yaml";
+                if (RawExport)
+                    picker.InitialFileName = "ChiaPlotStatus-raw.yaml";
+                else
+                    picker.InitialFileName = "ChiaPlotStatus.yaml";
+                picker.Filters = new List<FileDialogFilter>
+                {
+                    new FileDialogFilter
+                    {
+                        Name = "Yaml (.yaml)", Extensions = new List<string> {"yaml"}
+                    },
+                    new FileDialogFilter
+                    {
+                        Name = "All files",
+                        Extensions = new List<string> {"*"}
+                    }
+                };
+                Task.Run(async () =>
+                {
+                    var result = await picker.ShowAsync(MainWindow.Instance);
+                    exporter.ToYaml(result, RawExport);
+                });
+            });
+
+            ExportCsvCommand = ReactiveCommand.Create(() =>
+            {
+                Exporter exporter = new Exporter(PlotLogTuples);
+                SaveFileDialog picker = new SaveFileDialog();
+                picker.Title = "Save as Csv";
+                if (RawExport)
+                    picker.InitialFileName = "ChiaPlotStatus-raw.csv";
+                else
+                    picker.InitialFileName = "ChiaPlotStatus.csv";
+                picker.Filters = new List<FileDialogFilter>
+                {
+                    new FileDialogFilter
+                    {
+                        Name = "Yaml (.csv)", Extensions = new List<string> {"csv"}
+                    },
+                    new FileDialogFilter
+                    {
+                        Name = "All files",
+                        Extensions = new List<string> {"*"}
+                    }
+                };
+                Task.Run(async () =>
+                {
+                    var result = await picker.ShowAsync(MainWindow.Instance);
+                    exporter.ToCsv(result, RawExport);
+                });
             });
         }
 

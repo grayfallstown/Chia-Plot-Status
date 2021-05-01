@@ -13,10 +13,11 @@
  - Show important information from log file in easy to read table
  - Multiple folders with log files supported
  - Multiple plots per log file supported (plot create --num n)
+ - Export of data to Json, Yaml and CSV
 
 ## Installation / Download
 
-[Download latest version patient-farmer](https://grayfallstown.github.io/Chia-Plot-Status/Setup.exe)
+[Download latest version busy-harvester](https://grayfallstown.github.io/Chia-Plot-Status/Setup.exe)
 
 ## Working with many distributed plotting rigs
 
