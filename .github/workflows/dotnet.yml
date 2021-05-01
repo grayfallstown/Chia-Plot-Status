@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore --configfile .\NuGet.Config
+      run: dotnet restore --configfile .\NuGet.Config ChiaPlotStatus.sln
     - name: Build
       run: dotnet build --no-restore --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
     - name: Test
