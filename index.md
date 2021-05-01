@@ -17,7 +17,7 @@
 
 ## Download
 
-Windows: [Download latest version busy-harvester](./Setup.exe)
+Windows: [Download latest version overgrown-field](./Setup.exe)
 
 Mac and Linux: ChiaPlotStatus should be compatible with [mono](https://www.mono-project.com/) (currently untested) [Download](./ChiaPlotStatus.zip)
 
