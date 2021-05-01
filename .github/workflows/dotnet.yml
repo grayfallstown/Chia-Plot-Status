@@ -17,8 +17,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+    - name: Show Working Directory
+      run: ls -lah
     - name: Restore dependencies
-      run: dotnet restore --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
+      run: dotnet restore --configfile .\NuGet.Config ChiaPlotStatus.sln
     - name: Build
       run: dotnet build --no-restore --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
     - name: Test
