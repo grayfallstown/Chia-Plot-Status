@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,7 +47,8 @@ namespace ChiaPlotStatus
                         CurrentPlotLog().Threads = int.Parse(threadsRg.Matches(line)[0].Groups[1].Value);
                         break;
                     case var _ when startDateRg.IsMatch(line):
-                        CurrentPlotLog().StartDate = startDateRg.Matches(line)[0].Groups[1].Value;
+                        var dateTimeStr = startDateRg.Matches(line)[0].Groups[1].Value;
+                        CurrentPlotLog().StartDate = DateTime.ParseExact(dateTimeStr, "ddd MMM d HH:mm:ss yyyy", new System.Globalization.CultureInfo("en-US"), DateTimeStyles.AllowWhiteSpaces);
                         break;
                     case var _ when plotNameRg.IsMatch(line):
                         CurrentPlotLog().PlotName = plotNameRg.Matches(line)[0].Groups[1].Value;

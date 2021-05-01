@@ -65,8 +65,9 @@ namespace ChiaPlotStatus
             {
                 this.CurrentPhase += "/4";
             }
-            this.TimeRemaining = formatSeconds(plotLog.TimeRemaining);
             this.ETA = formatDateTime(plotLog.ETA);
+            this.StartDate = formatDateTime(plotLog.StartDate);
+            this.TimeRemaining = formatSeconds(plotLog.TimeRemaining);
             this.Phase1Seconds = formatSeconds(plotLog.Phase1Seconds);
             this.Phase2Seconds = formatSeconds(plotLog.Phase2Seconds);
             this.Phase3Seconds = formatSeconds(plotLog.Phase3Seconds);
@@ -79,7 +80,6 @@ namespace ChiaPlotStatus
             this.Threads = plotLog.Threads.ToString();
             this.Buffer = plotLog.Buffer + " MB";
             this.CurrentBucket = plotLog.CurrentBucket + "/" + plotLog.Buckets.ToString();
-            this.StartDate = plotLog.StartDate;
             this.PlotName = plotLog.PlotName;
             this.LogFolder = plotLog.LogFolder;
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);

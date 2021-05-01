@@ -28,7 +28,7 @@ namespace ChiaPlotStatus
         public int Threads { get; set; } = 0;
         public int Buffer { get; set; } = 0;
         public int Buckets { get; set; } = 0;
-        public string StartDate { get; set; } = "";
+        public DateTime? StartDate { get; set; }
         public string PlotName { get; set; } = "";
         public string LogFolder { get; set; } = "";
         public string LogFile { get; set; } = "";
