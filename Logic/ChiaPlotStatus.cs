@@ -30,7 +30,8 @@ namespace ChiaPlotStatus
         public void AddDefaultLogFolder()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
-                                            + @"\.chia\mainnet\plotter\";
+                     + Path.DirectorySeparatorChar + ".chia" + Path.DirectorySeparatorChar + "mainnet" +
+                     Path.DirectorySeparatorChar + "plotter";
             AddLogFolder(path);
         }
 

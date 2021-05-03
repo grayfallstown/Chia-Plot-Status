@@ -108,7 +108,8 @@ namespace ChiaPlotStatus.ViewModels
 
         public void InitializeChiaPlotStatus()
         {
-            Settings Settings = new Settings(System.Reflection.Assembly.GetExecutingAssembly().Location + ".config.json");
+            var folder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + Path.DirectorySeparatorChar;
+            Settings Settings = new Settings(folder + "ChiaPlotStatu.config.json");
             Settings.Load();
             PlotManager = new(Settings);
             if (PlotManager.Settings.LogDirectories.Count == 0)

@@ -26,13 +26,7 @@ namespace ChiaPlotStatus
         public PlotLogFileParser(string path)
         {
             this.LogFile = path;
-            // being linux compatible
-            if (path.Contains("\\")) {
-                this.LogFolder = path.Substring(0, path.LastIndexOf("\\"));
-            } else
-            {
-                this.LogFolder = path.Substring(0, path.LastIndexOf("/"));
-            }
+            this.LogFolder = path.Substring(0, path.LastIndexOf(Path.DirectorySeparatorChar));
             this.TailLineEmitter = new TailLineEmitter(path, (line) =>
             {
                 CurrentPlotLog().IsLastLineTempError = false;
