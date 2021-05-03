@@ -14,6 +14,7 @@ namespace ChiaPlotStatus
      */
     public class PlottingStatistics
     {
+        // in seconds
         public int Phase1AvgTimeNeed { get; }
         public int Phase1Completed { get; }
         public int Phase2AvgTimeNeed { get; }

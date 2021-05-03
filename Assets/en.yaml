@@ -115,11 +115,12 @@ Tooltips:
         You might be out of disk space (free up some space and it continues after 5min) or your external hard
         disk / network attached storage is detached. Since Version 1.1.4 (4!) it will continue when the
         storage is reattached, before that: dead.
-        "⚠ 5min ago" means last update to the logfile was N minutes ago. Process might be still running!
-        "⚠ Dead? (15min)" means last update to the logFile was long ago. Process might be still running.
-        Phase 4 can take a while without logging anything! If the process is not in phase 4 and your system is
-        not slow at the moment it is likely dead (check to be sure). Chia Plot Status considers it dead until
-        it logs something again.
-        "✗ Dead" means the processes is not done and a new process appeared in the logfile. If your logging
+        "⚠ 25min ago" means last update to the logfile was N minutes ago, but Chia Plot Status expected
+        a new log line earlier than that. Process might be still running, maybe you gave your temp drive
+        more IO than they can handle this time?
+        "⚠ Dead? (50min)" means last update to the logFile was way too long ago. Process might be still running!
+        If your system is not really slow/overtaxed at the moment the process is likely dead
+        (check to be sure). Chia Plot Status considers it dead until it logs something again.
+        "✗ Dead" means the processes is not done and a new process appeared in the same logfile. If your logging
         is not messed up and logging multiple processes in parallel to the same file this means the process
         is dead.

@@ -62,7 +62,7 @@ namespace ChiaPlotStatus
             HandleStatistics(plotLogs.ToList());
             List<(PlotLog, PlotLogReadable)> plusReadable = new();
             foreach (var plotLog in plotLogs)
-                plusReadable.Add((plotLog, new PlotLogReadable(plotLog)));
+                plusReadable.Add((plotLog, new PlotLogReadable(plotLog, Statistics)));
             List<(PlotLog, PlotLogReadable)> result = Filter(searchString, plusReadable);
             SortPlotLogs(sortPropertyName, sortAsc, result);
             return result;

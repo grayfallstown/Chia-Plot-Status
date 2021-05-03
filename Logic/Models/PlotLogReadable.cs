@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace ChiaPlotStatus
 {
     /**
      * Stores readable informations about a plotting process.
      * This is the object shown in the ui table.
+     *
+     * Currently does the formatting as well.. should be separated
      */
     public class PlotLogReadable
     {
@@ -36,7 +39,7 @@ namespace ChiaPlotStatus
         public string FinalFileSize { get; set; } = "";
         public string Health { get; set; } = "";
 
-        public PlotLogReadable(PlotLog plotLog)
+        public PlotLogReadable(PlotLog plotLog, PlottingStatisticsHolder statistics)
         {
             this.Tmp1Drive = plotLog.Tmp1Drive;
             this.Tmp2Drive = plotLog.Tmp2Drive;
@@ -86,7 +89,7 @@ namespace ChiaPlotStatus
             this.PlotName = plotLog.PlotName;
             this.LogFolder = plotLog.LogFolder;
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
-            this.Health = GetHealth(plotLog);
+            this.Health = GetHealth(plotLog, statistics);
             switch (this.CurrentPhase)
             {
                 case "1/4":
@@ -144,8 +147,41 @@ namespace ChiaPlotStatus
         }
 
 
-        private string GetHealth(PlotLog plotLog)
+        private string GetHealth(PlotLog plotLog, PlottingStatisticsHolder statistics)
         {
+            var stats = statistics.GetMostRelevantStatistics(plotLog);
+            int lastModifiedAtWarningThreashold = 0;
+            int lastModifiedAtErrorThreashold = 0;
+
+            switch(this.CurrentPhase)
+            {
+                case "1/4":
+                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase1AvgTimeNeed / 60 / 7 / plotLog.Buckets) * 3);
+                    if (lastModifiedAtWarningThreashold == 0)
+                        lastModifiedAtWarningThreashold = 15;
+                    break;
+                case "2/4":
+                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase2AvgTimeNeed / 60 / 7 / plotLog.Buckets) * 3);
+                    if (lastModifiedAtWarningThreashold == 0)
+                        lastModifiedAtWarningThreashold = 10;
+                    break;
+                case "3/4":
+                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase3AvgTimeNeed / 60 / 7 / plotLog.Buckets) * 3);
+                    if (lastModifiedAtWarningThreashold == 0)
+                        lastModifiedAtWarningThreashold = 15;
+                    break;
+                case "4/4":
+                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase3AvgTimeNeed / 60 / plotLog.Buckets) * 3);
+                    if (lastModifiedAtWarningThreashold == 0)
+                        lastModifiedAtWarningThreashold = 15;
+                    break;
+            }
+            if (lastModifiedAtWarningThreashold < 10)
+                lastModifiedAtWarningThreashold = 10;
+            lastModifiedAtErrorThreashold = lastModifiedAtWarningThreashold * 2;
+            Debug.WriteLine("lastModifiedAtWarningThreashold: " + lastModifiedAtWarningThreashold);
+            Debug.WriteLine("lastModifiedAtErrorThreashold: " + lastModifiedAtErrorThreashold);
+
             bool notLastAndNotDone = plotLog.Progress < 100d && !plotLog.IsLastInLogFile;
             bool lastModfiedAtWarning = false;
             bool lastModfiedAtError = false;
@@ -155,9 +191,9 @@ namespace ChiaPlotStatus
             if (plotLog.FileLastWritten != null)
             {
                 fileLastWrittenAge = DateTime.Now - ((DateTime)plotLog.FileLastWritten);
-                if (plotLog.Progress < 100d && ((TimeSpan)fileLastWrittenAge).TotalMinutes > 5)
+                if (plotLog.Progress < 100d && ((TimeSpan)fileLastWrittenAge).TotalMinutes > lastModifiedAtWarningThreashold)
                     lastModfiedAtWarning = true;
-                if (plotLog.Progress < 100d && ((TimeSpan)fileLastWrittenAge).TotalMinutes > 15)
+                if (plotLog.Progress < 100d && ((TimeSpan)fileLastWrittenAge).TotalMinutes > lastModifiedAtErrorThreashold)
                     lastModfiedAtError = true;
                 lastWriteMinutesAgo = (int)((TimeSpan)fileLastWrittenAge).TotalMinutes;
             }
