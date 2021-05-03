@@ -53,6 +53,7 @@ namespace ChiaPlotStatus.ViewModels
             InitializeSearchBox();
             KeepGridScrollbarOnScreen();
             InitializeThemeSwitcher();
+            InitRefreshInterval();
         }
 
         private void InitializeThemeSwitcher()
@@ -61,7 +62,6 @@ namespace ChiaPlotStatus.ViewModels
             {
                 PlotManager.Settings.Theme = theme;
                 PlotManager.Settings.Persist();
-                // TODO: persist
                 var light = new StyleInclude(new Uri("resm:Styles?assembly=ControlCatalog"))
                 {
                     Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default")
@@ -294,6 +294,19 @@ namespace ChiaPlotStatus.ViewModels
         {
             double height = MainWindow.Instance.Height - 600;
             MainWindow.Instance.Find<DataGrid>("PlotLogGrid").Height = height;
+        }
+
+
+        public void InitRefreshInterval()
+        {
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+            timer.Tick += (sender, e) =>
+            {
+                // Somehow this ticks twice
+                Debug.WriteLine("Refresh " + DateTime.Now);
+                LoadPlotLogs();
+            };
+            timer.Start();
         }
 
 
