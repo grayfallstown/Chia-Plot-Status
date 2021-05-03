@@ -18,9 +18,9 @@
 
 ## Download
 
-Windows: [Download latest version overgrown-field](./Setup.exe)
+Windows: [Download latest version busy-plotter](./Setup.exe)
 
-Mac and Linux: ChiaPlotStatus should be compatible with [mono](https://www.mono-project.com/) (currently untested) [Download](./ChiaPlotStatus.zip)
+Mac and Linux: comming soon
 
 ## Working with many distributed plotting rigs
 
