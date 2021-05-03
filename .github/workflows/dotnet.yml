@@ -7,11 +7,10 @@ on:
     branches: [ main ]
 
 jobs:
-  strategy:
-    matrix:
-      os: [ubuntu-latest, windows-latest, macos-latest]
-      node: [10, 12, 14]
   build-on-linux:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.platform }}
     steps:
     - uses: actions/checkout@v2
