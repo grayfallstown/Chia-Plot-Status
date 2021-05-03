@@ -115,7 +115,12 @@ namespace ChiaPlotStatus
             }
             if (currentPhase <= 4)
             {
-                this.TimeRemaining += stats.Phase4AvgTimeNeed;
+                float factor = 1;
+                if (currentPhase == 4)
+                {
+                    factor = (float)1 - ((float)((float)this.CurrentBucket / this.Buckets));
+                }
+                this.TimeRemaining += (int)(factor * stats.Phase4AvgTimeNeed);
             }
             if (currentPhase <= 3)
             {
