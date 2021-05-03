@@ -20,16 +20,16 @@ jobs:
         dotnet-version: 5.0.x
     #- name: Show Working Directory # does not work on windows as we are not in a powershell
     #  run: ls -lah
-    - name: touch narf
-      run: touch narf
-    - name: tree
-      run: tree
     - name: Restore dependencies
       run: dotnet restore --configfile NuGet.Config ChiaPlotStatus.sln
     - name: Build
       run: dotnet build --no-restore --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
+    - name: touch narf
+      run: touch narf
+    - name: tree
+      run: tree
     - uses: actions/upload-artifact@v2
       with:
         name: binaries
