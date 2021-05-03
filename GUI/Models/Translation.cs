@@ -69,6 +69,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string LogFile { get; set; } = "";
         public string ApproximateWorkingSpace { get; set; } = "";
         public string FinalFileSize { get; set; } = "";
+        public string Health { get; set; } = "";
     }
 
     public class Columns
@@ -99,5 +100,6 @@ namespace ChiaPlotStatus.GUI.Models
         public string LogFile { get; set; } = "";
         public string ApproximateWorkingSpace { get; set; } = "";
         public string FinalFileSize { get; set; } = "";
+        public string Health { get; set; } = "";
     }
 }

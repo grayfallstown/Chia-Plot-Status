@@ -110,11 +110,38 @@
 		<Style Selector="CheckBox:pointerover">
 			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
 		</Style>
+
+
+
+    <Style Selector="StackPanel.LogLines StackPanel.Line TextBlock.Level1">
+      <Setter Property="FontWeight" Value="Normal" />
+      <Setter Property="Foreground" Value="Gray" />
+    </Style>
+    <Style Selector="StackPanel.LogLines StackPanel.Line TextBlock.Level2">
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="Black" />
+    </Style>
 	</Window.Styles>
 
 	<ScrollViewer Name="WindowContext">
 		<StackPanel>
-		<Panel>
+      <!--
+      <StackPanel Classes="LogLines" Orientation="Vertical">
+        <StackPanel Classes="Line" Orientation="Horizontal">
+          <TextBlock Classes="">sort time =  2374.087 seconds. CPU (41.570%) Sun May  2 04:49:41 2021</TextBlock>
+        </StackPanel>
+        <StackPanel Classes="Line" Orientation="Horizontal">
+          Tooltips
+				<TextBlock Classes="Level1">Time for phase 1 = </TextBlock>
+          <TextBlock Classes="Level2">41645.190</TextBlock>
+          <TextBlock Classes="Level1"> seconds. CPU (</TextBlock>
+          <TextBlock Classes="Level2">80.080%</TextBlock>
+          <TextBlock Classes="Level1">) Sat May  1 23:38:19 2021</TextBlock>
+        </StackPanel>
+      </StackPanel>
+-->
+
+      <Panel>
 			<ExperimentalAcrylicBorder IsHitTestVisible="False">
 				<ExperimentalAcrylicBorder.Material>
 					<ExperimentalAcrylicMaterial
@@ -281,23 +308,40 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
-						<DataGridTemplateColumn.Header>
-							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Errors}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
-						</DataGridTemplateColumn.Header>
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<StackPanel>
-									<ToolTip.Tip>
-										<StackPanel>
-											<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Errors}"></TextBlock>
-										</StackPanel>
-									</ToolTip.Tip>
-									<TextBlock Text="{Binding Errors}" HorizontalAlignment="Right" ></TextBlock>
-								</StackPanel>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
+          <DataGridTemplateColumn>
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Health}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <StackPanel>
+                  <ToolTip.Tip>
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Health}"></TextBlock>
+                    </StackPanel>
+                  </ToolTip.Tip>
+                  <TextBlock Text="{Binding Health}" HorizontalAlignment="Left" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn>
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Errors}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <StackPanel>
+                  <ToolTip.Tip>
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Errors}"></TextBlock>
+                    </StackPanel>
+                  </ToolTip.Tip>
+                  <TextBlock Text="{Binding Errors}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Progress}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
@@ -538,40 +582,6 @@
 					</DataGridTemplateColumn>
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.Header>
-							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.ApproximateWorkingSpace}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
-						</DataGridTemplateColumn.Header>
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate >
-								<StackPanel>
-									<ToolTip.Tip>
-										<StackPanel>
-											<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.ApproximateWorkingSpace}"></TextBlock>
-										</StackPanel>
-									</ToolTip.Tip>
-									<TextBlock Text="{Binding ApproximateWorkingSpace}" HorizontalAlignment="Right" ></TextBlock>
-								</StackPanel>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
-						<DataGridTemplateColumn.Header>
-							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.FinalFileSize}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
-						</DataGridTemplateColumn.Header>
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate >
-								<StackPanel>
-									<ToolTip.Tip>
-										<StackPanel>
-											<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.FinalFileSize}"></TextBlock>
-										</StackPanel>
-									</ToolTip.Tip>
-									<TextBlock Text="{Binding FinalFileSize}" HorizontalAlignment="Right" ></TextBlock>
-								</StackPanel>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
-						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.LogFolder}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
 						<DataGridTemplateColumn.CellTemplate>
@@ -604,6 +614,40 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn >
+          <DataGridTemplateColumn>
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.ApproximateWorkingSpace}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <ToolTip.Tip>
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.ApproximateWorkingSpace}"></TextBlock>
+                    </StackPanel>
+                  </ToolTip.Tip>
+                  <TextBlock Text="{Binding ApproximateWorkingSpace}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn>
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.FinalFileSize}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <ToolTip.Tip>
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.FinalFileSize}"></TextBlock>
+                    </StackPanel>
+                  </ToolTip.Tip>
+                  <TextBlock Text="{Binding FinalFileSize}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
 				</DataGrid.Columns>
 			</DataGrid>
 			<TextBlock>

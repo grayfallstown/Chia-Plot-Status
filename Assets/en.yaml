@@ -28,6 +28,7 @@ Columns:
     LogFile: "Log File"
     ApproximateWorkingSpace: "Workingspace"
     FinalFileSize: "Final Size"
+    Health: "Health"
 
 Tooltips:
     JsonExport: "Export shown data to Json. Check <Raw Export> if you want plain unformatted numbers."
@@ -104,3 +105,21 @@ Tooltips:
         An estimate on how much temporary space was used during the creation of the plot.
     FinalFileSize: >
         The size of the finished plot file. Varies little over the same k-size.
+    Health: >
+        Read catefully!
+        An Estimate on the processes health. In some cases it is not clear if the process is still running,
+        this can happen especially in phase 4. If your system does not update "last modfied at" on files
+        (some deactivate it on SSDs) ignore the warnings with update time in it. Chia Plot Status doesn't
+        know any better.
+        "⚠ Temp Errors" means the last line in the logfile is a read/write error (look at Errors column).
+        You might be out of disk space (free up some space and it continues after 5min) or your external hard
+        disk / network attached storage is detached. Since Version 1.1.4 (4!) it will continue when the
+        storage is reattached, before that: dead.
+        "⚠ 5min ago" means last update to the logfile was N minutes ago. Process might be still running!
+        "⚠ Dead? (15min)" means last update to the logFile was long ago. Process might be still running.
+        Phase 4 can take a while without logging anything! If the process is not in phase 4 and your system is
+        not slow at the moment it is likely dead (check to be sure). Chia Plot Status considers it dead until
+        it logs something again.
+        "✗ Dead" means the processes is not done and a new process appeared in the logfile. If your logging
+        is not messed up and logging multiple processes in parallel to the same file this means the process
+        is dead.

@@ -34,6 +34,7 @@ namespace ChiaPlotStatus
         public string LogFile { get; set; } = "";
         public string ApproximateWorkingSpace { get; set; } = "";
         public string FinalFileSize { get; set; } = "";
+        public string Health { get; set; } = "";
 
         public PlotLogReadable(PlotLog plotLog)
         {
@@ -85,6 +86,7 @@ namespace ChiaPlotStatus
             this.PlotName = plotLog.PlotName;
             this.LogFolder = plotLog.LogFolder;
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
+            this.Health = GetHealth(plotLog);
             switch (this.CurrentPhase)
             {
                 case "1/4":
@@ -139,6 +141,37 @@ namespace ChiaPlotStatus
             else
                 // forced to make it non nullable or it does not find ToString(format)
                 return ((DateTime)dateTime).ToString("MM/dd HH:mm");
+        }
+
+
+        private string GetHealth(PlotLog plotLog)
+        {
+            bool notLastAndNotDone = plotLog.Progress < 100d && !plotLog.IsLastInLogFile;
+            bool lastModfiedAtWarning = false;
+            bool lastModfiedAtError = false;
+            bool lastLineError = plotLog.IsLastLineTempError;
+            TimeSpan? fileLastWrittenAge = null;
+            int lastWriteMinutesAgo = 0;
+            if (plotLog.FileLastWritten != null)
+            {
+                fileLastWrittenAge = DateTime.Now - ((DateTime)plotLog.FileLastWritten);
+                if (plotLog.Progress < 100d && ((TimeSpan)fileLastWrittenAge).TotalMinutes > 5)
+                    lastModfiedAtWarning = true;
+                if (plotLog.Progress < 100d && ((TimeSpan)fileLastWrittenAge).TotalMinutes > 15)
+                    lastModfiedAtError = true;
+                lastWriteMinutesAgo = (int)((TimeSpan)fileLastWrittenAge).TotalMinutes;
+            }
+
+            if (notLastAndNotDone)
+                return "✗ Dead";
+            else if (lastModfiedAtError)
+                return "⚠ Dead? (" + lastWriteMinutesAgo + "m)";
+            else if (lastModfiedAtWarning)
+                return "⚠ " + lastWriteMinutesAgo + "m";
+            else if (lastLineError)
+                return "⚠ Temp Errors";
+            else
+                return "✓";
         }
     }
 }

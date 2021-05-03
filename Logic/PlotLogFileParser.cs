@@ -26,9 +26,16 @@ namespace ChiaPlotStatus
         public PlotLogFileParser(string path)
         {
             this.LogFile = path;
-            this.LogFolder = path.Substring(0, path.LastIndexOf("\\"));
+            // being linux compatible
+            if (path.Contains("\\")) {
+                this.LogFolder = path.Substring(0, path.LastIndexOf("\\"));
+            } else
+            {
+                this.LogFolder = path.Substring(0, path.LastIndexOf("/"));
+            }
             this.TailLineEmitter = new TailLineEmitter(path, (line) =>
             {
+                CurrentPlotLog().IsLastLineTempError = false;
                 switch (line)
                 {
                     case var _ when plotSizeRg.IsMatch(line):
@@ -96,10 +103,10 @@ namespace ChiaPlotStatus
                         CurrentPlotLog().FinalFileSize = finalFileSize.Matches(line)[0].Groups[1].Value;
                         break;
                     case var _ when writePloblemRg.IsMatch(line):
+                    case var _ when readPloblemRg.IsMatch(line):
+                        CurrentPlotLog().IsLastLineTempError = true;
                         CurrentPlotLog().Errors++;
                         break;
-                    case var _ when readPloblemRg.IsMatch(line):
-                        CurrentPlotLog().Errors++;
                         break;
                     case var _ when tmpFolders.IsMatch(line):
                         var match = tmpFolders.Matches(line)[0];
@@ -128,6 +135,7 @@ namespace ChiaPlotStatus
         public List<PlotLog> ParsePlotLog()
         {
             this.TailLineEmitter.ReadMore();
+            CurrentPlotLog().FileLastWritten = File.GetLastWriteTime(this.LogFile);
             return PlotLogs;
         }
 
@@ -143,6 +151,7 @@ namespace ChiaPlotStatus
         private PlotLog NextPlotLog()
         {
             var oldPlotLog = CurrentPlotLog();
+            oldPlotLog.IsLastInLogFile = false;
             var newPlotLog = new PlotLog();
             // when plot create --num n is used parameters stay the same
             newPlotLog.Buckets = oldPlotLog.Buckets;
