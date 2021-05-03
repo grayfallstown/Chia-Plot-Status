@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-on-linux:
+  build:
     strategy:
       matrix:
         platform: [ubuntu-latest, windows-latest, macos-latest]
@@ -26,3 +26,7 @@ jobs:
       run: dotnet build --no-restore --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: binaries
+        path: bin\Release\net5.0
