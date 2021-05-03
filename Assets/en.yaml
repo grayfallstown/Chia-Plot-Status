@@ -106,7 +106,8 @@ Tooltips:
     FinalFileSize: >
         The size of the finished plot file. Varies little over the same k-size.
     Health: >
-        Read catefully!
+        Read catefully! This feature requires existing logs of finished plots from the same log directory
+        to run correctly or it uses default warning thresholds that are pretty much diced at the moment!
         An Estimate on the processes health. In some cases it is not clear if the process is still running,
         this can happen especially in phase 4. If your system does not update "last modfied at" on files
         (some deactivate it on SSDs) ignore the warnings with update time in it. Chia Plot Status doesn't
