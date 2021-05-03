@@ -136,7 +136,7 @@ namespace ChiaPlotStatus
                 float factor = 1;
                 if (currentPhase == 2)
                 {
-                    factor = (float)1 - ((float)(((float)(7 - this.Phase2Table) - 1) + ((float)this.CurrentBucket / this.Buckets)) / 7);
+                    factor = (float)1 - ((float)((float) 7 - this.Phase2Table) / 7);
                 }
                 this.TimeRemaining += (int)(factor * stats.Phase2AvgTimeNeed);
             }

@@ -161,7 +161,7 @@ namespace ChiaPlotStatus
                         lastModifiedAtWarningThreashold = 15;
                     break;
                 case "2/4":
-                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase2AvgTimeNeed / 60 / 7 / plotLog.Buckets) * 3);
+                    lastModifiedAtWarningThreashold = (int)((float)stats.Phase2AvgTimeNeed / 60 / 7 * 3);
                     if (lastModifiedAtWarningThreashold == 0)
                         lastModifiedAtWarningThreashold = 10;
                     break;
