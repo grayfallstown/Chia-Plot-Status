@@ -18,7 +18,9 @@
 
 ## Installation / Download
 
-[Download latest version overgrown-field](https://grayfallstown.github.io/Chia-Plot-Status/Setup.exe)
+Windows: [Download latest version busy-plotter](https://grayfallstown.github.io/Chia-Plot-Status/Setup.exe)
+
+Mac and Linux support coming soon.
 
 ## Working with many distributed plotting rigs
 

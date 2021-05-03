@@ -87,10 +87,6 @@ namespace ChiaPlotStatus
 
         public void UpdateEta(PlottingStatistics stats)
         {
-            if (this.Phase3Seconds == 0 && this.Tmp1Drive != null && this.Tmp1Drive.ToLower().StartsWith("p"))
-            {
-                Debug.WriteLine("");
-            }
             this.TimeRemaining = 0;
             if (this.Buckets == 0)
             {
