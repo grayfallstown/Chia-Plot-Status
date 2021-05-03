@@ -26,11 +26,9 @@ jobs:
       run: dotnet build --no-restore --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
-    - name: touch narf
-      run: touch narf
-    - name: tree
-      run: tree
+    #- name: tree
+    #  run: tree
     - uses: actions/upload-artifact@v2
       with:
-        name: binaries
+        name: binaries-${{ matrix.platform }}
         path: bin/Release/net5.0
