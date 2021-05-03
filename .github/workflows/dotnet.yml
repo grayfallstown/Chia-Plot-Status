@@ -18,8 +18,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Show Working Directory
-      run: ls -lah
+#    - name: Show Working Directory # does not work on windows as we are not in a powershell
+#      run: ls -lah
     - name: Restore dependencies
       run: dotnet restore --configfile NuGet.Config ChiaPlotStatus.sln
     - name: Build
