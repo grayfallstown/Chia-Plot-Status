@@ -20,6 +20,8 @@ jobs:
         dotnet-version: 5.0.x
     #- name: Show Working Directory # does not work on windows as we are not in a powershell
     #  run: ls -lah
+    - name: touch narf
+      run: touch narf
     - name: tree
       run: tree
     - name: Restore dependencies
