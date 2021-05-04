@@ -335,6 +335,8 @@ namespace ChiaPlotStatus.ViewModels
                     .Subscribe((x) => LoadPlotLogs());
                 MainWindow.Instance.Find<CheckBox>("HideHealthy").WhenAnyValue(x => x.IsChecked)
                     .Subscribe((x) => LoadPlotLogs());
+                MainWindow.Instance.Find<CheckBox>("HideFinished").WhenAnyValue(x => x.IsChecked)
+                    .Subscribe((x) => LoadPlotLogs());
             }
         }
 

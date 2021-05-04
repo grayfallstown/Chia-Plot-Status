@@ -253,6 +253,15 @@
               </ToolTip.Tip>
             </CheckBox>
           </Border>
+          <Border>
+            <CheckBox Name="HideFinished" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HideFinished}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.Filter.HideFinished}">
+              <ToolTip.Tip>
+                <StackPanel>
+                  <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.HideFinished}"></TextBlock>
+                </StackPanel>
+              </ToolTip.Tip>
+            </CheckBox>
+          </Border>
         </StackPanel>
 			</StackPanel>
 

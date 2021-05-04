@@ -49,6 +49,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string LogFolder { get; set; } = "";
         public string RawExport { get; set; } = "";
         public string HideHealthy { get; set; } = "";
+        public string HideFinished { get; set; } = "";
         public string HidePossiblyDead { get; set; } = "";
         public string HideConfirmedDead { get; set; } = "";
     }

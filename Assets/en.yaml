@@ -8,6 +8,7 @@ Fields:
     LogFolder: "Log Folders"
     RawExport: "Raw Export"
     HideHealthy: "Hide healthy"
+    HideFinished: "Hide finished"
     HidePossiblyDead: "Hide possibly Dead"
     HideConfirmedDead: "Hide confirmed Dead"
 
