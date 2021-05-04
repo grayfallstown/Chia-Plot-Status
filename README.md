@@ -36,6 +36,10 @@ Mac and Linux support coming soon.
 
 Either mount the log folders of all rigs as network shares or collect them by your favorite means like Google Drive or something similar (Chia Plot Status does not talk to any cloud services for you, you have to install those apps and mount your log folders in them yourself if you want to use them)
 
+Best Practice:
+- Each plotting rig should have its own log folder, so they don't mix and mess up estimates and warning thresholds for each other.
+- Always log locally. If you log directly to a network share / NAS your plotting can crash if the connection becomes flaky. Prefer connecting your host machine to networkshares on the plotters, not the other way around or use your own cloud solutions which offer local folders (should be pretty much all of them).
+
 ## Open Source
 
 MIT opensource licence, free to keep or change.
