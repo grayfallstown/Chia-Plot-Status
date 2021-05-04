@@ -4,6 +4,8 @@
 
 # [Chia](https://www.chia.net/) Plot Status
 
+Tool to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion
+
 ![Screenshot](./Screenshot.jpg)
 ![Screenshot](./Screenshot-Dark.jpg)
 
