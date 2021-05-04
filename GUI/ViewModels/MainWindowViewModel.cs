@@ -16,6 +16,7 @@ using System.IO;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using ChiaPlotStatus.Logic.Models;
 
 namespace ChiaPlotStatus.ViewModels
 {
@@ -25,7 +26,10 @@ namespace ChiaPlotStatus.ViewModels
 
         public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
         public List<(PlotLog, PlotLogReadable)> PlotLogTuples { get; set; } = new();
+
         public string? Search { get; set; } = null;
+        public Filter Filter { get; } = new();
+
         public string SortProperty { get; set; } = "Progress";
         public bool SortAsc { get; set; } = true;
         public ObservableCollection<string> SortProperties = new();
@@ -53,7 +57,8 @@ namespace ChiaPlotStatus.ViewModels
             InitializeSearchBox();
             KeepGridScrollbarOnScreen();
             InitializeThemeSwitcher();
-            InitRefreshInterval();
+            InitializeRefreshInterval();
+            InitializeFilterUpdates();
         }
 
         private void InitializeThemeSwitcher()
@@ -121,7 +126,7 @@ namespace ChiaPlotStatus.ViewModels
         {
             PlotLogs.Clear();
             PlotLogTuples = new();
-            foreach (var plotLog in PlotManager.PollPlotLogs(Search, SortProperty, SortAsc))
+            foreach (var plotLog in PlotManager.PollPlotLogs(SortProperty, SortAsc, Search, Filter))
             {
                 PlotLogs.Add(plotLog.Item2);
                 PlotLogTuples.Add(plotLog);
@@ -298,7 +303,7 @@ namespace ChiaPlotStatus.ViewModels
         }
 
 
-        public void InitRefreshInterval()
+        public void InitializeRefreshInterval()
         {
             var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
             timer.Tick += (sender, e) =>
@@ -308,6 +313,29 @@ namespace ChiaPlotStatus.ViewModels
                 LoadPlotLogs();
             };
             timer.Start();
+        }
+
+
+        public void InitializeFilterUpdates()
+        {
+            /*
+            this.WhenAnyValue(x => x.Filter.HideHealthy)
+                .Subscribe((x) => LoadPlotLogs());
+            this.WhenAnyValue(x => x.Filter.HidePossiblyDead)
+                .Subscribe((x) => LoadPlotLogs());
+            this.WhenAnyValue(x => x.Filter.HideConfirmedDead)
+                .Subscribe((x) => LoadPlotLogs());
+            */
+            var checkBox = MainWindow.Instance.Find<CheckBox>("HideConfirmedDead");
+            if (checkBox != null)
+            {
+                checkBox.WhenAnyValue(x => x.IsChecked)
+                    .Subscribe((x) => LoadPlotLogs());
+                MainWindow.Instance.Find<CheckBox>("HidePossiblyDead").WhenAnyValue(x => x.IsChecked)
+                    .Subscribe((x) => LoadPlotLogs());
+                MainWindow.Instance.Find<CheckBox>("HideHealthy").WhenAnyValue(x => x.IsChecked)
+                    .Subscribe((x) => LoadPlotLogs());
+            }
         }
 
 

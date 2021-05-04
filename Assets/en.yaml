@@ -1,6 +1,23 @@
 ﻿Name: English
 
 
+Fields:
+    Search: "Search"
+    Light: "Light"
+    Dark: "Dark"
+    LogFolder: "Log Folders"
+    RawExport: "Raw Export"
+    HideHealthy: "Hide healthy"
+    HidePossiblyDead: "Hide possibly Dead"
+    HideConfirmedDead: "Hide confirmed Dead"
+
+Buttons:
+    Add: "Add"
+    Remove: "Remove"
+    Json: "Json"
+    Yaml: "Yaml"
+    CSV: "CSV"
+
 Columns:
     Tmp1Drive: "Tmp1"
     Tmp2Drive: "Tmp2"

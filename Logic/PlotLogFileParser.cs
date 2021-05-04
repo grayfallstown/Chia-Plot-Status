@@ -56,16 +56,12 @@ namespace ChiaPlotStatus
                         break;
                     case var _ when phase1Rg.IsMatch(line):
                         CurrentPlotLog().Phase1Seconds = int.Parse(phase1Rg.Matches(line)[0].Groups[1].Value);
-                        break;
-                    case var _ when phase1Table.IsMatch(line):
-                        CurrentPlotLog().Phase1Table = int.Parse(phase1Table.Matches(line)[0].Groups[1].Value);
-                        break;
-                    case var _ when phase1Rg.IsMatch(line):
-                        CurrentPlotLog().Phase1Seconds = int.Parse(phase1Rg.Matches(line)[0].Groups[1].Value);
                         CurrentPlotLog().CurrentBucket = 0;
                         break;
                     case var _ when phase1Table.IsMatch(line):
                         CurrentPlotLog().Phase1Table = int.Parse(phase1Table.Matches(line)[0].Groups[1].Value);
+                        CurrentPlotLog().CurrentTable = CurrentPlotLog().Phase1Table;
+                        CurrentPlotLog().CurrentPhase = 1;
                         break;
                     case var _ when phase2Rg.IsMatch(line):
                         CurrentPlotLog().Phase2Seconds = int.Parse(phase2Rg.Matches(line)[0].Groups[1].Value);
@@ -73,6 +69,9 @@ namespace ChiaPlotStatus
                         break;
                     case var _ when phase2Table.IsMatch(line):
                         CurrentPlotLog().Phase2Table = int.Parse(phase2Table.Matches(line)[0].Groups[1].Value);
+                        CurrentPlotLog().CurrentTable = CurrentPlotLog().Phase2Table;
+                        CurrentPlotLog().CurrentPhase = 2;
+
                         break;
                     case var _ when phase3Rg.IsMatch(line):
                         CurrentPlotLog().Phase3Seconds = int.Parse(phase3Rg.Matches(line)[0].Groups[1].Value);
@@ -80,14 +79,18 @@ namespace ChiaPlotStatus
                         break;
                     case var _ when phase3Table.IsMatch(line):
                         CurrentPlotLog().Phase3Table = int.Parse(phase3Table.Matches(line)[0].Groups[1].Value);
+                        CurrentPlotLog().CurrentTable = CurrentPlotLog().Phase3Table;
+                        CurrentPlotLog().CurrentPhase = 3;
                         break;
                     case var _ when phase4Rg.IsMatch(line):
                         CurrentPlotLog().Phase4Seconds = int.Parse(phase4Rg.Matches(line)[0].Groups[1].Value);
                         CurrentPlotLog().CurrentBucket = 0;
+                        CurrentPlotLog().CurrentPhase = 4;
                         break;
                     case var _ when totalTimeRg.IsMatch(line):
                         var curPlot = CurrentPlotLog();
                         curPlot.TotalSeconds = int.Parse(totalTimeRg.Matches(line)[0].Groups[1].Value);
+                        curPlot.CurrentPhase = 5;
                         if (curPlot.StartDate != null)
                             curPlot.FinishDate = ((DateTime)curPlot.StartDate).AddSeconds(curPlot.TotalSeconds);
                         break;
@@ -117,7 +120,6 @@ namespace ChiaPlotStatus
                         plotLog.Tmp2Drive = match.Groups[2].Value;
                         break;
                     default:
-                        // Console.WriteLine($"{line}: not all upper or lower");
                         break;
                 }
                 var cPlotLog = CurrentPlotLog();
@@ -159,6 +161,7 @@ namespace ChiaPlotStatus
             newPlotLog.Tmp2Drive = oldPlotLog.Tmp2Drive;
             newPlotLog.LogFile = oldPlotLog.LogFile;
             newPlotLog.LogFolder = oldPlotLog.LogFolder;
+            newPlotLog.PlaceInLogFile = oldPlotLog.PlaceInLogFile + 1;
             PlotLogs.Add(newPlotLog);
             return newPlotLog;
         }

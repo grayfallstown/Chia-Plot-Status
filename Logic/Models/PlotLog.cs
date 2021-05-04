@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChiaPlotStatus.Logic.Models;
+using System;
 using System.Diagnostics;
 
 namespace ChiaPlotStatus
@@ -16,6 +17,9 @@ namespace ChiaPlotStatus
         public float Progress { get; set; } = 0;
         public int TimeRemaining { get; set; } = 0;
         public DateTime? ETA { get; set; }
+        public int CurrentTable { get; set; } = 0;
+        // Phase 5 is done
+        public int CurrentPhase { get; set; } = 0;
         public int CurrentBucket { get; set; } = 0;
         public int Phase1Table { get; set; } = 0;
         public int Phase2Table { get; set; } = 0;
@@ -37,8 +41,10 @@ namespace ChiaPlotStatus
         public string ApproximateWorkingSpace { get; set; } = "";
         public string FinalFileSize { get; set; } = "";
         public DateTime? FileLastWritten { get; set; }
+        public HealthIndicator Health { get; set; } = Healthy.Instance;
         public bool IsLastInLogFile { get; set; } = true;
         public bool IsLastLineTempError { get; set; } = false;
+        public int PlaceInLogFile { get; set; } = 1;
 
         public void UpdateProgress()
         {
@@ -49,40 +55,33 @@ namespace ChiaPlotStatus
             // 7 tables in phase 3
             // 1 phase 4
             float subpart = 0;
-            if (Phase4Seconds > 0)
+
+            switch(CurrentPhase)
             {
-                // we are Done
-                part = 22;
-            }
-            else if (Phase3Seconds > 0)
-            {
-                // we are in 4
-                part = 21;
-            }
-            else if (Phase3Table > 0)
-            {
-                // we are in 3
-                int totalTablesIn3 = 7;
-                part = 20 - (totalTablesIn3 - Phase3Table);
-                subpart = (float)CurrentBucket / Buckets;
-            }
-            else if (Phase2Table > 0)
-            {
-                // we are in 2
-                part = 14 - Phase2Table;
-                subpart = (float)CurrentBucket / Buckets;
-            }
-            else
-            {
-                // we are in 1
-                int totalTablesIn1 = 7;
-                part = 7 - (totalTablesIn1 - Phase1Table);
-                subpart = (float)CurrentBucket / Buckets;
+                case 5:
+                    part = 22;
+                    break;
+                case 4:
+                    part = 21;
+                    break;
+                case 3:
+                    int totalTablesIn3 = 7;
+                    part = 20 - (totalTablesIn3 - Phase3Table);
+                    subpart = (float)CurrentBucket / Buckets;
+                    break;
+                case 2:
+                    part = 14 - Phase2Table;
+                    subpart = (float)CurrentBucket / Buckets;
+                    break;
+                case 1:
+                    int totalTablesIn1 = 7;
+                    part = 7 - (totalTablesIn1 - Phase1Table);
+                    subpart = (float)CurrentBucket / Buckets;
+                    break;
             }
             Progress = (part + subpart) / 22 * 100;
             if (Double.IsNaN(Progress))
                 Progress = 0;
-
         }
 
         public void UpdateEta(PlottingStatistics stats)
@@ -91,56 +90,42 @@ namespace ChiaPlotStatus
             if (this.Buckets == 0)
             {
                 // log too short to know anything yet
+                this.ETA = null;
+                this.TimeRemaining = 0;
                 return;
             }
-            int currentPhase = 1;
-            if (Math.Abs(this.Progress - 100f) < 0.00001)
+            if (CurrentPhase == 5)
             {
-                return;
+                this.TimeRemaining = 0;
             }
-            else
-            {
-                if (this.Phase3Seconds > 0)
-                {
-                    currentPhase = 4;
-                }
-                else if (this.Phase2Seconds > 0)
-                {
-                    currentPhase = 3;
-                }
-                else if (this.Phase1Seconds > 0)
-                {
-                    currentPhase = 2;
-                }
-            }
-            if (currentPhase <= 4)
+            if (CurrentPhase <= 4)
             {
                 float factor = 1;
-                if (currentPhase == 4)
+                if (CurrentPhase == 4)
                 {
                     factor = (float)1 - ((float)((float)this.CurrentBucket / this.Buckets));
                 }
                 this.TimeRemaining += (int)(factor * stats.Phase4AvgTimeNeed);
             }
-            if (currentPhase <= 3)
+            if (CurrentPhase <= 3)
             {
                 float factor = 1;
-                if (currentPhase == 3)
+                if (CurrentPhase == 3)
                 {
                     factor = (float)1 - ((float)(((float)this.Phase3Table - 1) + ((float)this.CurrentBucket / this.Buckets)) / 7);
                 }
                 this.TimeRemaining += (int)(factor * stats.Phase3AvgTimeNeed);
             }
-            if (currentPhase <= 2)
+            if (CurrentPhase <= 2)
             {
                 float factor = 1;
-                if (currentPhase == 2)
+                if (CurrentPhase == 2)
                 {
                     factor = (float)1 - ((float)((float) 7 - this.Phase2Table) / 7);
                 }
                 this.TimeRemaining += (int)(factor * stats.Phase2AvgTimeNeed);
             }
-            if (currentPhase == 1)
+            if (CurrentPhase == 1)
             {
                 var factor = (float)1 - ((float)(((float)this.Phase3Table - 1) + ((float)this.CurrentBucket / this.Buckets)) / 7);
                 this.TimeRemaining += (int)(factor * stats.Phase2AvgTimeNeed);
@@ -154,6 +139,74 @@ namespace ChiaPlotStatus
             else
                 this.ETA = null;
         }
+
+        public void UpdateHealth(PlottingStatistics stats)
+        {
+            int lastModifiedAtWarningThreashold = 0;
+            int lastModifiedAtErrorThreashold = 0;
+
+            switch (this.CurrentPhase)
+            {
+                case 1:
+                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase1AvgTimeNeed / 60 / 7 / this.Buckets) * 3);
+                    if (lastModifiedAtWarningThreashold == 0)
+                        lastModifiedAtWarningThreashold = 15;
+                    break;
+                case 2:
+                    lastModifiedAtWarningThreashold = (int)((float)stats.Phase2AvgTimeNeed / 60 / 7 * 3);
+                    if (lastModifiedAtWarningThreashold == 0)
+                        lastModifiedAtWarningThreashold = 10;
+                    break;
+                case 3:
+                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase3AvgTimeNeed / 60 / 7 / this.Buckets) * 3);
+                    if (lastModifiedAtWarningThreashold == 0)
+                        lastModifiedAtWarningThreashold = 15;
+                    break;
+                case 4:
+                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase3AvgTimeNeed / 60 / this.Buckets) * 3);
+                    if (lastModifiedAtWarningThreashold == 0)
+                        lastModifiedAtWarningThreashold = 15;
+                    break;
+                case 5:
+                    Health = Healthy.Instance;
+                    return;
+            }
+            if (lastModifiedAtWarningThreashold < 10)
+                lastModifiedAtWarningThreashold = 10;
+            lastModifiedAtErrorThreashold = lastModifiedAtWarningThreashold * 2;
+            // Debug.WriteLine("lastModifiedAtWarningThreashold: " + lastModifiedAtWarningThreashold);
+            // Debug.WriteLine("lastModifiedAtErrorThreashold: " + lastModifiedAtErrorThreashold);
+
+            bool notLastAndNotDone = this.Progress < 100d && !this.IsLastInLogFile;
+            bool lastModfiedAtWarning = false;
+            bool lastModfiedAtError = false;
+            bool lastLineError = this.IsLastLineTempError;
+            TimeSpan? fileLastWrittenAge = null;
+            int lastWriteMinutesAgo = 0;
+            if (this.FileLastWritten != null)
+            {
+                fileLastWrittenAge = DateTime.Now - ((DateTime)this.FileLastWritten);
+                if (((TimeSpan)fileLastWrittenAge).TotalMinutes > lastModifiedAtWarningThreashold)
+                    lastModfiedAtWarning = true;
+                if (((TimeSpan)fileLastWrittenAge).TotalMinutes > lastModifiedAtErrorThreashold)
+                    lastModfiedAtError = true;
+                lastWriteMinutesAgo = (int)((TimeSpan)fileLastWrittenAge).TotalMinutes;
+            }
+
+            bool manual = false; // TODO
+            if (notLastAndNotDone)
+                this.Health = new ConfirmedDead(manual);
+            else if (lastModfiedAtError)
+                this.Health = new PossiblyDead(lastWriteMinutesAgo, lastModifiedAtErrorThreashold);
+            else if (lastModfiedAtWarning)
+                this.Health = new Concerning(lastWriteMinutesAgo, lastModifiedAtWarningThreashold);
+            else if (lastLineError)
+                this.Health = TempError.Instance;
+            else
+                this.Health = Healthy.Instance;
+
+        }
+
 
     }
 }

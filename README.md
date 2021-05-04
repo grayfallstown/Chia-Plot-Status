@@ -11,10 +11,11 @@
 
  - Show Progress of running plots
  - Show estimated time to completion based on your already finished plots best matching your current plot config
+ - Health of plot processes
  - Show important information from log file in easy to read table
- - Multiple folders with log files supported
+ - Multiple folders with log files supported (multiple plotting rigs, anyone?)
  - Multiple plots per log file supported (plot create --num n)
- - Export of data to Json, Yaml and CSV
+ - Export of readable or raw data to Json, Yaml and CSV
 
 ## Installation / Download
 

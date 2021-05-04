@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChiaPlotStatus.Logic.Models;
+using System;
 using System.Diagnostics;
 
 namespace ChiaPlotStatus
@@ -39,7 +40,7 @@ namespace ChiaPlotStatus
         public string FinalFileSize { get; set; } = "";
         public string Health { get; set; } = "";
 
-        public PlotLogReadable(PlotLog plotLog, PlottingStatisticsHolder statistics)
+        public PlotLogReadable(PlotLog plotLog)
         {
             this.Tmp1Drive = plotLog.Tmp1Drive;
             this.Tmp2Drive = plotLog.Tmp2Drive;
@@ -77,7 +78,7 @@ namespace ChiaPlotStatus
             this.PlotName = plotLog.PlotName;
             this.LogFolder = plotLog.LogFolder;
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
-            this.Health = GetHealth(plotLog, statistics);
+            this.Health = formatHealth(plotLog.Health);
             switch (this.CurrentPhase)
             {
                 case "1/4":
@@ -122,68 +123,25 @@ namespace ChiaPlotStatus
                 return ((DateTime)dateTime).ToString("MM/dd HH:mm");
         }
 
-
-        private string GetHealth(PlotLog plotLog, PlottingStatisticsHolder statistics)
+        private string formatHealth(HealthIndicator health)
         {
-            var stats = statistics.GetMostRelevantStatistics(plotLog);
-            int lastModifiedAtWarningThreashold = 0;
-            int lastModifiedAtErrorThreashold = 0;
-
-            switch(this.CurrentPhase)
+            switch (health)
             {
-                case "1/4":
-                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase1AvgTimeNeed / 60 / 7 / plotLog.Buckets) * 3);
-                    if (lastModifiedAtWarningThreashold == 0)
-                        lastModifiedAtWarningThreashold = 15;
-                    break;
-                case "2/4":
-                    lastModifiedAtWarningThreashold = (int)((float)stats.Phase2AvgTimeNeed / 60 / 7 * 3);
-                    if (lastModifiedAtWarningThreashold == 0)
-                        lastModifiedAtWarningThreashold = 10;
-                    break;
-                case "3/4":
-                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase3AvgTimeNeed / 60 / 7 / plotLog.Buckets) * 3);
-                    if (lastModifiedAtWarningThreashold == 0)
-                        lastModifiedAtWarningThreashold = 15;
-                    break;
-                case "4/4":
-                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase3AvgTimeNeed / 60 / plotLog.Buckets) * 3);
-                    if (lastModifiedAtWarningThreashold == 0)
-                        lastModifiedAtWarningThreashold = 15;
-                    break;
+                case Healthy:
+                    return "✓";
+                case TempError:
+                    return "⚠ Temp Errors";
+                case Concerning c:
+                    return "⚠ " + c.Minutes + " / " + c.ExpectedMinutes + "m";
+                case PossiblyDead p:
+                    return "⚠ " + p.Minutes + " / " + p.ExpectedMinutes + "m";
+                case ConfirmedDead c:
+                    return "✗ Dead" + (c.Manual ? " (m)" : "");
+                default:
+                    throw new NotImplementedException("formatHealth (HealthIndicator " + Health + ")");
             }
-            if (lastModifiedAtWarningThreashold < 10)
-                lastModifiedAtWarningThreashold = 10;
-            lastModifiedAtErrorThreashold = lastModifiedAtWarningThreashold * 2;
-            // Debug.WriteLine("lastModifiedAtWarningThreashold: " + lastModifiedAtWarningThreashold);
-            // Debug.WriteLine("lastModifiedAtErrorThreashold: " + lastModifiedAtErrorThreashold);
-
-            bool notLastAndNotDone = plotLog.Progress < 100d && !plotLog.IsLastInLogFile;
-            bool lastModfiedAtWarning = false;
-            bool lastModfiedAtError = false;
-            bool lastLineError = plotLog.IsLastLineTempError;
-            TimeSpan? fileLastWrittenAge = null;
-            int lastWriteMinutesAgo = 0;
-            if (plotLog.FileLastWritten != null)
-            {
-                fileLastWrittenAge = DateTime.Now - ((DateTime)plotLog.FileLastWritten);
-                if (plotLog.Progress < 100d && ((TimeSpan)fileLastWrittenAge).TotalMinutes > lastModifiedAtWarningThreashold)
-                    lastModfiedAtWarning = true;
-                if (plotLog.Progress < 100d && ((TimeSpan)fileLastWrittenAge).TotalMinutes > lastModifiedAtErrorThreashold)
-                    lastModfiedAtError = true;
-                lastWriteMinutesAgo = (int)((TimeSpan)fileLastWrittenAge).TotalMinutes;
-            }
-
-            if (notLastAndNotDone)
-                return "✗ Dead";
-            else if (lastModfiedAtError)
-                return "⚠ Dead? (" + lastWriteMinutesAgo + "m)";
-            else if (lastModfiedAtWarning)
-                return "⚠ " + lastWriteMinutesAgo + "m";
-            else if (lastLineError)
-                return "⚠ Temp Errors";
-            else
-                return "✓";
         }
+
+
     }
 }

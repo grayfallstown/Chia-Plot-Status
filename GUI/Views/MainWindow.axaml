@@ -111,15 +111,9 @@
 			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
 		</Style>
 
-
-
-    <Style Selector="StackPanel.LogLines StackPanel.Line TextBlock.Level1">
-      <Setter Property="FontWeight" Value="Normal" />
-      <Setter Property="Foreground" Value="Gray" />
-    </Style>
-    <Style Selector="StackPanel.LogLines StackPanel.Line TextBlock.Level2">
-      <Setter Property="FontWeight" Value="Bold" />
-      <Setter Property="Foreground" Value="Black" />
+    <Style Selector="StackPanel.Filters > Border">
+      <Setter Property="Margin" Value="2" />
+      <Setter Property="Padding" Value="2" />
     </Style>
 	</Window.Styles>
 
@@ -185,8 +179,8 @@
 				<StackPanel Orientation="Vertical">
 					<TextBox Name="SearchBox" Width="300" Watermark="Search" Text="{Binding Search, Mode=TwoWay}" KeyUp="OnKeyPressUp" />
 					<ComboBox Name="Themes">
-						<ComboBoxItem>Light</ComboBoxItem>
-						<ComboBoxItem>Dark</ComboBoxItem>
+						<ComboBoxItem Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.Light}"></ComboBoxItem>
+            <ComboBoxItem Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.Dark}"></ComboBoxItem>
 					</ComboBox>
 					<StackPanel Classes="Export" Orientation="Horizontal">
 						<Border>
@@ -231,6 +225,35 @@
             -->
 					</StackPanel>
 				</StackPanel>
+        <StackPanel Name="Filters" Classes="Filters" Orientation="Vertical">
+          <Border>
+            <CheckBox Name="HideConfirmedDead" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HideConfirmedDead}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.Filter.HideConfirmedDead}">
+              <ToolTip.Tip>
+                <StackPanel>
+                  <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.HideConfirmedDead}"></TextBlock>
+                </StackPanel>
+              </ToolTip.Tip>
+            </CheckBox>
+          </Border>
+          <Border>
+            <CheckBox Name="HidePossiblyDead" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HidePossiblyDead}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.Filter.HidePossiblyDead}">
+              <ToolTip.Tip>
+                <StackPanel>
+                  <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.HidePossiblyDead}"></TextBlock>
+                </StackPanel>
+              </ToolTip.Tip>
+            </CheckBox>
+          </Border>
+          <Border>
+            <CheckBox Name="HideHealthy" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HideHealthy}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.Filter.HideHealthy}">
+              <ToolTip.Tip>
+                <StackPanel>
+                  <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.HideHealthy}"></TextBlock>
+                </StackPanel>
+              </ToolTip.Tip>
+            </CheckBox>
+          </Border>
+        </StackPanel>
 			</StackPanel>
 
 			<DataGrid Name="LogDataGrid" Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="80" CanUserSortColumns="true">

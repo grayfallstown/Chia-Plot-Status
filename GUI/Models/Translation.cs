@@ -30,11 +30,37 @@ namespace ChiaPlotStatus.GUI.Models
 
     }
 
+
     public class Language
     {
         public string Name { get; set; }
         public Tooltips Tooltips { get; set; }
         public Columns Columns { get; set; }
+        public Fields Fields { get; set; }
+        public Buttons Buttons { get; set; }
+    }
+
+
+    public class Fields
+    {
+        public string Search { get; set; } = "";
+        public string Light { get; set; } = "";
+        public string Dark { get; set; } = "";
+        public string LogFolder { get; set; } = "";
+        public string RawExport { get; set; } = "";
+        public string HideHealthy { get; set; } = "";
+        public string HidePossiblyDead { get; set; } = "";
+        public string HideConfirmedDead { get; set; } = "";
+    }
+
+
+    public class Buttons
+    {
+        public string Add { get; set; } = "";
+        public string Remove { get; set; } = "";
+        public string Json { get; set; } = "";
+        public string Yaml { get; set; } = "";
+        public string CSV { get; set; } = "";
     }
 
     public class Tooltips

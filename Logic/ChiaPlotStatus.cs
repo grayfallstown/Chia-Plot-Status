@@ -1,4 +1,5 @@
 ﻿using ChiaPlotStatus.GUI.Models;
+using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatus.Logic.Utils;
 using System;
 using System.Collections.Concurrent;
@@ -55,15 +56,15 @@ namespace ChiaPlotStatus
             }
         }
 
-        public List<(PlotLog, PlotLogReadable)> PollPlotLogs(string? searchString, string sortPropertyName, bool sortAsc)
+        public List<(PlotLog, PlotLogReadable)> PollPlotLogs(string sortPropertyName, bool sortAsc, string? searchString, Filter filter)
         {
             SearchForNewLogFiles();
             ConcurrentBag<PlotLog> plotLogs = ParseTheLogs();
             HandleStatistics(plotLogs.ToList());
             List<(PlotLog, PlotLogReadable)> plusReadable = new();
             foreach (var plotLog in plotLogs)
-                plusReadable.Add((plotLog, new PlotLogReadable(plotLog, Statistics)));
-            List<(PlotLog, PlotLogReadable)> result = Filter(searchString, plusReadable);
+                plusReadable.Add((plotLog, new PlotLogReadable(plotLog)));
+            List<(PlotLog, PlotLogReadable)> result = Filter(searchString, filter, plusReadable);
             SortPlotLogs(sortPropertyName, sortAsc, result);
             return result;
         }
@@ -107,9 +108,34 @@ namespace ChiaPlotStatus
             return plotLogs;
         }
 
-        private List<(PlotLog, PlotLogReadable)> Filter(string? searchString, List<(PlotLog, PlotLogReadable)> plotLogs)
+        private List<(PlotLog, PlotLogReadable)> Filter(string? searchString, Filter filter, List<(PlotLog, PlotLogReadable)> plotLogs)
         {
-            return SearchFilter.Search<PlotLog, PlotLogReadable>(searchString, plotLogs);
+            List<(PlotLog, PlotLogReadable)> searchResults = SearchFilter.Search<PlotLog, PlotLogReadable>(searchString, plotLogs);
+            List<(PlotLog, PlotLogReadable)> filterResults = new();
+            foreach (var tuple in searchResults)
+            {
+                switch (tuple.Item1.Health)
+                {
+                    case Healthy:
+                        if (!filter.HideHealthy) filterResults.Add(tuple);
+                        break;
+                    case TempError:
+                        // well, you have to take action here.
+                        filterResults.Add(tuple);
+                        break;
+                    case Concerning:
+                        // would one want to hide those?
+                        filterResults.Add(tuple);
+                        break;
+                    case PossiblyDead:
+                        if (!filter.HidePossiblyDead) filterResults.Add(tuple);
+                        break;
+                    case ConfirmedDead:
+                        if (!filter.HideConfirmedDead) filterResults.Add(tuple);
+                        break;
+                }
+            }
+            return filterResults;
         }
 
         private static void SortPlotLogs(string propertyName, bool sortAsc, List<(PlotLog, PlotLogReadable)> plotLogs)
@@ -125,6 +151,7 @@ namespace ChiaPlotStatus
             {
                 PlottingStatistics stats = Statistics.GetMostRelevantStatistics(plotLog);
                 plotLog.UpdateEta(stats);
+                plotLog.UpdateHealth(stats);
             }
         }
 
