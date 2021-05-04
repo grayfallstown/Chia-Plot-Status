@@ -11,9 +11,9 @@ Tool to Monitor and Analyse Chia Plotting log files, show health and progress of
 
 ## Features
 
- - Show Progress of running plots
+ - Monitor Progress of running plots
  - Show estimated time to completion based on your already finished plots best matching your current plot config
- - Health of plot processes
+ - Monitor Health of plot processes
  - Show important information from log file in easy to read table
  - Multiple folders with log files supported (multiple plotting rigs, anyone?)
  - Multiple plots per log file supported (plot create --num n)
