@@ -102,9 +102,9 @@ namespace ChiaPlotStatus
                         break;
                     case var _ when writePloblemRg.IsMatch(line):
                     case var _ when readPloblemRg.IsMatch(line):
+                    case var _ when couldNotOpenFile.IsMatch(line):
                         CurrentPlotLog().IsLastLineTempError = true;
                         CurrentPlotLog().Errors++;
-                        break;
                         break;
                     case var _ when tmpFolders.IsMatch(line):
                         var match = tmpFolders.Matches(line)[0];
@@ -153,7 +153,7 @@ namespace ChiaPlotStatus
             var newPlotLog = new PlotLog();
             // when plot create --num n is used parameters stay the same
             newPlotLog.Buckets = oldPlotLog.Buckets;
-            //newPlotLog.Threads = oldPlotLog.Threads;
+            newPlotLog.Threads = oldPlotLog.Threads;
             newPlotLog.Buffer = oldPlotLog.Buffer;
             newPlotLog.Tmp1Drive = oldPlotLog.Tmp1Drive;
             newPlotLog.Tmp2Drive = oldPlotLog.Tmp2Drive;
@@ -165,29 +165,28 @@ namespace ChiaPlotStatus
 
 
         // interesting data from logfiles as regex
-        // TODO: was multiline really necessary?
-        static Regex plotSizeRg = new Regex("^Plot size is: (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex bufferSizeRg = new Regex("^Buffer size is: (\\d+)MiB", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex bucketsRg = new Regex("^Using (\\d+) buckets", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex threadsRg = new Regex("^Using (\\d+) threads of stripe size (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex startDateRg = new Regex("^Starting phase 1/4: Forward Propagation into tmp files\\.\\.\\. (.+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex phase1Rg = new Regex("^Time for phase 1 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex phase2Rg = new Regex("^Time for phase 2 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex phase3Rg = new Regex("^Time for phase 3 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex phase4Rg = new Regex("^Time for phase 4 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex totalTimeRg = new Regex("^Total time = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex plotNameRg = new Regex("^Renamed final file from \".+\" to (\".+\")", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex currentBucketRg = new Regex("^\\tBucket (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex phase1Table = new Regex("^Computing table (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex phase2Table = new Regex("^scanned table (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex phase3Table = new Regex("^Compressing tables (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex tmpFolders = new Regex("^Starting plotting progress into temporary dirs: (.*) and (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex writePloblemRg = new Regex("^Only wrote \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex readPloblemRg = new Regex("^Only read \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex approximateWorkingSpace = new Regex("^Approximate working space used \\(without final file\\): (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex finalFileSize = new Regex("^Final File size: (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex destinationDirectory = new Regex("^Final Directory is: (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        // Approximate working space used (without final file)
+        // Could not open P:\PlotTemp\plot-k32-2021-05-03-14-01-902cf9d5d5d499fc980e94825090e14f40a237b6cb928a706d3c3d80dcd8834d.plot.p2.t2.sort_bucket_084.tmp: No such file or directory. Retrying in one minute.
+        public static Regex plotSizeRg = new Regex("^Plot size is: (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex bufferSizeRg = new Regex("^Buffer size is: (\\d+)MiB", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex bucketsRg = new Regex("^Using (\\d+) buckets", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex threadsRg = new Regex("^Using (\\d+) threads of stripe size (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex startDateRg = new Regex("^Starting phase 1/4: Forward Propagation into tmp files\\.\\.\\. (.+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase1Rg = new Regex("^Time for phase 1 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase2Rg = new Regex("^Time for phase 2 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase3Rg = new Regex("^Time for phase 3 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase4Rg = new Regex("^Time for phase 4 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex totalTimeRg = new Regex("^Total time = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex plotNameRg = new Regex("^Renamed final file from \".+\" to (\".+\")", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex currentBucketRg = new Regex("^\\tBucket (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase1Table = new Regex("^Computing table (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase2Table = new Regex("^scanned table (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase3Table = new Regex("^Compressing tables (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex tmpFolders = new Regex("^Starting plotting progress into temporary dirs: (.*) and (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex writePloblemRg = new Regex("^Only wrote \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex readPloblemRg = new Regex("^Only read \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex approximateWorkingSpace = new Regex("^Approximate working space used \\(without final file\\): (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex finalFileSize = new Regex("^Final File size: (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex destinationDirectory = new Regex("^Final Directory is: (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex couldNotOpenFile = new Regex("^Could not open .*: No such file or directory\\. Retrying in one minute\\.", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     }
 }

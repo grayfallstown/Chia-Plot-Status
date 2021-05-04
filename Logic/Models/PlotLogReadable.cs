@@ -44,32 +44,20 @@ namespace ChiaPlotStatus
             this.Tmp1Drive = plotLog.Tmp1Drive;
             this.Tmp2Drive = plotLog.Tmp2Drive;
             if (plotLog.Errors > 0)
-            {
                 this.Errors = plotLog.Errors.ToString();
-            }
             this.Progress = string.Format("{0:0.00}", plotLog.Progress) + "%";
             if (string.Equals(this.Progress, "NaN%")) this.Progress = "";
             this.CurrentPhase = "1";
             if (plotLog.Phase1Seconds > 0)
-            {
                 this.CurrentPhase = "2";
-            }
             if (plotLog.Phase2Seconds > 0)
-            {
                 this.CurrentPhase = "3";
-            }
             if (plotLog.Phase3Seconds > 0)
-            {
                 this.CurrentPhase = "4";
-            }
             if (plotLog.Phase4Seconds > 0)
-            {
                 this.CurrentPhase = "";
-            }
             else
-            {
                 this.CurrentPhase += "/4";
-            }
             this.ETA = formatDateTime(plotLog.ETA);
             this.StartDate = formatDateTime(plotLog.StartDate);
             this.FinishDate = formatDateTime(plotLog.FinishDate);
@@ -113,27 +101,15 @@ namespace ChiaPlotStatus
         private string formatSeconds(int seconds)
         {
             if (seconds == 0)
-            {
                 return "";
-
-            }
             else if (seconds > 24 * 60 * 60)
-            {
                 return TimeSpan.FromSeconds(seconds).ToString(@"dd\d\ hh\h\ mm\m\ ss\s");
-            }
             else if (seconds > 60 * 60)
-            {
                 return TimeSpan.FromSeconds(seconds).ToString(@"hh\h\ mm\m\ ss\s");
-            }
             else if (seconds > 60)
-            {
                 return TimeSpan.FromSeconds(seconds).ToString(@"mm\m\ ss\s");
-
-            }
             else
-            {
                 return TimeSpan.FromSeconds(seconds).ToString(@"ss\s");
-            }
         }
 
         private string formatDateTime(DateTime? dateTime)
@@ -179,8 +155,8 @@ namespace ChiaPlotStatus
             if (lastModifiedAtWarningThreashold < 10)
                 lastModifiedAtWarningThreashold = 10;
             lastModifiedAtErrorThreashold = lastModifiedAtWarningThreashold * 2;
-            Debug.WriteLine("lastModifiedAtWarningThreashold: " + lastModifiedAtWarningThreashold);
-            Debug.WriteLine("lastModifiedAtErrorThreashold: " + lastModifiedAtErrorThreashold);
+            // Debug.WriteLine("lastModifiedAtWarningThreashold: " + lastModifiedAtWarningThreashold);
+            // Debug.WriteLine("lastModifiedAtErrorThreashold: " + lastModifiedAtErrorThreashold);
 
             bool notLastAndNotDone = plotLog.Progress < 100d && !plotLog.IsLastInLogFile;
             bool lastModfiedAtWarning = false;

@@ -9,6 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Reactive;
+using System.Threading.Tasks;
 
 namespace ChiaPlotStatus.Views
 {
@@ -63,7 +64,6 @@ namespace ChiaPlotStatus.Views
             Button header = ((Button)sender);
             string headerText = (string) header.Content;
             SortChangeWorkaround(headerText);
-
         }
 
         public void ThemeSwitcher()
@@ -81,6 +81,12 @@ namespace ChiaPlotStatus.Views
                         break;
                 }
             };
+        }
+
+        public void OpenLogViewerWindow(object sender, RoutedEventArgs e)
+        {
+            var dialog = new LogViewerWindow(@"C:\Users\mk\.chia\mainnet\plotter\6ce9d6ea-cba0-4ec5-87c6-53d06a420cb2.log");
+            _ = dialog.ShowDialog<bool>(this);
         }
 
     }

@@ -1,0 +1,71 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+        x:Class="ChiaPlotStatus.Views.LogViewerWindow"
+        Icon="/Assets/Logo.png"
+        TransparencyLevelHint="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        Title="Log Viewer">
+
+  <!--
+	<Window.DataContext>
+		<vm:MainWindowViewModel/>
+	</Window.DataContext>
+  -->
+	<Window.Styles>
+    <Style Selector="StackPanel.LogLines StackPanel.Line TextBlock.Level0">
+      <Setter Property="FontWeight" Value="Normal" />
+      <Setter Property="Foreground" Value="Gray" />
+    </Style>
+    <Style Selector="StackPanel.LogLines StackPanel.Line TextBlock.Level1">
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="Black" />
+    </Style>
+    <Style Selector="StackPanel.LogLines StackPanel.Line TextBlock.Level2">
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="DarkBlue" />
+    </Style>
+	</Window.Styles>
+
+  <Panel Name="WindowContext">
+		<StackPanel>
+      <Panel>
+			  <ExperimentalAcrylicBorder IsHitTestVisible="False">
+				  <ExperimentalAcrylicBorder.Material>
+					  <ExperimentalAcrylicMaterial
+						  BackgroundSource="Digger"
+						  TintColor="Black"
+						  TintOpacity="0.2"
+						  MaterialOpacity="0.25" />
+				  </ExperimentalAcrylicBorder.Material>
+			  </ExperimentalAcrylicBorder>
+		  </Panel>
+
+      <TextBlock Text="TODO: Auto size scrollviewer" FontWeight="Bold"></TextBlock>
+      <TextBlock Text="{Binding Path}"></TextBlock>
+
+      <ScrollViewer Name="Log" Height="650">
+        <StackPanel Name="LogLines" Classes="LogLines" Orientation="Vertical">
+
+        </StackPanel>
+      </ScrollViewer>
+<!--
+      <StackPanel Classes="LogLines" Orientation="Vertical">
+        <StackPanel Classes="Line" Orientation="Horizontal">
+          <TextBlock Classes="">sort time =  2374.087 seconds. CPU (41.570%) Sun May  2 04:49:41 2021</TextBlock>
+        </StackPanel>
+        <StackPanel Classes="Line" Orientation="Horizontal">
+          Tooltips
+				<TextBlock Classes="Level1">Time for phase 1 = </TextBlock>
+          <TextBlock Classes="Level2">41645.190</TextBlock>
+          <TextBlock Classes="Level1"> seconds. CPU (</TextBlock>
+          <TextBlock Classes="Level2">80.080%</TextBlock>
+          <TextBlock Classes="Level1">) Sat May  1 23:38:19 2021</TextBlock>
+        </StackPanel>
+      </StackPanel>
+-->
+    </StackPanel>
+	</Panel>
+</Window>

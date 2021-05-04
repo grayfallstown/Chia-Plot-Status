@@ -225,6 +225,10 @@
 								</ToolTip.Tip>
 							</CheckBox>
 						</Border>
+
+            <!--
+            <Button Click="OpenLogViewerWindow" Content="Assd"></Button>
+            -->
 					</StackPanel>
 				</StackPanel>
 			</StackPanel>
