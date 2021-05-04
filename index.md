@@ -18,7 +18,7 @@
 
 ## Download
 
-Windows: [Download latest version busy-plotter](./Setup.exe)
+Windows: [Download latest version busy-plotter](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.6-beta4/Setup.exe)
 
 Mac and Linux: comming soon
 
