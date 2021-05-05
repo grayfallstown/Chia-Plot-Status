@@ -15,7 +15,7 @@ namespace ChiaPlotStatus.Logic.Models
     public class Healthy : HealthIndicator
     {
         public string Name { get; } = "Healthy";
-        public int  SortIndex { get; } = 1;
+        public int SortIndex { get; } = 1;
         private Healthy() { }
         public static Healthy Instance = new();
     }

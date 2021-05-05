@@ -183,7 +183,7 @@ namespace ChiaPlotStatus
         public static Regex plotNameRg = new Regex("^Renamed final file from \".+\" to (\".+\")", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex currentBucketRg = new Regex("^\\tBucket (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex phase1Table = new Regex("^Computing table (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        public static Regex phase2Table = new Regex("^Backpropagating on table(\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase2Table = new Regex("^Backpropagating on table (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex phase3Table = new Regex("^Compressing tables (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex tmpFolders = new Regex("^Starting plotting progress into temporary dirs: (.*) and (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex writePloblemRg = new Regex("^Only wrote \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase);

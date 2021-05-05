@@ -75,7 +75,18 @@ namespace ChiaPlotStatus
             this.Buckets = plotLog.Buckets.ToString();
             this.Threads = plotLog.Threads.ToString();
             this.Buffer = plotLog.Buffer + " MB";
-            this.CurrentBucket = plotLog.CurrentBucket + "/" + plotLog.Buckets.ToString();
+            switch (plotLog.CurrentPhase)
+            {
+                case 1:
+                case 3:
+                    this.CurrentBucket = plotLog.CurrentBucket + "/" + plotLog.Buckets;
+                    break;
+                case 2:
+                case 4:
+                case 5:
+                    this.CurrentBucket = "";
+                    break;
+            }
             this.PlotName = plotLog.PlotName;
             this.LogFolder = plotLog.LogFolder;
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
@@ -134,9 +145,9 @@ namespace ChiaPlotStatus
                 case TempError:
                     return "⚠ Temp Errors";
                 case Concerning c:
-                    return "⚠ " + c.Minutes + " / " + c.ExpectedMinutes + "m";
+                    return "⚠ Slow " + c.Minutes + " / " + c.ExpectedMinutes + "m";
                 case PossiblyDead p:
-                    return "⚠ " + p.Minutes + " / " + p.ExpectedMinutes + "m";
+                    return "⚠ Dead? " + p.Minutes + " / " + p.ExpectedMinutes + "m";
                 case ConfirmedDead c:
                     return "✗ Dead" + (c.Manual ? " (m)" : "");
                 default:

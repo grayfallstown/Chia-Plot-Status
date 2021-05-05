@@ -79,7 +79,7 @@ Tooltips:
         Phase 2 it will start with table 7 and work its way back to table 1. An arrow shows in which way it currently
         progresses.
     CurrentBucket: >
-        The Chia plotter will work through each table in the phases 1 to 3 and will process each bucket in each table.
+        The Chia plotter will work through each table in the phases 1 and 3 and will process each bucket in each table.
         This shows which bucket in the current table is currently worked on.
     CurrentPhase: >
         Shows in which of the four phases the plotting process is. It does not go back to a previous phase.
@@ -124,22 +124,47 @@ Tooltips:
     FinalFileSize: >
         The size of the finished plot file. Varies little over the same k-size.
     Health: >
-        Read catefully! This feature requires existing logs of finished plots from the same log directory
+        Read catefully! Don't be rushed into making a decision here!
+        This feature requires existing logs of finished plots from the same log directory
         to run correctly or it uses default warning thresholds that are pretty much diced at the moment!
+        If your system does not update "last modfied at" on files (some deactivate it on SSDs) ignore
+        the warnings with time in it. Chia Plot Status doesn't know any better.
+
+
         An Estimate on the processes health. In some cases it is not clear if the process is still running,
-        this can happen especially in phase 4. If your system does not update "last modfied at" on files
-        (some deactivate it on SSDs) ignore the warnings with update time in it. Chia Plot Status doesn't
-        know any better.
-        "⚠ Temp Errors" means the last line in the logfile is a read/write error (look at Errors column).
-        You might be out of disk space (free up some space and it continues after 5min) or your external hard
-        disk / network attached storage is detached. Since Version 1.1.4 (4!) it will continue when the
-        storage is reattached, before that: dead.
-        "⚠ 25min ago" means last update to the logfile was N minutes ago, but Chia Plot Status expected
-        a new log line earlier than that. Process might be still running, maybe you gave your temp drive
-        more IO than they can handle this time?
-        "⚠ Dead? (50min)" means last update to the logFile was way too long ago. Process might be still running!
-        If your system is not really slow/overtaxed at the moment the process is likely dead
-        (check to be sure). Chia Plot Status considers it dead until it logs something again.
-        "✗ Dead" means the processes is not done and a new process appeared in the same logfile. If your logging
-        is not messed up and logging multiple processes in parallel to the same file this means the process
-        is dead.
+        this can happen especially in phase 4.
+
+
+        "⚠ Temp Errors": Usually not so serious, but you need to take action.
+        It means the last line in the logfile is a read or write error (look at Errors column).
+        You might be out of disk space for temp1, temp2 or the destination, so free up some space.
+        Another reason could be your external hard disk / network attached storage is detached or the
+        connection is flaky.
+        The plotter retries every 5 minutes, so it continues once you fixed the error.
+
+
+        "⚠ Slow 25m/15m": Usually not serious, just have an eye on it.
+        It means last update to the logfile was 15 minutes ago, but Chia Plot Status expected a new log line
+        within 15 minutes.
+        Process is likely still running.
+        Maybe you gave your temp drives more IO than they can handle this time?
+        If you only have finished plots that ran on SSDs and this one is on a HDD now, it is expected to be
+        slower and throw that warning.
+        Chia Plot Status will learn that this drive is slower once this plot is done.
+        Another case can be phase 4. Currently the plotter does not log anything for as long as it copies
+        the plot to the destination.
+
+
+        "⚠ Dead? 40m/10m": This is scary. It means last update to the logFile was way too long ago.
+        Process might be still running! Especially in phase 4 when it does not log anything while copying the
+        plot to its destination. This needs to be fixed in Chia.
+        If your system is not really slow/overtaxed at the moment the process could be dead (check to be sure).
+        Chia Plot Status considers it dead until it logs something again.
+
+
+        "✗ Dead (m)": You manually marked this process as dead.
+
+
+        "✗ Dead": Ouch. It means the processes is not done and a new process appeared in the same logfile.
+        If your logging is not messed up and logging multiple processes in parallel to the same file this means
+        the process is dead.

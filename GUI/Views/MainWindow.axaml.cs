@@ -29,6 +29,7 @@ namespace ChiaPlotStatus.Views
             this.AttachDevTools();
 #endif
             ThemeSwitcher();
+            this.WindowState = WindowState.Maximized;
         }
 
         private void InitializeComponent()
