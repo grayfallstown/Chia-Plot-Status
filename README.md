@@ -55,6 +55,7 @@ Clone this repo:
 Build it:
 
 `cd Chia-Plot-Status`
+
 `dotnet build --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"`
 
 Chia-Plot-Status can now be found at `.\bin\Release\net5.0\ChiaPlotStatus.exe` (or on mac/linux without the `.exe`)
