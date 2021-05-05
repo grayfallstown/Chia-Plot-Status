@@ -30,7 +30,7 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 Windows: [Download latest version busy-plotter](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.6-beta4/Setup.exe)
 
-For Mac and Linux you currently have to [build it yourself](#Build-it-yourself).
+For Mac and Linux you currently have to [build it yourself](#Build-it-yourself) for now.
 
 ## Working with many distributed plotting rigs
 
