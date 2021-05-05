@@ -1,8 +1,16 @@
-# dotnet build -c Release
+dotnet build --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
+
+Echo ""
+Echo "The warnings are normal. Only formal flaws in the code"
+Echo ""
+
+Echo "Cleaning release folder"
+
 rm -r release\
 mkdir release\
 mkdir release\ChiaPlotStatus\
 
+Echo "Copying build to release folder"
 copy -r C:\Users\mk\IdeaProjects\ChiaPlotStatus\bin\Release\net5.0\* release\ChiaPlotStatus\
-rm release\ChiaPlotStatus\ChiaPlotStatus.dll.config.json
-# Compress-Archive release\ChiaPlotStatus release\ChiaPlotStatus.zip
+
+Echo "Now open and build setup using InstallForge and InstallerConfig.ifp as config"
