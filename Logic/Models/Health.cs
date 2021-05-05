@@ -9,11 +9,13 @@ namespace ChiaPlotStatus.Logic.Models
     public interface HealthIndicator
     {
         public string Name { get; }
+        public int SortIndex { get; }
     }
 
     public class Healthy : HealthIndicator
     {
         public string Name { get; } = "Healthy";
+        public int  SortIndex { get; } = 1;
         private Healthy() { }
         public static Healthy Instance = new();
     }
@@ -21,6 +23,7 @@ namespace ChiaPlotStatus.Logic.Models
     public class TempError : HealthIndicator
     {
         public string Name { get; } = "TempError";
+        public int SortIndex { get; } = 2;
         private TempError() { }
         public static TempError Instance = new();
     }
@@ -28,6 +31,7 @@ namespace ChiaPlotStatus.Logic.Models
     public class Concerning : HealthIndicator
     {
         public string Name { get; } = "Concerning";
+        public int SortIndex { get; } = 3;
         public float Minutes { get; set; }
         public float ExpectedMinutes { get; set; }
 
@@ -40,6 +44,7 @@ namespace ChiaPlotStatus.Logic.Models
     public class PossiblyDead : HealthIndicator
     {
         public string Name { get; } = "PossiblyDead";
+        public int SortIndex { get; } = 4;
         public float Minutes { get; set; }
         public float ExpectedMinutes { get; set; }
 
@@ -53,6 +58,7 @@ namespace ChiaPlotStatus.Logic.Models
     public class ConfirmedDead : HealthIndicator
     {
         public string Name { get; } = "ConfirmedDead";
+        public int SortIndex { get; } = 5;
         public bool Manual { get; set; }
         public ConfirmedDead(bool manual)
         {

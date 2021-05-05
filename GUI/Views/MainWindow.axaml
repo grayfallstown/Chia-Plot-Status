@@ -220,9 +220,9 @@
 							</CheckBox>
 						</Border>
 
-            <!--
+
             <Button Click="OpenLogViewerWindow" Content="Assd"></Button>
-            -->
+
 					</StackPanel>
 				</StackPanel>
         <StackPanel Name="Filters" Classes="Filters" Orientation="Vertical">

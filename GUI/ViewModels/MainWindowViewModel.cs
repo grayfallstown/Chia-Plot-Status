@@ -17,12 +17,15 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using ChiaPlotStatus.Logic.Models;
+using Avalonia;
 
 namespace ChiaPlotStatus.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
         public ChiaPlotStatus PlotManager { get; internal set; }
+
+        // private readonly INotificationManager _notificationManager { get; private set; };
 
         public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
         public List<(PlotLog, PlotLogReadable)> PlotLogTuples { get; set; } = new();
@@ -305,7 +308,7 @@ namespace ChiaPlotStatus.ViewModels
 
         public void InitializeRefreshInterval()
         {
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
             timer.Tick += (sender, e) =>
             {
                 // Somehow this ticks twice
@@ -340,6 +343,32 @@ namespace ChiaPlotStatus.ViewModels
             }
         }
 
+        /*
+        public void InitializeNotifications()
+        {
+            _notificationManager = AvaloniaLocator.Current.GetService<INotificationManager>();
+        }
+
+        public void HandleNotification(PlotLogReadable plotLog)
+        {
+            try
+            {
+                _notificationManager.ShowNotification(new Notification
+                {
+                    Title = "Plot finished",
+                    Body = "PlotName: " + plotLog.PlotName + "\n" +
+                            "LogFolder: " + plotLog.LogFolder + "\n"+
+                            "Tmp1: " + plotLog.Tmp1Drive + "\n" +
+                            "Tmp2: " + plotLog.Tmp2Drive + "\n" +
+                            "Dest: " + plotLog.DestDrive + "\n" +
+                            "TotalTime: " + plotLog.TotalSeconds + "\n"
+                });
+            } catch (Exception e)
+            {
+                Debug.WriteLine("NotificationManager.ShowNotification failed. MacOS?", e);
+            }
+        }
+        */
 
     }
 }

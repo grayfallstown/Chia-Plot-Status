@@ -63,7 +63,12 @@ namespace ChiaPlotStatus
             HandleStatistics(plotLogs.ToList());
             List<(PlotLog, PlotLogReadable)> plusReadable = new();
             foreach (var plotLog in plotLogs)
+            {
+                foreach (var markOfDeath in Settings.MarksOfDeath)
+                    if (markOfDeath.IsMatch(plotLog))
+                        plotLog.Health = new ConfirmedDead(true);
                 plusReadable.Add((plotLog, new PlotLogReadable(plotLog)));
+            }
             List<(PlotLog, PlotLogReadable)> result = Filter(searchString, filter, plusReadable);
             SortPlotLogs(sortPropertyName, sortAsc, result);
             return result;

@@ -39,6 +39,7 @@ namespace ChiaPlotStatus
         public string ApproximateWorkingSpace { get; set; } = "";
         public string FinalFileSize { get; set; } = "";
         public string Health { get; set; } = "";
+        public int PlaceInLogFile { get; set; } = -1;
 
         public PlotLogReadable(PlotLog plotLog)
         {
@@ -79,22 +80,23 @@ namespace ChiaPlotStatus
             this.LogFolder = plotLog.LogFolder;
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
             this.Health = formatHealth(plotLog.Health);
-            switch (this.CurrentPhase)
+            this.PlaceInLogFile = plotLog.PlaceInLogFile;
+            switch (plotLog.CurrentPhase)
             {
-                case "1/4":
+                case 1:
                     this.CurrentTable = plotLog.Phase1Table + "/7 ↑";
                     break;
-                case "2/4":
+                case 2:
                     this.CurrentTable = plotLog.Phase2Table + "/7 ↓";
                     break;
-                case "3/4":
+                case 3:
                     this.CurrentTable = plotLog.Phase3Table + "/7 ↑";
                     break;
-                case "4/4":
-                    this.CurrentTable = "4/4";
+                case 4:
+                    this.CurrentTable = "1/1";
                     break;
-                default:
-                    this.CurrentTable ="";
+                case 5:
+                    this.CurrentTable = "";
                     break;
             }
         }

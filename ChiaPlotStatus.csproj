@@ -25,6 +25,9 @@
     <PackageReference Include="YamlDotNet" Version="11.1.3-nullable-enums-0003" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="GUI\Views\MainWindow - Kopieren.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

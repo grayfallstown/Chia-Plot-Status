@@ -166,6 +166,8 @@ namespace ChiaPlotStatus
                     lastModifiedAtWarningThreashold = (int)(((float)stats.Phase3AvgTimeNeed / 60 / this.Buckets) * 3);
                     if (lastModifiedAtWarningThreashold == 0)
                         lastModifiedAtWarningThreashold = 15;
+                    if (this.CurrentBucket == this.Buckets)
+                        lastModifiedAtWarningThreashold = 20;
                     break;
                 case 5:
                     Health = Healthy.Instance;
@@ -173,7 +175,7 @@ namespace ChiaPlotStatus
             }
             if (lastModifiedAtWarningThreashold < 10)
                 lastModifiedAtWarningThreashold = 10;
-            lastModifiedAtErrorThreashold = lastModifiedAtWarningThreashold * 2;
+            lastModifiedAtErrorThreashold = lastModifiedAtWarningThreashold * 4;
             // Debug.WriteLine("lastModifiedAtWarningThreashold: " + lastModifiedAtWarningThreashold);
             // Debug.WriteLine("lastModifiedAtErrorThreashold: " + lastModifiedAtErrorThreashold);
 

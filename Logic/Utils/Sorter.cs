@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChiaPlotStatus.Logic.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -65,7 +66,10 @@ namespace ChiaPlotStatus.Logic.Utils
                         break;
                     case TypeCode.DateTime:
                     case TypeCode.Object:
-                        sortIndex = compare((DateTime?)valueA, (DateTime?)valueB);
+                        if (valueA is HealthIndicator)
+                            sortIndex = ((HealthIndicator)valueA).SortIndex.CompareTo(((HealthIndicator)valueB).SortIndex);
+                        else
+                            sortIndex = compare((DateTime?)valueA, (DateTime?)valueB);
                         break;
                     case TypeCode.String:
                         string valueAStr = "";
@@ -80,6 +84,12 @@ namespace ChiaPlotStatus.Logic.Utils
                         Debug.WriteLine("TypeCode " + typeCode);
                         break;
                 }
+
+                if (sortIndex == 0)
+                {
+                    sortIndex = a.Item1.GetHashCode().CompareTo(b.Item1.GetHashCode());
+                }
+
                 if (!sortAsc)
                 {
                     sortIndex *= -1;

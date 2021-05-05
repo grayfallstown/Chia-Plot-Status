@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChiaPlotStatus.Logic.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -15,6 +16,7 @@ namespace ChiaPlotStatus.GUI.Models
         public ObservableCollection<string> LogDirectories { get; set; } = new();
         public double? FontSize { get; set; } = 10d;
         public string? Theme { get; set; } = "Light";
+        public List<MarkOfDeath>? MarksOfDeath { get; set; } = new();
 
         public Settings()
         {
@@ -40,6 +42,8 @@ namespace ChiaPlotStatus.GUI.Models
                         this.FontSize = fromFile.FontSize;
                     if (fromFile.Theme != null)
                         this.Theme = fromFile.Theme;
+                    if (fromFile.MarksOfDeath != null)
+                        this.MarksOfDeath = fromFile.MarksOfDeath;
                     return true;
                 }
             }
