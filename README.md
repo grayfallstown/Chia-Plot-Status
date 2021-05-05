@@ -30,7 +30,7 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 Windows: [Download latest version busy-plotter](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.6-beta4/Setup.exe)
 
-Mac and Linux support coming soon.
+For Mac and Linux you currently have to [build it yourself](#Build-it-yourself) for now.
 
 ## Working with many distributed plotting rigs
 
@@ -43,6 +43,22 @@ Best Practice:
 ## Open Source
 
 MIT opensource licence, free to keep or change.
+
+## Build it yourself
+
+Download and install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0) and [git](https://git-scm.com/).
+
+Clone this repo:
+
+`git clone https://github.com/grayfallstown/Chia-Plot-Status.git`
+
+Build it:
+
+`cd Chia-Plot-Status`
+
+`dotnet build --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"`
+
+Chia-Plot-Status can now be found at `.\bin\Release\net5.0\ChiaPlotStatus.exe` (or on mac/linux without the `.exe`)
 
 ## Thanks to
 
