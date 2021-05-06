@@ -28,7 +28,7 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 ## Installation / Download
 
-Windows: [Download latest version busy-plotter](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.6-beta5/Setup.exe)
+Windows: [Download latest version busy-plotter](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.6-beta6/Setup.exe)
 You will get a blue warning saying this was published by an unknown developer.
 
 For Mac and Linux you currently have to [build it yourself](#Build-it-yourself) for now.
