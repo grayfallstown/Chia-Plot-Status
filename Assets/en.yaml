@@ -21,6 +21,7 @@ Buttons:
     MarkAsDead: "Mark as dead"
     UnmarkAsDead: "Unmark as dead"
     Abort: "Cancel"
+    Copy: "Copy"
 
 Columns:
     Tmp1Drive: "Tmp1"

@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="100"
+        Width="500" Height="100"
+        x:Class="ChiaPlotStatus.Views.UpdateDialog"
+        Icon="/Assets/Logo.png"
+        TransparencyLevelHint="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        Title="Checking for updates">
+
+  <!--
+	<Window.DataContext>
+		<vm:MainWindowViewModel/>
+	</Window.DataContext>
+  -->
+	<Window.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="Margin" Value="3" />
+    </Style>
+  </Window.Styles>
+
+  <Panel Name="WindowContext">
+		<StackPanel Margin="20">
+      <Panel>
+			  <ExperimentalAcrylicBorder IsHitTestVisible="False">
+				  <ExperimentalAcrylicBorder.Material>
+					  <ExperimentalAcrylicMaterial
+						  BackgroundSource="Digger"
+						  TintColor="Black"
+						  TintOpacity="0.2"
+						  MaterialOpacity="0.25" />
+				  </ExperimentalAcrylicBorder.Material>
+			  </ExperimentalAcrylicBorder>
+		  </Panel>
+
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="Latest Release:" FontWeight="Bold"></TextBlock>
+        <TextBlock Text="{Binding Latest.TagName}"></TextBlock>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="Currently installed:" FontWeight="Bold"></TextBlock>
+        <TextBlock Text="{Binding Current}"></TextBlock>
+      </StackPanel>
+
+
+      <TextBlock Text="You are up to date!" Name="UpToDate"></TextBlock>
+      <Button Content="Download Update" Name="DownloadUpdate" Click="DownloadUpdate" />
+    </StackPanel>
+	</Panel>
+</Window>

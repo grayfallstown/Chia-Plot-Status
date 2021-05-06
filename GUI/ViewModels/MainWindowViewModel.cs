@@ -270,6 +270,22 @@ namespace ChiaPlotStatus.ViewModels
                 var dialog = new MarkOfDeathDialog(plotLogReadable, this.Language, this.PlotManager.Settings, LoadPlotLogs);
                 dialog.Show();
             });
+
+            var donateButton = MainWindow.Instance.Find<MenuItem>("DonateButton");
+            if (donateButton != null)
+                donateButton.Command = ReactiveCommand.Create(() =>
+                {
+                    var dialog = new DonationDialog(this.Language);
+                    dialog.Show();
+                });
+
+            var updateButton = MainWindow.Instance.Find<MenuItem>("UpdateButton");
+            if (updateButton != null)
+                updateButton.Command = ReactiveCommand.Create(() =>
+                {
+                    var dialog = new UpdateDialog(this.Language);
+                    dialog.Show();
+                });
         }
 
         public void InitializeSearchBox()

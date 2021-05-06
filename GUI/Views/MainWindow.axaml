@@ -151,6 +151,13 @@
 				</ExperimentalAcrylicBorder.Material>
 			</ExperimentalAcrylicBorder>
 		</Panel>
+
+      <DockPanel>
+        <Menu DockPanel.Dock="Top">
+          <MenuItem Header="Update" Name="UpdateButton" />
+          <MenuItem Header="Donate" Name="DonateButton" />
+        </Menu>
+      </DockPanel>
 			<StackPanel Orientation="Horizontal">
 				<Image Source="/Assets/Logo.png" Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
 				<StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">

@@ -1,0 +1,72 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="200"
+        Width="500" Height="200"
+        x:Class="ChiaPlotStatus.Views.DonationDialog"
+        Icon="/Assets/Logo.png"
+        TransparencyLevelHint="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        Title="Donation to the Chia Plot Status developer">
+
+  <!--
+	<Window.DataContext>
+		<vm:MainWindowViewModel/>
+	</Window.DataContext>
+  -->
+	<Window.Styles>
+    <Style Selector="Button.Compact">
+      <Setter Property="Margin" Value="3" />
+      <Setter Property="Padding" Value="2" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="TextBlock.Margin">
+      <Setter Property="Margin" Value="3" />
+      <Setter Property="Padding" Value="2" />
+    </Style>
+    <Style Selector="Button.Margin">
+      <Setter Property="Margin" Value="3" />
+      <Setter Property="Padding" Value="2" />
+    </Style>
+  </Window.Styles>
+
+  <Panel Name="WindowContext">
+		<StackPanel Margin="20">
+      <Panel>
+			  <ExperimentalAcrylicBorder IsHitTestVisible="False">
+				  <ExperimentalAcrylicBorder.Material>
+					  <ExperimentalAcrylicMaterial
+						  BackgroundSource="Digger"
+						  TintColor="Black"
+						  TintOpacity="0.2"
+						  MaterialOpacity="0.25" />
+				  </ExperimentalAcrylicBorder.Material>
+			  </ExperimentalAcrylicBorder>
+		  </Panel>
+
+      <TextBlock Text="Buy the Chia Plot Status developer a beer or some coffee"></TextBlock>
+      <TextBlock Text=" "></TextBlock>
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="Chia:" FontWeight="Bold" Classes="Margin"></TextBlock>
+        <Border>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding ChiaAddress}" Classes="Margin"></TextBlock>
+            <Button Content="{Binding Language.Buttons.Copy}" Classes="Margin" Click="CopyToClipboard" Tag="{Binding ChiaAddress}"></Button>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="Paypal:" FontWeight="Bold" Classes="Margin"></TextBlock>
+        <Border>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Paypal}" Classes="Margin"></TextBlock>
+            <Button Content="{Binding Language.Buttons.Copy}" Classes="Margin" Click="CopyToClipboard" Tag="{Binding ChiaAddress}"></Button>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+
+      <TextBlock Text="Thank you and cheers!" FontWeight="Bold" Name="Thx" Classes="Margin"></TextBlock>
+    </StackPanel>
+	</Panel>
+</Window>

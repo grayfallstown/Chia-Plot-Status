@@ -1,3 +1,6 @@
+Echo "Set Version!"
+pause
+
 dotnet build --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
 
 Echo ""

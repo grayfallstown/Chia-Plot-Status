@@ -65,6 +65,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string MarkAsDead { get; set; } = "";
         public string UnmarkAsDead { get; set; } = "";
         public string Abort { get; set; } = "";
+        public string Copy { get; set; } = "";
     }
 
     public class Tooltips
