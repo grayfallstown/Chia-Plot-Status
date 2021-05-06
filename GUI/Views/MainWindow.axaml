@@ -115,6 +115,11 @@
       <Setter Property="Margin" Value="2" />
       <Setter Property="Padding" Value="2" />
     </Style>
+    <Style Selector="Button.Compact">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
 	</Window.Styles>
 
 	<ScrollViewer Name="WindowContext">
@@ -356,7 +361,7 @@
                       <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Health}"></TextBlock>
                     </StackPanel>
                   </ToolTip.Tip>
-                  <Button Content="{Binding Health}" HorizontalAlignment="Left" Command="{Binding ElementName=WindowContext, Path=DataContext.MarkAsDeadCommand}" CommandParameter="{Binding}"
+                  <Button Content="{Binding Health}" HorizontalAlignment="Left" Classes="Compact" Command="{Binding ElementName=WindowContext, Path=DataContext.MarkAsDeadCommand}" CommandParameter="{Binding}"
                     ></Button>
                 </StackPanel>
               </DataTemplate>
