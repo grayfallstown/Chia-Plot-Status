@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace ChiaPlotStatus.Logic.Models
 {
     /**
-     * Manually marks a PlogLog as dead, so it can be hidden
+     * Manually marks a PlogLog as dead so it can be hidden
      */
     public class MarkOfDeath
     {
@@ -26,8 +27,9 @@ namespace ChiaPlotStatus.Logic.Models
         public bool IsMatch(PlotLog plotLog)
         {
             if (!string.Equals(this.LogFolder, plotLog.LogFolder)) return false;
-            if (!string.Equals(this.LogFile, plotLog.LogFile)) return false;
-            if (!string.Equals(this.PlaceInLogFile, plotLog.PlaceInLogFile)) return false;
+            string logFileName = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf(Path.DirectorySeparatorChar) + 1);
+            if (!string.Equals(this.LogFile, logFileName)) return false;
+            if (this.PlaceInLogFile != plotLog.PlaceInLogFile) return false;
             return true;
         }
 
@@ -37,6 +39,19 @@ namespace ChiaPlotStatus.Logic.Models
             if (!string.Equals(this.LogFile, plotLog.LogFile)) return false;
             if (!string.Equals(this.PlaceInLogFile, plotLog.PlaceInLogFile)) return false;
             return true;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is MarkOfDeath death &&
+                   LogFolder == death.LogFolder &&
+                   LogFile == death.LogFile &&
+                   PlaceInLogFile == death.PlaceInLogFile;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(LogFolder, LogFile, PlaceInLogFile);
         }
     }
 }

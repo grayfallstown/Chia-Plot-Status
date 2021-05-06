@@ -356,7 +356,8 @@
                       <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Health}"></TextBlock>
                     </StackPanel>
                   </ToolTip.Tip>
-                  <TextBlock Text="{Binding Health}" HorizontalAlignment="Left" ></TextBlock>
+                  <Button Content="{Binding Health}" HorizontalAlignment="Left" Command="{Binding ElementName=WindowContext, Path=DataContext.MarkAsDeadCommand}" CommandParameter="{Binding}"
+                    ></Button>
                 </StackPanel>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>

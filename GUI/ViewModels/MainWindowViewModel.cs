@@ -48,6 +48,7 @@ namespace ChiaPlotStatus.ViewModels
         public ReactiveCommand<string, Unit> RemoveFolderCommand { get; set; }
         public ReactiveCommand<Unit, Unit> IncreaseFontSizeCommand { get; set; }
         public ReactiveCommand<Unit, Unit> DecreaseFontSizeCommand { get; set; }
+        public ReactiveCommand<PlotLogReadable, Unit> MarkAsDeadCommand { get; set; }
 
         public MainWindowViewModel()
         {
@@ -262,6 +263,12 @@ namespace ChiaPlotStatus.ViewModels
                     if (result != null)
                         exporter.ToCsv(result, RawExport);
                 });
+            });
+
+            MarkAsDeadCommand = ReactiveCommand.Create<PlotLogReadable>((plotLogReadable) =>
+            {
+                var dialog = new MarkOfDeathDialog(plotLogReadable, this.Language, this.PlotManager.Settings, LoadPlotLogs);
+                dialog.Show();
             });
         }
 

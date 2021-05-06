@@ -18,6 +18,9 @@ Buttons:
     Json: "Json"
     Yaml: "Yaml"
     CSV: "CSV"
+    MarkAsDead: "Mark as dead"
+    UnmarkAsDead: "Unmark as dead"
+    Abort: "Cancel"
 
 Columns:
     Tmp1Drive: "Tmp1"
