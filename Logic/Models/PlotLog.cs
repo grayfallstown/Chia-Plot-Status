@@ -188,14 +188,15 @@ namespace ChiaPlotStatus
             if (this.FileLastWritten != null)
             {
                 fileLastWrittenAge = DateTime.Now - ((DateTime)this.FileLastWritten);
-                if (((TimeSpan)fileLastWrittenAge).TotalMinutes > lastModifiedAtWarningThreashold)
+                if (((TimeSpan)fileLastWrittenAge).TotalMinutes > (lastModifiedAtWarningThreashold + 1))
                     lastModfiedAtWarning = true;
-                if (((TimeSpan)fileLastWrittenAge).TotalMinutes > lastModifiedAtErrorThreashold)
+                if (((TimeSpan)fileLastWrittenAge).TotalMinutes > (lastModifiedAtErrorThreashold + 1))
                     lastModfiedAtError = true;
                 lastWriteMinutesAgo = (int)((TimeSpan)fileLastWrittenAge).TotalMinutes;
             }
 
-            bool manual = false; // TODO
+            // manual is set to false for now, it will be overwritten in ChiaPlotStatus.cs if necessary
+            bool manual = false;
             if (notLastAndNotDone)
                 this.Health = new ConfirmedDead(manual);
             else if (lastModfiedAtError)
@@ -206,9 +207,7 @@ namespace ChiaPlotStatus
                 this.Health = TempError.Instance;
             else
                 this.Health = Healthy.Instance;
-
         }
-
 
     }
 }
