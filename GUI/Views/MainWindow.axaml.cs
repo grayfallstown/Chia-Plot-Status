@@ -91,14 +91,14 @@ namespace ChiaPlotStatus.Views
             var plotLogReadable = (PlotLogReadable)((Button)sender).Tag;
             var path = plotLogReadable.LogFolder + Path.DirectorySeparatorChar + plotLogReadable.LogFile;
 
-            OpenUrl(path);
+            OpenFile(path);
             /*
             var dialog = new LogViewerWindow(path);
             dialog.Show();
             */
         }
 
-        private void OpenUrl(string url)
+        private void OpenFile(string url)
         {
             try
             {
@@ -110,7 +110,8 @@ namespace ChiaPlotStatus.Views
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     url = url.Replace("&", "^&");
-                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                    // force notepad or it will not open log files of running plots
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start notepad {url}") { CreateNoWindow = true });
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
