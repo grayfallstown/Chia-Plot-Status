@@ -111,7 +111,7 @@ namespace ChiaPlotStatus.ViewModels
                 {
                     var dataGrid = MainWindow.Instance.Find<DataGrid>("LogDataGrid");
                     if (dataGrid != null)
-                        dataGrid.Height = x - 130;
+                        dataGrid.Height = x - 135;
                 });
         }
 
