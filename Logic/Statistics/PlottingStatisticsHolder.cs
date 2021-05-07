@@ -33,13 +33,14 @@ namespace ChiaPlotStatus
         public PlottingStatistics GetMostRelevantStatistics(PlotLog plotLog)
         {
             PlottingStatisticsID id = new PlottingStatisticsID(plotLog);
-            ConcurrentDictionary<int, ConcurrentBag<PlotLog>> byRelevance = new ConcurrentDictionary<int, ConcurrentBag<PlotLog>>();
-            Parallel.ForEach(AllPlotLogs, (plotLog) =>
-            {
-                int relevance = id.CalcRelevance(new PlottingStatisticsID(plotLog), weights);
+            Dictionary<int, List<PlotLog>> byRelevance = new Dictionary<int, List<PlotLog>>();
+            foreach (var fromAll in AllPlotLogs) {
+                int relevance = id.CalcRelevance(new PlottingStatisticsID(fromAll), weights);
                 // Debug.WriteLine(relevance);
-                byRelevance.GetOrAdd(relevance, (_) => new ConcurrentBag<PlotLog>()).Add(plotLog);
-            });
+                if (!byRelevance.ContainsKey(relevance))
+                    byRelevance.Add(relevance, new List<PlotLog>());
+                byRelevance[relevance].Add(fromAll);
+            }
 
             int highestRelevance = -1;
             foreach (var relevance in byRelevance.Keys)
@@ -52,11 +53,34 @@ namespace ChiaPlotStatus
 
             if (highestRelevance > -1)
             {
-                ConcurrentBag<PlotLog> plotLogs;
-                _ = byRelevance.TryGetValue(highestRelevance, out plotLogs);
+                List<PlotLog> plotLogs = byRelevance[highestRelevance];
                 return new PlottingStatistics(plotLogs.ToList());
             }
-            return new PlottingStatistics(AllPlotLogs.ToList());
+            if (AllPlotLogs.Count > 0)
+                return new PlottingStatistics(AllPlotLogs.ToList());
+            else
+                return MagicNumbers();
+        }
+
+        /**
+         * An average over some plotlogs I had on my drive.
+         * This way we can display ETA and Time Remaining even
+         * when the user does not have finished plotlogs (will
+         * be imprecise tho).
+         * That way we get better warning and error thresholds
+         * from the beginning too, as they were diced before.
+         * See Issue #23
+         */
+        private PlottingStatistics MagicNumbers()
+        {
+            List<PlotLog> plotLogs = new List<PlotLog>();
+            var magicPlotLog = new PlotLog();
+            magicPlotLog.Phase1Seconds = 31573;
+            magicPlotLog.Phase2Seconds = 12298;
+            magicPlotLog.Phase3Seconds = 34925;
+            magicPlotLog.Phase4Seconds = 3024;
+            plotLogs.Add(magicPlotLog);
+            return new PlottingStatistics(plotLogs);
         }
 
     }
