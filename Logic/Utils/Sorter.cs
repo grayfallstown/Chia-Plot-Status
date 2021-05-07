@@ -34,6 +34,7 @@ namespace ChiaPlotStatus.Logic.Utils
                 property = propertyB;
                 sortOverLeftTupleItem = false;
             }
+            // property not found, sort by first property on A whatever it is
             if (property == null)
                 property = propertiesA[0];
             items.Sort((a, b) =>
@@ -51,6 +52,8 @@ namespace ChiaPlotStatus.Logic.Utils
                     valueA = property.GetValue(a.Item2);
                     valueB = property.GetValue(b.Item2);
                 }
+                string valueAStr = "";
+                string valueBStr = "";
                 TypeCode typeCode = Type.GetTypeCode(property.PropertyType);
                 switch (typeCode)
                 {
@@ -72,8 +75,8 @@ namespace ChiaPlotStatus.Logic.Utils
                             sortIndex = compare((DateTime?)valueA, (DateTime?)valueB);
                         break;
                     case TypeCode.String:
-                        string valueAStr = "";
-                        string valueBStr = "";
+                        valueAStr = "";
+                        valueBStr = "";
                         if (valueA != null)
                             valueAStr = valueA.ToString().ToLower();
                         if (valueB != null)
@@ -85,10 +88,70 @@ namespace ChiaPlotStatus.Logic.Utils
                         break;
                 }
 
+                // keep empty values on the bottom of the table
+                if (propertyB != null)
+                {
+                    // we sort over plotLog first but might hide useless information in plotLogReadable
+                    // the sorting does not see this values as empty as it looks into plotLogs first since
+                    // the data there is more easily sortable
+                    // but on the table we stil see empty values on top of the table as they are hidden.
+                    // That is why we sort on propertyB (plotLogReadable/item2) here
+                    var valueAPropB = propertyB.GetValue(a.Item2);
+                    var valueBPropB = propertyB.GetValue(b.Item2);
+                    var valueAProbANullOrEmpty = valueA == null || string.IsNullOrEmpty("" + valueA);
+                    var valueBProbANullOrEmpty = valueB == null || string.IsNullOrEmpty("" + valueB);
+                    var valueAProbBNullOrEmpty = valueAPropB == null || string.IsNullOrEmpty("" + valueAPropB);
+                    var valueBProbBNullOrEmpty = valueBPropB == null || string.IsNullOrEmpty("" + valueBPropB);
+
+                    if ((!valueAProbANullOrEmpty && valueAProbBNullOrEmpty) || (!valueBProbANullOrEmpty && valueBProbBNullOrEmpty))
+                    {
+                        // this is to sort by propb when values are null in plotlogreadable but not in plotlog
+                        if (valueAProbBNullOrEmpty != valueBProbBNullOrEmpty)
+                            Debug.WriteLine("asd");
+                        if (valueAProbBNullOrEmpty && !valueBProbBNullOrEmpty)
+                        {
+                            if (sortAsc)
+                                sortIndex = 1;
+                            else
+                                sortIndex = -1;
+                        }
+                        if (!valueAProbBNullOrEmpty && valueBProbBNullOrEmpty)
+                        {
+                            if (sortAsc)
+                                sortIndex = -1;
+                            else
+                                sortIndex = 1;
+                        }
+                    }
+                    else
+                    {
+                        // this is to sort by propa when values are null in plotlog
+                        if (valueAProbANullOrEmpty && !valueBProbANullOrEmpty)
+                        {
+                            if (sortAsc)
+                                sortIndex = 1;
+                            else
+                                sortIndex = -1;
+                        }
+                        if (!valueAProbANullOrEmpty && valueBProbANullOrEmpty)
+                        {
+                            if (sortAsc)
+                                sortIndex = -1;
+                            else
+                                sortIndex = 1;
+                        }
+                    }
+                }
+
+
+                // stabilize sorting so a refresh or sort does not put plot logs with equal values at random
+                // positions causing visual "jumping" of table entries.
+                // this way sorting stays consistent on equal values across the runtime of the program
                 if (sortIndex == 0)
                 {
                     sortIndex = a.Item1.GetHashCode().CompareTo(b.Item1.GetHashCode());
                 }
+
 
                 if (!sortAsc)
                 {
