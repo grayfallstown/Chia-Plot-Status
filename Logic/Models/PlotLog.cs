@@ -28,6 +28,7 @@ namespace ChiaPlotStatus
         public int Phase2Seconds { get; set; } = 0;
         public int Phase3Seconds { get; set; } = 0;
         public int Phase4Seconds { get; set; } = 0;
+        public int CopyTimeSeconds { get; set; } = 0;
         public int TotalSeconds { get; set; } = 0;
         public int PlotSize { get; set; } = 0;
         public int Threads { get; set; } = 0;

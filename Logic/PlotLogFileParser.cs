@@ -87,6 +87,9 @@ namespace ChiaPlotStatus
                         CurrentPlotLog().CurrentBucket = 0;
                         CurrentPlotLog().CurrentPhase = 4;
                         break;
+                    case var _ when copyTime.IsMatch(line):
+                        CurrentPlotLog().CopyTimeSeconds = int.Parse(copyTime.Matches(line)[0].Groups[1].Value);
+                        break;
                     case var _ when totalTimeRg.IsMatch(line):
                         var curPlot = CurrentPlotLog();
                         curPlot.TotalSeconds = int.Parse(totalTimeRg.Matches(line)[0].Groups[1].Value);
@@ -179,6 +182,7 @@ namespace ChiaPlotStatus
         public static Regex phase2Rg = new Regex("^Time for phase 2 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex phase3Rg = new Regex("^Time for phase 3 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex phase4Rg = new Regex("^Time for phase 4 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex copyTime = new Regex("^Copy time = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex totalTimeRg = new Regex("^Total time = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex plotNameRg = new Regex("^Renamed final file from \".+\" to (\".+\")", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex currentBucketRg = new Regex("^\\tBucket (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);

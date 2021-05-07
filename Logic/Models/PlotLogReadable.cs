@@ -26,6 +26,7 @@ namespace ChiaPlotStatus
         public string Phase2Seconds { get; set; } = "";
         public string Phase3Seconds { get; set; } = "";
         public string Phase4Seconds { get; set; } = "";
+        public string CopyTimeSeconds { get; set; } = "";
         public string TotalSeconds { get; set; } = "";
         public string PlotSize { get; set; } = "";
         public string Threads { get; set; } = "";
@@ -68,6 +69,7 @@ namespace ChiaPlotStatus
             this.Phase2Seconds = formatSeconds(plotLog.Phase2Seconds);
             this.Phase3Seconds = formatSeconds(plotLog.Phase3Seconds);
             this.Phase4Seconds = formatSeconds(plotLog.Phase4Seconds);
+            this.CopyTimeSeconds = formatSeconds(plotLog.CopyTimeSeconds);
             this.TotalSeconds = formatSeconds(plotLog.TotalSeconds);
             this.ApproximateWorkingSpace = plotLog.ApproximateWorkingSpace;
             this.DestDrive = plotLog.DestDrive;

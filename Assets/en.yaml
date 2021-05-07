@@ -38,6 +38,7 @@ Columns:
     Phase2Seconds: "Phase 2 🕐"
     Phase3Seconds: "Phase 3 🕐"
     Phase4Seconds: "Phase 4 🕐"
+    CopyTimeSeconds: "Copy 🕐"
     TotalSeconds: "Total 🕐"
     PlotSize: "K-Size"
     Threads: "Threads"
@@ -88,15 +89,25 @@ Tooltips:
     CurrentPhase: >
         Shows in which of the four phases the plotting process is. It does not go back to a previous phase.
     Phase1Seconds: >
-        The Seconds this plot process took to complete phase 1
+        The time this plot process took to complete phase 1.
+        This is the only phase with multithreading enabled and the only one you can optimize with the threads option.
     Phase2Seconds: >
-        The Seconds this plot process took to complete phase 2
+        The time this plot process took to complete phase 2
     Phase3Seconds: >
-        The Seconds this plot process took to complete phase 3
+        The time this plot process took to complete phase 3
     Phase4Seconds: >
-        The Seconds this plot process took to complete phase 4
+        The time this plot process took to complete phase 4
+    CopyTimeSeconds: >
+        The time this plot process took to copy the final file to the destination.
+        It gets copied from temp folder 2 to destination unless temp folder 2 and the destination are identical.
+        If you are using a remote destination you can optimize this process by using a local ssd or even just a
+        hdd as destination and then moving the plot to its remote destination by other means.
+        This way your plotting process is completed before the plot slowly gets moved to its final destination
+        and the plotter can already begin the next plot.
+        Google "windows task scheduler" or "linux chron jobs" to see how to set up automatic jobs that move the
+        files for you.
     TotalSeconds: >
-        The Seconds this plot process took to complete
+        The time this plot process took to fully complete
     PlotSize: >
         The k-size of the plot. Usally 32, which produces a 100GB plot file. Apparently there is very little
         reason to use a larger k-size for now.

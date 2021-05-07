@@ -88,6 +88,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string Phase2Seconds { get; set; } = "";
         public string Phase3Seconds { get; set; } = "";
         public string Phase4Seconds { get; set; } = "";
+        public string CopyTimeSeconds { get; set; } = "";
         public string TotalSeconds { get; set; } = "";
         public string PlotSize { get; set; } = "";
         public string Threads { get; set; } = "";
@@ -119,6 +120,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string Phase2Seconds { get; set; } = "";
         public string Phase3Seconds { get; set; } = "";
         public string Phase4Seconds { get; set; } = "";
+        public string CopyTimeSeconds { get; set; } = "";
         public string TotalSeconds { get; set; } = "";
         public string PlotSize { get; set; } = "";
         public string Threads { get; set; } = "";
