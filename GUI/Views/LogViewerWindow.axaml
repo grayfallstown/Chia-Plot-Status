@@ -43,29 +43,18 @@
 			  </ExperimentalAcrylicBorder>
 		  </Panel>
 
-      <TextBlock Text="TODO: Auto size scrollviewer" FontWeight="Bold"></TextBlock>
-      <TextBlock Text="{Binding Path}"></TextBlock>
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="Log file: " FontWeight="Bold"></TextBlock>
+        <TextBlock Text="{Binding Path}"></TextBlock>
+      </StackPanel>
+
+      <TextBlock Text="" Margin="5"></TextBlock>
 
       <ScrollViewer Name="Log" Height="650">
         <StackPanel Name="LogLines" Classes="LogLines" Orientation="Vertical">
-
+            <!-- Log added here via code-->
         </StackPanel>
       </ScrollViewer>
-<!--
-      <StackPanel Classes="LogLines" Orientation="Vertical">
-        <StackPanel Classes="Line" Orientation="Horizontal">
-          <TextBlock Classes="">sort time =  2374.087 seconds. CPU (41.570%) Sun May  2 04:49:41 2021</TextBlock>
-        </StackPanel>
-        <StackPanel Classes="Line" Orientation="Horizontal">
-          Tooltips
-				<TextBlock Classes="Level1">Time for phase 1 = </TextBlock>
-          <TextBlock Classes="Level2">41645.190</TextBlock>
-          <TextBlock Classes="Level1"> seconds. CPU (</TextBlock>
-          <TextBlock Classes="Level2">80.080%</TextBlock>
-          <TextBlock Classes="Level1">) Sat May  1 23:38:19 2021</TextBlock>
-        </StackPanel>
-      </StackPanel>
--->
     </StackPanel>
 	</Panel>
 </Window>

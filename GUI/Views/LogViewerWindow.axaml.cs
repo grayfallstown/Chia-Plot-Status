@@ -5,8 +5,10 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Threading;
 using ReactiveUI;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Reactive;
@@ -18,6 +20,7 @@ namespace ChiaPlotStatus.Views
     {
         public static LogViewerWindow? Instance { get; private set; }
         public TailLineEmitter TailLineEmitter { get; private set; }
+        public DispatcherTimer Timer { get; private set; }
         public string Path{ get; private set; }
 
         public StackPanel LogLines;
@@ -37,6 +40,8 @@ namespace ChiaPlotStatus.Views
 #endif
             InitializeTailLineEmitter();
             InitializeResizer();
+            InitializeRefresh();
+            this.Focus();
         }
 
         private void InitializeComponent()
@@ -143,8 +148,8 @@ namespace ChiaPlotStatus.Views
                     matches = PlotLogFileParser.plotNameRg.Matches(line);
                     var parts = line.Split(matches[0].Groups[1].Value);
                     highlight(1, parts[0]);
-                    highlight(2, parts[1]);
-                    highlight(1, parts[2]);
+                    highlight(2, matches[0].Groups[1].Value);
+                    highlight(1, parts[1]);
                 }
                 else if (PlotLogFileParser.currentBucketRg.IsMatch(line))
                 {
@@ -182,25 +187,11 @@ namespace ChiaPlotStatus.Views
                 }
                 else if (PlotLogFileParser.writePloblemRg.IsMatch(line))
                 {
-                    matches = PlotLogFileParser.writePloblemRg.Matches(line);
-                    var parts = line.Split(matches[0].Groups[1].Value);
-                    highlight(1, parts[0]);
-                    highlight(2, matches[0].Groups[1].Value);
-                    parts = line.Split(matches[0].Groups[2].Value);
-                    highlight(1, parts[0]);
-                    highlight(2, matches[0].Groups[2].Value);
-                    highlight(1, parts[2]);
+                    highlight(2, line);
                 }
                 else if (PlotLogFileParser.readPloblemRg.IsMatch(line))
                 {
-                    matches = PlotLogFileParser.readPloblemRg.Matches(line);
-                    var parts = line.Split(matches[0].Groups[1].Value);
-                    highlight(1, parts[0]);
-                    highlight(2, matches[0].Groups[1].Value);
-                    parts = line.Split(matches[0].Groups[2].Value);
-                    highlight(1, parts[0]);
-                    highlight(2, matches[0].Groups[2].Value);
-                    highlight(1, parts[2]);
+                    highlight(2, line);
                 }
                 else if (PlotLogFileParser.approximateWorkingSpace.IsMatch(line))
                 {
@@ -255,6 +246,25 @@ namespace ChiaPlotStatus.Views
                 .Subscribe(x => this.Find<ScrollViewer>("Log").Height = x - 40);
             this.WhenAnyValue(x => x.Width)
                 .Subscribe(x => this.Find<ScrollViewer>("Log").Width = x - 10);
+        }
+
+        public void InitializeRefresh()
+        {
+            Timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
+            Timer.Tick += (sender, e) =>
+            {
+                Debug.WriteLine("Refresh LogViewer" + DateTime.Now);
+                TailLineEmitter.ReadMore();
+            };
+            Timer.Start();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            // TODO: cleanup hangs the application
+            LogLines.Children.Clear();
+            Timer.Stop();
+            base.OnClosing(e);
         }
 
     }

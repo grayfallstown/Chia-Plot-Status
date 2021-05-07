@@ -8,7 +8,9 @@ using ReactiveUI;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Reactive;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace ChiaPlotStatus.Views
@@ -86,8 +88,43 @@ namespace ChiaPlotStatus.Views
 
         public void OpenLogViewerWindow(object sender, RoutedEventArgs e)
         {
-            var dialog = new LogViewerWindow(@"C:\Users\mk\.chia\mainnet\plotter\6ce9d6ea-cba0-4ec5-87c6-53d06a420cb2.log");
-            _ = dialog.ShowDialog<bool>(this);
+            var plotLogReadable = (PlotLogReadable)((Button)sender).Tag;
+            var path = plotLogReadable.LogFolder + Path.DirectorySeparatorChar + plotLogReadable.LogFile;
+
+            OpenUrl(path);
+            /*
+            var dialog = new LogViewerWindow(path);
+            dialog.Show();
+            */
+        }
+
+        private void OpenUrl(string url)
+        {
+            try
+            {
+                Process.Start(url);
+            }
+            catch
+            {
+                // hack because of this: https://github.com/dotnet/corefx/issues/10361
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    url = url.Replace("&", "^&");
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", url);
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", url);
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
     }

@@ -675,7 +675,7 @@
 											<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.LogFile}"></TextBlock>
 										</StackPanel>
 									</ToolTip.Tip>
-									<TextBlock Text="{Binding LogFile}" HorizontalAlignment="Left" ></TextBlock>
+									<Button Classes="Compact" Content="{Binding LogFile}" HorizontalAlignment="Left" Click="OpenLogViewerWindow" Tag="{Binding}"></Button>
 								</StackPanel>
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>

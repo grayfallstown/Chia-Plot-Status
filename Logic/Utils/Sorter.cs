@@ -106,8 +106,6 @@ namespace ChiaPlotStatus.Logic.Utils
                     if ((!valueAProbANullOrEmpty && valueAProbBNullOrEmpty) || (!valueBProbANullOrEmpty && valueBProbBNullOrEmpty))
                     {
                         // this is to sort by propb when values are null in plotlogreadable but not in plotlog
-                        if (valueAProbBNullOrEmpty != valueBProbBNullOrEmpty)
-                            Debug.WriteLine("asd");
                         if (valueAProbBNullOrEmpty && !valueBProbBNullOrEmpty)
                         {
                             if (sortAsc)
