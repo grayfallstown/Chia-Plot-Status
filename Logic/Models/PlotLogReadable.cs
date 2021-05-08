@@ -50,17 +50,33 @@ namespace ChiaPlotStatus
                 this.Errors = plotLog.Errors.ToString();
             this.Progress = string.Format("{0:0.00}", plotLog.Progress) + "%";
             if (string.Equals(this.Progress, "NaN%")) this.Progress = "";
-            this.CurrentPhase = "1";
-            if (plotLog.Phase1Seconds > 0)
-                this.CurrentPhase = "2";
-            if (plotLog.Phase2Seconds > 0)
-                this.CurrentPhase = "3";
-            if (plotLog.Phase3Seconds > 0)
-                this.CurrentPhase = "4";
-            if (plotLog.Phase4Seconds > 0)
-                this.CurrentPhase = "";
-            else
-                this.CurrentPhase += "/4";
+            switch(plotLog.CurrentPhase)
+            {
+                case 1:
+                    this.CurrentPhase = "1/5";
+                    this.CurrentTable = plotLog.Phase1Table + "/7 ↑";
+                    break;
+                case 2:
+                    this.CurrentPhase = "2/5";
+                    this.CurrentTable = plotLog.Phase2Table + "/7 ↓";
+                    break;
+                case 3:
+                    this.CurrentPhase = "3/5";
+                    this.CurrentTable = plotLog.Phase3Table + "/7 ↑";
+                    break;
+                case 4:
+                    this.CurrentPhase = "4/5";
+                    this.CurrentTable = "1/1";
+                    break;
+                case 5:
+                    this.CurrentPhase = "5/5";
+                    this.CurrentTable = "";
+                    break;
+                case 6: // done
+                    this.CurrentPhase = "";
+                    this.CurrentTable = "";
+                    break;
+            }
             this.ETA = formatDateTime(plotLog.ETA);
             this.StartDate = formatDateTime(plotLog.StartDate);
             this.FinishDate = formatDateTime(plotLog.FinishDate);
@@ -86,6 +102,7 @@ namespace ChiaPlotStatus
                 case 2:
                 case 4:
                 case 5:
+                case 6:
                     this.CurrentBucket = "";
                     break;
             }
@@ -94,24 +111,6 @@ namespace ChiaPlotStatus
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
             this.Health = formatHealth(plotLog.Health);
             this.PlaceInLogFile = plotLog.PlaceInLogFile;
-            switch (plotLog.CurrentPhase)
-            {
-                case 1:
-                    this.CurrentTable = plotLog.Phase1Table + "/7 ↑";
-                    break;
-                case 2:
-                    this.CurrentTable = plotLog.Phase2Table + "/7 ↓";
-                    break;
-                case 3:
-                    this.CurrentTable = plotLog.Phase3Table + "/7 ↑";
-                    break;
-                case 4:
-                    this.CurrentTable = "1/1";
-                    break;
-                case 5:
-                    this.CurrentTable = "";
-                    break;
-            }
         }
 
         private string formatSeconds(int seconds)

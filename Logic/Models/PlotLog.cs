@@ -59,6 +59,9 @@ namespace ChiaPlotStatus
 
             switch(CurrentPhase)
             {
+                case 6:
+                    part = 23;
+                    break;
                 case 5:
                     part = 22;
                     break;
@@ -80,7 +83,7 @@ namespace ChiaPlotStatus
                     subpart = (float)CurrentBucket / Buckets;
                     break;
             }
-            Progress = (part + subpart) / 22 * 100;
+            Progress = (part + subpart) / 23 * 100;
             if (Double.IsNaN(Progress))
                 Progress = 0;
         }
@@ -95,9 +98,13 @@ namespace ChiaPlotStatus
                 this.TimeRemaining = 0;
                 return;
             }
-            if (CurrentPhase == 5)
+            if (CurrentPhase == 6)
             {
                 this.TimeRemaining = 0;
+            }
+            if (CurrentPhase <= 5)
+            {
+                this.TimeRemaining += stats.CopyTimeAvgTimeNeed;
             }
             if (CurrentPhase <= 4)
             {
@@ -171,6 +178,7 @@ namespace ChiaPlotStatus
                         lastModifiedAtWarningThreashold = 20;
                     break;
                 case 5:
+                case 6:
                     Health = Healthy.Instance;
                     return;
             }

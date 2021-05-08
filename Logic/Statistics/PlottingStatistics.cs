@@ -23,6 +23,8 @@ namespace ChiaPlotStatus
         public int Phase3Completed { get; }
         public int Phase4AvgTimeNeed { get; }
         public int Phase4Completed { get; }
+        public int CopyTimeAvgTimeNeed { get; }
+        public int CopyTimeCompleted { get; }
 
         public PlottingStatistics(List<PlotLog> plotLogs)
         {
@@ -48,11 +50,17 @@ namespace ChiaPlotStatus
                     Phase4Completed++;
                     Phase4AvgTimeNeed += plotLog.Phase4Seconds;
                 }
+                if (plotLog.CopyTimeSeconds != 0)
+                {
+                    CopyTimeCompleted++;
+                    CopyTimeAvgTimeNeed += plotLog.CopyTimeSeconds;
+                }
             }
             if (Phase1Completed > 0) Phase1AvgTimeNeed /= Phase1Completed;
             if (Phase2Completed > 0) Phase2AvgTimeNeed /= Phase2Completed;
             if (Phase3Completed > 0) Phase3AvgTimeNeed /= Phase3Completed;
             if (Phase4Completed > 0) Phase4AvgTimeNeed /= Phase4Completed;
+            if (CopyTimeCompleted > 0) CopyTimeAvgTimeNeed /= CopyTimeCompleted;
         }
     }
 }

@@ -79,6 +79,7 @@ namespace ChiaPlotStatus
             magicPlotLog.Phase2Seconds = 12298;
             magicPlotLog.Phase3Seconds = 34925;
             magicPlotLog.Phase4Seconds = 3024;
+            magicPlotLog.CopyTimeSeconds = 934;
             plotLogs.Add(magicPlotLog);
             return new PlottingStatistics(plotLogs);
         }

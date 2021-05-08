@@ -98,6 +98,7 @@ Tooltips:
     Phase4Seconds: >
         The time this plot process took to complete phase 4
     CopyTimeSeconds: >
+        Unofficial phase 5.
         The time this plot process took to copy the final file to the destination.
         It gets copied from temp folder 2 to destination unless temp folder 2 and the destination are identical.
         If you are using a remote destination you can optimize this process by using a local ssd or even just a
