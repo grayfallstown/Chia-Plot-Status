@@ -5,9 +5,10 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
+[ubuntu-latest, windows-latest, macos-latest]
 jobs:
   build-on-windows:
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -32,6 +33,7 @@ jobs:
         path: bin/Release/net5.0
 
   build-on-linux:
+    runs-on: linux-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -56,6 +58,7 @@ jobs:
         path: bin/Release/net5.0
 
   build-on-mac:
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
