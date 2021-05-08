@@ -93,7 +93,7 @@ namespace ChiaPlotStatus
                     case var _ when totalTimeRg.IsMatch(line):
                         var curPlot = CurrentPlotLog();
                         curPlot.TotalSeconds = int.Parse(totalTimeRg.Matches(line)[0].Groups[1].Value);
-                        curPlot.CurrentPhase = 5;
+                        curPlot.CurrentPhase = 6;
                         if (curPlot.StartDate != null)
                             curPlot.FinishDate = ((DateTime)curPlot.StartDate).AddSeconds(curPlot.TotalSeconds);
                         break;
