@@ -191,7 +191,7 @@ namespace ChiaPlotStatus
         public static Regex phase3Table = new Regex("^Compressing tables (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex tmpFolders = new Regex("^Starting plotting progress into temporary dirs: (.*) and (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex writePloblemRg = new Regex("^Only wrote \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        public static Regex couldNotOpenFile = new Regex("^Could not open .*: No such file or directory\\. Retrying in one minute\\.", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex couldNotOpenFile = new Regex("^Could not open", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex readPloblemRg = new Regex("^Only read \\d+ of \\d+ bytes at", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex copyPloblemRg = new Regex("^Could not copy ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex approximateWorkingSpace = new Regex("^Approximate working space used \\(without final file\\): (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
