@@ -159,23 +159,20 @@ Tooltips:
         The plotter retries every 5 minutes, so it continues once you fixed the error.
 
 
-        "⚠ Slow 25m/15m": Usually not serious, just have an eye on it.
-        It means last update to the logfile was 15 minutes ago, but Chia Plot Status expected a new log line
+        "⚠ Slow 20m/15m": Usually not serious, just have an eye on it.
+        It means last update to the logfile was 20 minutes ago, but Chia Plot Status expected a new log line
         within 15 minutes.
         Process is likely still running.
         Maybe you gave your temp drives more IO than they can handle this time?
         If you only have finished plots that ran on SSDs and this one is on a HDD now, it is expected to be
         slower and throw that warning.
         Chia Plot Status will learn that this drive is slower once this plot is done.
-        Another case can be phase 4. Currently the plotter does not log anything for as long as it copies
-        the plot to the destination.
 
 
         "⚠ Dead? 40m/10m": This is scary. It means last update to the logFile was way too long ago.
-        Process might be still running! Especially in phase 4 when it does not log anything while copying the
-        plot to its destination. This needs to be fixed in Chia.
+        Process might be still running!
         If your system is not really slow/overtaxed at the moment the process could be dead (check to be sure).
-        Chia Plot Status considers it dead until it logs something again.
+        Chia Plot Status considers it possibly dead until it logs something again.
 
 
         "✗ Dead (m)": You manually marked this process as dead.
