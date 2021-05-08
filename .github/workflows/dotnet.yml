@@ -7,8 +7,17 @@ on:
     branches: [ main ]
 
 jobs:
-  build-on-windows:
-    runs-on: windows-latest
+  build:
+    strategy:
+      matrix:
+        job:
+        - platform: linux-latest
+          dotnetplatform: linux-x64
+        - platform: windows-latest
+          dotnetplatform: win-x64
+        - platform: macos-latest
+          dotnetplatform: osx-x64
+    runs-on: ${{ matrix.job.platform }}
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -26,58 +35,8 @@ jobs:
     #- name: tree
     #  run: tree
     - name: Publish
-      run: dotnet publish --self-contained -r win-x64 -c release -o publish -p:PublishSingleFile=true
+      run: dotnet publish --self-contained -r ${{ matrix.job.dotnetplatform }} -c release -o ..\output\darwin_x64 -p:PublishSingleFile=true
     - uses: actions/upload-artifact@v2
       with:
-        name: binaries-windows
-        path: bin/Release/net5.0
-
-  build-on-linux:
-    runs-on: linux-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
-    #- name: Show Working Directory # does not work on windows as we are not in a powershell
-    #  run: ls -lah
-    - name: Restore dependencies
-      run: dotnet restore --configfile NuGet.Config ChiaPlotStatus.sln
-    - name: Build
-      run: dotnet build --no-restore --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
-    - name: Test
-      run: dotnet test --no-build --verbosity normal --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
-    #- name: tree
-    #  run: tree
-    - name: Publish
-      run: dotnet publish --self-contained -r linux-x64 -c release -o publish -p:PublishSingleFile=true
-    - uses: actions/upload-artifact@v2
-      with:
-        name: binaries-linux
-        path: bin/Release/net5.0
-
-  build-on-mac:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
-    #- name: Show Working Directory # does not work on windows as we are not in a powershell
-    #  run: ls -lah
-    - name: Restore dependencies
-      run: dotnet restore --configfile NuGet.Config ChiaPlotStatus.sln
-    - name: Build
-      run: dotnet build --no-restore --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
-    - name: Test
-      run: dotnet test --no-build --verbosity normal --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
-    #- name: tree
-    #  run: tree
-    - name: Publish
-      run: dotnet publish --self-contained -r osx-x64 -c release -o publish -p:PublishSingleFile=true
-    - uses: actions/upload-artifact@v2
-      with:
-        name: binaries-macos
+        name: binaries-${{ matrix.job.platform }}
         path: bin/Release/net5.0
