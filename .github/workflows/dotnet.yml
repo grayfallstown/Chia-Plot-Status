@@ -29,7 +29,7 @@ jobs:
       run: dotnet publish --self-contained -r win-x64 -c release -o publish -p:PublishSingleFile=true
     - uses: actions/upload-artifact@v2
       with:
-        name: binaries-${{ matrix.platform }}
+        name: binaries-windows
         path: bin/Release/net5.0
 
   build-on-linux:
@@ -54,7 +54,7 @@ jobs:
       run: dotnet publish --self-contained -r linux-x64 -c release -o publish -p:PublishSingleFile=true
     - uses: actions/upload-artifact@v2
       with:
-        name: binaries-${{ matrix.platform }}
+        name: binaries-linux
         path: bin/Release/net5.0
 
   build-on-mac:
@@ -79,5 +79,5 @@ jobs:
       run: dotnet publish --self-contained -r osx-x64 -c release -o publish -p:PublishSingleFile=true
     - uses: actions/upload-artifact@v2
       with:
-        name: binaries-${{ matrix.platform }}
+        name: binaries-macos
         path: bin/Release/net5.0
