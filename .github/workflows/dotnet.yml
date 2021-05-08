@@ -10,14 +10,8 @@ jobs:
   build:
     strategy:
       matrix:
-        job:
-        - platform: linux-latest
-          dotnetplatform: linux-x64
-        - platform: windows-latest
-          dotnetplatform: win-x64
-        - platform: macos-latest
-          dotnetplatform: osx-x64
-    runs-on: ${{ matrix.job.platform }}
+        platform: [linux-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.platform }}
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -34,9 +28,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
     #- name: tree
     #  run: tree
-    - name: Publish
-      run: dotnet publish --self-contained -r ${{ matrix.job.dotnetplatform }} -c release -o ..\output\darwin_x64 -p:PublishSingleFile=true
     - uses: actions/upload-artifact@v2
       with:
-        name: binaries-${{ matrix.job.platform }}
+        name: binaries-${{ matrix.platform }}
         path: bin/Release/net5.0
