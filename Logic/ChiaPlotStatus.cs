@@ -119,7 +119,7 @@ namespace ChiaPlotStatus
             List<(PlotLog, PlotLogReadable)> filterResults = new();
             foreach (var tuple in searchResults)
             {
-                if (filter.HideFinished && tuple.Item1.CurrentPhase == 5)
+                if (filter.HideFinished && tuple.Item1.CurrentPhase == 6)
                     continue;
                 switch (tuple.Item1.Health)
                 {
