@@ -28,7 +28,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
     #- name: tree
     #  run: tree
-    - uses: actions/upload-artifact@v2
-      with:
-        name: binaries-${{ matrix.platform }}
-        path: bin/Release/net5.0
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: binaries-${{ matrix.platform }}
+#        path: bin/Release/net5.0
