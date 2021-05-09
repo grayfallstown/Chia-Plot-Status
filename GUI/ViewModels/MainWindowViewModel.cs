@@ -1,4 +1,4 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Threading;
@@ -18,14 +18,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ChiaPlotStatus.Logic.Models;
 using Avalonia;
+using System.Runtime.InteropServices;
 
 namespace ChiaPlotStatus.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
         public ChiaPlotStatus PlotManager { get; internal set; }
-
-        // private readonly INotificationManager _notificationManager { get; private set; };
 
         public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
         public List<(PlotLog, PlotLogReadable)> PlotLogTuples { get; set; } = new();
@@ -135,6 +134,7 @@ namespace ChiaPlotStatus.ViewModels
                 PlotLogs.Add(plotLog.Item2);
                 PlotLogTuples.Add(plotLog);
             }
+            HandleNotification(PlotLogTuples[0].Item1);
         }
 
         public void InitializeButtons()
@@ -365,33 +365,6 @@ namespace ChiaPlotStatus.ViewModels
                     .Subscribe((x) => LoadPlotLogs());
             }
         }
-
-        /*
-        public void InitializeNotifications()
-        {
-            _notificationManager = AvaloniaLocator.Current.GetService<INotificationManager>();
-        }
-
-        public void HandleNotification(PlotLogReadable plotLog)
-        {
-            try
-            {
-                _notificationManager.ShowNotification(new Notification
-                {
-                    Title = "Plot finished",
-                    Body = "PlotName: " + plotLog.PlotName + "\n" +
-                            "LogFolder: " + plotLog.LogFolder + "\n"+
-                            "Tmp1: " + plotLog.Tmp1Drive + "\n" +
-                            "Tmp2: " + plotLog.Tmp2Drive + "\n" +
-                            "Dest: " + plotLog.DestDrive + "\n" +
-                            "TotalTime: " + plotLog.TotalSeconds + "\n"
-                });
-            } catch (Exception e)
-            {
-                Debug.WriteLine("NotificationManager.ShowNotification failed. MacOS?", e);
-            }
-        }
-        */
 
     }
 }

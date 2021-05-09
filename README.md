@@ -1,13 +1,13 @@
 <p align="center">
-  <img width="200" alt="Chia Plot Status Log" src="./Icon%20-%20Color%20changed.svg">
+  <img width="200" alt="Chia Plot Status Log" src="./Logo/Icon%20-%20Color%20changed.svg">
 </p>
 
 # [Chia](https://www.chia.net/) Plot Status
 
 Tool to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion
 
-![Screenshot](./Screenshot.jpg)
-![Screenshot](./Screenshot-Dark.jpg)
+![Screenshot](./Screenshots/Screenshot.jpg)
+![Screenshot](./Screenshots/Screenshot-Dark.jpg)
 
 ## Features
 
@@ -63,4 +63,4 @@ Chia-Plot-Status can now be found at `.\bin\Release\net5.0\ChiaPlotStatus.exe` (
 
 ## Thanks to
 
-[charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Icon%20-%20Readme.txt)
+[charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
