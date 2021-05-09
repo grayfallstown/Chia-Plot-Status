@@ -134,7 +134,6 @@ namespace ChiaPlotStatus.ViewModels
                 PlotLogs.Add(plotLog.Item2);
                 PlotLogTuples.Add(plotLog);
             }
-            HandleNotification(PlotLogTuples[0].Item1);
         }
 
         public void InitializeButtons()

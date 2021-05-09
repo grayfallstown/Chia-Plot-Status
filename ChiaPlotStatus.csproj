@@ -22,7 +22,6 @@
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.3" />
     <PackageReference Include="CsvHelper" Version="27.0.2" />
-    <PackageReference Include="GridExtra.Avalonia" Version="0.9.1" />
     <PackageReference Include="Octokit" Version="0.50.0" />
     <PackageReference Include="YamlDotNet" Version="11.1.3-nullable-enums-0003" />
   </ItemGroup>
