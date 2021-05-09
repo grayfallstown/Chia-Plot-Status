@@ -104,7 +104,20 @@ namespace ChiaPlotStatus
             }
             if (CurrentPhase <= 5)
             {
-                this.TimeRemaining += stats.CopyTimeAvgTimeNeed;
+                float factor = 1;
+                if (CurrentPhase == 5)
+                {
+                    DateTime copyStart = ((DateTime)this.StartDate)
+                        .AddSeconds(this.Phase1Seconds)
+                        .AddSeconds(this.Phase2Seconds)
+                        .AddSeconds(this.Phase3Seconds)
+                        .AddSeconds(this.Phase4Seconds);
+                    int elapsed = (int)(DateTime.Now - copyStart).TotalSeconds;
+                    factor = (float)1 - (float)((float)elapsed / stats.CopyTimeAvgTimeNeed);
+                    if (factor < 0.0001f)
+                        factor = 0.001f;
+                }
+                this.TimeRemaining += (int)(factor * (float)stats.CopyTimeAvgTimeNeed);
             }
             if (CurrentPhase <= 4)
             {
