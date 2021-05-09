@@ -114,8 +114,8 @@ namespace ChiaPlotStatus
                         .AddSeconds(this.Phase4Seconds);
                     int elapsed = (int)(DateTime.Now - copyStart).TotalSeconds;
                     factor = (float)1 - (float)((float)elapsed / stats.CopyTimeAvgTimeNeed);
-                    if (factor < 0.0001f)
-                        factor = 0.001f;
+                    if (factor < 0.01f)
+                        factor = 0.01f;
                 }
                 this.TimeRemaining += (int)(factor * (float)stats.CopyTimeAvgTimeNeed);
             }
@@ -195,6 +195,7 @@ namespace ChiaPlotStatus
                     Health = Healthy.Instance;
                     return;
             }
+            lastModifiedAtWarningThreashold = (int)((float)lastModifiedAtWarningThreashold * 1.2f);
             if (lastModifiedAtWarningThreashold < 10)
                 lastModifiedAtWarningThreashold = 10;
             lastModifiedAtErrorThreashold = lastModifiedAtWarningThreashold * 4;
