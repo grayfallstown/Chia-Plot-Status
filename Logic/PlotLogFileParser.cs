@@ -76,6 +76,7 @@ namespace ChiaPlotStatus
                     case var _ when phase3Rg.IsMatch(line):
                         CurrentPlotLog().Phase3Seconds = int.Parse(phase3Rg.Matches(line)[0].Groups[1].Value);
                         CurrentPlotLog().CurrentBucket = 0;
+                        CurrentPlotLog().CurrentPhase = 4;
                         break;
                     case var _ when phase3Table.IsMatch(line):
                         CurrentPlotLog().Phase3Table = int.Parse(phase3Table.Matches(line)[0].Groups[1].Value);
@@ -85,7 +86,7 @@ namespace ChiaPlotStatus
                     case var _ when phase4Rg.IsMatch(line):
                         CurrentPlotLog().Phase4Seconds = int.Parse(phase4Rg.Matches(line)[0].Groups[1].Value);
                         CurrentPlotLog().CurrentBucket = 0;
-                        CurrentPlotLog().CurrentPhase = 4;
+                        CurrentPlotLog().CurrentPhase = 5;
                         break;
                     case var _ when copyTime.IsMatch(line):
                         CurrentPlotLog().CopyTimeSeconds = int.Parse(copyTime.Matches(line)[0].Groups[1].Value);
