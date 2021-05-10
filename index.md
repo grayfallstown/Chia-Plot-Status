@@ -29,7 +29,20 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 Windows: [Download latest version busy-plotter](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.6-beta11/Setup.exe)
 
-Mac and Linux support coming soon.
+You will get a blue warning saying this was published by an unknown developer.
+
+For Mac and Linux you currently have to [build it yourself](#Build-it-yourself) for now.
+
+
+## Getting Log Files from PowerShell
+
+```
+$BUCKETS=128
+$THREADS=4
+...
+
+chia.exe plots create --tmp_dir "$TEMP1" --tmp2_dir "$TEMP2" --final_dir "$FINAL" --size 32 --buffer $BUFFER --num_threads $THREADS --buckets $BUCKETS --alt_fingerprint $FINGERPRINT --pool_public_key $PUBKEY | Tee-Object -FilePath "C:\Users\$USERNAME\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log"
+```
 
 ## Working with many distributed plotting rigs
 
@@ -42,6 +55,30 @@ Best Practice:
 ## Open Source
 
 MIT opensource licence, free to keep or change.
+
+
+## Build it yourself
+
+Download and install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0) and [git](https://git-scm.com/).
+
+Clone this repo:
+
+`git clone https://github.com/grayfallstown/Chia-Plot-Status.git`
+
+Build it:
+
+`cd Chia-Plot-Status`
+
+`dotnet build --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"`
+
+Chia-Plot-Status can now be found at 
+
+windows: `.\bin\Release\net5.0\ChiaPlotStatus.exe` 
+
+linux: `./bin/Release/net5.0/ChiaPlotStatus`
+
+alternatively try `dotnet run --build`.
+
 
 ## Thanks to
 
