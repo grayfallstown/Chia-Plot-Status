@@ -33,6 +33,18 @@ You will get a blue warning saying this was published by an unknown developer.
 
 For Mac and Linux you currently have to [build it yourself](#Build-it-yourself) for now.
 
+## Getting Log Files from PowerShell
+
+```
+$BUCKETS=128
+$THREADS=4
+...
+
+chia.exe plots create --tmp_dir "$TEMP1" --tmp2_dir "$TEMP2" --final_dir "$FINAL" --size 32 --buffer $BUFFER --num_threads $THREADS --buckets $BUCKETS --alt_fingerprint $FINGERPRINT --pool_public_key $PUBKEY | Tee-Object -FilePath "C:\Users\$USERNAME\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log"
+```
+
+The last part with Tee-Object writes the log to the PowerShell and to a file with a unique name for each plotting process.
+
 ## Working with many distributed plotting rigs
 
 Either mount the log folders of all rigs as network shares or collect them by your favorite means like Google Drive or something similar (Chia Plot Status does not talk to any cloud services for you, you have to install those apps and mount your log folders in them yourself if you want to use them)
