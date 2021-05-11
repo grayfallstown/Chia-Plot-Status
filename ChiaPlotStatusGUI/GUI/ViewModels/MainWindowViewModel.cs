@@ -64,6 +64,7 @@ namespace ChiaPlotStatus.ViewModels
             InitializeThemeSwitcher();
             InitializeRefreshInterval();
             InitializeFilterUpdates();
+            SetGridHeight();
         }
 
         private void InitializeThemeSwitcher()
@@ -112,7 +113,7 @@ namespace ChiaPlotStatus.ViewModels
                 {
                     var dataGrid = MainWindow.Instance.Find<DataGrid>("LogDataGrid");
                     if (dataGrid != null)
-                        dataGrid.Height = x - 135;
+                        dataGrid.Height = x - 145;
                 });
         }
 
@@ -328,8 +329,11 @@ namespace ChiaPlotStatus.ViewModels
 
         public void SetGridHeight()
         {
-            double height = MainWindow.Instance.Height - 600;
-            MainWindow.Instance.Find<DataGrid>("PlotLogGrid").Height = height;
+            if (MainWindow.Instance.Find<DataGrid>("PlotLogGrid") != null)
+            {
+                double height = MainWindow.Instance.Height - 600;
+                MainWindow.Instance.Find<DataGrid>("PlotLogGrid").Height = height;
+            }
         }
 
 

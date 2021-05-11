@@ -22,6 +22,8 @@ namespace ChiaPlotStatus
         private List<PlotLog> PlotLogs { get; } = new List<PlotLog>();
         public string LogFile;
         public string LogFolder;
+        public bool firstRead = true;
+        public bool lineRead = true;
 
         public PlotLogFileParser(string path)
         {
@@ -131,6 +133,7 @@ namespace ChiaPlotStatus
                 cPlotLog.LogFile = this.LogFile;
                 cPlotLog.LogFolder = this.LogFolder;
                 cPlotLog.UpdateProgress();
+                lineRead = true;
             });
         }
 
@@ -139,8 +142,14 @@ namespace ChiaPlotStatus
          */
         public List<PlotLog> ParsePlotLog()
         {
+            lineRead = false;
             this.TailLineEmitter.ReadMore();
             CurrentPlotLog().FileLastWritten = File.GetLastWriteTime(this.LogFile);
+            if (lineRead && !firstRead)
+                CurrentPlotLog().FileLastWritten = DateTime.Now;
+            else if (CurrentPlotLog().FileLastWritten != null && CurrentPlotLog().FileLastWritten < File.GetLastWriteTime(this.LogFile))
+                CurrentPlotLog().FileLastWritten = File.GetLastWriteTime(this.LogFile);
+            firstRead = false;
             return PlotLogs;
         }
 
