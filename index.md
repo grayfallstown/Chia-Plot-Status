@@ -27,7 +27,7 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 ## Installation / Download
 
-Windows: [Download latest version smart-farmer](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.7/Setup.exe)
+Windows: [Download latest version smart-farmer](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.7-beta2/Setup.exe)
 
 You will get a blue warning saying this was published by an unknown developer.
 
