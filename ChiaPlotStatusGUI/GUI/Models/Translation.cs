@@ -19,7 +19,7 @@ namespace ChiaPlotStatus.GUI.Models
             var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
             foreach (var lang2 in new string[] { "en" })
             {
-                System.IO.Stream filestream = assets.Open(new Uri("avares://ChiaPlotStatus/Assets/" + lang2 + ".yaml"));
+                System.IO.Stream filestream = assets.Open(new Uri("avares://ChiaPlotStatus/GUI/Assets/" + lang2 + ".yaml"));
                 StreamReader reader = new StreamReader(filestream);
                 string yaml = reader.ReadToEnd();
                 var lang = deserializer.Deserialize<Language>(yaml);

@@ -92,10 +92,8 @@ namespace ChiaPlotStatus.Views
             var path = plotLogReadable.LogFolder + Path.DirectorySeparatorChar + plotLogReadable.LogFile;
 
             OpenFile(path);
-            /*
-            var dialog = new LogViewerWindow(path);
-            dialog.Show();
-            */
+            // var dialog = new LogViewerWindow(path);
+            // dialog.Show();
         }
 
         private void OpenFile(string url)

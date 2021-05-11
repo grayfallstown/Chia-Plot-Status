@@ -195,9 +195,9 @@ namespace ChiaPlotStatus
                     Health = Healthy.Instance;
                     return;
             }
-            lastModifiedAtWarningThreashold = (int)((float)lastModifiedAtWarningThreashold * 1.2f);
             if (lastModifiedAtWarningThreashold < 10)
                 lastModifiedAtWarningThreashold = 10;
+            lastModifiedAtWarningThreashold = (int)((float)lastModifiedAtWarningThreashold * 1.2f);
             lastModifiedAtErrorThreashold = lastModifiedAtWarningThreashold * 4;
             // Debug.WriteLine("lastModifiedAtWarningThreashold: " + lastModifiedAtWarningThreashold);
             // Debug.WriteLine("lastModifiedAtErrorThreashold: " + lastModifiedAtErrorThreashold);

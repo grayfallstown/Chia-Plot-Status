@@ -1,29 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>grayfallstown.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <ApplicationIcon>Icon - Color changed.ico</ApplicationIcon>
+    <ApplicationIcon></ApplicationIcon>
+    <StartupObject></StartupObject>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>grayfallstown</Authors>
+    <Company>none</Company>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="ChiaPlotStatusGUI\GUI\Assets\**" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\en - Kopieren.yaml" />
     <None Remove="Assets\en.yaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.3" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.10.3" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.3" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.3" />
-    <PackageReference Include="CsvHelper" Version="27.0.2" />
-    <PackageReference Include="Octokit" Version="0.50.0" />
-    <PackageReference Include="YamlDotNet" Version="11.1.3-nullable-enums-0003" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Update="Assets\en - Kopieren.yaml">
@@ -31,9 +28,6 @@
     </AvaloniaResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="GUI\Views\MainWindow - Kopieren.axaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

@@ -70,7 +70,7 @@ namespace ChiaPlotStatus.Views
         {
             var deserializer = new DeserializerBuilder().Build();
             var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-            System.IO.Stream filestream = assets.Open(new Uri("avares://ChiaPlotStatus/Assets/version.yaml"));
+            System.IO.Stream filestream = assets.Open(new Uri("avares://ChiaPlotStatus/GUI/Assets/version.yaml"));
             StreamReader reader = new StreamReader(filestream);
             string yaml = reader.ReadToEnd();
             var versionFile = deserializer.Deserialize<VersionFile>(yaml);

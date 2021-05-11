@@ -364,6 +364,5 @@ namespace ChiaPlotStatus.ViewModels
                     .Subscribe((x) => LoadPlotLogs());
             }
         }
-
     }
 }

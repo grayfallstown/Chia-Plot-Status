@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
         x:Class="ChiaPlotStatus.Views.MainWindow"
-        Icon="/Assets/Logo.png"
+        Icon="/GUI/Assets/Logo.png"
         TransparencyLevelHint="Transparent"
         ExtendClientAreaToDecorationsHint="False"
         Title="Chia Plot Status">
@@ -159,7 +159,7 @@
         </Menu>
       </DockPanel>
 			<StackPanel Orientation="Horizontal">
-				<Image Source="/Assets/Logo.png" Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
+				<Image Source="/GUI/Assets/Logo.png" Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
 				<StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
 					<DataGrid Name="FolderGrid" Height="100" MaxHeight="100" Items="{Binding PlotManager.Settings.LogDirectories}" Classes="folders">
 						<DataGrid.Columns>

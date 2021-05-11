@@ -15,16 +15,16 @@ namespace ChiaPlotStatus
     public class PlottingStatistics
     {
         // in seconds
-        public int Phase1AvgTimeNeed { get; }
-        public int Phase1Completed { get; }
-        public int Phase2AvgTimeNeed { get; }
-        public int Phase2Completed { get; }
-        public int Phase3AvgTimeNeed { get; }
-        public int Phase3Completed { get; }
-        public int Phase4AvgTimeNeed { get; }
-        public int Phase4Completed { get; }
-        public int CopyTimeAvgTimeNeed { get; }
-        public int CopyTimeCompleted { get; }
+        public int Phase1AvgTimeNeed { get; set; }
+        public int Phase1Completed { get; set; }
+        public int Phase2AvgTimeNeed { get; set; }
+        public int Phase2Completed { get; set; }
+        public int Phase3AvgTimeNeed { get; set; }
+        public int Phase3Completed { get; set; }
+        public int Phase4AvgTimeNeed { get; set; }
+        public int Phase4Completed { get; set; }
+        public int CopyTimeAvgTimeNeed { get; set; }
+        public int CopyTimeCompleted { get; set; }
 
         public PlottingStatistics(List<PlotLog> plotLogs)
         {

@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
         x:Class="ChiaPlotStatus.Views.LogViewerWindow"
-        Icon="/Assets/Logo.png"
+        Icon="/GUI/Assets/Logo.png"
         TransparencyLevelHint="Transparent"
         ExtendClientAreaToDecorationsHint="False"
         Title="Log Viewer">
@@ -30,18 +30,19 @@
 	</Window.Styles>
 
   <Panel Name="WindowContext">
-		<StackPanel>
+    <StackPanel>
       <Panel>
-			  <ExperimentalAcrylicBorder IsHitTestVisible="False">
-				  <ExperimentalAcrylicBorder.Material>
-					  <ExperimentalAcrylicMaterial
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+          <ExperimentalAcrylicBorder.Material>
+            <ExperimentalAcrylicMaterial
 						  BackgroundSource="Digger"
 						  TintColor="Black"
 						  TintOpacity="0.2"
 						  MaterialOpacity="0.25" />
-				  </ExperimentalAcrylicBorder.Material>
-			  </ExperimentalAcrylicBorder>
-		  </Panel>
+          </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+      </Panel>
+
 
       <StackPanel Orientation="Horizontal">
         <TextBlock Text="Log file: " FontWeight="Bold"></TextBlock>
@@ -49,11 +50,30 @@
       </StackPanel>
 
       <TextBlock Text="" Margin="5"></TextBlock>
-
       <ScrollViewer Name="Log" Height="650">
-        <StackPanel Name="LogLines" Classes="LogLines" Orientation="Vertical">
-            <!-- Log added here via code-->
-        </StackPanel>
+        <ItemsRepeater Items="{Binding Lines}">
+          <ItemsRepeater.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Classes="Line" Orientation="Horizontal">
+                <ItemsRepeater Items="{Binding}">
+                  <ItemsRepeater.ItemTemplate>
+                    <DataTemplate>
+                      <!-- Binding to Classes directly not supported, Classes.MyClass="{Binding IsMyClassEnabled}" is -->
+                      <TextBlock Text="{Binding Text}"
+                                  Classes.Level0="{Binding Level0}"
+                                  Classes.Level1="{Binding Level1}"
+                                  Classes.Level2="{Binding Level2}"
+                                  Classes.Level3="{Binding Level3}"
+                                  Classes.Level4="{Binding Level4}"
+                                  Classes.Level5="{Binding Level5}"
+                    ></TextBlock>
+                    </DataTemplate>
+                  </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+              </StackPanel>
+            </DataTemplate>
+          </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
       </ScrollViewer>
     </StackPanel>
 	</Panel>

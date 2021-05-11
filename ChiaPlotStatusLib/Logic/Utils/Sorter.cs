@@ -34,9 +34,6 @@ namespace ChiaPlotStatus.Logic.Utils
                 property = propertyB;
                 sortOverLeftTupleItem = false;
             }
-            // property not found, sort by first property on A whatever it is
-            if (property == null)
-                property = propertiesA[0];
             items.Sort((a, b) =>
             {
                 int sortIndex = 0;
@@ -44,11 +41,17 @@ namespace ChiaPlotStatus.Logic.Utils
                 object? valueB = null;
                 if (sortOverLeftTupleItem)
                 {
+                    // property not found, sort by first property on A whatever it is
+                    if (property == null)
+                        property = propertiesA[0];
                     valueA = property.GetValue(a.Item1);
                     valueB = property.GetValue(b.Item1);
                 }
                 else
                 {
+                    // property not found, sort by first property on A whatever it is
+                    if (property == null)
+                        property = propertiesB[0];
                     valueA = property.GetValue(a.Item2);
                     valueB = property.GetValue(b.Item2);
                 }

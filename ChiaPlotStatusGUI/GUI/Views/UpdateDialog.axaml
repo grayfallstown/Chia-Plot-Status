@@ -2,13 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
-        Width="400" Height="100"
-        x:Class="ChiaPlotStatus.Views.MarkOfDeathDialog"
-        Icon="/Assets/Logo.png"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="100"
+        Width="500" Height="100"
+        x:Class="ChiaPlotStatus.Views.UpdateDialog"
+        Icon="/GUI/Assets/Logo.png"
         TransparencyLevelHint="Transparent"
         ExtendClientAreaToDecorationsHint="False"
-        Title="Mark this Plotting Process as Dead?">
+        Title="Checking for updates">
 
   <!--
 	<Window.DataContext>
@@ -16,10 +16,10 @@
 	</Window.DataContext>
   -->
 	<Window.Styles>
-    <Style Selector="Button">
-      <Setter Property="Margin" Value="4" />
+    <Style Selector="TextBlock">
+      <Setter Property="Margin" Value="3" />
     </Style>
-	</Window.Styles>
+  </Window.Styles>
 
   <Panel Name="WindowContext">
 		<StackPanel Margin="20">
@@ -35,20 +35,19 @@
 			  </ExperimentalAcrylicBorder>
 		  </Panel>
 
-      <TextBlock Text="Mark this Plotting Process as Dead?"></TextBlock>
-      <TextBlock Text=" "></TextBlock>
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="Latest Release:" FontWeight="Bold"></TextBlock>
+        <TextBlock Text="{Binding Latest.TagName}"></TextBlock>
+      </StackPanel>
 
       <StackPanel Orientation="Horizontal">
-        <Button Name="MarkAsDead" Click="MarkAsDead">
-          <TextBlock Text="{Binding Language.Buttons.MarkAsDead }"></TextBlock>
-        </Button>
-        <Button Name="UnmarkAsDead" Click="UnmarkAsDead">
-          <TextBlock Text="{Binding Language.Buttons.UnmarkAsDead }"></TextBlock>
-        </Button>
-        <Button Name="Abort" Click="Abort">
-          <TextBlock Text="{Binding Language.Buttons.Abort }"></TextBlock>
-        </Button>
+        <TextBlock Text="Currently installed:" FontWeight="Bold"></TextBlock>
+        <TextBlock Text="{Binding Current}"></TextBlock>
       </StackPanel>
+
+
+      <TextBlock Text="You are up to date!" Name="UpToDate"></TextBlock>
+      <Button Content="Download Update" Name="DownloadUpdate" Click="DownloadUpdate" />
     </StackPanel>
 	</Panel>
 </Window>

@@ -5,7 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="200"
         Width="500" Height="200"
         x:Class="ChiaPlotStatus.Views.DonationDialog"
-        Icon="/Assets/Logo.png"
+        Icon="/GUI/Assets/Logo.png"
         TransparencyLevelHint="Transparent"
         ExtendClientAreaToDecorationsHint="False"
         Title="Donation to the Chia Plot Status developer">

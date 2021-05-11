@@ -6,8 +6,11 @@ using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Threading;
+using ChiaPlotStatus.GUI.Models;
 using ReactiveUI;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -20,6 +23,7 @@ namespace ChiaPlotStatus.Views
     {
         public static LogViewerWindow? Instance { get; private set; }
         public TailLineEmitter TailLineEmitter { get; private set; }
+        public ObservableCollection<List<HighlightedText>> Lines { get; private set; } = new();
         public DispatcherTimer Timer { get; private set; }
         public string Path{ get; private set; }
 
@@ -34,11 +38,11 @@ namespace ChiaPlotStatus.Views
             this.Path = path;
             Instance = this;
             DataContext = this;
+            InitializeTailLineEmitter();
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-            InitializeTailLineEmitter();
             InitializeResizer();
             InitializeRefresh();
             this.Focus();
@@ -54,19 +58,11 @@ namespace ChiaPlotStatus.Views
         {
             this.TailLineEmitter = new TailLineEmitter(this.Path, (line) =>
             {
-                StackPanel lineStackPanel = new StackPanel
-                {
-                    Classes = { "Line" },
-                    Orientation = Orientation.Horizontal
-                };
+                List<HighlightedText> textline = new();
 
                 void highlight(int level, string text)
                 {
-                    lineStackPanel.Children.Add(new TextBlock
-                    {
-                        Classes = { "Level" + level },
-                        Text = text
-                    });
+                    textline.Add(new HighlightedText(text, level));
                 }
 
                 MatchCollection matches;
@@ -230,8 +226,9 @@ namespace ChiaPlotStatus.Views
                     highlight(0, line);
                 }
 
-                LogLines.Children.Add(lineStackPanel);
+                Lines.Add(textline);
             });
+
             TailLineEmitter.ReadMore();
         }
 
@@ -261,8 +258,6 @@ namespace ChiaPlotStatus.Views
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            // TODO: cleanup hangs the application
-            LogLines.Children.Clear();
             Timer.Stop();
             base.OnClosing(e);
         }

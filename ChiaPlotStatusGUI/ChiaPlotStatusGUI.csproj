@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <StartupObject>ChiaPlotStatus.Program</StartupObject>
+    <AssemblyName>ChiaPlotStatus</AssemblyName>
+    <PackageId>ChiaPlotStatusGUI</PackageId>
+    <Company>none</Company>
+    <Authors>grayfallstown</Authors>
+    <ApplicationIcon>Icon - Color changed.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="GUI\Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.3" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.10.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.3" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.3" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChiaPlotStatusLib\ChiaPlotStatusLib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="GUI\App.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="GUI\Views\DonationDialog.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="GUI\Views\LogViewerWindow.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="GUI\Views\MainWindow.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="GUI\Views\MarkOfDeathDialog.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="GUI\Views\UpdateDialog.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

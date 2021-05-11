@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatus", "ChiaPlotStatus.csproj", "{17E4A93C-4D85-41EF-8591-672EB7C36CB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusCli", "ChiaPlotStatusCli\ChiaPlotStatusCli.csproj", "{677D6D3F-3693-4EA7-9FE0-AE64167BE82E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusGUI", "ChiaPlotStatusGUI\ChiaPlotStatusGUI.csproj", "{38F6EA6C-7E72-439B-B548-AFB5591DCEE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChiaPlotStatusLib", "ChiaPlotStatusLib\ChiaPlotStatusLib.csproj", "{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{17E4A93C-4D85-41EF-8591-672EB7C36CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17E4A93C-4D85-41EF-8591-672EB7C36CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17E4A93C-4D85-41EF-8591-672EB7C36CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17E4A93C-4D85-41EF-8591-672EB7C36CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{677D6D3F-3693-4EA7-9FE0-AE64167BE82E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{677D6D3F-3693-4EA7-9FE0-AE64167BE82E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{677D6D3F-3693-4EA7-9FE0-AE64167BE82E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{677D6D3F-3693-4EA7-9FE0-AE64167BE82E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38F6EA6C-7E72-439B-B548-AFB5591DCEE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F6EA6C-7E72-439B-B548-AFB5591DCEE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F6EA6C-7E72-439B-B548-AFB5591DCEE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F6EA6C-7E72-439B-B548-AFB5591DCEE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

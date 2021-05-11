@@ -1,7 +1,15 @@
 .vs
 ChiaPlotStatus.csproj.user
 obj
-bin
+ChiaPlotStatusLib/obj
+ChiaPlotStatusLib/bin
+ChiaPlotStatusLib/.vs
+ChiaPlotStatusGUI/obj
+ChiaPlotStatusGUI/bin
+ChiaPlotStatusGUI/.vs
+ChiaPlotStatusCli/obj
+ChiaPlotStatusCli/bin
+ChiaPlotStatusCli/.vs
 release
 Notes.txt
 website
