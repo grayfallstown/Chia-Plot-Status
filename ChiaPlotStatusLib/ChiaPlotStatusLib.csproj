@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Company>grayfallstown</Company>
+    <Authors>grayfallstown</Authors>
+    <Product>ChiaPlotStatusLib</Product>
   </PropertyGroup>
 
   <ItemGroup>

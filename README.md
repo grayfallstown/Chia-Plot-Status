@@ -28,7 +28,7 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 ## Installation / Download
 
-Windows: [Download latest version busy-plotter](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.6-beta11/Setup.exe)
+Windows: [Download latest version smart-farmer](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.7/Setup.exe)
 You will get a blue warning saying this was published by an unknown developer.
 
 For Mac and Linux you currently have to [build it yourself](#Build-it-yourself) for now.
@@ -53,6 +53,47 @@ Best Practice:
 - Each plotting rig should have its own log folder, so they don't mix and mess up estimates and warning thresholds for each other.
 - Always log locally. If you log directly to a network share / NAS your plotting can crash if the connection becomes flaky. Prefer connecting your host machine to networkshares on the plotters, not the other way around or use your own cloud solutions which offer local folders (should be pretty much all of them).
 
+
+## Custom tools / Home automation
+
+You can export plot logs to json, yaml or csv both via the gui on the console or for automation:
+
+```
+"C:\Program Files (x86)\ChiaPlotStatus\ChiaPlotStatus\ChiaPlotStatusCli.exe" --help
+Copyright (C) 2021 grayfallstown
+
+  -o, --outfile            Required. The file to write to
+
+  -f, --format             Required. The format to use while writing the file. Valid values are json, yaml and csv
+
+  -l, --log-folders        The folders where logs can be found, comma separated. Uses default folder when empty
+
+  -s, --sort-property      The property you want the plotlogs sorted by
+
+  -a, --sort-asc           Sort ascending
+
+  --search                 Filter plotlogs by this search terms. You filter for your temp1 folder for example.
+
+  --hide-finished          Hide finished plots
+
+  --hide-possibly-dead     Hide possibly dead plots
+
+  --hide-confirmed-dead    Hide confirmed dead plots
+
+  --hide-healthy           Hide healthy plots
+
+  --keep-updating          Keep updating the file every 10 seconds
+
+  --help                   Display this help screen.
+
+
+
+"C:\Program Files (x86)\ChiaPlotStatus\ChiaPlotStatus\ChiaPlotStatusCli.exe" -o test.json -f json
+Sorting by Progress
+File 'test.json' written
+```
+
+
 ## Open Source
 
 MIT opensource licence, free to keep or change.
@@ -61,7 +102,7 @@ MIT opensource licence, free to keep or change.
 
 Download and install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0) and [git](https://git-scm.com/).
 
-Clone this repo:
+On the console, clone/download this repository:
 
 `git clone https://github.com/grayfallstown/Chia-Plot-Status.git`
 
@@ -73,9 +114,9 @@ Build it:
 
 Chia-Plot-Status can now be found at 
 
-windows: `.\bin\Release\net5.0\ChiaPlotStatus.exe` 
+windows: `.\ChiaPlotStatusGUI\bin\Release\net5.0\ChiaPlotStatus.exe` 
 
-linux: `./bin/Release/net5.0/ChiaPlotStatus`
+linux: `./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus`
 
 alternatively try `dotnet run --build`.
 

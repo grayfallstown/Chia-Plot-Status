@@ -6,7 +6,7 @@
     <StartupObject>ChiaPlotStatus.Program</StartupObject>
     <AssemblyName>ChiaPlotStatus</AssemblyName>
     <PackageId>ChiaPlotStatusGUI</PackageId>
-    <Company>none</Company>
+    <Company>grayfallstown</Company>
     <Authors>grayfallstown</Authors>
     <ApplicationIcon>Icon - Color changed.ico</ApplicationIcon>
   </PropertyGroup>

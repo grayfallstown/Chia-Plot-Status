@@ -6,7 +6,7 @@
     <StartupObject>ChiaPlotStatus.CLI.ChiaPlotStatusCLI</StartupObject>
     <ApplicationIcon>Icon - Color changed.ico</ApplicationIcon>
     <Authors>grayfallstown</Authors>
-    <Company>none</Company>
+    <Company>grayfallstown</Company>
   </PropertyGroup>
 
   <ItemGroup>
