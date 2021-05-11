@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using ChiaPlotStatus.Logic.Models;
 using Avalonia;
 using System.Runtime.InteropServices;
+using ChiaPlotStatusGUI.GUI.Models;
 
 namespace ChiaPlotStatus.ViewModels
 {
@@ -28,6 +29,7 @@ namespace ChiaPlotStatus.ViewModels
 
         public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
         public List<(PlotLog, PlotLogReadable)> PlotLogTuples { get; set; } = new();
+        public PlotCounts PlotCounts { get; set; }
 
         public string? Search { get; set; } = null;
         public Filter Filter { get; } = new();
@@ -134,7 +136,10 @@ namespace ChiaPlotStatus.ViewModels
                 PlotLogs.Add(plotLog.Item2);
                 PlotLogTuples.Add(plotLog);
             }
+            PlotCounts = new(PlotLogTuples);
+            this.RaisePropertyChanged("PlotCounts");
         }
+
 
         public void InitializeButtons()
         {

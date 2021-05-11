@@ -120,7 +120,16 @@
       <Setter Property="Padding" Value="0" />
       <Setter Property="BorderThickness" Value="0" />
     </Style>
-	</Window.Styles>
+
+
+    <Style Selector="StackPanel.PlotCounts">
+      <Setter Property="Margin" Value="1" />
+    </Style>
+    <Style Selector="StackPanel.PlotCounts TextBlock">
+      <Setter Property="Margin" Value="2" />
+      <Setter Property="FontSize" Value="13" />
+    </Style>
+  </Window.Styles>
 
 	<ScrollViewer Name="WindowContext">
 		<StackPanel>
@@ -274,6 +283,64 @@
               </ToolTip.Tip>
             </CheckBox>
           </Border>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Classes="PlotCounts">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>
+              Running:
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.Running, Mode=TwoWay}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>
+              Finished:
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.Finished, Mode=TwoWay}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>
+              Concerning:
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.Concerning, Mode=TwoWay}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>
+              Failed:
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.Failed, Mode=TwoWay}"/>
+          </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Classes="PlotCounts">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>
+              Phase 1:
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.PlotsInPhase1, Mode=TwoWay}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>
+              Phase 2:
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.PlotsInPhase2, Mode=TwoWay}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>
+              Phase 3:
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.PlotsInPhase3, Mode=TwoWay}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>
+              Phase 4:
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.PlotsInPhase4, Mode=TwoWay}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>
+              Phase 5:
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.PlotsInPhase5, Mode=TwoWay}"/>
+          </StackPanel>
         </StackPanel>
 			</StackPanel>
 
