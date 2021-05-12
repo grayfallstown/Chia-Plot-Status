@@ -79,7 +79,7 @@ namespace ChiaPlotStatus
                     break;
                 case 1:
                     int totalTablesIn1 = 7;
-                    part = 7 - (totalTablesIn1 - Phase1Table);
+                    part = 7 - (totalTablesIn1 - Phase1Table) - 1;
                     subpart = (float)CurrentBucket / Buckets;
                     break;
             }

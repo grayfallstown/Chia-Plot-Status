@@ -24,6 +24,7 @@ namespace ChiaPlotStatus
         public string LogFolder;
         public bool firstRead = true;
         public bool lineRead = true;
+        public DateTime? lastGrown;
 
         public PlotLogFileParser(string path)
         {
@@ -145,10 +146,11 @@ namespace ChiaPlotStatus
             lineRead = false;
             this.TailLineEmitter.ReadMore();
             CurrentPlotLog().FileLastWritten = File.GetLastWriteTime(this.LogFile);
-            if (lineRead && !firstRead)
-                CurrentPlotLog().FileLastWritten = DateTime.Now;
-            else if (CurrentPlotLog().FileLastWritten != null && CurrentPlotLog().FileLastWritten < File.GetLastWriteTime(this.LogFile))
-                CurrentPlotLog().FileLastWritten = File.GetLastWriteTime(this.LogFile);
+            if (lineRead && !firstRead) {
+                lastGrown = DateTime.Now;
+            }
+            if (lastGrown != null)
+                CurrentPlotLog().FileLastWritten = lastGrown;
             firstRead = false;
             return PlotLogs;
         }
