@@ -118,6 +118,8 @@ windows: `.\ChiaPlotStatusGUI\bin\Release\net5.0\ChiaPlotStatus.exe`
 
 linux: `./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus`
 
+macOS: `dotnet ./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus.dll`
+
 alternatively try `dotnet run --build`.
 
 ## Thanks to
