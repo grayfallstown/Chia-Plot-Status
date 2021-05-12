@@ -112,11 +112,13 @@ Build it:
 
 `dotnet build --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"`
 
-Chia-Plot-Status can now be found at 
+Chia-Plot-Status can now be started with 
 
 windows: `.\ChiaPlotStatusGUI\bin\Release\net5.0\ChiaPlotStatus.exe` 
 
 linux: `./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus`
+
+mac `dotnet ./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus.dll` (thanks @mahdi-ninja)
 
 alternatively try `dotnet run --build`.
 
