@@ -11,21 +11,25 @@ mkdir release\ChiaPlotStatus\
 
 
 Echo "Building linux deb and rpm packages"
-rm -r ChiaPlotStatusCLI\bin
-rm -r ChiaPlotStatusGUI\bin
 cd ChiaPlotStatusCLI
-dotnet publish -c Release -f net5.0 -r linux-x64 -p:Version=0.9.7
+dotnet publish -c Release -f net5.0 -r linux-x64
 cd ..\ChiaPlotStatusGUI
-dotnet publish -c Release -f net5.0 -r linux-x64 -p:Version=0.9.7
+dotnet publish -c Release -f net5.0 -r linux-x64
 cp ..\ChiaPlotStatusCLI\bin\Release\net5.0\linux-x64\publish\ChiaPlotStatusCLI* .\bin\Release\net5.0\linux-x64\publish\
 dotnet rpm -r linux-x64 -f net5.0 -c Release
-cp bin\Release\net5.0\linux-x64\ChiaPlotStatus.1.0.0.linux-x64.rpm ..\release\
+cp bin\Release\net5.0\linux-x64\ChiaPlotStatus.*.linux-x64.rpm ..\release\ChiaPlotStatus.linux-x64.rpm
 dotnet deb -r linux-x64 -f net5.0 -c Release
-cp bin\Release\net5.0\linux-x64\ChiaPlotStatus.1.0.0.linux-x64.deb ..\release\
+cp bin\Release\net5.0\linux-x64\ChiaPlotStatus.*.linux-x64.deb ..\release\ChiaPlotStatus.linux-x64.deb
+cd ..
+
+
+# Echo "Building for MacOS"
+# dotnet publish -r osx-x64 --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
+# dotnet pkg -r osx-x64 -f net5.0 -c Release
 
 
 Echo "Building for Windows"
-dotnet publish -r win-x64 --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU" -p:Version=0.9.7
+dotnet publish -r win-x64 --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU"
 
 
 Echo ""

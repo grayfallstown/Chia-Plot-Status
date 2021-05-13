@@ -70,7 +70,7 @@ namespace ChiaPlotStatus.Views
 
         private string LoadCurrentRelease()
         {
-            return "" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
         }
 
         public void DownloadWindows(object sender, RoutedEventArgs e)
@@ -81,13 +81,13 @@ namespace ChiaPlotStatus.Views
 
         public void DownloadDeb(object sender, RoutedEventArgs e)
         {
-            Utils.OpenUrl("https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/downloadChiaPlotStatus.linux-x64.deb");
+            Utils.OpenUrl("https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.deb");
             Close();
         }
 
         public void DownloadRpm(object sender, RoutedEventArgs e)
         {
-            Utils.OpenUrl("https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/downloadChiaPlotStatus.linux-x64.rpm");
+            Utils.OpenUrl("https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.rpm");
             Close();
         }
 

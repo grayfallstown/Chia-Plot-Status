@@ -6,4 +6,3 @@ dotnet version --no-git --patch
 cd ..\ChiaPlotStatusLib
 dotnet version --no-git --patch
 cd ..
-.\release.ps1

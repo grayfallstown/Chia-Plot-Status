@@ -14,8 +14,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Reactive;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace ChiaPlotStatus.Views
 {
@@ -23,7 +26,7 @@ namespace ChiaPlotStatus.Views
     {
         public static LogViewerWindow? Instance { get; private set; }
         public TailLineEmitter TailLineEmitter { get; private set; }
-        public ObservableCollection<List<HighlightedText>> Lines { get; private set; } = new();
+        public StringBuilder htmlBlock = new();
         public DispatcherTimer Timer { get; private set; }
         public string Path{ get; private set; }
 
@@ -51,18 +54,20 @@ namespace ChiaPlotStatus.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            this.LogLines = this.Find<StackPanel>("LogLines");
+            // this.LogLines = this.Find<StackPanel>("LogLines");
         }
 
         private void InitializeTailLineEmitter()
         {
             this.TailLineEmitter = new TailLineEmitter(this.Path, (line) =>
             {
-                List<HighlightedText> textline = new();
+                StringBuilder htmlLine = new StringBuilder("<p class=\"line\">");
 
                 void highlight(int level, string text)
                 {
-                    textline.Add(new HighlightedText(text, level));
+                    htmlLine.Append("<span class=\"level" + level + "\">");
+                    htmlLine.Append(HttpUtility.HtmlEncode(text));
+                    htmlLine.Append("</span>");
                 }
 
                 MatchCollection matches;
@@ -226,7 +231,8 @@ namespace ChiaPlotStatus.Views
                     highlight(0, line);
                 }
 
-                Lines.Add(textline);
+                htmlLine.Append("</span>");
+                htmlBlock.Append(htmlLine).Append('\n');
             });
 
             TailLineEmitter.ReadMore();

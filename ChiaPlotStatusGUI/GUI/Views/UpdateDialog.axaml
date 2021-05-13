@@ -49,9 +49,9 @@
       <TextBlock Text="You are up to date!" Name="UpToDate"></TextBlock>
       <StackPanel Name="DownloadButtons" Orientation="Horizontal">
         <Button Content="Windows" Click="DownloadWindows" />
-        <Button Content="Linux Deb Package" Click="DownloadDeb" />
+        <Button Content="Linux Deb" Click="DownloadDeb" />
+        <Button Content="Linux RPM" Click="DownloadRpm" />
         <!--
-        <Button Content="Linux RPM Package" Click="DownloadRpm" />
         <Button Content="MacOS" Click="DownloadMac" />
         -->
       </StackPanel>
