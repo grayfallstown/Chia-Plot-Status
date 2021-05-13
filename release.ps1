@@ -12,14 +12,17 @@ mkdir release\ChiaPlotStatus\
 
 Echo "Building linux deb and rpm packages"
 cd ChiaPlotStatusCLI
-dotnet publish -c Release -f net5.0 -r linux-x64
-cd ..\ChiaPlotStatusGUI
-dotnet publish -c Release -f net5.0 -r linux-x64
-cp ..\ChiaPlotStatusCLI\bin\Release\net5.0\linux-x64\publish\ChiaPlotStatusCLI* .\bin\Release\net5.0\linux-x64\publish\
-dotnet rpm -r linux-x64 -f net5.0 -c Release
-cp bin\Release\net5.0\linux-x64\ChiaPlotStatus.*.linux-x64.rpm ..\release\ChiaPlotStatus.linux-x64.rpm
 dotnet deb -r linux-x64 -f net5.0 -c Release
-cp bin\Release\net5.0\linux-x64\ChiaPlotStatus.*.linux-x64.deb ..\release\ChiaPlotStatus.linux-x64.deb
+# dotnet publish -c Release -f net5.0 -r ubuntu.16.04-x64
+# cd ..\ChiaPlotStatusGUI
+# dotnet deb -r ubuntu.16.04-x64 -f net5.0 -c Release
+# cp ..\ChiaPlotStatusCLI\bin\Release\net5.0\linux-x64\publish\ChiaPlotStatusCLI* .\bin\Release\net5.0\ubuntu.16.04-x64\publish\
+# dotnet rpm -r ubuntu.16.04-x64 -f net5.0 -c Release
+# cp bin\Release\net5.0\ubuntu.16.04-x64\ChiaPlotStatus.*.ubuntu.16.04-x64.rpm ..\release\ChiaPlotStatus.linux-x64.rpm
+# dotnet deb -r ubuntu.16.04-x64 -f net5.0 -c Release
+# dotnet deb -c Release
+# cp bin\Release\net5.0\ChiaPlotStatus.*.deb ..\release\ChiaPlotStatus.linux-x64.deb
+cp bin\Release\net5.0\linux-x64\ChiaPlotStatus*.deb ..\release\ChiaPlotStatus.linux-x64.deb
 cd ..
 
 

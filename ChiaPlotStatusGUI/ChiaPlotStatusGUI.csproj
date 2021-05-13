@@ -2,6 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+	<RuntimeIdentifiers>win7-x64;ubuntu.16.10-x64;linux-x64</RuntimeIdentifiers>
     <Nullable>enable</Nullable>
     <StartupObject>ChiaPlotStatus.Program</StartupObject>
     <AssemblyName>ChiaPlotStatus</AssemblyName>
@@ -15,6 +16,16 @@
     <AvaloniaResource Include="GUI\Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="chia-plot-status.desktop" CopyToPublishDirectory="Always" LinuxFileMode="0755">
+      <LinuxPath>/usr/share/applications/chia-plot-status.desktop</LinuxPath>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="chia-plot-status.png" CopyToPublishDirectory="Always" LinuxFileMode="0755">
+      <LinuxPath>/usr/share/pixmaps/chia-plot-status.png</LinuxPath>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.3" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.10.3" />
     <PackageReference Include="Avalonia.Desktop" Version="0.10.3" />
@@ -24,24 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChiaPlotStatusLib\ChiaPlotStatusLib.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Packaging.Targets" Version="0.1.1-*" />
-    <DotNetCliToolReference Include="dotnet-deb" Version="0.1.1-*" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(RuntimeIdentifier)'=='linux-x64' OR '$(RuntimeIdentifier)'=='linux-arm'">
-    <Content Include="chia-plot-status.desktop" CopyToPublishDirectory="Always" LinuxFileMode="0755">
-      <LinuxPath>/usr/share/applications/chia-plot-status.desktop</LinuxPath>
-    </Content>
-  </ItemGroup>
-  <ItemGroup Condition="'$(RuntimeIdentifier)'=='linux-x64' OR '$(RuntimeIdentifier)'=='linux-arm'">
-    <Content Include="chia-plot-status.png" CopyToPublishDirectory="Always" LinuxFileMode="0755">
-      <LinuxPath>/usr/share/pixmaps/chia-plot-status.png</LinuxPath>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Packaging.Targets" Version="0.1.1-*" />
-    <DotNetCliToolReference Include="dotnet-rpm" Version="0.1.1-*" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="GUI\App.axaml.cs">

@@ -6,11 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusCli", "ChiaPlotStatusCli\ChiaPlotStatusCli.csproj", "{677D6D3F-3693-4EA7-9FE0-AE64167BE82E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusGUI", "ChiaPlotStatusGUI\ChiaPlotStatusGUI.csproj", "{38F6EA6C-7E72-439B-B548-AFB5591DCEE3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{677D6D3F-3693-4EA7-9FE0-AE64167BE82E} = {677D6D3F-3693-4EA7-9FE0-AE64167BE82E}
-	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusLib", "ChiaPlotStatusLib\ChiaPlotStatusLib.csproj", "{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChiaPlotStatusLib", "ChiaPlotStatusLib\ChiaPlotStatusLib.csproj", "{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

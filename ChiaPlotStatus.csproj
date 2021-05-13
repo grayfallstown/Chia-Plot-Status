@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+	<RuntimeIdentifiers>win7-x64;ubuntu.16.10-x64;linux-x64</RuntimeIdentifiers>
     <Nullable>enable</Nullable>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>grayfallstown.pfx</AssemblyOriginatorKeyFile>
@@ -11,7 +12,6 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>grayfallstown</Authors>
     <Company>none</Company>
-    <Version>0.9.8</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningLevel>5</WarningLevel>

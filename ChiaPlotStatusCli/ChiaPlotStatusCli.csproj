@@ -2,6 +2,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+		<RuntimeIdentifiers>win7-x64;ubuntu.16.10-x64;linux-x64</RuntimeIdentifiers>
+
     <StartupObject>ChiaPlotStatus.CLI.ChiaPlotStatusCLI</StartupObject>
     <ApplicationIcon>Icon - Color changed.ico</ApplicationIcon>
     <Authors>grayfallstown</Authors>
