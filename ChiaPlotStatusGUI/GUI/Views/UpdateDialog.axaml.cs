@@ -9,6 +9,7 @@ using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Platform;
 using ChiaPlotStatus.GUI.Models;
 using ChiaPlotStatus.Logic.Models;
+using ChiaPlotStatusGUI.GUI.Utils;
 using Octokit;
 using ReactiveUI;
 using System;
@@ -16,6 +17,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reactive;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -43,7 +45,7 @@ namespace ChiaPlotStatus.Views
             this.AttachDevTools();
 #endif
             this.Find<TextBlock>("UpToDate").IsVisible = string.Equals(this.Latest.TagName, this.Current);
-            this.Find<Button>("DownloadUpdate").IsVisible = !string.Equals(this.Latest.TagName, this.Current);
+            this.Find<StackPanel>("DownloadButtons").IsVisible = !string.Equals(this.Latest.TagName, this.Current);
             this.Focus();
         }
 
@@ -68,49 +70,28 @@ namespace ChiaPlotStatus.Views
 
         private string LoadCurrentRelease()
         {
-            var deserializer = new DeserializerBuilder().Build();
-            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-            System.IO.Stream filestream = assets.Open(new Uri("avares://ChiaPlotStatus/GUI/Assets/version.yaml"));
-            StreamReader reader = new StreamReader(filestream);
-            string yaml = reader.ReadToEnd();
-            var versionFile = deserializer.Deserialize<VersionFile>(yaml);
-            return "" + versionFile.Version;
+            return "" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
         }
 
-        public void DownloadUpdate(object sender, RoutedEventArgs e)
+        public void DownloadWindows(object sender, RoutedEventArgs e)
         {
-            OpenUrl(Latest.HtmlUrl.Replace("/tag/", "/download/") + "/Setup.exe");
+            Utils.OpenUrl("https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/Setup.exe");
             Close();
         }
 
-        private void OpenUrl(string url)
+        public void DownloadDeb(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Process.Start(url);
-            }
-            catch
-            {
-                // hack because of this: https://github.com/dotnet/corefx/issues/10361
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    url = url.Replace("&", "^&");
-                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    Process.Start("xdg-open", url);
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    Process.Start("open", url);
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            Utils.OpenUrl("https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/downloadChiaPlotStatus.linux-x64.deb");
+            Close();
         }
+
+        public void DownloadRpm(object sender, RoutedEventArgs e)
+        {
+            Utils.OpenUrl("https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/downloadChiaPlotStatus.linux-x64.rpm");
+            Close();
+        }
+
+
     }
 
     public class VersionFile

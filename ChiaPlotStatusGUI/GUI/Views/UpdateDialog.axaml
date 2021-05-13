@@ -2,8 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="100"
-        Width="500" Height="100"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="100"
+        Width="300" Height="100"
         x:Class="ChiaPlotStatus.Views.UpdateDialog"
         Icon="/GUI/Assets/Logo.png"
         TransparencyLevelHint="Transparent"
@@ -47,7 +47,14 @@
 
 
       <TextBlock Text="You are up to date!" Name="UpToDate"></TextBlock>
-      <Button Content="Download Update" Name="DownloadUpdate" Click="DownloadUpdate" />
+      <StackPanel Name="DownloadButtons" Orientation="Horizontal">
+        <Button Content="Windows" Click="DownloadWindows" />
+        <Button Content="Linux Deb Package" Click="DownloadDeb" />
+        <!--
+        <Button Content="Linux RPM Package" Click="DownloadRpm" />
+        <Button Content="MacOS" Click="DownloadMac" />
+        -->
+      </StackPanel>
     </StackPanel>
 	</Panel>
 </Window>

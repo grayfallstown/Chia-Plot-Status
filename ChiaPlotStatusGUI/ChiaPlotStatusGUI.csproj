@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
@@ -9,6 +9,7 @@
     <Company>grayfallstown</Company>
     <Authors>grayfallstown</Authors>
     <ApplicationIcon>Icon - Color changed.ico</ApplicationIcon>
+    <Version>0.9.8</Version>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="GUI\Assets\**" />
@@ -28,17 +29,16 @@
     <PackageReference Include="Packaging.Targets" Version="0.1.1-*" />
     <DotNetCliToolReference Include="dotnet-deb" Version="0.1.1-*" />
   </ItemGroup>
-    <ItemGroup Condition="'$(RuntimeIdentifier)'=='linux-x64' OR '$(RuntimeIdentifier)'=='linux-arm'">
+  <ItemGroup Condition="'$(RuntimeIdentifier)'=='linux-x64' OR '$(RuntimeIdentifier)'=='linux-arm'">
     <Content Include="chia-plot-status.desktop" CopyToPublishDirectory="Always" LinuxFileMode="0755">
-        <LinuxPath>/usr/share/applications/chia-plot-status.desktop</LinuxPath>
+      <LinuxPath>/usr/share/applications/chia-plot-status.desktop</LinuxPath>
     </Content>
   </ItemGroup>
-    <ItemGroup Condition="'$(RuntimeIdentifier)'=='linux-x64' OR '$(RuntimeIdentifier)'=='linux-arm'">
+  <ItemGroup Condition="'$(RuntimeIdentifier)'=='linux-x64' OR '$(RuntimeIdentifier)'=='linux-arm'">
     <Content Include="chia-plot-status.png" CopyToPublishDirectory="Always" LinuxFileMode="0755">
-        <LinuxPath>/usr/share/pixmaps/chia-plot-status.png</LinuxPath>
+      <LinuxPath>/usr/share/pixmaps/chia-plot-status.png</LinuxPath>
     </Content>
   </ItemGroup>
-  
   <ItemGroup>
     <PackageReference Include="Packaging.Targets" Version="0.1.1-*" />
     <DotNetCliToolReference Include="dotnet-rpm" Version="0.1.1-*" />

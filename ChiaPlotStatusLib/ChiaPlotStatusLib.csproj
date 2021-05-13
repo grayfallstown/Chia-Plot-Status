@@ -1,15 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Company>grayfallstown</Company>
     <Authors>grayfallstown</Authors>
     <Product>ChiaPlotStatusLib</Product>
+    <Version>0.9.8</Version>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="27.0.2" />
     <PackageReference Include="YamlDotNet" Version="11.1.1" />
   </ItemGroup>
-
 </Project>

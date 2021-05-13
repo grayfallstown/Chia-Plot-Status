@@ -1,10 +1,8 @@
 Echo "Set Version!"
+Echo ".\next-patch.ps1"
+Echo ".\next-minor.ps1"
+
 pause
-
-
-Echo ""
-Echo "The warnings are normal. Only formal flaws in the code"
-Echo ""
 
 Echo "Cleaning release folder"
 rm -r release\
@@ -26,10 +24,14 @@ dotnet deb -r linux-x64 -f net5.0 -c Release
 cp bin\Release\net5.0\linux-x64\ChiaPlotStatus.1.0.0.linux-x64.deb ..\release\
 
 
-
-
 Echo "Building for Windows"
 dotnet publish -r win-x64 --configuration .\ChiaPlotStatus.sln /p:Configuration=Release /p:Platform="Any CPU" -p:Version=0.9.7
+
+
+Echo ""
+Echo "The warnings are normal. Only formal flaws in the code"
+Echo ""
+
 
 Echo "Copying Windows build to release folder"
 xcopy /sy C:\Users\mk\IdeaProjects\ChiaPlotStatus\ChiaPlotStatusLib\bin\Release\net5.0\win-x64\publish\* release\ChiaPlotStatus\
