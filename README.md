@@ -66,7 +66,7 @@ Best Practice:
 
 ## Custom tools / Home automation
 
-You can export plot logs to json, yaml or csv both via the gui on the console or for automation:
+You can export plot logs to json, yaml or csv both via the gui or the console for automation:
 
 ```
 "C:\Program Files (x86)\ChiaPlotStatus\ChiaPlotStatus\ChiaPlotStatusCli.exe" --help
