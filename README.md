@@ -4,7 +4,7 @@
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/grayfallstown/Chia-Plot-Status?color=green&include_prereleases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/grayfallstown/Chia-Plot-Status)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC)
-[![Liberapay patrons](https://img.shields.io/liberapay/patrons/grayfallstown?label=Librepay)](https://liberapay.com/grayfallstown/donate)
+[![Liberapay](https://img.shields.io/liberapay/patrons/grayfallstown?label=Liberapay)](https://liberapay.com/grayfallstown/donate)
 
 <p align="center">
   <img width="200" alt="Chia Plot Status Log" src="./Logo/Icon%20-%20Color%20changed.svg">
