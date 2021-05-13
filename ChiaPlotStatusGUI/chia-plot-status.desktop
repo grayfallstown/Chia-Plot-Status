@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Chia Plot Status
+Comment=Tool to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion
+GenericName=Chia Plot Status
+Exec=/usr/local/bin/ChiaPlotStatus %U
+Icon=chia-plot-status
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Utility;

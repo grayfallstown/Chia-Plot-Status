@@ -2,8 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="200"
-        Width="500" Height="200"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="130"
+        Width="500" Height="130"
         x:Class="ChiaPlotStatus.Views.DonationDialog"
         Icon="/GUI/Assets/Logo.png"
         TransparencyLevelHint="Transparent"
@@ -45,7 +45,7 @@
 			  </ExperimentalAcrylicBorder>
 		  </Panel>
 
-      <TextBlock Text="Buy the Chia Plot Status developer a beer or some coffee"></TextBlock>
+      <TextBlock FontWeight="Bold" Text="Buy the Chia Plot Status developer a beer, some coffee or another Terabyte"></TextBlock>
       <TextBlock Text=" "></TextBlock>
       <StackPanel Orientation="Horizontal">
         <TextBlock Text="Chia:" FontWeight="Bold" Classes="Margin"></TextBlock>
@@ -57,11 +57,10 @@
         </Border>
       </StackPanel>
       <StackPanel Orientation="Horizontal">
-        <TextBlock Text="Paypal:" FontWeight="Bold" Classes="Margin"></TextBlock>
         <Border>
           <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding Paypal}" Classes="Margin"></TextBlock>
-            <Button Content="{Binding Language.Buttons.Copy}" Classes="Margin" Click="CopyToClipboard" Tag="{Binding ChiaAddress}"></Button>
+            <Button Content="Paypal" Classes="Margin" Click="OpenLink" Tag="{Binding PaypalURL}"></Button>
+            <Button Content="Liberapay" Classes="Margin" Click="OpenLink" Tag="{Binding LiberapayURL}"></Button>
           </StackPanel>
         </Border>
       </StackPanel>

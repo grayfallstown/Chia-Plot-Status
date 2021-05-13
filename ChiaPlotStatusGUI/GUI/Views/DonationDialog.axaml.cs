@@ -13,6 +13,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Reactive;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace ChiaPlotStatus.Views
@@ -21,7 +22,8 @@ namespace ChiaPlotStatus.Views
     {
         public Language Language { get; set; }
         public string ChiaAddress { get; set; } = "xch1sxgmrrmq95klztd5796ysz8c6jattd6k70z4gxuet5a9792s24hqf4jdtn";
-        public string Paypal { get; set; } = "maklemenz@googlemail.com";
+        public string PaypalURL { get; set; } = "https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC";
+        public string LiberapayURL { get; set; } = "https://liberapay.com/grayfallstown/donate";
 
         public DonationDialog() { }
 
@@ -47,6 +49,43 @@ namespace ChiaPlotStatus.Views
             string text = (string)(((Button)sender).Tag);
             Application.Current.Clipboard.SetTextAsync(text);
             this.Find<TextBlock>("Thx").IsVisible = true;
+        }
+
+        public void OpenLink(object sender, RoutedEventArgs e)
+        {
+            string url = (string)(((Button)sender).Tag);
+            OpenUrl(url);
+            this.Find<TextBlock>("Thx").IsVisible = true;
+        }
+
+
+        private void OpenUrl(string url)
+        {
+            try
+            {
+                Process.Start(url);
+            }
+            catch
+            {
+                // hack because of this: https://github.com/dotnet/corefx/issues/10361
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    url = url.Replace("&", "^&");
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", url);
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", url);
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
     }
