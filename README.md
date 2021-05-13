@@ -1,3 +1,4 @@
+![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/grayfallstown/Chia-Plot-Status/.NET/main)
 ![GitHub](https://img.shields.io/github/license/grayfallstown/Chia-Plot-Status)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/grayfallstown/Chia-Plot-Status?color=green&include_prereleases)
@@ -35,10 +36,12 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 ## Installation / Download
 
-Windows: [Download latest version smart-farmer](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.7-beta4/Setup.exe)
+Windows: [Download latest version smart-farmer.](https://github.com/grayfallstown/Chia-Plot-Status/releases/download/0.9.7-beta4/Setup.exe)
 You will get a blue warning saying this was published by an unknown developer.
 
 For Mac and Linux you currently have to [build it yourself](#Build-it-yourself) for now.
+
+![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
 
 ## Getting Log Files from PowerShell
 
