@@ -39,7 +39,7 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 Windows: [Download latest version](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/Setup.exe)
 You will get a blue warning saying this was published by an unknown developer.
 
-Linux: First installl [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0), then either[deb](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.deb) or [rpm](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.rpm) depending on your linux distribution (deb for ubuntu)
+Linux: First install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0), then either[deb](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.deb) or [rpm](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.rpm) depending on your linux distribution (deb for ubuntu)
 
 For Mac you currently have to [build it yourself](#Build-it-yourself).
 
