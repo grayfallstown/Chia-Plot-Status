@@ -36,14 +36,14 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 ## Installation / Download
 
+![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
+
 Windows: [Download latest version](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/Setup.exe)
 You will get a blue warning saying this was published by an unknown developer.
 
-Linux: First install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0), then either[deb](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.deb) or [rpm](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.rpm) depending on your linux distribution (deb for ubuntu)
+Linux: First install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0), then either the Chia Plot Status [deb](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.deb) or [rpm](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.rpm) package depending on your linux distribution (deb for ubuntu)
 
 For Mac you currently have to [build it yourself](#Build-it-yourself).
-
-![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
 
 ## Getting Log Files from PowerShell
 
@@ -64,7 +64,7 @@ Either mount the log folders of all rigs as network shares or collect them by yo
 Best Practice:
 - Each plotting rig should have its own log folder, so they don't mix and mess up estimates and warning thresholds for each other.
 - Always log locally. If you log directly to a network share / NAS your plotting can crash if the connection becomes flaky. Prefer connecting your host machine to networkshares on the plotters, not the other way around or use your own cloud solutions which offer local folders (should be pretty much all of them).
-
+- Only delete log files of finished plots if your hardware or the way you plot has significantly changed. Chia Plot Status uses finished plots to calculate ETA/Time Remaining as well as warning/error thresholds. If you delete finished log files the quality of those values decreases significantly.
 
 ## Custom tools / Home automation
 
@@ -104,6 +104,11 @@ Copyright (C) 2021 grayfallstown
 Sorting by Progress
 File 'test.json' written
 ```
+
+
+## Troubleshooting
+
+If you use Cloud Sync Services like Syncthing to collect your log files you might run into an issue with the files not properly syncing. Sonething like `The process cannot access the file because it is being used by another process.`. See [Issue #40](https://github.com/grayfallstown/Chia-Plot-Status/issues/40#issuecomment-841025993) for how to fix that.
 
 
 ## Open Source
