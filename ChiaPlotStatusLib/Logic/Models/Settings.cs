@@ -17,6 +17,7 @@ namespace ChiaPlotStatus.GUI.Models
         public double? FontSize { get; set; } = 10d;
         public string? Theme { get; set; } = "Light";
         public List<MarkOfDeath>? MarksOfDeath { get; set; } = new();
+        public bool? AlwaysDoFullRead { get; set; } = false;
 
         public Settings()
         {
@@ -44,6 +45,8 @@ namespace ChiaPlotStatus.GUI.Models
                         this.Theme = fromFile.Theme;
                     if (fromFile.MarksOfDeath != null)
                         this.MarksOfDeath = fromFile.MarksOfDeath;
+                    if (fromFile.AlwaysDoFullRead != null)
+                        this.AlwaysDoFullRead = fromFile.AlwaysDoFullRead;
                     return true;
                 }
             }

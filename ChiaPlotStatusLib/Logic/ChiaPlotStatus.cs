@@ -60,6 +60,8 @@ namespace ChiaPlotStatus
         {
             SearchForNewLogFiles();
             ConcurrentBag<PlotLog> plotLogs = ParseTheLogs();
+            if (Settings.AlwaysDoFullRead == true) // nullable, so == true
+                PlotLogFiles.Clear();
             HandleStatistics(plotLogs.ToList());
             List<(PlotLog, PlotLogReadable)> plusReadable = new();
             foreach (var plotLog in plotLogs)
@@ -86,7 +88,7 @@ namespace ChiaPlotStatus
                     {
                         if (!PlotLogFiles.ContainsKey(filePath) && LooksLikeAPlotLog(filePath))
                         {
-                            PlotLogFiles[filePath] = new PlotLogFileParser(filePath);
+                            PlotLogFiles[filePath] = new PlotLogFileParser(filePath, Settings.AlwaysDoFullRead == true);
                         }
                     }
                 } else

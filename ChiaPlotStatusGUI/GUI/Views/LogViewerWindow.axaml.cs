@@ -59,7 +59,7 @@ namespace ChiaPlotStatus.Views
 
         private void InitializeTailLineEmitter()
         {
-            this.TailLineEmitter = new TailLineEmitter(this.Path, (line) =>
+            this.TailLineEmitter = new TailLineEmitter(this.Path, false, (line) =>
             {
                 StringBuilder htmlLine = new StringBuilder("<p class=\"line\">");
 

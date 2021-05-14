@@ -22,8 +22,10 @@ namespace ChiaPlotStatus
         TailLineEmitterCallback Callback { get; set; }
         int CurrentLine { get; set; } = 0;
         private string file;
+        private bool closeOnEndOfFile;
+        private bool firstRead = false;
 
-        public TailLineEmitter(string file, TailLineEmitterCallback callback)
+        public TailLineEmitter(string file, bool closeOnEndOfFile, TailLineEmitterCallback callback)
         {
             this.file = file;
             this.Callback = callback;
@@ -41,20 +43,30 @@ namespace ChiaPlotStatus
          */
         public void ReadMore()
         {
-            try
+            if (!closeOnEndOfFile ||firstRead)
             {
-                string? line = "";
-                do
+                firstRead = false;
+                try
                 {
-                    line = this.StreamReader.ReadLine();
-                    if (line != null)
+                    string? line = "";
+                    do
                     {
-                        this.Callback(line);
-                    }
-                } while (line != null);
-            } catch (Exception e)
-            {
-                Debug.WriteLine(e);
+                        line = this.StreamReader.ReadLine();
+                        if (line != null)
+                        {
+                            this.Callback(line);
+                        }
+                    } while (line != null);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                }
+                if (closeOnEndOfFile)
+                {
+                    this.StreamReader.Close();
+                }
+
             }
         }
 

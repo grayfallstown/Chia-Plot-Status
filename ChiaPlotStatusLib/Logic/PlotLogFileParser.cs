@@ -26,11 +26,11 @@ namespace ChiaPlotStatus
         public bool lineRead = true;
         public DateTime? lastGrown;
 
-        public PlotLogFileParser(string path)
+        public PlotLogFileParser(string path, bool closeOnEndOfFile)
         {
             this.LogFile = path;
             this.LogFolder = path.Substring(0, path.LastIndexOf(Path.DirectorySeparatorChar));
-            this.TailLineEmitter = new TailLineEmitter(path, (line) =>
+            this.TailLineEmitter = new TailLineEmitter(path, closeOnEndOfFile, (line) =>
             {
                 CurrentPlotLog().IsLastLineTempError = false;
                 switch (line)
