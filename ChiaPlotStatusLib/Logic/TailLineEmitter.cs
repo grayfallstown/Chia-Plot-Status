@@ -29,6 +29,7 @@ namespace ChiaPlotStatus
         {
             this.file = file;
             this.Callback = callback;
+            this.closeOnEndOfFile = closeOnEndOfFile;
             var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             this.StreamReader = new StreamReader(fs);
         }

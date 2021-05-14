@@ -11,8 +11,9 @@ mkdir release\ChiaPlotStatus\
 
 
 Echo "Building linux deb and rpm packages"
-cd ChiaPlotStatusCLI
+cd ChiaPlotStatusGUI
 dotnet deb -r linux-x64 -f net5.0 -c Release
+dotnet rpm -r linux-x64 -f net5.0 -c Release
 # dotnet publish -c Release -f net5.0 -r ubuntu.16.04-x64
 # cd ..\ChiaPlotStatusGUI
 # dotnet deb -r ubuntu.16.04-x64 -f net5.0 -c Release
@@ -23,6 +24,7 @@ dotnet deb -r linux-x64 -f net5.0 -c Release
 # dotnet deb -c Release
 # cp bin\Release\net5.0\ChiaPlotStatus.*.deb ..\release\ChiaPlotStatus.linux-x64.deb
 cp bin\Release\net5.0\linux-x64\ChiaPlotStatus*.deb ..\release\ChiaPlotStatus.linux-x64.deb
+cp bin\Release\net5.0\linux-x64\ChiaPlotStatus*.rpm ..\release\ChiaPlotStatus.linux-x64.rpm
 cd ..
 
 
