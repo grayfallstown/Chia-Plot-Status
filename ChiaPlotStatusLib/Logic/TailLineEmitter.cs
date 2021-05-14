@@ -23,7 +23,7 @@ namespace ChiaPlotStatus
         int CurrentLine { get; set; } = 0;
         private string file;
         private bool closeOnEndOfFile;
-        private bool firstRead = false;
+        private bool firstRead = true;
 
         public TailLineEmitter(string file, bool closeOnEndOfFile, TailLineEmitterCallback callback)
         {
