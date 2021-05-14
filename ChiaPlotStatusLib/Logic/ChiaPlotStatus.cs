@@ -166,7 +166,7 @@ namespace ChiaPlotStatus
 
         private bool LooksLikeAPlotLog(string file)
         {
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[4096];
             try
             {
                 using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -176,10 +176,11 @@ namespace ChiaPlotStatus
                     if (bytes_read > 63)
                     {
                         string asString = GetEncoding(file).GetString(buffer);
-                        if (asString.Contains("\n") && asString.Contains("Starting plotting progress into temporary dirs"))
-                        {
+                        bool hasNewLine = asString.Contains("\n");
+                        bool hasStartingSentence = asString.Contains("Starting plotting progress into temporary dirs");
+                        bool hasHarvesterDuplicateWarning = asString.Contains("already exists for harvester, please remove it manually");
+                        if (hasNewLine && (hasStartingSentence || hasHarvesterDuplicateWarning))
                             return true;
-                        }
                     }
                 }
             } catch (Exception e)
