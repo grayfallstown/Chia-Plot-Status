@@ -48,14 +48,16 @@ For Mac you currently have to [build it yourself](#Build-it-yourself).
 ## Getting Log Files from PowerShell
 
 ```
-$BUCKETS=128
-$THREADS=4
+$Temp1="D:\PlotTemp"
+$Temp2="D:\PlotTemp"
 ...
 
-chia.exe plots create --tmp_dir "$TEMP1" --tmp2_dir "$TEMP2" --final_dir "$FINAL" --size 32 --buffer $BUFFER --num_threads $THREADS --buckets $BUCKETS --alt_fingerprint $FINGERPRINT --pool_public_key $PUBKEY | Tee-Object -FilePath "C:\Users\$USERNAME\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log"
+chia.exe plots create --tmp_dir "$TEMP1" --tmp2_dir "$TEMP2" [and so on] | Tee-Object -FilePath "C:\Users\$USERNAME\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log"
 ```
 
 The last part with Tee-Object writes the log to the PowerShell and to a file with a unique name for each plotting process.
+
+You can download a [full example script with Tee-Object](https://gist.github.com/grayfallstown/8530acb84eb131d3dae074e4be23badb) as well.
 
 ## Working with many distributed plotting rigs
 
