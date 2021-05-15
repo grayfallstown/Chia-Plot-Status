@@ -67,7 +67,7 @@ namespace ChiaPlotStatus
                     break;
                 case 4:
                     part = 20;
-                    subpart = (float)1 - ((float)((float)this.CurrentBucket / this.Buckets));
+                    subpart = (float)this.CurrentBucket / this.Buckets;
                     break;
                 case 3:
                     int totalTablesIn3 = 7;
