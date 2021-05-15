@@ -170,7 +170,10 @@ namespace ChiaPlotStatus
             switch (this.CurrentPhase)
             {
                 case 1:
-                    lastModifiedAtWarningThreashold = (int)(((float)stats.Phase1AvgTimeNeed / 60 / 7 / this.Buckets) * 3);
+                    if (this.CurrentTable == 1)
+                        lastModifiedAtWarningThreashold = (int)(((float)stats.Phase1AvgTimeNeed / 60 / 7) * 3);
+                    else
+                        lastModifiedAtWarningThreashold = (int)(((float)stats.Phase1AvgTimeNeed / 60 / 7 / this.Buckets) * 3);
                     if (lastModifiedAtWarningThreashold == 0)
                         lastModifiedAtWarningThreashold = 15;
                     break;
