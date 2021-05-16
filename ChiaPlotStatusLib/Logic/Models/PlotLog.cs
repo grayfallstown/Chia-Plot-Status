@@ -18,7 +18,7 @@ namespace ChiaPlotStatus
         public int TimeRemaining { get; set; } = 0;
         public DateTime? ETA { get; set; }
         public int CurrentTable { get; set; } = 0;
-        // Phase 5 is done
+        // Phase 6 is done
         public int CurrentPhase { get; set; } = 0;
         public int CurrentBucket { get; set; } = 0;
         public int Phase1Table { get; set; } = 0;
@@ -55,6 +55,7 @@ namespace ChiaPlotStatus
             // 7 tables in phase 2
             // 7 tables in phase 3
             // 1 phase 4
+            // 1 phase 5
             float subpart = 0;
 
             switch(CurrentPhase)
