@@ -38,7 +38,6 @@ namespace ChiaPlotStatusGUI.GUI.Models
                         break;
                     case TempError:
                     case Concerning c:
-                        Running++;
                         Concerning++;
                         handlePhase(plotLog);
                         break;
