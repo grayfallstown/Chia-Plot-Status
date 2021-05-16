@@ -143,4 +143,19 @@ alternatively try `dotnet run --build`.
 
 ## Thanks to
 
-[charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
+- [charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
+- @Jonesyj83
+- @RedxLus
+- @TormodSan
+- @Waloumi
+- @bathrobehero
+- @bestq8.com
+- @carfnann
+- @darkfriend77
+- @dvlzgrmz
+- @kata32
+- @magnusmyklebost
+- @rul3s
+- @tajchert
+- @whitetechnologies
+- @wild9
