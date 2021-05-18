@@ -154,12 +154,16 @@ alternatively try `dotnet run --build`.
 - @bestq8.com
 - @carfnann
 - @darkfriend77
+- @dorofino
 - @dvlzgrmz
 - @kata32
 - @magnusmyklebost
 - @ouoam
 - @rul3s
+- @raf-cr
 - @tajchert
 - @whitetechnologies
 - @Vera Toro
 - @wild9
+
+For contributing to Chia Plot Status either by donating or otherwise.
