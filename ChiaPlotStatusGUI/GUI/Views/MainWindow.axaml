@@ -343,9 +343,9 @@
         </StackPanel>
 			</StackPanel>
 
-			<DataGrid Name="LogDataGrid" Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="80" CanUserSortColumns="true">
-				<DataGrid.Columns>
-					<DataGridTemplateColumn>
+      <DataGrid Name="LogDataGrid" Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="80" CanUserSortColumns="false">
+        <DataGrid.Columns>
+					<DataGridTemplateColumn SortMemberPath="Tmp1Drive">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Tmp1Drive}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -357,7 +357,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Tmp2Drive">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Tmp2Drive}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -370,7 +370,7 @@
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
 					<!--
-					<DataGridTemplateColumn>
+					<DataGridTemplateColumn SortMemberPath="DestDrive">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.DestDrive}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -388,7 +388,7 @@
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
 					-->
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="StartDate">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.StartDate}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -405,7 +405,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+					<DataGridTemplateColumn SortMemberPath="FinishDate">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.FinishDate}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -422,7 +422,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-          <DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Health">
             <DataGridTemplateColumn.Header>
               <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Health}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
             </DataGridTemplateColumn.Header>
@@ -440,7 +440,7 @@
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
-          <DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Errors">
             <DataGridTemplateColumn.Header>
               <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Errors}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
             </DataGridTemplateColumn.Header>
@@ -457,7 +457,7 @@
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Progress">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Progress}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -474,7 +474,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="ETA">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.ETA}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -491,7 +491,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn >
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="TimeRemaining">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.TimeRemaining}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -508,7 +508,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn >
-          <DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="RunTimeSeconds">
             <DataGridTemplateColumn.Header>
               <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.RunTimeSeconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
             </DataGridTemplateColumn.Header>
@@ -525,7 +525,7 @@
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="CurrentPhase">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.CurrentPhase}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -542,7 +542,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="CurrentTable">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.CurrentTable}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -559,7 +559,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="CurrentBucket">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.CurrentBucket}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -576,7 +576,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn >
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase1Seconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase1Seconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -593,7 +593,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase2Seconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase2Seconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -610,7 +610,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase3Seconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase3Seconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -627,7 +627,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase4Seconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase4Seconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -644,7 +644,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="CopyTimeSeconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.CopyTimeSeconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -661,7 +661,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="TotalSeconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.TotalSeconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -678,7 +678,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Buffer">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Buffer}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -695,7 +695,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Buckets">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Buckets}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -712,7 +712,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Threads">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Threads}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -729,7 +729,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="LogFolder">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.LogFolder}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -746,7 +746,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="LogFile">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.LogFile}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>
@@ -763,7 +763,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn >
-          <DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="ApproximateWorkingSpace">
             <DataGridTemplateColumn.Header>
               <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.ApproximateWorkingSpace}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
             </DataGridTemplateColumn.Header>
@@ -780,7 +780,7 @@
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
-          <DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="FinalFileSize">
             <DataGridTemplateColumn.Header>
               <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.FinalFileSize}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
             </DataGridTemplateColumn.Header>

@@ -72,8 +72,118 @@ namespace ChiaPlotStatus.ViewModels
             InitializeRefreshPauseButton();
             InitializeFilterUpdates();
             SetGridHeight();
+
+            SortColumns();
         }
 
+
+        private void SortColumns()
+        {
+            List<string> colNames = new()
+            {
+                "ApproximateWorkingSpace",
+                "Buckets",
+                "Buffer",
+                "CopyTimeSeconds",
+                "CurrentBucket",
+                "CurrentPhase",
+                "CurrentTable",
+                "ETA",
+                "Errors",
+                "FinalFileSize",
+                "FinishDate",
+                "Health",
+                "LogFile",
+                "LogFolder",
+                "Phase1Seconds",
+                "Phase2Seconds",
+                "Phase3Seconds",
+                "Phase4Seconds",
+                "Progress",
+                "RunTimeSeconds",
+                "StartDate",
+                "Threads",
+                "TimeRemaining",
+                "Tmp1Drive",
+                "Tmp2Drive",
+                "TotalSeconds",
+            };
+
+            /**
+             * Sorting Avalonia DataGrid columns programmatically is kinda
+             * weird / unexpected.
+             * Sorting the ObservableCollection dataGrid.Columns directly
+             * is not really supported.
+             * One would think taking the columns out of the datagrid,
+             * saving them in a List, sorting them, re-adding them to
+             * DataGrid.Columns in the right order would work. Well.. for
+             * some columns it does.. Others just plain ignore that they
+             * are appended at the end and order themselfs where they want
+             * which is somewhat related to in which order they are defined
+             * in the axaml, but not really, at least not for all columns.
+             *
+             * Ok, other approach. Lets set columns.DisplayIndex directly...
+             * Nope, order in gui gets deterministic not really explainable.
+             *
+             * Next Approach. Having two DataGrids: LogDataGrid and
+             * DummyLogDataGrid. LogDataGrid has no columns defined in the
+             * template, therefor does not know anything about any order.
+             * DummyLogDataGrid has the columns defined, therefor knows an
+             * order. Column-Pointers get added to new list,
+             * DummyLogDataGrid.Columns gets cleared, list gets sorted,
+             * columns get added to LogDataGrid - which has never seen the
+             * Columns until now - in correct order. Behaviour in the GUI
+             * still unexplainable.
+             *
+             * Ok.. Lets try adding the columns, one after the other,
+             * with a one second delay in between and let the GUI re-render
+             * between adding columns to see what happens.. Column Order
+             * improves unexplainably! But is still wrong.
+             *
+             * No, using Columns.Insert(index, column) instead of Columns.Add
+             * does not improve the situation. At least that is expected given
+             * the API documentation of ObservableCollection.
+             *
+             * To get things working:
+             * 1. Remember Columns in a temporary list
+             * 2. Clear DataGrid.Columns
+             * 3. Sort temporary list
+             * 4. for each column, set the DisplayIndex and then add it to
+             *    DataGrid.Columns BEFORE proceeding with the next column.
+             *
+             *  Everything else or any other order produces unexpected
+             *  results at least sometimes.
+             *
+             *  Well.. lets say this worked SO FAR
+             *
+             *  Having to add them in the right order AND having to
+             *  set DisplayIndex to reflect that order manually for each
+             *  column, before the next is added is kinda unexpected. One
+             *  would think DisplayIndex should be readonly and completely
+             *  handled internally. OR one has to set DisplayIndex, but not
+             *  have to reorder DataGrid.Columns.
+             */
+
+            var logDataGrid = MainWindow.Instance.Find<DataGrid>("LogDataGrid");
+            List<DataGridColumn> columns = new();
+            foreach (var col in logDataGrid.Columns)
+            {
+                columns.Add(col);
+            }
+
+            logDataGrid.Columns.Clear();
+
+            columns.Sort((a, b) =>
+            {
+                return colNames.IndexOf(a.SortMemberPath).CompareTo(colNames.IndexOf(b.SortMemberPath));
+            });
+
+            for (int i = 0; i < columns.Count; i++)
+            {
+                columns[i].DisplayIndex = i;
+                logDataGrid.Columns.Add(columns[i]);
+            }
+        }
 
         private void InitializeRefreshPauseButton()
         {
