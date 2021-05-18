@@ -80,6 +80,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string Errors { get; set; } = "";
         public string Progress { get; set; } = "";
         public string TimeRemaining { get; set; } = "";
+        public string RunTimeSeconds { get; set; } = "";
         public string ETA { get; set; } = "";
         public string CurrentTable { get; set; } = "";
         public string CurrentBucket { get; set; } = "";
@@ -112,6 +113,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string Errors { get; set; } = "";
         public string Progress { get; set; } = "";
         public string TimeRemaining { get; set; } = "";
+        public string RunTimeSeconds { get; set; } = "";
         public string ETA { get; set; } = "";
         public string CurrentTable { get; set; } = "";
         public string CurrentBucket { get; set; } = "";

@@ -41,6 +41,7 @@ namespace ChiaPlotStatus
         public string FinalFileSize { get; set; } = "";
         public string Health { get; set; } = "";
         public int PlaceInLogFile { get; set; } = -1;
+        public string RunTimeSeconds { get; set; } = "";
 
         public PlotLogReadable(PlotLog plotLog)
         {
@@ -87,6 +88,7 @@ namespace ChiaPlotStatus
             this.Phase4Seconds = formatSeconds(plotLog.Phase4Seconds);
             this.CopyTimeSeconds = formatSeconds(plotLog.CopyTimeSeconds);
             this.TotalSeconds = formatSeconds(plotLog.TotalSeconds);
+            this.RunTimeSeconds = formatSeconds(plotLog.RunTimeSeconds);
             this.ApproximateWorkingSpace = plotLog.ApproximateWorkingSpace;
             this.DestDrive = plotLog.DestDrive;
             this.FinalFileSize = plotLog.FinalFileSize;

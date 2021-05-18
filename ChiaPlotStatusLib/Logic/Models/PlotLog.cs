@@ -46,6 +46,7 @@ namespace ChiaPlotStatus
         public bool IsLastInLogFile { get; set; } = true;
         public bool IsLastLineTempError { get; set; } = false;
         public int PlaceInLogFile { get; set; } = 1;
+        public int RunTimeSeconds { get; set; } = 0;
 
         public void UpdateProgress()
         {
@@ -88,6 +89,20 @@ namespace ChiaPlotStatus
             Progress = (part + subpart) / 23 * 100;
             if (Double.IsNaN(Progress))
                 Progress = 0;
+        }
+
+        public bool IsRunning()
+        {
+            switch (Health)
+            {
+                case Healthy:
+                case Concerning:
+                case TempError:
+                case PossiblyDead:
+                    return CurrentPhase != 6;
+                default:
+                    return false;
+            }
         }
 
         public void UpdateEta(PlottingStatistics stats)

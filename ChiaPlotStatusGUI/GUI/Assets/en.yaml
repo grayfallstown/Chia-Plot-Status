@@ -30,6 +30,7 @@ Columns:
     Errors: "Errors"
     Progress: "Progress"
     TimeRemaining: "Remaining 🕐"
+    RunTimeSeconds: "Runtime 🕐"
     ETA: "ETA"
     CurrentTable: "Cur. Table"
     CurrentBucket: "Cur. Bucket"
@@ -74,6 +75,8 @@ Tooltips:
         the data extracted from your finished plots. It will try to use the data of those plots that match the
         configuration of that plot most closely to make a better prediction if you mix hard disks, ssd, internal
         and external drives and even network attached storage.
+    RunTimeSeconds: >
+        "How long the process is running already"
     ETA: >
         An estimate on when the plotting process completes formatted MM/dd HH:mm. It is based on the plots
         progress and all the data extracted from your finished plots. It will try to use the data of those plots

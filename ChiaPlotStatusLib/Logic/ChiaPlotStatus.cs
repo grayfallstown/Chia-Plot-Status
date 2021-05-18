@@ -69,6 +69,10 @@ namespace ChiaPlotStatus
                 foreach (var markOfDeath in Settings.MarksOfDeath)
                     if (markOfDeath.IsMatch(plotLog))
                         plotLog.Health = new ConfirmedDead(true);
+                if (!plotLog.IsRunning())
+                    plotLog.RunTimeSeconds = 0;
+                else if (plotLog.StartDate != null)
+                    plotLog.RunTimeSeconds = (int)((TimeSpan)(DateTime.Now - plotLog.StartDate)).TotalSeconds;
                 plusReadable.Add((plotLog, new PlotLogReadable(plotLog)));
             }
             List<(PlotLog, PlotLogReadable)> result = Filter(searchString, filter, plusReadable);
