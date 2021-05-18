@@ -50,11 +50,17 @@ namespace ChiaPlotStatus.ViewModels
         public ReactiveCommand<Unit, Unit> IncreaseFontSizeCommand { get; set; }
         public ReactiveCommand<Unit, Unit> DecreaseFontSizeCommand { get; set; }
         public ReactiveCommand<PlotLogReadable, Unit> MarkAsDeadCommand { get; set; }
+        public DispatcherTimer RefreshTimer { get; set; }
 
         public MainWindowViewModel()
         {
             foreach (var property in typeof(PlotLogReadable).GetProperties())
                 SortProperties.Add(property.Name);
+            if (MainWindow.Instance.Find<Button>("RefreshPauseButton") == null)
+            {
+                // TODO: rewrite in proper MVVM or similar pattern to get rid of this
+                return;
+            }
             Languages = Translation.LoadLanguages();
             Language = Languages["English"];
             InitializeChiaPlotStatus();
@@ -63,8 +69,33 @@ namespace ChiaPlotStatus.ViewModels
             KeepGridScrollbarOnScreen();
             InitializeThemeSwitcher();
             InitializeRefreshInterval();
+            InitializeRefreshPauseButton();
             InitializeFilterUpdates();
             SetGridHeight();
+        }
+
+
+        private void InitializeRefreshPauseButton()
+        {
+            var button = MainWindow.Instance.Find<Button>("RefreshPauseButton");
+            if (button != null)
+            {
+                button.Click += (sender, e) =>
+                {
+                    if (RefreshTimer.IsEnabled)
+                    {
+                        Debug.WriteLine("pausing refresh");
+                        button.Content = "Refresh ■";
+                        RefreshTimer.Stop();
+                    } else
+                    {
+                        Debug.WriteLine("continuing refresh");
+                        button.Content = "Refresh ▶";
+                        RefreshTimer.Start();
+                        LoadPlotLogs();
+                    }
+                };
+            }
         }
 
         private void InitializeThemeSwitcher()
@@ -339,14 +370,14 @@ namespace ChiaPlotStatus.ViewModels
 
         public void InitializeRefreshInterval()
         {
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
-            timer.Tick += (sender, e) =>
+            RefreshTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
+            RefreshTimer.Tick += (sender, e) =>
             {
                 // Somehow this ticks twice
                 Debug.WriteLine("Refresh " + DateTime.Now);
                 LoadPlotLogs();
             };
-            timer.Start();
+            RefreshTimer.Start();
         }
 
 

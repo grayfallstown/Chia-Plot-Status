@@ -240,6 +240,9 @@
 								</ToolTip.Tip>
 							</CheckBox>
 						</Border>
+            <Border>
+              <Button Name="RefreshPauseButton" Content="Refresh ▶"></Button>
+            </Border>
 					</StackPanel>
 				</StackPanel>
         <StackPanel Name="Filters" Classes="Filters" Orientation="Vertical">
