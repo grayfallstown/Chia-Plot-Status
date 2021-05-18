@@ -10,7 +10,7 @@
   <img width="200" alt="Chia Plot Status Log" src="./Logo/Icon%20-%20Color%20changed.svg">
 </p>
 
-# [Chia](https://www.chia.net/) Plot Status
+# [Chia Plot Status](https://grayfallstown.github.io/Chia-Plot-Status/)
 
 Tool to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion
 
