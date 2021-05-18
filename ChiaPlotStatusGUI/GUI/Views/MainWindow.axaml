@@ -343,7 +343,7 @@
         </StackPanel>
 			</StackPanel>
 
-      <DataGrid Name="LogDataGrid" Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="80" CanUserSortColumns="false">
+      <DataGrid Name="LogDataGrid" Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="80" CanUserSortColumns="false" CanUserResizeColumns="true">
         <DataGrid.Columns>
 					<DataGridTemplateColumn SortMemberPath="Tmp1Drive">
 						<DataGridTemplateColumn.Header>

@@ -10,88 +10,68 @@ namespace ChiaPlotStatusLib.Logic.Models
      * This is code for the GUI, but needs to here to be part of Settings.
      * Well, it could be used to render an ascii table / cli ui, too.
      */
-	public class Column
-    {
-        public string Name { get; set; } = "";
-        public bool AlignRight { get; set; } = false;
-
-        public Column() { }
-
-        public Column(string name, bool alignRight) {
-            this.Name = Name;
-            this.AlignRight = AlignRight;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is Column column &&
-                   Name == column.Name &&
-                   AlignRight == column.AlignRight;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Name, AlignRight);
-        }
-    }
-
     public class Columns
     {
-        public List<Column> cols { get; set; } = new();
+        public List<string> Order { get; set; } = new();
 
         public Columns() {  }
+
+        public int IndexOf(string columnName)
+        {
+            for (int i = 0; i < Order.Count; i++)
+                if (columnName == Order[i])
+                    return i;
+            return -1;
+        }
 
         public void FixAddedAndRemovedColumns() {
             var defaultColumns = Default();
             // add columns that are new in this release
-            foreach (var defaultCol in defaultColumns.cols)
-                if (!this.cols.Contains(defaultCol))
-                    this.cols.Add(defaultCol);
+            foreach (var defaultCol in defaultColumns.Order)
+                if (!this.Order.Contains(defaultCol))
+                    this.Order.Add(defaultCol);
 
             // remove saved columns that were removed in this release
-            List<Column> colsToRemove = new();
-            foreach (var col in this.cols)
-                if (!defaultColumns.cols.Contains(col))
+            List<string> colsToRemove = new();
+            foreach (var col in this.Order)
+                if (!defaultColumns.Order.Contains(col))
                     colsToRemove.Add(col);
             foreach (var col in colsToRemove)
-                this.cols.Remove(col);
+                this.Order.Remove(col);
         }
 
         public static Columns Default()
         {
             Columns columns = new();
 
-            void add(string name, bool alignRight)
-            {
-                columns.cols.Add(new Column(name, alignRight));
-            }
-
-            add("Tmp1Drive", false);
-            add("Tmp2Drive", false);
-            // add("DestDrive", false);
-            add("StartDate", false);
-            add("FinishDate", false);
-            add("Health", false);
-            add("Errors", true);
-            add("Progress", true);
-            add("ETA", false);
-            add("TimeRemaining", true);
-            add("CurrentPhase", true);
-            add("CurrentTable", true);
-            add("CurrentBucket", true);
-            add("Phase1Seconds", true);
-            add("Phase2Seconds", true);
-            add("Phase3Seconds", true);
-            add("Phase4Seconds", true);
-            add("CopyTimeSeconds", true);
-            add("TotalSeconds", true);
-            add("Buffer", true);
-            add("Buckets", true);
-            add("Threads", true);
-            add("LogFolder", false);
-            add("LogFile", false);
-            add("ApproximateWorkingSpace", false);
-            add("FinalFileSize", false);
+            // TODO: back to its position
+            columns.Order.Add("Tmp1Drive");
+            columns.Order.Add("Tmp2Drive");
+            // columns.cols.Add("DestDrive", false);
+            columns.Order.Add("StartDate");
+            columns.Order.Add("FinishDate");
+            columns.Order.Add("Health");
+            columns.Order.Add("Errors");
+            columns.Order.Add("Progress");
+            columns.Order.Add("ETA");
+            columns.Order.Add("TimeRemaining");
+            columns.Order.Add("RunTimeSeconds");
+            columns.Order.Add("CurrentPhase");
+            columns.Order.Add("CurrentTable");
+            columns.Order.Add("CurrentBucket");
+            columns.Order.Add("Phase1Seconds");
+            columns.Order.Add("Phase2Seconds");
+            columns.Order.Add("Phase3Seconds");
+            columns.Order.Add("Phase4Seconds");
+            columns.Order.Add("CopyTimeSeconds");
+            columns.Order.Add("TotalSeconds");
+            columns.Order.Add("Buffer");
+            columns.Order.Add("Buckets");
+            columns.Order.Add("Threads");
+            columns.Order.Add("LogFolder");
+            columns.Order.Add("LogFile");
+            columns.Order.Add("ApproximateWorkingSpace");
+            columns.Order.Add("FinalFileSize");
 
             return columns;
         }

@@ -1,4 +1,5 @@
 ﻿using ChiaPlotStatus.Logic.Models;
+using ChiaPlotStatusLib.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,6 +19,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string? Theme { get; set; } = "Light";
         public List<MarkOfDeath>? MarksOfDeath { get; set; } = new();
         public bool? AlwaysDoFullRead { get; set; } = false;
+        public Columns Columns { get; set; } = Columns.Default();
 
         public Settings()
         {
@@ -47,6 +49,11 @@ namespace ChiaPlotStatus.GUI.Models
                         this.MarksOfDeath = fromFile.MarksOfDeath;
                     if (fromFile.AlwaysDoFullRead != null)
                         this.AlwaysDoFullRead = fromFile.AlwaysDoFullRead;
+                    if (fromFile.Columns != null)
+                    {
+                        this.Columns = fromFile.Columns;
+                        this.Columns.FixAddedAndRemovedColumns();
+                    }
                     return true;
                 }
             }
