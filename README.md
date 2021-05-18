@@ -40,7 +40,7 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 **ATTENTION, important notice:** Chia Plot Status uses an external library to provide a graphical user interface that runs on Windows, Linux and MacOS called [AvaloniaUI](https://avaloniaui.net/). Avalonia currently gets flagged as Trojan by Windows Defender and as far as currently known, only by Windows Defender. The file was already [deemed safe by microsoft malware analysts](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-842849470), but then got [flagged again](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-843005699). I am currently trying to resolve this issue, but feel free to postpone the installation of Chia Plot Status until the issue is resolved.
 
-**UPDATE**: Windows Defender no longer reports Avalonia as a Trojan **IF** one updates the Dynamic Signatures of Windows Defender. I am leaving this notice for the time beeing for transparency sake.
+**UPDATE**: Windows Defender no longer reports Avalonia as a Trojan **IF** one updates the Dynamic Signatures of Windows Defender. I am leaving this notice for the time beeing for transparency.
 
 Windows: [Download latest version](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/Setup.exe)
 You will get a blue warning saying this was published by an unknown developer.
