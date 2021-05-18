@@ -177,3 +177,10 @@ alternatively try `dotnet run --build`.
 - @wild9
 
 For contributing to Chia Plot Status either by donating or otherwise.
+
+
+## See Chia Plot Status in action:
+
+Chia Plot Status on Patro TV:
+[![](http://img.youtube.com/vi/JLVhG86-4UI/0.jpg)](http://www.youtube.com/watch?v=JLVhG86-4UI "Chia Plot Status on Patro TV")
+
