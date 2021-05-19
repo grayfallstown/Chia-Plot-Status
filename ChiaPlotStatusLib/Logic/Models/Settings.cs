@@ -20,6 +20,7 @@ namespace ChiaPlotStatus.GUI.Models
         public List<MarkOfDeath>? MarksOfDeath { get; set; } = new();
         public bool? AlwaysDoFullRead { get; set; } = false;
         public Columns Columns { get; set; } = Columns.Default();
+        public Filter Filter { get; set; } = new();
 
         public Settings()
         {
@@ -49,6 +50,8 @@ namespace ChiaPlotStatus.GUI.Models
                         this.MarksOfDeath = fromFile.MarksOfDeath;
                     if (fromFile.AlwaysDoFullRead != null)
                         this.AlwaysDoFullRead = fromFile.AlwaysDoFullRead;
+                    if (fromFile.Filter != null)
+                        this.Filter = fromFile.Filter;
                     if (fromFile.Columns != null)
                     {
                         this.Columns = fromFile.Columns;

@@ -32,7 +32,6 @@ namespace ChiaPlotStatus.ViewModels
         public PlotCounts PlotCounts { get; set; }
 
         public string? Search { get; set; } = null;
-        public Filter Filter { get; } = new();
 
         public string SortProperty { get; set; } = "Progress";
         public bool SortAsc { get; set; } = true;
@@ -186,7 +185,7 @@ namespace ChiaPlotStatus.ViewModels
         {
             PlotLogs.Clear();
             PlotLogTuples = new();
-            foreach (var plotLog in PlotManager.PollPlotLogs(SortProperty, SortAsc, Search, Filter))
+            foreach (var plotLog in PlotManager.PollPlotLogs(SortProperty, SortAsc, Search, PlotManager.Settings.Filter))
             {
                 PlotLogs.Add(plotLog.Item2);
                 PlotLogTuples.Add(plotLog);
@@ -417,14 +416,20 @@ namespace ChiaPlotStatus.ViewModels
             var checkBox = MainWindow.Instance.Find<CheckBox>("HideConfirmedDead");
             if (checkBox != null)
             {
+                void update()
+                {
+                    PlotManager.Settings.Persist();
+                    LoadPlotLogs();
+                }
+
                 checkBox.WhenAnyValue(x => x.IsChecked)
-                    .Subscribe((x) => LoadPlotLogs());
+                    .Subscribe((x) => update());
                 MainWindow.Instance.Find<CheckBox>("HidePossiblyDead").WhenAnyValue(x => x.IsChecked)
-                    .Subscribe((x) => LoadPlotLogs());
+                    .Subscribe((x) => update());
                 MainWindow.Instance.Find<CheckBox>("HideHealthy").WhenAnyValue(x => x.IsChecked)
-                    .Subscribe((x) => LoadPlotLogs());
+                    .Subscribe((x) => update());
                 MainWindow.Instance.Find<CheckBox>("HideFinished").WhenAnyValue(x => x.IsChecked)
-                    .Subscribe((x) => LoadPlotLogs());
+                    .Subscribe((x) => update());
             }
         }
     }

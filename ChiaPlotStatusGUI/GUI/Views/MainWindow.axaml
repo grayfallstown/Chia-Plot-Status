@@ -247,7 +247,7 @@
 				</StackPanel>
         <StackPanel Name="Filters" Classes="Filters" Orientation="Vertical">
           <Border>
-            <CheckBox Name="HideConfirmedDead" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HideConfirmedDead}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.Filter.HideConfirmedDead}">
+            <CheckBox Name="HideConfirmedDead" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HideConfirmedDead}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.PlotManager.Settings.Filter.HideConfirmedDead}">
               <ToolTip.Tip>
                 <StackPanel>
                   <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.HideConfirmedDead}"></TextBlock>
@@ -256,7 +256,7 @@
             </CheckBox>
           </Border>
           <Border>
-            <CheckBox Name="HidePossiblyDead" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HidePossiblyDead}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.Filter.HidePossiblyDead}">
+            <CheckBox Name="HidePossiblyDead" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HidePossiblyDead}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.PlotManager.Settings.Filter.HidePossiblyDead}">
               <ToolTip.Tip>
                 <StackPanel>
                   <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.HidePossiblyDead}"></TextBlock>
@@ -265,7 +265,7 @@
             </CheckBox>
           </Border>
           <Border>
-            <CheckBox Name="HideHealthy" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HideHealthy}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.Filter.HideHealthy}">
+            <CheckBox Name="HideHealthy" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HideHealthy}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.PlotManager.Settings.Filter.HideHealthy}">
               <ToolTip.Tip>
                 <StackPanel>
                   <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.HideHealthy}"></TextBlock>
@@ -274,7 +274,7 @@
             </CheckBox>
           </Border>
           <Border>
-            <CheckBox Name="HideFinished" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HideFinished}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.Filter.HideFinished}">
+            <CheckBox Name="HideFinished" Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Fields.HideFinished}" IsChecked="{Binding ElementName=WindowContext, Path=DataContext.PlotManager.Settings.Filter.HideFinished}">
               <ToolTip.Tip>
                 <StackPanel>
                   <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.HideFinished}"></TextBlock>
