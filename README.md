@@ -10,7 +10,7 @@
   <img width="200" alt="Chia Plot Status Log" src="./Logo/Icon%20-%20Color%20changed.svg">
 </p>
 
-# [Chia](https://www.chia.net/) Plot Status
+# [Chia Plot Status](https://grayfallstown.github.io/Chia-Plot-Status/)
 
 Tool to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion
 
@@ -40,7 +40,7 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 **ATTENTION, important notice:** Chia Plot Status uses an external library to provide a graphical user interface that runs on Windows, Linux and MacOS called [AvaloniaUI](https://avaloniaui.net/). ~~Avalonia currently gets flagged as Trojan by Windows Defender~~ and as far as currently known, only by Windows Defender. The file was already [deemed safe by microsoft malware analysts](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-842849470), but then got [flagged again](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-843005699). ~~I am currently trying to resolve this issue, but feel free to postpone the installation of Chia Plot Status until the issue is resolved.~~
 
-**UPDATE**: Users who have Chia Plot Status installed or tried to install it during that time were NOT in any danger. The files were safe and clean all along and falsely reported my Windows Defender. Windows Defender no longer reports Avalonia as a Trojan **IF** one updates the Dynamic Signatures of Windows Defender. For transparency I am leaving this notice for the time beeing and I have documented the entire situation in an [incident report](https://github.com/grayfallstown/Chia-Plot-Status/issues/2#issuecomment-843279417)
+**UPDATE**: Users who have Chia Plot Status installed or tried to install it during that time were NOT in any danger. The files were safe and clean all along and falsely reported by Windows Defender. Windows Defender no longer reports Avalonia as a Trojan **IF** one updates the Dynamic Signatures of Windows Defender. For transparency I am leaving this notice for the time being and I have documented the entire situation in an [incident report](https://github.com/grayfallstown/Chia-Plot-Status/issues/2#issuecomment-843279417)
 
 Windows: [Download latest version](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/Setup.exe)
 You will get a blue warning saying this was published by an unknown developer.
@@ -111,10 +111,16 @@ Sorting by Progress
 File 'test.json' written
 ```
 
+## Need the columns in a different order?
+
+See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843351280
+
 
 ## Troubleshooting
 
 If you use Cloud Sync Services like Syncthing to collect your log files you might run into an issue with the files not properly syncing. Sonething like `The process cannot access the file because it is being used by another process.`. See [Issue #40](https://github.com/grayfallstown/Chia-Plot-Status/issues/40#issuecomment-841025993) for how to fix that.
+
+If Chia Plot Status does no longer start, try renaming `ChiaPlotStatu.config.json` to `ChiaPlotStatu.config.json.backup`. The file is located in your home directory at `C:\Users\<your username>\ChiaPlotStatu.config.json` on windows, `/home/<your username>/ChiaPlotStatu.config.json` on linux and `<your user profile directory>/ChiaPlotStatu.config.json` on mac.
 
 
 ## Open Source
@@ -150,6 +156,7 @@ alternatively try `dotnet run --build`.
 - [charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
 - @Hellfall1
 - @Jonesyj83
+- @Patro TV
 - @RedxLus
 - @TormodSan
 - @Waloumi
@@ -171,3 +178,11 @@ alternatively try `dotnet run --build`.
 - @wild9
 
 For contributing to Chia Plot Status either by donating or otherwise.
+
+
+## See Chia Plot Status in action:
+
+Chia Plot Status on Patro TV (YouTube):
+
+[![](http://img.youtube.com/vi/JLVhG86-4UI/0.jpg)](http://www.youtube.com/watch?v=JLVhG86-4UI "Chia Plot Status on Patro TV")
+
