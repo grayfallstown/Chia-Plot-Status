@@ -111,6 +111,9 @@ Sorting by Progress
 File 'test.json' written
 ```
 
+Note: Write your tools or home automation in a way that new fields/properties/columns added to the exported files do not crash it.
+
+
 ## Need the columns in a different order?
 
 See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843351280
