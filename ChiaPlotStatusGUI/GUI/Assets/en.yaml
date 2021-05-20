@@ -57,6 +57,7 @@ Columns:
     ApproximateWorkingSpace: "Workingspace"
     FinalFileSize: "Final Size"
     Health: "Health"
+    LastLogLine: "Last Log Line"
 
 Tooltips:
     JsonExport: "Export shown data to Json. Check <Raw Export> if you want plain unformatted numbers."
@@ -197,3 +198,5 @@ Tooltips:
         error" in your logfile or it means the processes is not done and a new process appeared in the same logfile.
         If your logging is not messed up and logging multiple processes in parallel to the same file this means
         the process is dead.
+    LastLogLine: >
+        "Last line in this plots log file"

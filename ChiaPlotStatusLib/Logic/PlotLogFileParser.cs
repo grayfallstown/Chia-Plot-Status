@@ -33,6 +33,7 @@ namespace ChiaPlotStatus
             this.TailLineEmitter = new TailLineEmitter(path, closeOnEndOfFile, (line) =>
             {
                 CurrentPlotLog().IsLastLineTempError = false;
+                CurrentPlotLog().LastLogLine = line.Trim();
                 switch (line)
                 {
                     case var _ when plotSizeRg.IsMatch(line):
@@ -122,7 +123,7 @@ namespace ChiaPlotStatus
                         CurrentPlotLog().Errors++;
                         break;
                     case var _ when caughtPlottingError.IsMatch(line):
-                        CurrentPlotLog().IsLastLineTempError = true;
+                        CurrentPlotLog().CaughtPlottingError = true;
                         break;
                     case var _ when tmpFolders.IsMatch(line):
                         var match = tmpFolders.Matches(line)[0];

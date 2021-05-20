@@ -10,15 +10,15 @@ namespace ChiaPlotStatusGUI.GUI.Models
 {
     public class PlotCounts
     {
-        int PlotsInPhase1 { get; set; } = 0;
-        int PlotsInPhase2 { get; set; } = 0;
-        int PlotsInPhase3 { get; set; } = 0;
-        int PlotsInPhase4 { get; set; } = 0;
-        int PlotsInPhase5 { get; set; } = 0;
-        int Finished { get; set; } = 0;
-        int Running { get; set; } = 0;
-        int Concerning { get; set; } = 0;
-        int Failed { get; set; } = 0;
+        public int PlotsInPhase1 { get; set; } = 0;
+        public int PlotsInPhase2 { get; set; } = 0;
+        public int PlotsInPhase3 { get; set; } = 0;
+        public int PlotsInPhase4 { get; set; } = 0;
+        public int PlotsInPhase5 { get; set; } = 0;
+        public int Finished { get; set; } = 0;
+        public int Running { get; set; } = 0;
+        public int Concerning { get; set; } = 0;
+        public int Failed { get; set; } = 0;
 
         public PlotCounts() { }
 

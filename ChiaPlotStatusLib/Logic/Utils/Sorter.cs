@@ -66,8 +66,10 @@ namespace ChiaPlotStatus.Logic.Utils
                     case TypeCode.Single:
                         sortIndex = compare((Single?)valueA, (Single?)valueB);
                         break;
-                    case TypeCode.Decimal:
                     case TypeCode.Double:
+                        sortIndex = compare((Double?)valueA, (Double?)valueB);
+                        break;
+                    case TypeCode.Decimal:
                         sortIndex = compare((Decimal?)valueA, (Decimal?)valueB);
                         break;
                     case TypeCode.DateTime:
@@ -163,6 +165,21 @@ namespace ChiaPlotStatus.Logic.Utils
         }
 
         private static int compare(Single? a, Single? b)
+        {
+            if (a == null && b != null)
+                return +1;
+            if (a != null && b == null)
+                return -1;
+            if (a == null && b == null)
+                return 0;
+            if (a > b)
+                return +1;
+            if (a < b)
+                return -1;
+            return 0;
+        }
+
+        private static int compare(Double? a, Double? b)
         {
             if (a == null && b != null)
                 return +1;

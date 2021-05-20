@@ -46,6 +46,7 @@ namespace ChiaPlotStatus
         public string Health { get; set; } = "";
         public int PlaceInLogFile { get; set; } = -1;
         public string RunTimeSeconds { get; set; } = "";
+        public string LastLogLine { get; set; } = "";
 
         public PlotLogReadable(PlotLog plotLog)
         {
@@ -103,6 +104,7 @@ namespace ChiaPlotStatus
             this.Buckets = plotLog.Buckets.ToString();
             this.Threads = plotLog.Threads.ToString();
             this.Buffer = plotLog.Buffer + " MB";
+            this.LastLogLine = plotLog.LastLogLine;
             switch (plotLog.CurrentPhase)
             {
                 case 1:
