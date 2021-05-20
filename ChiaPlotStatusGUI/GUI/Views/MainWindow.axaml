@@ -577,22 +577,39 @@
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn >
           <DataGridTemplateColumn SortMemberPath="Phase1Seconds">
-						<DataGridTemplateColumn.Header>
-							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase1Seconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
-						</DataGridTemplateColumn.Header>
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate >
-								<StackPanel>
-									<ToolTip.Tip>
-										<StackPanel>
-											<TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase1Seconds}"></TextBlock>
-										</StackPanel>
-									</ToolTip.Tip>
-									<TextBlock Text="{Binding Phase1Seconds}" HorizontalAlignment="Right" ></TextBlock>
-								</StackPanel>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase1Seconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <ToolTip.Tip>
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase1Seconds}"></TextBlock>
+                    </StackPanel>
+                  </ToolTip.Tip>
+                  <TextBlock Text="{Binding Phase1Seconds}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase1Cpu">
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase1Cpu}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <ToolTip.Tip>
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase1Cpu}"></TextBlock>
+                    </StackPanel>
+                  </ToolTip.Tip>
+                  <TextBlock Text="{Binding Phase1Cpu}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
           <DataGridTemplateColumn SortMemberPath="Phase2Seconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase2Seconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
@@ -610,6 +627,23 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase2Cpu">
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase2Cpu}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <ToolTip.Tip>
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase2Cpu}"></TextBlock>
+                    </StackPanel>
+                  </ToolTip.Tip>
+                  <TextBlock Text="{Binding Phase2Cpu}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
           <DataGridTemplateColumn SortMemberPath="Phase3Seconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase3Seconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
@@ -627,6 +661,23 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase3Cpu">
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase3Cpu}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <ToolTip.Tip>
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase3Cpu}"></TextBlock>
+                    </StackPanel>
+                  </ToolTip.Tip>
+                  <TextBlock Text="{Binding Phase3Cpu}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
           <DataGridTemplateColumn SortMemberPath="Phase4Seconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase4Seconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
@@ -644,6 +695,23 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase4Cpu">
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Phase4Cpu}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <ToolTip.Tip>
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Phase4Cpu}"></TextBlock>
+                    </StackPanel>
+                  </ToolTip.Tip>
+                  <TextBlock Text="{Binding Phase4Cpu}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
           <DataGridTemplateColumn SortMemberPath="CopyTimeSeconds">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.CopyTimeSeconds}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>

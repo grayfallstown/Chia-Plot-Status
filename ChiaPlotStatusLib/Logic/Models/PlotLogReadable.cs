@@ -22,6 +22,10 @@ namespace ChiaPlotStatus
         public string CurrentTable { get; set; } = "";
         public string CurrentBucket { get; set; } = "";
         public string CurrentPhase { get; set; } = "";
+        public string Phase1Cpu { get; set; } = "";
+        public string Phase2Cpu { get; set; } = "";
+        public string Phase3Cpu { get; set; } = "";
+        public string Phase4Cpu { get; set; } = "";
         public string Phase1Seconds { get; set; } = "";
         public string Phase2Seconds { get; set; } = "";
         public string Phase3Seconds { get; set; } = "";
@@ -82,6 +86,10 @@ namespace ChiaPlotStatus
             this.StartDate = formatDateTime(plotLog.StartDate);
             this.FinishDate = formatDateTime(plotLog.FinishDate);
             this.TimeRemaining = formatSeconds(plotLog.TimeRemaining);
+            this.Phase1Cpu = formatCpuUsage(plotLog.Phase1Cpu);
+            this.Phase2Cpu = formatCpuUsage(plotLog.Phase2Cpu);
+            this.Phase3Cpu = formatCpuUsage(plotLog.Phase3Cpu);
+            this.Phase4Cpu = formatCpuUsage(plotLog.Phase4Cpu);
             this.Phase1Seconds = formatSeconds(plotLog.Phase1Seconds);
             this.Phase2Seconds = formatSeconds(plotLog.Phase2Seconds);
             this.Phase3Seconds = formatSeconds(plotLog.Phase3Seconds);
@@ -113,6 +121,14 @@ namespace ChiaPlotStatus
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
             this.Health = formatHealth(plotLog.Health);
             this.PlaceInLogFile = plotLog.PlaceInLogFile;
+        }
+
+        private string formatCpuUsage(double usage)
+        {
+            if (usage < 0.01d)
+                return "";
+            else
+                return usage.ToString("0.0 '%'");
         }
 
         private string formatSeconds(int seconds)

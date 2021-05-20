@@ -60,9 +60,13 @@ namespace ChiaPlotStatusLib.Logic.Models
             columns.Order.Add("CurrentTable");
             columns.Order.Add("CurrentBucket");
             columns.Order.Add("Phase1Seconds");
+            columns.Order.Add("Phase1Cpu");
             columns.Order.Add("Phase2Seconds");
+            columns.Order.Add("Phase2Cpu");
             columns.Order.Add("Phase3Seconds");
+            columns.Order.Add("Phase3Cpu");
             columns.Order.Add("Phase4Seconds");
+            columns.Order.Add("Phase4Cpu");
             columns.Order.Add("CopyTimeSeconds");
             columns.Order.Add("TotalSeconds");
             columns.Order.Add("Buffer");

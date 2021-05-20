@@ -59,6 +59,7 @@ namespace ChiaPlotStatus
                         break;
                     case var _ when phase1Rg.IsMatch(line):
                         CurrentPlotLog().Phase1Seconds = int.Parse(phase1Rg.Matches(line)[0].Groups[1].Value);
+                        CurrentPlotLog().Phase1Cpu = double.Parse(phase1Rg.Matches(line)[0].Groups[2].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().CurrentBucket = 0;
                         break;
                     case var _ when phase1Table.IsMatch(line):
@@ -68,6 +69,7 @@ namespace ChiaPlotStatus
                         break;
                     case var _ when phase2Rg.IsMatch(line):
                         CurrentPlotLog().Phase2Seconds = int.Parse(phase2Rg.Matches(line)[0].Groups[1].Value);
+                        CurrentPlotLog().Phase2Cpu = double.Parse(phase2Rg.Matches(line)[0].Groups[2].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().CurrentBucket = 0;
                         break;
                     case var _ when phase2Table.IsMatch(line):
@@ -78,6 +80,7 @@ namespace ChiaPlotStatus
                         break;
                     case var _ when phase3Rg.IsMatch(line):
                         CurrentPlotLog().Phase3Seconds = int.Parse(phase3Rg.Matches(line)[0].Groups[1].Value);
+                        CurrentPlotLog().Phase3Cpu = double.Parse(phase3Rg.Matches(line)[0].Groups[2].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().CurrentBucket = 0;
                         CurrentPlotLog().CurrentPhase = 4;
                         break;
@@ -88,6 +91,7 @@ namespace ChiaPlotStatus
                         break;
                     case var _ when phase4Rg.IsMatch(line):
                         CurrentPlotLog().Phase4Seconds = int.Parse(phase4Rg.Matches(line)[0].Groups[1].Value);
+                        CurrentPlotLog().Phase4Cpu = double.Parse(phase4Rg.Matches(line)[0].Groups[2].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().CurrentBucket = 0;
                         CurrentPlotLog().CurrentPhase = 5;
                         break;
@@ -193,10 +197,10 @@ namespace ChiaPlotStatus
         public static Regex bucketsRg = new Regex("^Using (\\d+) buckets", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex threadsRg = new Regex("^Using (\\d+) threads of stripe size (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex startDateRg = new Regex("^Starting phase 1/4: Forward Propagation into tmp files\\.\\.\\. (.+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        public static Regex phase1Rg = new Regex("^Time for phase 1 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        public static Regex phase2Rg = new Regex("^Time for phase 2 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        public static Regex phase3Rg = new Regex("^Time for phase 3 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        public static Regex phase4Rg = new Regex("^Time for phase 4 = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase1Rg = new Regex("^Time for phase 1 = (\\d+)\\.\\d+ seconds. CPU \\((\\d+\\.\\d+)%\\) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase2Rg = new Regex("^Time for phase 2 = (\\d+)\\.\\d+ seconds. CPU \\((\\d+\\.\\d+)%\\) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase3Rg = new Regex("^Time for phase 3 = (\\d+)\\.\\d+ seconds. CPU \\((\\d+\\.\\d+)%\\) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex phase4Rg = new Regex("^Time for phase 4 = (\\d+)\\.\\d+ seconds. CPU \\((\\d+\\.\\d+)%\\) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex copyTime = new Regex("^Copy time = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex totalTimeRg = new Regex("^Total time = (\\d+)\\.\\d+ seconds", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex plotNameRg = new Regex("^Renamed final file from \".+\" to (\".+\")", RegexOptions.Compiled | RegexOptions.IgnoreCase);

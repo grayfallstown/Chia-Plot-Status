@@ -85,6 +85,10 @@ namespace ChiaPlotStatus.GUI.Models
         public string CurrentTable { get; set; } = "";
         public string CurrentBucket { get; set; } = "";
         public string CurrentPhase { get; set; } = "";
+        public string Phase1Cpu { get; set; } = "";
+        public string Phase2Cpu { get; set; } = "";
+        public string Phase3Cpu { get; set; } = "";
+        public string Phase4Cpu { get; set; } = "";
         public string Phase1Seconds { get; set; } = "";
         public string Phase2Seconds { get; set; } = "";
         public string Phase3Seconds { get; set; } = "";
@@ -118,6 +122,10 @@ namespace ChiaPlotStatus.GUI.Models
         public string CurrentTable { get; set; } = "";
         public string CurrentBucket { get; set; } = "";
         public string CurrentPhase { get; set; } = "";
+        public string Phase1Cpu { get; set; } = "";
+        public string Phase2Cpu { get; set; } = "";
+        public string Phase3Cpu { get; set; } = "";
+        public string Phase4Cpu { get; set; } = "";
         public string Phase1Seconds { get; set; } = "";
         public string Phase2Seconds { get; set; } = "";
         public string Phase3Seconds { get; set; } = "";

@@ -35,6 +35,10 @@ Columns:
     CurrentTable: "Cur. Table"
     CurrentBucket: "Cur. Bucket"
     CurrentPhase: "Cur. Phase"
+    Phase1Cpu: "P1 CPU"
+    Phase2Cpu: "P2 CPU"
+    Phase3Cpu: "P3 CPU"
+    Phase4Cpu: "P4 CPU"
     Phase1Seconds: "Phase 1 🕐"
     Phase2Seconds: "Phase 2 🕐"
     Phase3Seconds: "Phase 3 🕐"
@@ -91,6 +95,14 @@ Tooltips:
         This shows which bucket in the current table is currently worked on.
     CurrentPhase: >
         Shows in which of the four phases the plotting process is. It does not go back to a previous phase.
+    Phase1Cpu: >
+        "CPU Usage during phase 1."
+    Phase2Cpu: >
+        "CPU Usage during phase 2."
+    Phase3Cpu: >
+        "CPU Usage during phase 3."
+    Phase4Cpu: >
+        "CPU Usage during phase 4."
     Phase1Seconds: >
         The time this plot process took to complete phase 1.
         This is the only phase with multithreading enabled and the only one you can optimize with the threads option.
