@@ -47,6 +47,7 @@ namespace ChiaPlotStatus
         public bool IsLastLineTempError { get; set; } = false;
         public int PlaceInLogFile { get; set; } = 1;
         public int RunTimeSeconds { get; set; } = 0;
+        public bool caughtPlottingError { get; set; } = false;
 
         public void UpdateProgress()
         {
@@ -91,6 +92,9 @@ namespace ChiaPlotStatus
                 Progress = 0;
         }
 
+        /**
+         * Run UpdateHealth before calling
+         */
         public bool IsRunning()
         {
             switch (Health)
@@ -240,10 +244,10 @@ namespace ChiaPlotStatus
 
             // manual is set to false for now, it will be overwritten in ChiaPlotStatus.cs if necessary
             bool manual = false;
-            if (notLastAndNotDone)
+            if (notLastAndNotDone || this.caughtPlottingError)
                 this.Health = new ConfirmedDead(manual);
             else if (lastModfiedAtError)
-                this.Health = new PossiblyDead(lastWriteMinutesAgo, lastModifiedAtErrorThreashold);
+                this.Health = new PossiblyDead(lastWriteMinutesAgo, lastModifiedAtWarningThreashold);
             else if (lastModfiedAtWarning)
                 this.Health = new Concerning(lastWriteMinutesAgo, lastModifiedAtWarningThreashold);
             else if (lastLineError)

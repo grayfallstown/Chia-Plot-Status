@@ -181,6 +181,7 @@ Tooltips:
         "✗ Dead (m)": You manually marked this process as dead.
 
 
-        "✗ Dead": Ouch. It means the processes is not done and a new process appeared in the same logfile.
+        "✗ Dead": Ouch. The chia plotter produced a fatal error. There will be something like "Caught plotting
+        error" in your logfile or it means the processes is not done and a new process appeared in the same logfile.
         If your logging is not messed up and logging multiple processes in parallel to the same file this means
         the process is dead.

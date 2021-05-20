@@ -117,6 +117,9 @@ namespace ChiaPlotStatus
                         CurrentPlotLog().IsLastLineTempError = true;
                         CurrentPlotLog().Errors++;
                         break;
+                    case var _ when caughtPlottingError.IsMatch(line):
+                        CurrentPlotLog().IsLastLineTempError = true;
+                        break;
                     case var _ when tmpFolders.IsMatch(line):
                         var match = tmpFolders.Matches(line)[0];
                         var plotLog = CurrentPlotLog();
@@ -209,5 +212,6 @@ namespace ChiaPlotStatus
         public static Regex approximateWorkingSpace = new Regex("^Approximate working space used \\(without final file\\): (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex finalFileSize = new Regex("^Final File size: (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex destinationDirectory = new Regex("^Final Directory is: (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex caughtPlottingError = new Regex("^Caught plotting error: .*", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     }
 }
