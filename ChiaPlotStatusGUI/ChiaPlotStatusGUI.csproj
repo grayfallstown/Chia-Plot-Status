@@ -10,7 +10,7 @@
     <Company>grayfallstown</Company>
     <Authors>grayfallstown</Authors>
     <ApplicationIcon>Icon - Color changed.ico</ApplicationIcon>
-    <Version>0.9.12</Version>
+    <Version>0.9.13</Version>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="GUI\Assets\**" />
