@@ -61,6 +61,7 @@ Columns:
     FinalFileSize: "Final Size"
     Health: "Health"
     LastLogLine: "Last Log Line"
+    PlaceInLogFile: "Nr"
 
 Tooltips:
     JsonExport: "Export shown data to Json. Check <Raw Export> if you want plain unformatted numbers."
@@ -203,3 +204,6 @@ Tooltips:
         the process is dead.
     LastLogLine: >
         "Last line in this plots log file"
+    PlaceInLogFile: >
+         When using --num 20 to plot 20 plots in a row this shows you the current plot nr on the left and the
+         size of the queue on the right

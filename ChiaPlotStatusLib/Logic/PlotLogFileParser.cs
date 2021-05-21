@@ -115,6 +115,9 @@ namespace ChiaPlotStatus
                     case var _ when finalFileSize.IsMatch(line):
                         CurrentPlotLog().FinalFileSize = finalFileSize.Matches(line)[0].Groups[1].Value;
                         break;
+                    case var _ when queueSize.IsMatch(line):
+                        CurrentPlotLog().QueueSize = int.Parse(queueSize.Matches(line)[0].Groups[1].Value);
+                        break;
                     case var _ when writePloblemRg.IsMatch(line):
                     case var _ when readPloblemRg.IsMatch(line):
                     case var _ when copyPloblemRg.IsMatch(line):
@@ -187,6 +190,7 @@ namespace ChiaPlotStatus
             newPlotLog.LogFile = oldPlotLog.LogFile;
             newPlotLog.LogFolder = oldPlotLog.LogFolder;
             newPlotLog.PlaceInLogFile = oldPlotLog.PlaceInLogFile + 1;
+            newPlotLog.QueueSize = oldPlotLog.QueueSize;
             PlotLogs.Add(newPlotLog);
             return newPlotLog;
         }
@@ -218,5 +222,6 @@ namespace ChiaPlotStatus
         public static Regex finalFileSize = new Regex("^Final File size: (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex destinationDirectory = new Regex("^Final Directory is: (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex caughtPlottingError = new Regex("^Caught plotting error: .*", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex queueSize = new Regex(".* Starting plot \\d+/(\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     }
 }

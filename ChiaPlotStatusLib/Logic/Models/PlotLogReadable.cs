@@ -44,7 +44,7 @@ namespace ChiaPlotStatus
         public string ApproximateWorkingSpace { get; set; } = "";
         public string FinalFileSize { get; set; } = "";
         public string Health { get; set; } = "";
-        public int PlaceInLogFile { get; set; } = -1;
+        public string PlaceInLogFile { get; set; } = "";
         public string RunTimeSeconds { get; set; } = "";
         public string LastLogLine { get; set; } = "";
         public bool IsSelected { get; set; } = false;
@@ -123,7 +123,7 @@ namespace ChiaPlotStatus
             this.LogFolder = plotLog.LogFolder;
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
             this.Health = formatHealth(plotLog.Health);
-            this.PlaceInLogFile = plotLog.PlaceInLogFile;
+            this.PlaceInLogFile = plotLog.PlaceInLogFile + "/" + plotLog.QueueSize;
         }
 
         private string formatCpuUsage(double usage)
@@ -150,11 +150,11 @@ namespace ChiaPlotStatus
 
         private string formatDateTime(DateTime? dateTime)
         {
-            // decided agains local date format for now
             if (dateTime == null)
                 return "";
             else
-                // forced to make it non nullable or it does not find ToString(format)
+                // decided against local date format for now
+                // forced to cast it to a non nullable or it does not find ToString(format)
                 return ((DateTime)dateTime).ToString("MM/dd HH:mm");
         }
 

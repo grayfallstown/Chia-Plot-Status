@@ -49,6 +49,7 @@ namespace ChiaPlotStatus
         public HealthIndicator Health { get; set; } = Healthy.Instance;
         public bool IsLastInLogFile { get; set; } = true;
         public bool IsLastLineTempError { get; set; } = false;
+        public int QueueSize { get; set; } = 1;
         public int PlaceInLogFile { get; set; } = 1;
         public int RunTimeSeconds { get; set; } = 0;
         public bool CaughtPlottingError { get; set; } = false;

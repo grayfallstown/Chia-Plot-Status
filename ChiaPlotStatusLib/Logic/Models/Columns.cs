@@ -74,6 +74,7 @@ namespace ChiaPlotStatusLib.Logic.Models
             columns.Order.Add("Threads");
             columns.Order.Add("LogFolder");
             columns.Order.Add("LogFile");
+            columns.Order.Add("PlaceInLogFile");
             columns.Order.Add("ApproximateWorkingSpace");
             columns.Order.Add("FinalFileSize");
             columns.Order.Add("LastLogLine");

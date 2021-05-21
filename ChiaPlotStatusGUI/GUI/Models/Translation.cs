@@ -111,6 +111,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string FinalFileSize { get; set; } = "";
         public string Health { get; set; } = "";
         public string LastLogLine { get; set; } = "";
+        public string PlaceInLogFile { get; set; } = "";
     }
 
     public class Columns
@@ -149,5 +150,6 @@ namespace ChiaPlotStatus.GUI.Models
         public string FinalFileSize { get; set; } = "";
         public string Health { get; set; } = "";
         public string LastLogLine { get; set; } = "";
+        public string PlaceInLogFile { get; set; } = "";
     }
 }
