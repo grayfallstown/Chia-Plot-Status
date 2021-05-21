@@ -157,6 +157,7 @@ alternatively try `dotnet run --build`.
 ## Thanks to
 
 - [charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
+- @Cuello
 - @Hellfall1
 - @Jonesyj83
 - @Lyushen
