@@ -85,7 +85,7 @@ Other Options: Mount the log folders of all rigs as network shares (via samba on
 
 Best Practice:
 - Only delete log files of finished plots if your hardware or the way you plot has significantly changed. Chia Plot Status uses finished plots to calculate ETA/Time Remaining as well as warning/error thresholds. If you delete finished log files the quality of those values decreases significantly.
-- Use SSHFS to access the log directories multiple remote plotting rigs
+- Use SSHFS to access the log directories of your plotting rigs
 - Each plotting rig should have its own log folder, so they don't mix and mess up estimates and warning thresholds for each other.
 - Always log locally. If you log directly to a network share / NAS your plotting processes will crash if the connection becomes flaky. Prefer connecting your host machine (which runs Chia Plot Status) to networkshares on the plotting rigs, not the other way around.
 
