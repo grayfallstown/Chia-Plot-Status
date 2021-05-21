@@ -21,6 +21,8 @@ namespace ChiaPlotStatus.GUI.Models
         public bool? AlwaysDoFullRead { get; set; } = false;
         public Columns Columns { get; set; } = Columns.Default();
         public Filter Filter { get; set; } = new();
+        public string? SortProperty { get; set; } = "Progress";
+        public bool? SortAsc { get; set; } = true;
 
         public Settings()
         {
@@ -52,6 +54,10 @@ namespace ChiaPlotStatus.GUI.Models
                         this.AlwaysDoFullRead = fromFile.AlwaysDoFullRead;
                     if (fromFile.Filter != null)
                         this.Filter = fromFile.Filter;
+                    if (fromFile.SortProperty != null)
+                        this.SortProperty = fromFile.SortProperty;
+                    if (fromFile.SortAsc != null)
+                        this.SortAsc = fromFile.SortAsc;
                     if (fromFile.Columns != null)
                     {
                         this.Columns = fromFile.Columns;

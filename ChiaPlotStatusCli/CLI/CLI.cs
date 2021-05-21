@@ -46,7 +46,7 @@ namespace ChiaPlotStatus.CLI
             Filter filter = SetupFilter(options);
             string sortProperty = options.SortProperty;
             if (string.IsNullOrEmpty(sortProperty))
-                sortProperty = "Progress";
+                sortProperty = PlotManager.Settings.SortProperty;
             Console.Out.WriteLine("Sorting by " + sortProperty);
             List<(PlotLog, PlotLogReadable)> plotLogs = PlotManager.PollPlotLogs(options.SortProperty, options.SortAsc, options.Search, filter);
             ExportToFile(options, plotLogs);

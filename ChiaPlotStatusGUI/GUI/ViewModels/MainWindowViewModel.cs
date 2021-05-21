@@ -33,8 +33,6 @@ namespace ChiaPlotStatus.ViewModels
 
         public string? Search { get; set; } = null;
 
-        public string SortProperty { get; set; } = "Progress";
-        public bool SortAsc { get; set; } = true;
         public ObservableCollection<string> SortProperties = new();
 
         public Language Language { get; set; }
@@ -261,7 +259,7 @@ namespace ChiaPlotStatus.ViewModels
         {
             PlotLogs.Clear();
             PlotLogTuples = new();
-            foreach (var plotLog in PlotManager.PollPlotLogs(SortProperty, SortAsc, Search, PlotManager.Settings.Filter))
+            foreach (var plotLog in PlotManager.PollPlotLogs(PlotManager.Settings.SortProperty, (bool)PlotManager.Settings.SortAsc, Search, PlotManager.Settings.Filter))
             {
                 PlotLogs.Add(plotLog.Item2);
                 PlotLogTuples.Add(plotLog);
@@ -283,20 +281,21 @@ namespace ChiaPlotStatus.ViewModels
 
             MainWindow.Instance.SortChangeWorkaround = (headerText) =>
             {
-                var oldSortProperty = SortProperty;
+                var oldSortProperty = PlotManager.Settings.SortProperty;
                 foreach (var property in typeof(Columns).GetProperties())
                 {
                     string translation = (string)property.GetValue(Language.Columns);
                     if (string.Equals(headerText, translation))
                     {
-                        SortProperty = property.Name;
+                        PlotManager.Settings.SortProperty = property.Name;
                         break;
                     }
                 }
-                if (string.Equals(SortProperty, oldSortProperty))
-                    SortAsc = !SortAsc;
+                if (string.Equals(PlotManager.Settings.SortProperty, oldSortProperty))
+                    PlotManager.Settings.SortAsc = !PlotManager.Settings.SortAsc;
                 // Debug.WriteLine("SearchProperty: " + SortProperty + ", ASC: " + SortAsc);
                 LoadPlotLogs();
+                PlotManager.Settings.Persist();
                 return true;
             };
 
