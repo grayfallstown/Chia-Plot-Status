@@ -63,6 +63,9 @@ namespace ChiaPlotStatus.GUI.Models
         public string Yaml { get; set; } = "";
         public string CSV { get; set; } = "";
         public string MarkAsDead { get; set; } = "";
+        public string SelectAllConcerningCommand { get; set; } = "";
+        public string SelectAllPossiblyDeadCommand { get; set; } = "";
+        public string MarkSelectionAsDead { get; set; } = "";
         public string UnmarkAsDead { get; set; } = "";
         public string Abort { get; set; } = "";
         public string Copy { get; set; } = "";

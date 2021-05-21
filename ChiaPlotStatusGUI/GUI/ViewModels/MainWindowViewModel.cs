@@ -27,7 +27,7 @@ namespace ChiaPlotStatus.ViewModels
     {
         public ChiaPlotStatus PlotManager { get; internal set; }
 
-        public ObservableCollection<PlotLogReadable> PlotLogs { get; } = new();
+        public ObservableCollection<PlotLogReadable> PlotLogs { get; set; } = new();
         public List<(PlotLog, PlotLogReadable)> PlotLogTuples { get; set; } = new();
         public PlotCounts PlotCounts { get; set; }
 
@@ -49,6 +49,9 @@ namespace ChiaPlotStatus.ViewModels
         public ReactiveCommand<Unit, Unit> IncreaseFontSizeCommand { get; set; }
         public ReactiveCommand<Unit, Unit> DecreaseFontSizeCommand { get; set; }
         public ReactiveCommand<PlotLogReadable, Unit> MarkAsDeadCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> MarkSelectionAsDeadCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> SelectAllPossiblyDeadCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> SelectAllConcerningCommand { get; set; }
         public DispatcherTimer RefreshTimer { get; set; }
 
         public MainWindowViewModel()
@@ -69,11 +72,11 @@ namespace ChiaPlotStatus.ViewModels
             InitializeThemeSwitcher();
             InitializeRefreshInterval();
             InitializeRefreshPauseButton();
+            InitializeSelection();
             InitializeFilterUpdates();
             SetGridHeight();
             SortColumns();
         }
-
 
         private void SortColumns()
         {
@@ -102,22 +105,95 @@ namespace ChiaPlotStatus.ViewModels
             var button = MainWindow.Instance.Find<Button>("RefreshPauseButton");
             if (button != null)
             {
-                button.Click += (sender, e) =>
-                {
-                    if (RefreshTimer.IsEnabled)
-                    {
-                        Debug.WriteLine("pausing refresh");
-                        button.Content = "Refresh ■";
-                        RefreshTimer.Stop();
-                    } else
-                    {
-                        Debug.WriteLine("continuing refresh");
-                        button.Content = "Refresh ▶";
-                        RefreshTimer.Start();
-                        LoadPlotLogs();
-                    }
-                };
+                button.Click += (sender, e) => SetPauseRefreshState(null);
             }
+        }
+
+        private void SetPauseRefreshState(bool? pause)
+        {
+            if (pause == null)
+            {
+                pause = RefreshTimer.IsEnabled;
+            }
+            var button = MainWindow.Instance.Find<Button>("RefreshPauseButton");
+            if (pause == true)
+            {
+                Debug.WriteLine("pausing refresh");
+                button.Content = "Refresh ■";
+                RefreshTimer.Stop();
+            } else {
+                Debug.WriteLine("continuing refresh");
+                button.Content = "Refresh ▶";
+                RefreshTimer.Start();
+                LoadPlotLogs();
+            }
+        }
+
+        private void InitializeSelection()
+        {
+            MainWindow.Instance.SelectionChangedAction = () => SetPauseRefreshState(true);
+            this.SelectAllPossiblyDeadCommand = ReactiveCommand.Create(() => Select(true, false));
+            this.SelectAllConcerningCommand = ReactiveCommand.Create(() => Select(false, true));
+
+            void Select(bool possiblyDead, bool concerning)
+            {
+                foreach (var plotLogReadable in PlotLogs)
+                {
+                    plotLogReadable.IsSelected = false;
+                    var plotLog = getPlotLogByReadable(plotLogReadable);
+                    switch (plotLog.Health)
+                    {
+                        case PossiblyDead pd:
+                            if (possiblyDead)
+                                plotLogReadable.IsSelected = true;
+                            break;
+                        case Concerning c:
+                            if (concerning)
+                                plotLogReadable.IsSelected = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                // work around avalonia datagrid not updating the checkbox even
+                // with TwoWay Binding as I refuse to re-implement plotLog and
+                // plotLogReadable as ReactiveObjects and copy the data from
+                // plotLog/plotLogReadable to its reactive counterparts (thats
+                // not dry!) or even worse, make plotLog itself reactive and
+                // thereby adding gui code and dependencies to the non-gui
+                // library and cli
+                ObservableCollection<PlotLogReadable> plotLogsTemp = new();
+                foreach (var plotLogReadable in PlotLogs)
+                    plotLogsTemp.Add(plotLogReadable);
+                PlotLogs = plotLogsTemp;
+                this.RaisePropertyChanged("PlotLogs");
+
+                MainWindow.Instance.SelectionChangedAction();
+            }
+
+            this.MarkSelectionAsDeadCommand = ReactiveCommand.Create(() =>
+            {
+                foreach (var plotLog in PlotLogs)
+                {
+                    if (plotLog.IsSelected)
+                    {
+                        var mark = new MarkOfDeath(plotLog);
+                        if (!PlotManager.Settings.MarksOfDeath.Contains(mark))
+                            PlotManager.Settings.MarksOfDeath.Add(mark);
+                    }
+                }
+                PlotManager.Settings.Persist();
+                SetPauseRefreshState(false);
+            });
+        }
+
+        private PlotLog getPlotLogByReadable(PlotLogReadable plotLogReadable)
+        {
+            foreach (var tuple in PlotLogTuples)
+                if (tuple.Item2 == plotLogReadable)
+                    return tuple.Item1;
+            throw new Exception("getPlotLogByReadable did not find the match");
         }
 
         private void InitializeThemeSwitcher()

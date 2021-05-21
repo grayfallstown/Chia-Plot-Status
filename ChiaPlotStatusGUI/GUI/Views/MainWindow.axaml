@@ -19,11 +19,11 @@
 		<Style Selector="DataGridColumnHeader > Button">
 			<Setter Property="BorderThickness" Value="0" />
 		</Style>
-		<Style Selector="StackPanel.Export > Border">
+		<Style Selector="StackPanel.Export > Border, StackPanel.Selection > Border">
 			<Setter Property="Margin" Value="0" />
 			<Setter Property="Padding" Value="2" />
 		</Style>
-		<Style Selector="StackPanel.Export Button">
+		<Style Selector="StackPanel.Export Button, StackPanel.Selection Button">
 			<Setter Property="Height" Value="25" />
 			<Setter Property="Margin" Value="0" />
 			<Setter Property="Padding" Value="2" />
@@ -130,6 +130,7 @@
       <Setter Property="FontSize" Value="13" />
     </Style>
   </Window.Styles>
+
 
 	<ScrollViewer Name="WindowContext">
 		<StackPanel>
@@ -240,9 +241,6 @@
 								</ToolTip.Tip>
 							</CheckBox>
 						</Border>
-            <Border>
-              <Button Name="RefreshPauseButton" Content="Refresh ▶"></Button>
-            </Border>
 					</StackPanel>
 				</StackPanel>
         <StackPanel Name="Filters" Classes="Filters" Orientation="Vertical">
@@ -341,11 +339,38 @@
             <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.PlotCounts.PlotsInPhase5, Mode=TwoWay}"/>
           </StackPanel>
         </StackPanel>
+
+        <StackPanel Orientation="Vertical" Classes="Selection">
+          <Border>
+            <Button Name="RefreshPauseButton" Content="Refresh ▶"></Button>
+          </Border>
+          <Border>
+            <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Buttons.SelectAllConcerningCommand}" Command="{Binding ElementName=WindowContext, Path=DataContext.SelectAllConcerningCommand}"></Button>
+          </Border>
+          <Border>
+            <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Buttons.SelectAllPossiblyDeadCommand}" Command="{Binding ElementName=WindowContext, Path=DataContext.SelectAllPossiblyDeadCommand}"></Button>
+          </Border>
+          <Border>
+            <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Buttons.MarkSelectionAsDead}" Command="{Binding ElementName=WindowContext, Path=DataContext.MarkSelectionAsDeadCommand}"></Button>
+          </Border>
+        </StackPanel>
 			</StackPanel>
 
       <DataGrid Name="LogDataGrid" Items="{Binding PlotLogs}" IsReadOnly="true" MinHeight="80" CanUserSortColumns="false" CanUserResizeColumns="true">
         <DataGrid.Columns>
-					<DataGridTemplateColumn SortMemberPath="Tmp1Drive">
+          <DataGridTemplateColumn SortMemberPath="Selection">
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Selection}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <StackPanel>
+                  <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Checked="OnSelectionChanged"></CheckBox>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Tmp1Drive">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Tmp1Drive}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
 						</DataGridTemplateColumn.Header>

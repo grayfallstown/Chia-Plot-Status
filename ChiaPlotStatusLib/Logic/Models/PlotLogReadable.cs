@@ -47,6 +47,7 @@ namespace ChiaPlotStatus
         public int PlaceInLogFile { get; set; } = -1;
         public string RunTimeSeconds { get; set; } = "";
         public string LastLogLine { get; set; } = "";
+        public bool IsSelected { get; set; } = false;
 
         public PlotLogReadable(PlotLog plotLog)
         {

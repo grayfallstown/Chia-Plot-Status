@@ -22,6 +22,7 @@ namespace ChiaPlotStatus.Views
         public Func<string, bool> TextChangeWorkaround { get; set; }
         public Func<string, bool> SortChangeWorkaround { get; set; }
         public Func<string, bool> ThemeSwitchWorkaround { get; set; }
+        public Action SelectionChangedAction { get; set; }
 
         public MainWindow()
         {
@@ -85,6 +86,13 @@ namespace ChiaPlotStatus.Views
                 }
             };
         }
+
+
+        public void OnSelectionChanged(object sender, RoutedEventArgs e)
+        {
+            SelectionChangedAction();
+        }
+
 
         public void OpenLogViewerWindow(object sender, RoutedEventArgs e)
         {
