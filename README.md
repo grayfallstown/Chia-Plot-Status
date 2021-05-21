@@ -63,6 +63,12 @@ The last part with Tee-Object writes the log to the PowerShell and to a file wit
 
 You can download a [full example script with Tee-Object](https://gist.github.com/grayfallstown/8530acb84eb131d3dae074e4be23badb) as well.
 
+
+## Need the columns in a different order?
+
+See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843351280
+
+
 ## Working with many distributed plotting rigs
 
 **Recommended way:** Use sshfs (with [sshfs-win](https://github.com/billziss-gh/sshfs-win) for Windows) to securely mount the log dirs of your plotting rigs on your desktop via highly encrypted network connection, where it is your desktop that initiates the mount. This can be set up so that the desktop can only access the log dirs and only has read access. Even if you use remote plotting rigs that you access over the internet this is the most secure way and you most likely access your remote servers via ssh already.
@@ -71,9 +77,17 @@ Other Options: Mount the log folders of all rigs as network shares (via samba on
 
 
 Best Practice:
-- Each plotting rig should have its own log folder, so they don't mix and mess up estimates and warning thresholds for each other.
-- Always log locally. If you log directly to a network share / NAS your plotting can crash if the connection becomes flaky. Prefer connecting your host machine to networkshares on the plotters, not the other way around or use your own cloud solutions which offer local folders (should be pretty much all of them).
 - Only delete log files of finished plots if your hardware or the way you plot has significantly changed. Chia Plot Status uses finished plots to calculate ETA/Time Remaining as well as warning/error thresholds. If you delete finished log files the quality of those values decreases significantly.
+- Use SSHFS to access the log directories multiple remote plotting rigs
+- Each plotting rig should have its own log folder, so they don't mix and mess up estimates and warning thresholds for each other.
+- Always log locally. If you log directly to a network share / NAS your plotting processes will crash if the connection becomes flaky. Prefer connecting your host machine (which runs Chia Plot Status) to networkshares on the plotting rigs, not the other way around.
+
+
+## Troubleshooting
+
+If you use Cloud Sync Services, rsync/scp cronjobs or tools like Syncthing to collect your log files you might run into an issue with the files not properly syncing. Sonething like `The process cannot access the file because it is being used by another process.`. See [Issue #40](https://github.com/grayfallstown/Chia-Plot-Status/issues/40#issuecomment-841025993) for how to fix that, or even better, use sshfs instead.
+
+If Chia Plot Status does no longer start, try renaming `ChiaPlotStatu.config.json` to `ChiaPlotStatu.config.json.backup`. The file is located in your home directory at `C:\Users\<your username>\ChiaPlotStatu.config.json` on windows, `/home/<your username>/ChiaPlotStatu.config.json` on linux and `<your user profile directory>/ChiaPlotStatu.config.json` on mac.
 
 ## Custom tools / Home automation
 
@@ -115,18 +129,6 @@ File 'test.json' written
 ```
 
 Note: Write your tools or home automation in a way that new fields/properties/columns added to the exported files do not crash it.
-
-
-## Need the columns in a different order?
-
-See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843351280
-
-
-## Troubleshooting
-
-If you use Cloud Sync Services, rsync/scp cronjobs or tools like Syncthing to collect your log files you might run into an issue with the files not properly syncing. Sonething like `The process cannot access the file because it is being used by another process.`. See [Issue #40](https://github.com/grayfallstown/Chia-Plot-Status/issues/40#issuecomment-841025993) for how to fix that, or even better, use sshfs instead.
-
-If Chia Plot Status does no longer start, try renaming `ChiaPlotStatu.config.json` to `ChiaPlotStatu.config.json.backup`. The file is located in your home directory at `C:\Users\<your username>\ChiaPlotStatu.config.json` on windows, `/home/<your username>/ChiaPlotStatu.config.json` on linux and `<your user profile directory>/ChiaPlotStatu.config.json` on mac.
 
 
 ## Open Source
