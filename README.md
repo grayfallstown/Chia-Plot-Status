@@ -69,6 +69,13 @@ You can download a [full example script with Tee-Object](https://gist.github.com
 See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843351280
 
 
+## See Chia Plot Status in action:
+
+Chia Plot Status on Patro TV (YouTube):
+
+[![](http://img.youtube.com/vi/JLVhG86-4UI/0.jpg)](http://www.youtube.com/watch?v=JLVhG86-4UI "Chia Plot Status on Patro TV")
+
+
 ## Working with many distributed plotting rigs
 
 **Recommended way:** Use sshfs (with [sshfs-win](https://github.com/billziss-gh/sshfs-win) for Windows) to securely mount the log dirs of your plotting rigs on your desktop via highly encrypted network connection, where it is your desktop that initiates the mount. This can be set up so that the desktop can only access the log dirs and only has read access. Even if you use remote plotting rigs that you access over the internet this is the most secure way and you most likely access your remote servers via ssh already.
@@ -191,11 +198,3 @@ alternatively try `dotnet run --build`.
 - @wild9
 
 For contributing to Chia Plot Status either by donating or otherwise.
-
-
-## See Chia Plot Status in action:
-
-Chia Plot Status on Patro TV (YouTube):
-
-[![](http://img.youtube.com/vi/JLVhG86-4UI/0.jpg)](http://www.youtube.com/watch?v=JLVhG86-4UI "Chia Plot Status on Patro TV")
-
