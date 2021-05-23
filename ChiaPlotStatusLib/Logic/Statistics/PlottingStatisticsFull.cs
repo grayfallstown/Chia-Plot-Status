@@ -27,6 +27,7 @@ namespace ChiaPlotStatusGUI.GUI.ViewModels
         public int Phase4Completed { get; set; }
         public int CopyTimeAvgTimeNeed { get; set; }
         public int CopyTimeCompleted { get; set; }
+        public int TotalAvgTimeNeed { get; set; }
 
         public PlottingStatisticsFull(PlottingStatisticsID id, PlottingStatistics stats)
         {
@@ -47,6 +48,8 @@ namespace ChiaPlotStatusGUI.GUI.ViewModels
             this.Phase4Completed = stats.Phase4Completed;
             this.CopyTimeAvgTimeNeed = stats.CopyTimeAvgTimeNeed;
             this.CopyTimeCompleted = stats.CopyTimeCompleted;
+            this.TotalAvgTimeNeed = stats.Phase1AvgTimeNeed + stats.Phase2AvgTimeNeed +
+                stats.Phase3AvgTimeNeed + stats.Phase4AvgTimeNeed + stats.CopyTimeAvgTimeNeed;
         }
     }
 }

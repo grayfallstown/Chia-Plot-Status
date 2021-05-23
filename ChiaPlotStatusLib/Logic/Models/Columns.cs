@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ChiaPlotStatusLib.Logic.Models
@@ -13,6 +14,7 @@ namespace ChiaPlotStatusLib.Logic.Models
     public class Columns
     {
         public List<string> Order { get; set; } = new();
+        public Dictionary<string, int> Widths { get; set; } = new();
 
         public Columns() {  }
 

@@ -49,7 +49,7 @@ namespace ChiaPlotStatusGUI.GUI.ViewModels
             this.Phase4Completed = stats.Phase4Completed;
             this.CopyTimeAvgTimeNeed = Formatter.formatSeconds(stats.CopyTimeAvgTimeNeed);
             this.CopyTimeCompleted = stats.CopyTimeCompleted;
-            this.TotalAvgTimeNeed = Formatter.formatSeconds(stats.Phase1AvgTimeNeed + stats.Phase2AvgTimeNeed + stats.Phase3AvgTimeNeed + stats.Phase4AvgTimeNeed + stats.CopyTimeAvgTimeNeed);
+            this.TotalAvgTimeNeed = Formatter.formatSeconds(stats.TotalAvgTimeNeed);
         }
     }
 }

@@ -21,6 +21,7 @@ using Avalonia;
 using System.Runtime.InteropServices;
 using ChiaPlotStatusGUI.GUI.Models;
 using ChiaPlotStatusGUI.GUI.Utils;
+using System.ComponentModel;
 
 namespace ChiaPlotStatus.ViewModels
 {
@@ -55,13 +56,13 @@ namespace ChiaPlotStatus.ViewModels
 
         public MainWindowViewModel()
         {
-            foreach (var property in typeof(PlotLogReadable).GetProperties())
-                SortProperties.Add(property.Name);
             if (MainWindow.Instance.Find<Button>("RefreshPauseButton") == null)
             {
                 // TODO: rewrite in proper MVVM or similar pattern to get rid of this
                 return;
             }
+            foreach (var property in typeof(PlotLogReadable).GetProperties())
+                SortProperties.Add(property.Name);
             Languages = Translation.LoadLanguages();
             Language = Languages["English"];
             InitializeChiaPlotStatus();
@@ -74,6 +75,7 @@ namespace ChiaPlotStatus.ViewModels
             InitializeSelection();
             InitializeFilterUpdates();
             SortColumns();
+            HandleColumnWidths();
         }
 
         private void SortColumns()
@@ -96,6 +98,36 @@ namespace ChiaPlotStatus.ViewModels
                 columns[i].DisplayIndex = i;
                 logDataGrid.Columns.Add(columns[i]);
             }
+        }
+
+        private void HandleColumnWidths()
+        {
+            var logDataGrid = MainWindow.Instance.Find<DataGrid>("LogDataGrid");
+            foreach (var column in logDataGrid.Columns)
+            {
+                string name = column.SortMemberPath;
+                if (this.PlotManager.Settings.Columns.Widths.ContainsKey(name))
+                {
+                    column.Width = new DataGridLength(this.PlotManager.Settings.Columns.Widths[name]);
+                    //column.Width = new DataGridLength(3333);
+                }
+                /*
+                column.WhenAnyValue(x => x.ActualWidth).Subscribe(x => {
+                    this.PlotManager.Settings.Columns.Widths.Add(name, x);
+                    this.PlotManager.Settings.Persist();
+                });
+                */
+            }
+
+            MainWindow.Instance.Closing += (sender, e) =>
+            {
+                foreach (var column in logDataGrid.Columns)
+                {
+                    string name = column.SortMemberPath;
+                    this.PlotManager.Settings.Columns.Widths[name] = (int) column.ActualWidth;
+                }
+                this.PlotManager.Settings.Persist();
+            };
         }
 
         private void InitializeRefreshPauseButton()

@@ -14,15 +14,16 @@ namespace ChiaPlotStatus.GUI.Models
     public class Settings
     {
         private string SettingsFile;
-        public ObservableCollection<string> LogDirectories { get; set; } = new();
-        public double? FontSize { get; set; } = 10d;
-        public string? Theme { get; set; } = "Light";
-        public List<MarkOfDeath>? MarksOfDeath { get; set; } = new();
         public bool? AlwaysDoFullRead { get; set; } = false;
+        public string? Theme { get; set; } = "Light";
+        public ObservableCollection<string> LogDirectories { get; set; } = new();
         public Columns Columns { get; set; } = Columns.Default();
         public Filter Filter { get; set; } = new();
         public string? SortProperty { get; set; } = "Progress";
         public bool? SortAsc { get; set; } = true;
+        public List<MarkOfDeath>? MarksOfDeath { get; set; } = new();
+        // no longer supported, but needs to stay or JsonDeserializer is not happy
+        public double? FontSize { get; set; } = null;
 
         public Settings()
         {
@@ -72,6 +73,9 @@ namespace ChiaPlotStatus.GUI.Models
         public void Persist()
         {
             JsonSerializerOptions options = new JsonSerializerOptions();
+            options.AllowTrailingCommas = true;
+            options.MaxDepth = 9999999;
+            options.DefaultBufferSize = 64 * 1024;
             options.WriteIndented = true;
             string json = JsonSerializer.Serialize(this, options);
             File.WriteAllText(SettingsFile, json);
