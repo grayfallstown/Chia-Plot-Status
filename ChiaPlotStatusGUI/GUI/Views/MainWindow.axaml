@@ -14,8 +14,6 @@
 		<vm:MainWindowViewModel/>
 	</Window.DataContext>
 	<Window.Styles>
-        <Style Selector="DataGridColumnHeader">
-        </Style>
 		<Style Selector="DataGridColumnHeader > Button">
 			<Setter Property="BorderThickness" Value="0" />
 		</Style>

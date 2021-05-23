@@ -60,7 +60,7 @@ namespace ChiaPlotStatusGUI.GUI.Utils
                     window.Styles[0] = dark;
                     break;
                 default:
-                    window.Styles[0] = dark;
+                    window.Styles[0] = light;
                     break;
             }
         }

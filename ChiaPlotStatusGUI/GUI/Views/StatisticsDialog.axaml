@@ -16,9 +16,6 @@
 	</Window.DataContext>
   -->
 	<Window.Styles>
-    <Style Selector="DataGridColumnHeader > Button">
-      <Setter Property="BorderThickness" Value="0" />
-    </Style>
     <Style Selector="DataGridRow">
       <Setter Property="Margin" Value="2" />
     </Style>
@@ -63,6 +60,9 @@
     <Style Selector="Button.Compact">
       <Setter Property="Margin" Value="0" />
       <Setter Property="Padding" Value="0" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="DataGrid Button">
       <Setter Property="BorderThickness" Value="0" />
     </Style>
   </Window.Styles>

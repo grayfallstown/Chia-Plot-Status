@@ -246,7 +246,6 @@ namespace ChiaPlotStatus.ViewModels
                         MainWindow.Instance.Find<ComboBox>("Themes").Foreground = Avalonia.Media.Brushes.Black;
                         break;
                 }
-                MainWindow.Instance.Find<TextBox>("SearchBox").FontSize = (double) PlotManager.Settings.FontSize;
                 return true;
             };
             Dispatcher.UIThread.InvokeAsync(() =>
