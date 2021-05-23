@@ -27,11 +27,26 @@ Tool to Monitor and Analyse Chia Plotting log files, show health and progress of
  - Multiple plots per log file supported (plot create --num n)
  - Export of readable or raw data to Json, Yaml and CSV
 
+
 ## How it works
 
-Chia Plot Status observes the log folders you give it to monitor which can be local, on a networkshare or mounted from a cloud app like Google Drive (Chia Plot Status does not talk to any cloud services for you, you have to install those apps and mount your log folders in them yourself if you want to use them). By this it supports monitoring multiple plotting rigs as you can access them via a networkshare or by similar means. It regulary checks for new Log files in those folders and analyses them.
+Chia Plot Status observes the log folders you give it to monitor which can be local or connected via network. By this it supports monitoring multiple plotting rigs as you can access them on your desktop even if your plotting rigs are headless. It regulary checks for new Log files in those folders and analyses them.
 
 On basis of finished plots it builds a local statistic (on your machine, no data is send anywhere or pulled from any cloud) and uses them to calculate ETA / time remaining and warning thresholds for the Health of your plotting processes.
+
+
+## Working with many distributed plotting rigs
+
+**Recommended way:** Use sshfs (with [sshfs-win](https://github.com/billziss-gh/sshfs-win) for Windows) to securely mount the log dirs of your plotting rigs on your desktop via highly encrypted network connection, where it is your desktop that initiates the mount. This can be set up so that the desktop can only access the log dirs and only has read access. Even if you use remote plotting rigs that you access over the internet this is the most secure way and you most likely access your remote servers via ssh already.
+
+Other Options: Mount the log folders of all rigs as network shares (via samba on linux) if all your plotting rigs are in the local network or connected via VPN. Another way would be to make a cronjob on your plotting rigs that uses scp or rsync in append mode to copy the log dir to your desktop where you run Chia Plot Status, but if you can manage to set this up you should set up sshfs instead. Last, least preferred option: collect them with cloud apps like Google Drive (Chia Plot Status does not talk to any cloud services for you, you have to install those apps and mount your log folders in them yourself if you want to use them).
+
+
+**Best Practice:**
+- Only delete log files of finished plots if your hardware or the way you plot has significantly changed. Chia Plot Status uses finished plots to calculate ETA/Time Remaining as well as warning/error thresholds. If you delete finished log files the quality of those values decreases significantly.
+- Use SSHFS to access the log directories of your plotting rigs
+- Each plotting rig should have its own log folder, so they don't mix and mess up estimates and warning thresholds for each other.
+- Always log locally. If you log directly to a network share / NAS your plotting processes will crash if the connection becomes flaky. Prefer connecting your host machine (which runs Chia Plot Status) to networkshares on the plotting rigs, not the other way around.
 
 
 ## Installation / Download
@@ -55,7 +70,7 @@ $Temp2="D:\PlotTemp"
 chia.exe plots create --tmp_dir "$TEMP1" --tmp2_dir "$TEMP2" [and so on] 2>&1 | % ToString | Tee-Object -FilePath "C:\Users\$USERNAME\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log"
 ```
 
-The last part with `2>&1 | % ToString | Tee-Object" writes the log to the PowerShell and to a file with a unique name for each plotting process.
+The last part with `2>&1 | % ToString | Tee-Object` writes the log to the PowerShell and to a file with a unique name for each plotting process.
 
 You can download a [full example script with Tee-Object](https://gist.github.com/grayfallstown/8530acb84eb131d3dae074e4be23badb) as well.
 
@@ -70,20 +85,6 @@ See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843
 Chia Plot Status on Patro TV (YouTube):
 
 [![](http://img.youtube.com/vi/JLVhG86-4UI/0.jpg)](http://www.youtube.com/watch?v=JLVhG86-4UI "Chia Plot Status on Patro TV")
-
-
-## Working with many distributed plotting rigs
-
-**Recommended way:** Use sshfs (with [sshfs-win](https://github.com/billziss-gh/sshfs-win) for Windows) to securely mount the log dirs of your plotting rigs on your desktop via highly encrypted network connection, where it is your desktop that initiates the mount. This can be set up so that the desktop can only access the log dirs and only has read access. Even if you use remote plotting rigs that you access over the internet this is the most secure way and you most likely access your remote servers via ssh already.
-
-Other Options: Mount the log folders of all rigs as network shares (via samba on linux) if all your plotting rigs are in the local network or connected via VPN. Another way would be to make a cronjob on your plotting rigs that uses scp or rsync in append mode to copy the log dir to your desktop where you run Chia Plot Status, but if you can manage to set this up you should set up sshfs instead. Last, least preferred option: collect them with cloud apps like Google Drive (Chia Plot Status does not talk to any cloud services for you, you have to install those apps and mount your log folders in them yourself if you want to use them).
-
-
-Best Practice:
-- Only delete log files of finished plots if your hardware or the way you plot has significantly changed. Chia Plot Status uses finished plots to calculate ETA/Time Remaining as well as warning/error thresholds. If you delete finished log files the quality of those values decreases significantly.
-- Use SSHFS to access the log directories of your plotting rigs
-- Each plotting rig should have its own log folder, so they don't mix and mess up estimates and warning thresholds for each other.
-- Always log locally. If you log directly to a network share / NAS your plotting processes will crash if the connection becomes flaky. Prefer connecting your host machine (which runs Chia Plot Status) to networkshares on the plotting rigs, not the other way around.
 
 
 ## Troubleshooting
@@ -179,6 +180,7 @@ alternatively try `dotnet run --build`.
 - @Jonesyj83
 - @Lyushen
 - @Patro TV
+- @RaySmalley
 - @RedxLus
 - @TormodSan
 - @Waloumi
@@ -204,4 +206,4 @@ alternatively try `dotnet run --build`.
 - @wild9
 - @zeroarst
 
-For contributing to Chia Plot Status either by donating or otherwise.
+For contributing to Chia Plot Status either by [donating](https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC) or otherwise.
