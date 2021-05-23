@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using Avalonia.Markup.Xaml.Styling;
+using ChiaPlotStatus.Views;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -38,5 +41,29 @@ namespace ChiaPlotStatusGUI.GUI.Utils
                 }
             }
         }
+
+
+
+        public static void SetTheme(Window window, string theme)
+        {
+            var light = new StyleInclude(new Uri("resm:Styles?assembly=ControlCatalog"))
+            {
+                Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default")
+            };
+            var dark = new StyleInclude(new Uri("resm:Styles?assembly=ControlCatalog"))
+            {
+                Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseDark.xaml?assembly=Avalonia.Themes.Default")
+            };
+            switch (theme)
+            {
+                case "Dark":
+                    window.Styles[0] = dark;
+                    break;
+                default:
+                    window.Styles[0] = dark;
+                    break;
+            }
+        }
+
     }
 }

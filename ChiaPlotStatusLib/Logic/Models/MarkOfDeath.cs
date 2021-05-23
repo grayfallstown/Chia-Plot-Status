@@ -21,7 +21,7 @@ namespace ChiaPlotStatus.Logic.Models
         public MarkOfDeath(PlotLogReadable plotLogReadable) {
             this.LogFolder = plotLogReadable.LogFolder;
             this.LogFile = plotLogReadable.LogFile;
-            this.PlaceInLogFile = int.Parse(plotLogReadable.PlaceInLogFile.Split("/")[1]);
+            this.PlaceInLogFile = int.Parse(plotLogReadable.PlaceInLogFile.Split("/")[0]);
         }
 
         public bool IsMatch(PlotLog plotLog)

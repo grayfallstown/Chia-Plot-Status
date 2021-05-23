@@ -151,5 +151,12 @@ namespace ChiaPlotStatus.GUI.Models
         public string Health { get; set; } = "";
         public string LastLogLine { get; set; } = "";
         public string PlaceInLogFile { get; set; } = "";
+        public string Phase1AvgTimeNeed { get; set; } = "";
+        public string Phase2AvgTimeNeed { get; set; } = "";
+        public string Phase3AvgTimeNeed { get; set; } = "";
+        public string Phase4AvgTimeNeed { get; set; } = "";
+        public string CopyTimeAvgTimeNeed { get; set; } = "";
+        public string TotalAvgTimeNeed { get; set; } = "";
+        public string Phase1Completed { get; set; } = "";
     }
 }

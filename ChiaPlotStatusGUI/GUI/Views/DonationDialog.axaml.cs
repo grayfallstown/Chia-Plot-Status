@@ -28,7 +28,7 @@ namespace ChiaPlotStatus.Views
 
         public DonationDialog() { }
 
-        public DonationDialog(Language language)
+        public DonationDialog(Language language, string theme)
         {
             this.DataContext = this;
             this.Language = language;
@@ -37,6 +37,7 @@ namespace ChiaPlotStatus.Views
             this.AttachDevTools();
 #endif
             this.Find<TextBlock>("Thx").IsVisible = false;
+            Utils.SetTheme(this, theme);
             this.Focus();
         }
 

@@ -62,5 +62,36 @@ namespace ChiaPlotStatus
             if (Phase4Completed > 0) Phase4AvgTimeNeed /= Phase4Completed;
             if (CopyTimeCompleted > 0) CopyTimeAvgTimeNeed /= CopyTimeCompleted;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is PlottingStatistics statistics &&
+                   Phase1AvgTimeNeed == statistics.Phase1AvgTimeNeed &&
+                   Phase1Completed == statistics.Phase1Completed &&
+                   Phase2AvgTimeNeed == statistics.Phase2AvgTimeNeed &&
+                   Phase2Completed == statistics.Phase2Completed &&
+                   Phase3AvgTimeNeed == statistics.Phase3AvgTimeNeed &&
+                   Phase3Completed == statistics.Phase3Completed &&
+                   Phase4AvgTimeNeed == statistics.Phase4AvgTimeNeed &&
+                   Phase4Completed == statistics.Phase4Completed &&
+                   CopyTimeAvgTimeNeed == statistics.CopyTimeAvgTimeNeed &&
+                   CopyTimeCompleted == statistics.CopyTimeCompleted;
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new HashCode();
+            hash.Add(Phase1AvgTimeNeed);
+            hash.Add(Phase1Completed);
+            hash.Add(Phase2AvgTimeNeed);
+            hash.Add(Phase2Completed);
+            hash.Add(Phase3AvgTimeNeed);
+            hash.Add(Phase3Completed);
+            hash.Add(Phase4AvgTimeNeed);
+            hash.Add(Phase4Completed);
+            hash.Add(CopyTimeAvgTimeNeed);
+            hash.Add(CopyTimeCompleted);
+            return hash.ToHashCode();
+        }
     }
 }

@@ -43,11 +43,11 @@
     <Compile Update="GUI\Views\DonationDialog.axaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="GUI\Views\LogViewerWindow.axaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="GUI\Views\MainWindow.axaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="GUI\Views\StatisticsDialog.axaml.cs">
+      <DependentUpon>StatisticsDialog.axaml</DependentUpon>
     </Compile>
     <Compile Update="GUI\Views\MarkOfDeathDialog.axaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>

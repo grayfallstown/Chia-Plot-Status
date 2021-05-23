@@ -7,6 +7,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using ChiaPlotStatus.GUI.Models;
 using ChiaPlotStatus.Logic.Models;
+using ChiaPlotStatusGUI.GUI.Utils;
 using ReactiveUI;
 using System;
 using System.Diagnostics;
@@ -29,7 +30,7 @@ namespace ChiaPlotStatus.Views
         {
         }
 
-        public MarkOfDeathDialog(PlotLogReadable plotLogReadable, Language language, Settings settings, Action onUpdate)
+        public MarkOfDeathDialog(PlotLogReadable plotLogReadable, Language language, Settings settings, string theme, Action onUpdate)
         {
             this.DataContext = this;
             this.Language = language;
@@ -44,6 +45,7 @@ namespace ChiaPlotStatus.Views
                 if (markOfDeath.IsMatch(plotLogReadable))
                     this.IsDead = true;
             this.IsAlive = !this.IsDead;
+            Utils.SetTheme(this, theme);
             this.Focus();
         }
 

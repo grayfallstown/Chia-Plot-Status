@@ -83,5 +83,22 @@ namespace ChiaPlotStatus
             if (this.BufferSize == other.BufferSize) relevance++;
             return relevance;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is PlottingStatisticsID iD &&
+                   LogFolder == iD.LogFolder &&
+                   Tmp1Drive == iD.Tmp1Drive &&
+                   Tmp2Drive == iD.Tmp2Drive &&
+                   PlotSize == iD.PlotSize &&
+                   Threads == iD.Threads &&
+                   BufferSize == iD.BufferSize &&
+                   Buckets == iD.Buckets;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(LogFolder, Tmp1Drive, Tmp2Drive, PlotSize, Threads, BufferSize, Buckets);
+        }
     }
 }

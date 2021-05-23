@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChiaPlotStatusGUI.GUI.ViewModels;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,20 +22,22 @@ namespace ChiaPlotStatus
         public PlottingStatisticsHolder(List<PlotLog> plotLogs, PlottingStatisticsIdRelevanceWeights weights)
         {
             foreach (var plotLog in plotLogs)
-            {
                 if (plotLog.TotalSeconds > 0)
-                {
                     AllPlotLogs.Add(plotLog);
-                }
-            }
             this.weights = weights;
         }
 
         public PlottingStatistics GetMostRelevantStatistics(PlotLog plotLog)
         {
             PlottingStatisticsID id = new PlottingStatisticsID(plotLog);
+            return GetMostRelevantStatistics(id);
+        }
+
+        public PlottingStatistics GetMostRelevantStatistics(PlottingStatisticsID id)
+        {
             Dictionary<int, List<PlotLog>> byRelevance = new Dictionary<int, List<PlotLog>>();
-            foreach (var fromAll in AllPlotLogs) {
+            foreach (var fromAll in AllPlotLogs)
+            {
                 int relevance = id.CalcRelevance(new PlottingStatisticsID(fromAll), weights);
                 // Debug.WriteLine(relevance);
                 if (!byRelevance.ContainsKey(relevance))
@@ -82,6 +85,23 @@ namespace ChiaPlotStatus
             magicPlotLog.CopyTimeSeconds = 934;
             plotLogs.Add(magicPlotLog);
             return new PlottingStatistics(plotLogs);
+        }
+
+        public List<(PlottingStatisticsFull, PlottingStatisticsFullReadable)> AllStatistics()
+        {
+            Dictionary<PlottingStatisticsID, PlottingStatistics> statsDict = new();
+            foreach (var plotLog in AllPlotLogs)
+            {
+                var id = new PlottingStatisticsID(plotLog);
+                if (!statsDict.ContainsKey(id))
+                    statsDict.Add(id, this.GetMostRelevantStatistics(plotLog));
+            }
+            List<(PlottingStatisticsFull, PlottingStatisticsFullReadable)> statsFull = new();
+            foreach (var entry in statsDict) {
+                var stat = new PlottingStatisticsFull(entry.Key, entry.Value);
+                statsFull.Add((stat, new PlottingStatisticsFullReadable(stat)));
+            }
+            return statsFull;
         }
 
     }

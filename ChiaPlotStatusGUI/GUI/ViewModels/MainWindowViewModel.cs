@@ -20,6 +20,7 @@ using ChiaPlotStatus.Logic.Models;
 using Avalonia;
 using System.Runtime.InteropServices;
 using ChiaPlotStatusGUI.GUI.Models;
+using ChiaPlotStatusGUI.GUI.Utils;
 
 namespace ChiaPlotStatus.ViewModels
 {
@@ -72,7 +73,6 @@ namespace ChiaPlotStatus.ViewModels
             InitializeRefreshPauseButton();
             InitializeSelection();
             InitializeFilterUpdates();
-            SetGridHeight();
             SortColumns();
         }
 
@@ -200,25 +200,15 @@ namespace ChiaPlotStatus.ViewModels
             {
                 PlotManager.Settings.Theme = theme;
                 PlotManager.Settings.Persist();
-                var light = new StyleInclude(new Uri("resm:Styles?assembly=ControlCatalog"))
-                {
-                    Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default")
-                };
-                var dark = new StyleInclude(new Uri("resm:Styles?assembly=ControlCatalog"))
-                {
-                    Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseDark.xaml?assembly=Avalonia.Themes.Default")
-                };
-
+                Utils.SetTheme(MainWindow.Instance, theme);
                 switch (theme)
                 {
                     case "Dark":
-                        MainWindow.Instance.Styles[0] = dark;
                         MainWindow.Instance.Find<ComboBox>("Themes").SelectedIndex = 1;
                         MainWindow.Instance.Find<TextBox>("SearchBox").Foreground = Avalonia.Media.Brushes.LightGray;
                         MainWindow.Instance.Find<ComboBox>("Themes").Foreground = Avalonia.Media.Brushes.LightGray;
                         break;
                     default:
-                        MainWindow.Instance.Styles[0] = light;
                         MainWindow.Instance.Find<ComboBox>("Themes").SelectedIndex = 0;
                         MainWindow.Instance.Find<TextBox>("SearchBox").Foreground = Avalonia.Media.Brushes.Black;
                         MainWindow.Instance.Find<ComboBox>("Themes").Foreground = Avalonia.Media.Brushes.Black;
@@ -240,7 +230,7 @@ namespace ChiaPlotStatus.ViewModels
                 {
                     var dataGrid = MainWindow.Instance.Find<DataGrid>("LogDataGrid");
                     if (dataGrid != null)
-                        dataGrid.Height = x - 145;
+                        dataGrid.Height = x - 150;
                 });
         }
 
@@ -400,25 +390,35 @@ namespace ChiaPlotStatus.ViewModels
 
             MarkAsDeadCommand = ReactiveCommand.Create<PlotLogReadable>((plotLogReadable) =>
             {
-                var dialog = new MarkOfDeathDialog(plotLogReadable, this.Language, this.PlotManager.Settings, LoadPlotLogs);
+                var dialog = new MarkOfDeathDialog(plotLogReadable, this.Language, this.PlotManager.Settings, this.PlotManager.Settings.Theme, LoadPlotLogs);
                 dialog.Show();
             });
-
-            var donateButton = MainWindow.Instance.Find<MenuItem>("DonateButton");
-            if (donateButton != null)
-                donateButton.Command = ReactiveCommand.Create(() =>
-                {
-                    var dialog = new DonationDialog(this.Language);
-                    dialog.Show();
-                });
 
             var updateButton = MainWindow.Instance.Find<MenuItem>("UpdateButton");
             if (updateButton != null)
                 updateButton.Command = ReactiveCommand.Create(() =>
                 {
-                    var dialog = new UpdateDialog(this.Language);
+                    var dialog = new UpdateDialog(this.Language, this.PlotManager.Settings.Theme);
                     dialog.Show();
                 });
+
+            var donateButton = MainWindow.Instance.Find<MenuItem>("DonateButton");
+            if (donateButton != null)
+                donateButton.Command = ReactiveCommand.Create(() =>
+                {
+                    var dialog = new DonationDialog(this.Language, this.PlotManager.Settings.Theme);
+                    dialog.Show();
+                });
+
+            var statisticsButton = MainWindow.Instance.Find<MenuItem>("StatisticsButton");
+            if (statisticsButton != null)
+                statisticsButton.Command = ReactiveCommand.Create(() =>
+                {
+                    var dialog = new StatisticsDialog(this.PlotManager.Statistics.AllStatistics(), this.Language, this.PlotManager.Settings.Theme);
+                    dialog.Show();
+                });
+
+
         }
 
         public void InitializeSearchBox()
@@ -453,15 +453,6 @@ namespace ChiaPlotStatus.ViewModels
             PlotManager.RemoveLogFolder(folder);
             PlotManager.Settings.Persist();
             LoadPlotLogs();
-        }
-
-        public void SetGridHeight()
-        {
-            if (MainWindow.Instance.Find<DataGrid>("PlotLogGrid") != null)
-            {
-                double height = MainWindow.Instance.Height - 600;
-                MainWindow.Instance.Find<DataGrid>("PlotLogGrid").Height = height;
-            }
         }
 
 

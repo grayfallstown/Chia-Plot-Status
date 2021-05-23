@@ -62,6 +62,13 @@ Columns:
     Health: "Health"
     LastLogLine: "Last Log Line"
     PlaceInLogFile: "Nr"
+    Phase1AvgTimeNeed: "Phase 1 avg 🕐"
+    Phase2AvgTimeNeed: "Phase 2 avg 🕐"
+    Phase3AvgTimeNeed: "Phase 3 avg 🕐"
+    Phase4AvgTimeNeed: "Phase 4 avg 🕐"
+    CopyTimeAvgTimeNeed: "Copy avg 🕐"
+    TotalAvgTimeNeed: "Total avg 🕐"
+    Phase1Completed: "Sample Size"
 
 Tooltips:
     JsonExport: "Export shown data to Json. Check <Raw Export> if you want plain unformatted numbers."

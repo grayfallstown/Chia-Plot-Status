@@ -222,6 +222,6 @@ namespace ChiaPlotStatus
         public static Regex finalFileSize = new Regex("^Final File size: (\\d+\\.\\d+ .*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex destinationDirectory = new Regex("^Final Directory is: (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex caughtPlottingError = new Regex("^Caught plotting error: .*", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        public static Regex queueSize = new Regex(".* Starting plot \\d+/(\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex queueSize = new Regex("Starting plot \\d+.(\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     }
 }

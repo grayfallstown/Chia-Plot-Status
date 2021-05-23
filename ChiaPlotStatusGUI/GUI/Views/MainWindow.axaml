@@ -166,6 +166,7 @@
         <Menu DockPanel.Dock="Top">
           <MenuItem Header="Update" Name="UpdateButton" />
           <MenuItem Header="Donate" Name="DonateButton" />
+          <MenuItem Header="Statistics" Name="StatisticsButton" />
         </Menu>
       </DockPanel>
 			<StackPanel Orientation="Horizontal">

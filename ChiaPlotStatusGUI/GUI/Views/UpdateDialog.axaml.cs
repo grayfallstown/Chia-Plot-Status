@@ -34,7 +34,7 @@ namespace ChiaPlotStatus.Views
 
         public UpdateDialog() { }
 
-        public UpdateDialog(GUI.Models.Language language)
+        public UpdateDialog(GUI.Models.Language language, string theme)
         {
             this.DataContext = this;
             this.Language = language;
@@ -46,6 +46,7 @@ namespace ChiaPlotStatus.Views
 #endif
             this.Find<TextBlock>("UpToDate").IsVisible = string.Equals(this.Latest.TagName, this.Current);
             this.Find<StackPanel>("DownloadButtons").IsVisible = !string.Equals(this.Latest.TagName, this.Current);
+            Utils.SetTheme(this, theme);
             this.Focus();
         }
 
