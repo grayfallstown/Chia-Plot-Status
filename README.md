@@ -55,7 +55,7 @@ $Temp2="D:\PlotTemp"
 chia.exe plots create --tmp_dir "$TEMP1" --tmp2_dir "$TEMP2" [and so on] 2>&1 | % ToString | Tee-Object -FilePath "C:\Users\$USERNAME\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log"
 ```
 
-The last part with `2>&1 | % ToString | Tee-Object" writes the log to the PowerShell and to a file with a unique name for each plotting process.
+The last part with `2>&1 | % ToString | Tee-Object` writes the log to the PowerShell and to a file with a unique name for each plotting process.
 
 You can download a [full example script with Tee-Object](https://gist.github.com/grayfallstown/8530acb84eb131d3dae074e4be23badb) as well.
 
