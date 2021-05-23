@@ -172,9 +172,9 @@ macOS: `dotnet ./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus.dll` (thank
 alternatively try `dotnet run --build`.
 
 
-## Thanks to
+## Special Thanks
 
-- [charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
+- [@charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
 - @Cuello
 - @Gridjump
 - @Hellfall1
@@ -215,5 +215,6 @@ alternatively try `dotnet run --build`.
 - @whoismos3s
 - @wild9
 - @zeroarst
+- @The Malware Analysts of Microsoft and Malwarebytes for checking Chia Plot Status after every false positive
 
 For contributing to Chia Plot Status either by [donating](https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC) or otherwise.
