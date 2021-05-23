@@ -205,4 +205,4 @@ alternatively try `dotnet run --build`.
 - @wild9
 - @zeroarst
 
-For contributing to Chia Plot Status either by donating or otherwise.
+For contributing to Chia Plot Status either by [donating](https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC) or otherwise.
