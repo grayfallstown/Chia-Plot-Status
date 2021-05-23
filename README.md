@@ -38,10 +38,6 @@ On basis of finished plots it builds a local statistic (on your machine, no data
 
 ![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
 
-**ATTENTION, important notice:** Chia Plot Status uses an external library to provide a graphical user interface that runs on Windows, Linux and MacOS called [AvaloniaUI](https://avaloniaui.net/). ~~Avalonia currently gets flagged as Trojan by Windows Defender~~ and as far as currently known, only by Windows Defender. The file was already [deemed safe by microsoft malware analysts](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-842849470), but then got [flagged again](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-843005699). ~~I am currently trying to resolve this issue, but feel free to postpone the installation of Chia Plot Status until the issue is resolved.~~
-
-**UPDATE**: Users who have Chia Plot Status installed or tried to install it during that time were NOT in any danger. The files were safe and clean all along and falsely reported by Windows Defender. Windows Defender no longer reports Avalonia as a Trojan **IF** one updates the Dynamic Signatures of Windows Defender. For transparency I am leaving this notice for the time being and I have documented the entire situation in an [incident report](https://github.com/grayfallstown/Chia-Plot-Status/issues/2#issuecomment-843279417)
-
 Windows: [Download latest version](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/Setup.exe)
 You will get a blue warning saying this was published by an unknown developer.
 
@@ -138,9 +134,17 @@ File 'test.json' written
 Note: Write your tools or home automation in a way that new fields/properties/columns added to the exported files do not crash it.
 
 
+## Avalonia Incident
+
+Chia Plot Status uses an external library to provide a graphical user interface that runs on Windows, Linux and MacOS called [AvaloniaUI](https://avaloniaui.net/). ~~Avalonia currently gets flagged as Trojan by Windows Defender~~ and as far as currently known, only by Windows Defender. The file was already [deemed safe by microsoft malware analysts](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-842849470), but then got [flagged again](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-843005699). ~~I am currently trying to resolve this issue, but feel free to postpone the installation of Chia Plot Status until the issue is resolved.~~
+
+**UPDATE**: Users who have Chia Plot Status installed or tried to install it during that time were NOT in any danger. The files were safe and clean all along and falsely reported by Windows Defender. Windows Defender no longer reports Avalonia as a Trojan **IF** one updates the Dynamic Signatures of Windows Defender. For transparency I am leaving this notice for the time being and I have documented the entire situation in an [incident report](https://github.com/grayfallstown/Chia-Plot-Status/issues/2#issuecomment-843279417)
+
+
 ## Open Source
 
 MIT opensource licence, free to keep or change.
+
 
 ## Build it yourself
 
@@ -165,6 +169,7 @@ linux: `./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus`
 macOS: `dotnet ./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus.dll` (thanks @mahdi-ninja)
 
 alternatively try `dotnet run --build`.
+
 
 ## Thanks to
 
