@@ -1,6 +1,7 @@
 ﻿using ChiaPlotStatus.Logic.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,10 +37,11 @@ namespace ChiaPlotStatusLib.Logic.Utils
         {
             if (dateTime == null)
                 return "";
-            else
-                // decided against local date format for now
+            else {
+                CultureInfo culture = CultureInfo.CurrentCulture;
                 // forced to cast it to a non nullable or it does not find ToString(format)
-                return ((DateTime)dateTime).ToString("MM/dd HH:mm");
+                return ((DateTime)dateTime).ToString("m", culture) + " " + ((DateTime)dateTime).ToString("t", culture);
+            }
         }
 
         public static string formatHealth(HealthIndicator health)
