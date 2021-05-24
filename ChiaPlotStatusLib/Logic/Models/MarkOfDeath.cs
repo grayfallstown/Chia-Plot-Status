@@ -15,6 +15,7 @@ namespace ChiaPlotStatus.Logic.Models
         public string LogFolder { get; set; }
         public string LogFile { get; set; }
         public int PlaceInLogFile { get; set; }
+        public DateTime? DiedAt { get; set; }
 
         public MarkOfDeath() { }
 
@@ -22,6 +23,8 @@ namespace ChiaPlotStatus.Logic.Models
             this.LogFolder = plotLogReadable.LogFolder;
             this.LogFile = plotLogReadable.LogFile;
             this.PlaceInLogFile = int.Parse(plotLogReadable.PlaceInLogFile.Split("/")[0]);
+            // here and not in field definition to stay compatible to pre DiedAt versions
+            this.DiedAt = DateTime.Now;
         }
 
         public bool IsMatch(PlotLog plotLog)

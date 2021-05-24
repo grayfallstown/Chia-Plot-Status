@@ -9,6 +9,8 @@ namespace ChiaPlotStatus
 
     /**
      * Key used to determine best matches / relevance on finished plotting processes for a given PlotLog
+     * Relevance is calculated by summing up weigths assigned to the Properties that are equal between
+     * PlotLogs represented by this PlottingStatisticsID
      */
     public class PlottingStatisticsID
     {
@@ -45,18 +47,14 @@ namespace ChiaPlotStatus
         private int PlotSizeRelevance(PlottingStatisticsID other)
         {
             if (this.PlotSize == other.PlotSize)
-            {
                 return 1;
-            }
             return 0;
         }
 
         private int LogFolderRelevance(PlottingStatisticsID other)
         {
             if (string.Equals(this.LogFolder, other.LogFolder))
-            {
                 return 1;
-            }
             return 0;
         }
 
@@ -65,13 +63,9 @@ namespace ChiaPlotStatus
             bool tmp1Equal = string.Equals(this.Tmp1Drive, other.Tmp1Drive);
             bool tmp2Equal = string.Equals(this.Tmp2Drive, other.Tmp2Drive);
             if (tmp1Equal && tmp2Equal)
-            {
                 return 2;
-            }
             if (!tmp1Equal && !tmp2Equal)
-            {
                 return 0;
-            }
             return 1;
         }
 

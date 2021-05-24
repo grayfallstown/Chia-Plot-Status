@@ -18,6 +18,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string? Theme { get; set; } = "Light";
         public ObservableCollection<string> LogDirectories { get; set; } = new();
         public Columns Columns { get; set; } = Columns.Default();
+        public PlottingStatisticsIdRelevanceWeights Weigths = new();
         public Filter Filter { get; set; } = new();
         public string? SortProperty { get; set; } = "Progress";
         public bool? SortAsc { get; set; } = true;
@@ -59,6 +60,8 @@ namespace ChiaPlotStatus.GUI.Models
                         this.SortProperty = fromFile.SortProperty;
                     if (fromFile.SortAsc != null)
                         this.SortAsc = fromFile.SortAsc;
+                    if (fromFile.Weigths != null)
+                        this.Weigths = fromFile.Weigths;
                     if (fromFile.Columns != null)
                     {
                         this.Columns = fromFile.Columns;

@@ -20,12 +20,11 @@ namespace ChiaPlotStatus
     {
         public Settings Settings { get; }
         private Dictionary<string, PlotLogFileParser> PlotLogFiles { get; } = new Dictionary<string, PlotLogFileParser>();
-        public PlottingStatisticsIdRelevanceWeights Weights { get; } = new PlottingStatisticsIdRelevanceWeights();
         public PlottingStatisticsHolder Statistics { get; set; }
 
         public ChiaPlotStatus(Settings settings) {
             this.Settings = settings;
-            Statistics = new PlottingStatisticsHolder(new List<PlotLog>(), Weights);
+            Statistics = new PlottingStatisticsHolder(new List<PlotLog>(), Settings.Weigths, new List<MarkOfDeath>());
         }
 
         public void AddDefaultLogFolder()
@@ -158,8 +157,7 @@ namespace ChiaPlotStatus
 
         private void HandleStatistics(List<PlotLog> plotLogs)
         {
-            Statistics = new PlottingStatisticsHolder(plotLogs, Weights);
-            //Parallel.ForEach(result, (plotLog) =>
+            Statistics = new PlottingStatisticsHolder(plotLogs, Settings.Weigths, Settings.MarksOfDeath);
             foreach (var plotLog in plotLogs)
             {
                 PlottingStatistics stats = Statistics.GetMostRelevantStatistics(plotLog);

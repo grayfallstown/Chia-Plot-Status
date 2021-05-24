@@ -26,6 +26,7 @@ namespace ChiaPlotStatus.Views
         public Language Language { get; set; }
         public List<(PlottingStatisticsFull, PlottingStatisticsFullReadable)> StatsTuples { get; set; }
         public ObservableCollection<PlottingStatisticsFullReadable> Stats { get; set; } = new();
+        public ChiaPlotStatus PlotManager { get; set; }
         public string SortProperty { get; set; } = "Tmp1Drive";
         public bool SortAsc { get; set; } = true;
 
@@ -34,15 +35,12 @@ namespace ChiaPlotStatus.Views
         {
         }
 
-        public StatisticsDialog(List<(PlottingStatisticsFull, PlottingStatisticsFullReadable)> statsTuples, Language language, string theme)
+        public StatisticsDialog(ChiaPlotStatus plotManager, Language language, string theme)
         {
             this.DataContext = this;
             this.Language = language;
-            this.StatsTuples = statsTuples;
-            Sorter.Sort(SortProperty, SortAsc, StatsTuples);
-            Stats.Clear();
-            foreach (var tuple in statsTuples)
-                Stats.Add(tuple.Item2);
+            this.PlotManager = plotManager;
+            LoadData();
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
@@ -51,6 +49,15 @@ namespace ChiaPlotStatus.Views
             this.WindowState = WindowState.Maximized;
             Utils.SetTheme(this, theme);
             this.Focus();
+        }
+
+        private void LoadData()
+        {
+            this.StatsTuples = PlotManager.Statistics.AllStatistics();
+            Sorter.Sort(SortProperty, SortAsc, StatsTuples);
+            Stats.Clear();
+            foreach (var tuple in this.StatsTuples)
+                Stats.Add(tuple.Item2);
         }
 
         private void InitializeComponent()

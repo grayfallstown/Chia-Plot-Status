@@ -445,7 +445,7 @@ namespace ChiaPlotStatus.ViewModels
             if (statisticsButton != null)
                 statisticsButton.Command = ReactiveCommand.Create(() =>
                 {
-                    var dialog = new StatisticsDialog(this.PlotManager.Statistics.AllStatistics(), this.Language, this.PlotManager.Settings.Theme);
+                    var dialog = new StatisticsDialog(this.PlotManager, this.Language, this.PlotManager.Settings.Theme);
                     dialog.Show();
                 });
 
