@@ -172,25 +172,35 @@ macOS: `dotnet ./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus.dll` (thank
 alternatively try `dotnet run --build`.
 
 
-## Thanks to
+## Special Thanks
 
-- [charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
+- [@charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
+- @Çağlar
 - @Cuello
+- @Gridjump
 - @Hellfall1
 - @Jonesyj83
+- @Lucky_Length2676
 - @Lyushen
+- @Ok-Studio5311
 - @Patro TV
 - @RaySmalley
 - @RedxLus
 - @TormodSan
 - @Waloumi
+- @Worldly-Mind3108
+- @Zubon102
+- @badi95
 - @bathrobehero
 - @bestq8.com
 - @buettgenbach
 - @carfnann
 - @darkfriend77
+- @djdookie81
 - @dorofino
+- @douwebusschops
 - @dvlzgrmz
+- @jonnnny
 - @kata32
 - @magnusmyklebost
 - @ouoam
@@ -203,7 +213,9 @@ alternatively try `dotnet run --build`.
 - @tajchert
 - @whitetechnologies
 - @Vera Toro
+- @whoismos3s
 - @wild9
 - @zeroarst
+- @The Malware Analysts of Microsoft and Malwarebytes for checking Chia Plot Status after every false positive
 
 For contributing to Chia Plot Status either by [donating](https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC) or otherwise.
