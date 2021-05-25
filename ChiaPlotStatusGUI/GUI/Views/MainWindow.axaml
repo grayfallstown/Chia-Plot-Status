@@ -121,11 +121,11 @@
 
 
     <Style Selector="StackPanel.PlotCounts">
-      <Setter Property="Margin" Value="1" />
+      <Setter Property="Margin" Value="6 2" />
     </Style>
     <Style Selector="StackPanel.PlotCounts TextBlock">
       <Setter Property="Margin" Value="2" />
-      <Setter Property="FontSize" Value="13" />
+      <Setter Property="FontSize" Value="12" />
     </Style>
   </Window.Styles>
 

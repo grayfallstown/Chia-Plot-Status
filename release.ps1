@@ -4,11 +4,18 @@ Echo ".\next-minor.ps1"
 
 pause
 
+Echo "Killing running ChiaPlotStatus.exe"
+taskkill /IM "ChiaPlotStatus.exe" /F
+taskkill /IM "ChiaPlotStatus.exe" /F
+
 Echo "Cleaning release folder"
 rm -r release\
 mkdir release\
 mkdir release\ChiaPlotStatus\
 
+rm -r cd ChiaPlotStatusGUI\bin
+rm -r cd ChiaPlotStatusCLI\bin
+rm -r cd ChiaPlotStatusLIB\bin
 
 Echo "Building linux deb and rpm packages"
 cd ChiaPlotStatusGUI

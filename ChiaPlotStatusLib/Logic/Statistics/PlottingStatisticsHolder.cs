@@ -173,5 +173,10 @@ namespace ChiaPlotStatus
             return statsFull;
         }
 
+        public Dictionary<DateTime, PlottingStatisticsDay> GetDailyStats()
+        {
+            return new(Days);
+        }
+
     }
 }

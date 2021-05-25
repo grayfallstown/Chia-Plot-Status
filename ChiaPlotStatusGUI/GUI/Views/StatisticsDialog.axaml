@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:oxy="clr-namespace:OxyPlot.Avalonia;assembly=OxyPlot.Avalonia"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
         Width="1000" Height="600"
@@ -70,6 +71,110 @@
 
   <ScrollViewer Name="WindowContext">
     <StackPanel>
+
+      <DataGrid Name="DailyStats" Items="{Binding DailyStats}" CanUserResizeColumns="true" CanUserReorderColumns="false" CanUserSortColumns="false">
+        <DataGrid.Columns>
+          <DataGridTemplateColumn SortMemberPath="Finished">
+            <DataGridTemplateColumn.Header>
+              <Button Content="Finished" HorizontalAlignment="Left" ></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <TextBlock Text="{Binding Finished}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Died">
+            <DataGridTemplateColumn.Header>
+              <Button Content="Died" HorizontalAlignment="Left" ></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <TextBlock Text="{Binding Died}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Day">
+            <DataGridTemplateColumn.Header>
+              <Button Content="Day" HorizontalAlignment="Left" ></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <TextBlock Text="{Binding Day}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase1">
+            <DataGridTemplateColumn.Header>
+              <Button Content="Phase1" HorizontalAlignment="Left" ></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <TextBlock Text="{Binding Phase1}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase2">
+            <DataGridTemplateColumn.Header>
+              <Button Content="Phase2" HorizontalAlignment="Left" ></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <TextBlock Text="{Binding Phase2}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase3">
+            <DataGridTemplateColumn.Header>
+              <Button Content="Phase3" HorizontalAlignment="Left" ></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <TextBlock Text="{Binding Phase3}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase4">
+            <DataGridTemplateColumn.Header>
+              <Button Content="Phase4" HorizontalAlignment="Left" ></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <TextBlock Text="{Binding Phase4}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Phase5">
+            <DataGridTemplateColumn.Header>
+              <Button Content="Phase5" HorizontalAlignment="Left" ></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <TextBlock Text="{Binding Phase5}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+
+
+
       <DataGrid Name="StatsDataGrid" Items="{Binding Stats}" IsReadOnly="true" MinHeight="80" CanUserSortColumns="false" CanUserResizeColumns="true">
         <DataGrid.Columns>
           <DataGridTemplateColumn SortMemberPath="LogFolder">

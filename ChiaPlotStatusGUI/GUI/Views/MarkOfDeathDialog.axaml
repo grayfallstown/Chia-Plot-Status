@@ -16,6 +16,9 @@
 	</Window.DataContext>
   -->
 	<Window.Styles>
+    <Style>
+      <!-- will be replaced with dark theme-->
+    </Style>
     <Style Selector="Button">
       <Setter Property="Margin" Value="4" />
     </Style>

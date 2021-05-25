@@ -44,6 +44,18 @@ namespace ChiaPlotStatusLib.Logic.Utils
             }
         }
 
+        public static string formatDate(DateTime? dateTime)
+        {
+            if (dateTime == null)
+                return "";
+            else
+            {
+                CultureInfo culture = CultureInfo.CurrentCulture;
+                // forced to cast it to a non nullable or it does not find ToString(format)
+                return ((DateTime)dateTime).ToString("m", culture);
+            }
+        }
+
         public static string formatHealth(HealthIndicator health)
         {
             switch (health)
