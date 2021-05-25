@@ -74,6 +74,18 @@
 
       <DataGrid Name="DailyStats" Items="{Binding DailyStats}" CanUserResizeColumns="true" CanUserReorderColumns="false" CanUserSortColumns="false">
         <DataGrid.Columns>
+          <DataGridTemplateColumn SortMemberPath="Day">
+            <DataGridTemplateColumn.Header>
+              <Button Content="Day" HorizontalAlignment="Left" ></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <TextBlock Text="{Binding Day}" HorizontalAlignment="Right" ></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
           <DataGridTemplateColumn SortMemberPath="Finished">
             <DataGridTemplateColumn.Header>
               <Button Content="Finished" HorizontalAlignment="Left" ></Button>
@@ -94,18 +106,6 @@
               <DataTemplate >
                 <StackPanel>
                   <TextBlock Text="{Binding Died}" HorizontalAlignment="Right" ></TextBlock>
-                </StackPanel>
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTemplateColumn SortMemberPath="Day">
-            <DataGridTemplateColumn.Header>
-              <Button Content="Day" HorizontalAlignment="Left" ></Button>
-            </DataGridTemplateColumn.Header>
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate >
-                <StackPanel>
-                  <TextBlock Text="{Binding Day}" HorizontalAlignment="Right" ></TextBlock>
                 </StackPanel>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
