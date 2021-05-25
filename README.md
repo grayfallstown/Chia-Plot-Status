@@ -216,6 +216,7 @@ alternatively try `dotnet run --build`.
 - @Vera Toro
 - @whoismos3s
 - @wild9
+- @z.ostroff
 - @zeroarst
 - @The Malware Analysts of Microsoft and Malwarebytes for checking Chia Plot Status after every false positive
 
