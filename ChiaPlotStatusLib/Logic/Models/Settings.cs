@@ -18,7 +18,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string? Theme { get; set; } = "Light";
         public ObservableCollection<string> LogDirectories { get; set; } = new();
         public Columns Columns { get; set; } = Columns.Default();
-        public PlottingStatisticsIdRelevanceWeights Weigths = new();
+        public PlottingStatisticsIdRelevanceWeights Weigths { get; set; } = new();
         public Filter Filter { get; set; } = new();
         public string? SortProperty { get; set; } = "Progress";
         public bool? SortAsc { get; set; } = true;
