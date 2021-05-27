@@ -923,6 +923,19 @@
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Note">
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Note}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <Button Content="{Binding Note}" HorizontalAlignment="Left" Classes="Compact" Command="{Binding ElementName=WindowContext, Path=DataContext.NoteCommand}" CommandParameter="{Binding}"
+                    ></Button>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
 				</DataGrid.Columns>
 			</DataGrid>
 			<TextBlock>

@@ -46,7 +46,7 @@ namespace ChiaPlotStatusLib.Logic.Models
         {
             Columns columns = new();
 
-            // TODO: back to its position
+            columns.Order.Add("Note");
             columns.Order.Add("Tmp1Drive");
             columns.Order.Add("Tmp2Drive");
             // columns.cols.Add("DestDrive", false);

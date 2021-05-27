@@ -1,4 +1,5 @@
 ﻿using ChiaPlotStatus.Logic.Models;
+using ChiaPlotStatusLib.Logic.Models;
 using ChiaPlotStatusLib.Logic.Utils;
 using System;
 using System.Diagnostics;
@@ -47,6 +48,8 @@ namespace ChiaPlotStatus
         public string RunTimeSeconds { get; set; } = "";
         public string LastLogLine { get; set; } = "";
         public bool IsSelected { get; set; } = false;
+        public string Note { get; set; } = "";
+
 
         public PlotLogReadable(PlotLog plotLog)
         {
@@ -123,6 +126,7 @@ namespace ChiaPlotStatus
             this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
             this.Health = Formatter.formatHealth(plotLog.Health);
             this.PlaceInLogFile = plotLog.PlaceInLogFile + "/" + plotLog.QueueSize;
+            this.Note = plotLog.Note;
         }
     }
 }

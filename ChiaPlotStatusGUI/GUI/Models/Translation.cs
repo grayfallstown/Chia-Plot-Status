@@ -69,6 +69,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string UnmarkAsDead { get; set; } = "";
         public string Abort { get; set; } = "";
         public string Copy { get; set; } = "";
+        public string Save { get; set; } = "";
     }
 
     public class Tooltips
@@ -112,6 +113,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string Health { get; set; } = "";
         public string LastLogLine { get; set; } = "";
         public string PlaceInLogFile { get; set; } = "";
+        public string Note { get; set; } = "";
     }
 
     public class Columns
@@ -158,5 +160,6 @@ namespace ChiaPlotStatus.GUI.Models
         public string CopyTimeAvgTimeNeed { get; set; } = "";
         public string TotalAvgTimeNeed { get; set; } = "";
         public string Phase1Completed { get; set; } = "";
+        public string Note { get; set; } = "";
     }
 }

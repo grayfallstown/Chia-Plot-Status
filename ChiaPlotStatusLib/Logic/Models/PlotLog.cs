@@ -1,4 +1,5 @@
 ﻿using ChiaPlotStatus.Logic.Models;
+using ChiaPlotStatusLib.Logic.Models;
 using System;
 using System.Diagnostics;
 
@@ -54,6 +55,7 @@ namespace ChiaPlotStatus
         public int RunTimeSeconds { get; set; } = 0;
         public bool CaughtPlottingError { get; set; } = false;
         public string LastLogLine { get; set; } = "";
+        public string Note { get; set; } = "Notice / Tags";
 
         public void UpdateProgress()
         {

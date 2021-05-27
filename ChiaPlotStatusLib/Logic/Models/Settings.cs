@@ -22,8 +22,9 @@ namespace ChiaPlotStatus.GUI.Models
         public Filter Filter { get; set; } = new();
         public string? SortProperty { get; set; } = "Progress";
         public bool? SortAsc { get; set; } = true;
+        public List<Note>? Notes { get; set; } = new();
         public List<MarkOfDeath>? MarksOfDeath { get; set; } = new();
-        // no longer supported, but needs to stay or JsonDeserializer is not happy
+        // no longer supported, but needs to stay or JsonDeserializer is not happy with old config files
         public double? FontSize { get; set; } = null;
 
         public Settings()
@@ -62,6 +63,8 @@ namespace ChiaPlotStatus.GUI.Models
                         this.SortAsc = fromFile.SortAsc;
                     if (fromFile.Weigths != null)
                         this.Weigths = fromFile.Weigths;
+                    if (fromFile.Notes != null)
+                        this.Notes = fromFile.Notes;
                     if (fromFile.Columns != null)
                     {
                         this.Columns = fromFile.Columns;

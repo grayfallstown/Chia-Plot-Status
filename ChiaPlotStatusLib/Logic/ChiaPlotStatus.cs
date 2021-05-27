@@ -68,6 +68,9 @@ namespace ChiaPlotStatus
                 foreach (var markOfDeath in Settings.MarksOfDeath)
                     if (markOfDeath.IsMatch(plotLog))
                         plotLog.Health = new ConfirmedDead(true);
+                foreach (var note in Settings.Notes)
+                    if (note.IsMatch(plotLog))
+                        plotLog.Note = note.text;
                 if (!plotLog.IsRunning())
                     plotLog.RunTimeSeconds = 0;
                 else if (plotLog.StartDate != null)

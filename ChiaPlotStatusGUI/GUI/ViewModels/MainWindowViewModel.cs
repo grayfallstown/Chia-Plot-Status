@@ -49,6 +49,7 @@ namespace ChiaPlotStatus.ViewModels
         public ReactiveCommand<Unit, Unit> IncreaseFontSizeCommand { get; set; }
         public ReactiveCommand<Unit, Unit> DecreaseFontSizeCommand { get; set; }
         public ReactiveCommand<PlotLogReadable, Unit> MarkAsDeadCommand { get; set; }
+        public ReactiveCommand<PlotLogReadable, Unit> NoteCommand { get; set; }
         public ReactiveCommand<Unit, Unit> MarkSelectionAsDeadCommand { get; set; }
         public ReactiveCommand<Unit, Unit> SelectAllPossiblyDeadCommand { get; set; }
         public ReactiveCommand<Unit, Unit> SelectAllConcerningCommand { get; set; }
@@ -439,6 +440,12 @@ namespace ChiaPlotStatus.ViewModels
             MarkAsDeadCommand = ReactiveCommand.Create<PlotLogReadable>((plotLogReadable) =>
             {
                 var dialog = new MarkOfDeathDialog(plotLogReadable, this.Language, this.PlotManager.Settings, this.PlotManager.Settings.Theme, LoadPlotLogs);
+                dialog.Show();
+            });
+
+            NoteCommand = ReactiveCommand.Create<PlotLogReadable>((plotLogReadable) =>
+            {
+                var dialog = new NoteDialog(plotLogReadable, this.Language, this.PlotManager.Settings, this.PlotManager.Settings.Theme, LoadPlotLogs);
                 dialog.Show();
             });
 
