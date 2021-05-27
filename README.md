@@ -203,6 +203,7 @@ alternatively try `dotnet run --build`.
 - @douwebusschops
 - @dvlzgrmz
 - @j.spracher
+- @jimshank
 - @jonnnny
 - @kata32
 - @magnusmyklebost
