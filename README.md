@@ -183,6 +183,7 @@ alternatively try `dotnet run --build`.
 - @DjMuffin_top
 - @Dujapan
 - @Gridjump
+- @@getchiaplot
 - @Hellfall1
 - @Jazeon
 - @Jonesyj83
