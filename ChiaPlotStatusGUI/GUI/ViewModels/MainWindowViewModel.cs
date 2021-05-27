@@ -78,6 +78,18 @@ namespace ChiaPlotStatus.ViewModels
             HandleColumnWidths();
         }
 
+        private void HandleFinishDateVisibility()
+        {
+            var logDataGrid = MainWindow.Instance.Find<DataGrid>("LogDataGrid");
+            foreach (var col in logDataGrid.Columns)
+            {
+                if (col.SortMemberPath == "FinishDate") {
+                    col.IsVisible = !PlotManager.Settings.Filter.HideFinished;
+                    break;
+                }
+            }
+        }
+
         private void SortColumns()
         {
             var logDataGrid = MainWindow.Instance.Find<DataGrid>("LogDataGrid");
@@ -286,6 +298,7 @@ namespace ChiaPlotStatus.ViewModels
                 PlotLogTuples.Add(plotLog);
             }
             PlotCounts = new(PlotLogTuples);
+            HandleFinishDateVisibility();
             this.RaisePropertyChanged("PlotCounts");
         }
 
