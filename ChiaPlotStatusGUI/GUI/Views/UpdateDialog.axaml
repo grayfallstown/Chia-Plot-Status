@@ -55,6 +55,13 @@
         <Button Content="MacOS" Click="DownloadMac" />
         -->
       </StackPanel>
+      <StackPanel Name="DownloadNotice" Orientation="Vertical" IsVisible="False">
+        <TextBlock Text="Downloading installation file..."></TextBlock>
+        <TextBlock Text="Installation will be started as soon"></TextBlock>
+        <TextBlock Text="as the download finished."></TextBlock>
+        <TextBlock Text="Chia Plot Status will be closed"></TextBlock>
+        <TextBlock Text="automatically when the installation starts."></TextBlock>
+      </StackPanel>
     </StackPanel>
 	</Panel>
 </Window>

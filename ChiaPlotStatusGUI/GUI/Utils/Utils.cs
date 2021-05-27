@@ -13,6 +13,9 @@ namespace ChiaPlotStatusGUI.GUI.Utils
 {
     public class Utils
     {
+        /**
+         * Open URL in default browser
+         */
         public static void OpenUrl(string url)
         {
             try
@@ -21,7 +24,7 @@ namespace ChiaPlotStatusGUI.GUI.Utils
             }
             catch
             {
-                // hack because of this: https://github.com/dotnet/corefx/issues/10361
+                // workaround because of this: https://github.com/dotnet/corefx/issues/10361
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     url = url.Replace("&", "^&");

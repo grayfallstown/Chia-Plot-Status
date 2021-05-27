@@ -61,6 +61,10 @@ namespace ChiaPlotStatus.ViewModels
                 // TODO: rewrite in proper MVVM or similar pattern to get rid of this
                 return;
             }
+
+            // cleanup installation files after update
+            UpdateDialog.DeleteUpdateTempDirectory();
+
             foreach (var property in typeof(PlotLogReadable).GetProperties())
                 SortProperties.Add(property.Name);
             Languages = Translation.LoadLanguages();
