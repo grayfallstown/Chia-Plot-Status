@@ -13,9 +13,9 @@ rm -r release\
 mkdir release\
 mkdir release\ChiaPlotStatus\
 
-rm -r cd ChiaPlotStatusGUI\bin
-rm -r cd ChiaPlotStatusCLI\bin
-rm -r cd ChiaPlotStatusLIB\bin
+rm -r ChiaPlotStatusGUI\bin
+rm -r ChiaPlotStatusCLI\bin
+rm -r ChiaPlotStatusLIB\bin
 
 Echo "Building linux deb and rpm packages"
 cd ChiaPlotStatusGUI
