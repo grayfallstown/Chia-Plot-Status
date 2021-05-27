@@ -175,38 +175,58 @@ alternatively try `dotnet run --build`.
 ## Special Thanks
 
 - [@charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
+- @ใครๆก็ทําได้ DiY
+- @Alpha One
 - @Çağlar
 - @Cuello
 - @DazEB2
+- @DjMuffin_top
+- @Dujapan
 - @Gridjump
+- @@getchiaplot
 - @Hellfall1
+- @Jazeon
 - @Jonesyj83
+- @KJP Gaming
 - @Lucky_Length2676
 - @Lyushen
+- @Manic!
+- @Mr pq
 - @Ok-Studio5311
 - @Patro TV
+- @R3htribution
 - @RaySmalley
 - @RedxLus
+- @SERVAK
 - @TormodSan
+- @Upside Down Crypto
 - @Waloumi
+- @WeAreNotAngels
 - @Worldly-Mind3108
 - @Zubon102
 - @badi95
 - @bathrobehero
 - @bestq8.com
 - @buettgenbach
+- @c-pool
 - @carfnann
+- @chiaxch
 - @darkfriend77
 - @djdookie81
 - @dorofino
 - @douwebusschops
 - @dvlzgrmz
 - @j.spracher
+- @jimshank
 - @jonnnny
 - @kata32
+- @littleneko
 - @magnusmyklebost
+- @massimo de rovere
+- @mmoingame
 - @ouoam
 - @ozulu
+- @puperinoo
 - @raf-cr
 - @revlisoft
 - @rsegrest77
