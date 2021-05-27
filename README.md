@@ -194,6 +194,7 @@ alternatively try `dotnet run --build`.
 - @RedxLus
 - @TormodSan
 - @Waloumi
+- @WeAreNotAngels
 - @Worldly-Mind3108
 - @Zubon102
 - @badi95
