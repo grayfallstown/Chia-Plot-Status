@@ -190,6 +190,7 @@ alternatively try `dotnet run --build`.
 - @KJP Gaming
 - @Lucky_Length2676
 - @Lyushen
+- @Manic!
 - @Mr pq
 - @Ok-Studio5311
 - @Patro TV
@@ -207,7 +208,9 @@ alternatively try `dotnet run --build`.
 - @bathrobehero
 - @bestq8.com
 - @buettgenbach
+- @c-pool
 - @carfnann
+- @chiaxch
 - @darkfriend77
 - @djdookie81
 - @dorofino
@@ -220,6 +223,7 @@ alternatively try `dotnet run --build`.
 - @littleneko
 - @magnusmyklebost
 - @massimo de rovere
+- @mmoingame
 - @ouoam
 - @ozulu
 - @puperinoo
