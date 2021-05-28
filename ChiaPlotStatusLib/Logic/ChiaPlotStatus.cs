@@ -132,7 +132,7 @@ namespace ChiaPlotStatus
                 switch (tuple.Item1.Health)
                 {
                     case Healthy:
-                        if (!filter.HideHealthy) filterResults.Add(tuple);
+                        if (!filter.HideHealthy || (tuple.Item1.CurrentPhase == 6 && !filter.HideFinished)) filterResults.Add(tuple);
                         break;
                     case TempError:
                         // well, you have to take action here.

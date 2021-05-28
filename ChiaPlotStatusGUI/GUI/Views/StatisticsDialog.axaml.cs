@@ -95,9 +95,10 @@ namespace ChiaPlotStatus.Views
             this.WhenAnyValue(x => x.Height)
                 .Subscribe(x =>
                 {
-                    var dataGrid = this.Find<DataGrid>("StatsDataGrid");
-                    if (dataGrid != null)
-                        dataGrid.Height = x - 320;
+                    var statsDataGrid = this.Find<DataGrid>("StatsDataGrid");
+                    var dailyStatsDataGrid = this.Find<DataGrid>("DailyStatsDataGrid");
+                    statsDataGrid.Height = x / 2;
+                    dailyStatsDataGrid.Height = x / 2;
                 });
         }
 

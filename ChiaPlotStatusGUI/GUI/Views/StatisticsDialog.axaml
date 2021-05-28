@@ -72,7 +72,7 @@
   <ScrollViewer Name="WindowContext">
     <StackPanel>
 
-      <DataGrid Name="DailyStats" Items="{Binding DailyStats}" CanUserResizeColumns="true" CanUserReorderColumns="false" CanUserSortColumns="false">
+      <DataGrid Name="DailyStatsDataGrid" Items="{Binding DailyStats}" CanUserResizeColumns="true" CanUserReorderColumns="false" CanUserSortColumns="false">
         <DataGrid.Columns>
           <DataGridTemplateColumn SortMemberPath="Day">
             <DataGridTemplateColumn.Header>
