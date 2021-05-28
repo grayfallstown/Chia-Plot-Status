@@ -33,14 +33,14 @@ Tool to Monitor and Analyse Chia Plotting log files, show health and progress of
 ### On Upside Down Crypto (YouTube):
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=lK0o3KyGFW8" target="_blank">
- <img src="http://img.youtube.com/vi/lK0o3KyGFW8/mqdefault.jpg" alt="Watch the video" />
+ <img src="http://img.youtube.com/vi/lK0o3KyGFW8/hqdefault.jpg" alt="Watch the video" />
 </a>
 
 
 ### On Patro TV (YouTube):
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=JLVhG86-4UI" target="_blank">
- <img src="http://img.youtube.com/vi/JLVhG86-4UI/mqdefault.jpg" alt="Watch the video" />
+ <img src="http://img.youtube.com/vi/JLVhG86-4UI/hqdefault.jpg" alt="Watch the video" />
 </a>
 
 ## How it works
