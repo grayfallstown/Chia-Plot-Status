@@ -295,6 +295,7 @@ namespace ChiaPlotStatus.ViewModels
 
         public void LoadPlotLogs()
         {
+            MainWindow.Instance.Find<DataGrid>("LogDataGrid").BeginBatchUpdate();
             PlotLogs.Clear();
             PlotLogTuples = new();
             foreach (var plotLog in PlotManager.PollPlotLogs(PlotManager.Settings.SortProperty, (bool)PlotManager.Settings.SortAsc, Search, PlotManager.Settings.Filter))
@@ -304,6 +305,7 @@ namespace ChiaPlotStatus.ViewModels
             }
             PlotCounts = new(PlotLogTuples);
             HandleFinishDateVisibility();
+            MainWindow.Instance.Find<DataGrid>("LogDataGrid").EndBatchUpdate();
             this.RaisePropertyChanged("PlotCounts");
         }
 
