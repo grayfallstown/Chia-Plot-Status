@@ -12,7 +12,7 @@
 
 # [Chia Plot Status](https://grayfallstown.github.io/Chia-Plot-Status/)
 
-Tool to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion
+GUI Tool for beginners and experts to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion. No setup, configuration or installation of python or whatever required. Just install and enjoy.
 
 ![Screenshot](./Screenshots/Screenshot.jpg)
 ![Screenshot](./Screenshots/Screenshot-Dark.jpg)
