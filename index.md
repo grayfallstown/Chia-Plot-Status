@@ -27,6 +27,21 @@
  - Export of readable or raw data to Json, Yaml and CSV
 
 
+## See Chia Plot Status in action:
+
+### On Upside Down Crypto (YouTube):
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=lK0o3KyGFW8" target="_blank">
+ <img src="http://img.youtube.com/vi/lK0o3KyGFW8/mqdefault.jpg" alt="Watch the video" />
+</a>
+
+
+### On Patro TV (YouTube):
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=JLVhG86-4UI" target="_blank">
+ <img src="http://img.youtube.com/vi/JLVhG86-4UI/mqdefault.jpg" alt="Watch the video" />
+</a>
+
 ## How it works
 
 Chia Plot Status observes the log folders you give it to monitor which can be local or connected via network. By this it supports monitoring multiple plotting rigs as you can access them on your desktop even if your plotting rigs are headless. It regulary checks for new Log files in those folders and analyses them.
@@ -77,13 +92,6 @@ You can download a [full example script with Tee-Object](https://gist.github.com
 ## Need the columns in a different order?
 
 See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843351280
-
-
-## See Chia Plot Status in action:
-
-Chia Plot Status on Patro TV (YouTube):
-
-[![](http://img.youtube.com/vi/JLVhG86-4UI/0.jpg)](http://www.youtube.com/watch?v=JLVhG86-4UI "Chia Plot Status on Patro TV")
 
 
 ## Troubleshooting
