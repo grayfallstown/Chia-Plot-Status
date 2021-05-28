@@ -7,9 +7,10 @@
 [![Liberapay](https://img.shields.io/liberapay/patrons/grayfallstown?label=Liberapay)](https://liberapay.com/grayfallstown/donate)
 
 <p align="center">
-
   <img width="200" alt="Chia Plot Status Log" src="./Icon%20-%20Color%20changed.svg">
 </p>
+
+GUI Tool for beginners and experts to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion. No setup, configuration or installation of python or whatever required. Just install and enjoy.
 
 # [Chia](https://www.chia.net/) Plot Status
 
