@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 namespace ChiaPlotStatusLib.Logic.Models
 {
     /**
-     * A little notice or a collection of tags you can attach to a plot log
+     * A little notice or a collection of tags you can attach to a plot log <file>
+     * It affects all plot logs in the same log file, which allows to add the
+     * GUI Plotter Queue Name to Chia Plot Status.
      */
     public class Note
     {
         public string LogFolder { get; set; }
         public string LogFile { get; set; }
-        public int PlaceInLogFile { get; set; }
         public string text { get; set; }
 
         public Note() { }
@@ -24,7 +25,6 @@ namespace ChiaPlotStatusLib.Logic.Models
         {
             this.LogFolder = plotLogReadable.LogFolder;
             this.LogFile = plotLogReadable.LogFile;
-            this.PlaceInLogFile = int.Parse(plotLogReadable.PlaceInLogFile.Split("/")[0]);
             this.text = plotLogReadable.Note;
         }
 
@@ -34,7 +34,6 @@ namespace ChiaPlotStatusLib.Logic.Models
             if (!string.Equals(this.LogFolder, plotLog.LogFolder)) return false;
             string logFileName = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf(Path.DirectorySeparatorChar) + 1);
             if (!string.Equals(this.LogFile, logFileName)) return false;
-            if (this.PlaceInLogFile != plotLog.PlaceInLogFile) return false;
             return true;
         }
 
@@ -42,7 +41,6 @@ namespace ChiaPlotStatusLib.Logic.Models
         {
             if (!string.Equals(this.LogFolder, plotLog.LogFolder)) return false;
             if (!string.Equals(this.LogFile, plotLog.LogFile)) return false;
-            if (!string.Equals(this.PlaceInLogFile, plotLog.PlaceInLogFile)) return false;
             return true;
         }
 
@@ -50,13 +48,12 @@ namespace ChiaPlotStatusLib.Logic.Models
         {
             return obj is Note note &&
                    LogFolder == note.LogFolder &&
-                   LogFile == note.LogFile &&
-                   PlaceInLogFile == note.PlaceInLogFile;
+                   LogFile == note.LogFile;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(LogFolder, LogFile, PlaceInLogFile);
+            return HashCode.Combine(LogFolder, LogFile);
         }
     }
 }
