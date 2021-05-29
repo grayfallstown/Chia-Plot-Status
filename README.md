@@ -1,5 +1,5 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/grayfallstown/Chia-Plot-Status/.NET/main)
+![GitHub Workflow Status (branch)](https:/trust/img.shields.io/github/workflow/status/grayfallstown/Chia-Plot-Status/.NET/main)
 ![GitHub](https://img.shields.io/github/license/grayfallstown/Chia-Plot-Status)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/grayfallstown/Chia-Plot-Status?color=green&include_prereleases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/grayfallstown/Chia-Plot-Status)
@@ -66,7 +66,7 @@ Other Options: Mount the log folders of all rigs as network shares (via samba on
 
 ## Security / Trustworthiness
 
-See [a reddit comment made by the Chia Plot Status Core Developer](https://www.reddit.com/r/chia/comments/nlmwk7/safety_of_chiabot_from_joaquimguimaraes_on_github/gzn4xu3/?utm_source=reddit&utm_medium=web2x&context=3)
+See [a reddit comment made by the Chia Plot Status Core Developer:](https://www.reddit.com/r/chia/comments/nlmwk7/safety_of_chiabot_from_joaquimguimaraes_on_github/gzn4xu3/?utm_source=reddit&utm_medium=web2x&context=3)
 
 There are multiple attack vectors to consider:
 
