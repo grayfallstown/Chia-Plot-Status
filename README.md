@@ -66,7 +66,7 @@ Other Options: Mount the log folders of all rigs as network shares (via samba on
 
 ## Security / Trustworthiness
 
-See [a reddit comment made by the Chia Plot Status Core Developer (summarized in the following:)](https://www.reddit.com/r/chia/comments/nlmwk7/safety_of_chiabot_from_joaquimguimaraes_on_github/gzn4xu3/?utm_source=reddit&utm_medium=web2x&context=3)
+See [a reddit comment made by the Chia Plot Status Core Developer, summarized in the following:](https://www.reddit.com/r/chia/comments/nlmwk7/safety_of_chiabot_from_joaquimguimaraes_on_github/gzn4xu3/?utm_source=reddit&utm_medium=web2x&context=3)
 
 ### There are multiple attack vectors to consider:
 
@@ -102,7 +102,7 @@ The core developer (me) takes the following precautions to mitigate that risk:
 
 - Updating Dependencies (external libraries / code written by someone else) is delayed (possibly indefinitely) until an update is required to implement a feature or to fix a bug. This gives anti virus providers time to determine if that library version is malicious, which would prevent an update.
 
-**Note:** It is possible to build binaries with [Github Actions](https://github.com/features/actions) and thereby preventing the core developer (me) to create an installation package / Setup.exe that contains additional malicious code that is not inside the source code on github. While this could increase security, the core developer (I) is (am) simply fed up trying to debug remote build processes (so called CI-Pipelines) that he (I) can not accesss directly, as this actually takes (a lot) more time than implementing at least two more features each time a problem occurs. Feel free to [build Chia Plot Status yourself](https://github.com/grayfallstown/Chia-Plot-Status#build-it-yourself) if that is just not enough security for you, or if you need 32bit or raspberry pi/ARM builds.
+**Note:** It is possible to build binaries with [Github Actions](https://github.com/features/actions) and thereby preventing the core developer (me) to create an installation package / Setup.exe that contains additional malicious code that is not inside the source code on github. While this could increase security, the core developer (I) is (am) simply fed up trying to debug remote building processes (so called CI-Pipelines) that he (I) can not accesss directly, as this actually takes (a lot) more time than implementing at least two more features each time a problem occurs. Feel free to [build Chia Plot Status yourself](https://github.com/grayfallstown/Chia-Plot-Status#build-it-yourself) if that is just not enough security for you, or if you need 32bit or raspberry pi/ARM builds.
 
 
 ## Installation / Download
