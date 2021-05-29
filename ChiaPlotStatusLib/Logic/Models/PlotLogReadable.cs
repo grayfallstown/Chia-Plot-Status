@@ -3,6 +3,7 @@ using ChiaPlotStatusLib.Logic.Models;
 using ChiaPlotStatusLib.Logic.Utils;
 using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace ChiaPlotStatus
 {
@@ -123,7 +124,7 @@ namespace ChiaPlotStatus
             }
             this.PlotName = plotLog.PlotName;
             this.LogFolder = plotLog.LogFolder;
-            this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf("\\") + 1);
+            this.LogFile = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf(Path.DirectorySeparatorChar) + 1);
             this.Health = Formatter.formatHealth(plotLog.Health);
             this.PlaceInLogFile = plotLog.PlaceInLogFile + "/" + plotLog.QueueSize;
             this.Note = plotLog.Note;
