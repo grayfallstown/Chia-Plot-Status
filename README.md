@@ -100,7 +100,7 @@ The core developer (me) takes the following precautions to mitigate that risk:
 
 - Every release build is build on the same system and previously downloaded dependencies are never deleted/redownloaded. This prevents pulling in malicious code if the external dependency version used gets replaced with malicious code. But it also prevents  reproducible builds that everyone can follow and reproduce step by step on their system, if the external dependency version actually does get changed. Well, this should raise concern anyway and in any case.
 
-**Note:** It is possible to build binaries with [Github Actions](https://github.com/features/actions) and thereby preventing the core developer (me) to create an installation package / Setup.exe that contains additional malicious code that is not inside the source code on github. While this could increase security, the core developer (I) is (am) simply fed up trying to debug remote build processes (so called CI-Pipelines) that he (I) can not accesss directly, as this actually takes (a lot) more time than implementing at least two more features each time a problem occurs. Feel free to [build it Chia Plot Status yourself](https://github.com/grayfallstown/Chia-Plot-Status#build-it-yourself) if that is just not enough security for you.
+**Note:** It is possible to build binaries with [Github Actions](https://github.com/features/actions) and thereby preventing the core developer (me) to create an installation package / Setup.exe that contains additional malicious code that is not inside the source code on github. While this could increase security, the core developer (I) is (am) simply fed up trying to debug remote build processes (so called CI-Pipelines) that he (I) can not accesss directly, as this actually takes (a lot) more time than implementing at least two more features each time a problem occurs. Feel free to [build Chia Plot Status yourself](https://github.com/grayfallstown/Chia-Plot-Status#build-it-yourself) if that is just not enough security for you, or if your need 32bit or raspberry pi/ARM builds.
 
 - Updating Dependencies (external libraries / code written by someone else) is delayed (possibly indefinitely) until an update is required to implement a feature or to fix a bug. This gives anti virus providers time to determine if that library version is malicious, which would prevent an update.
 
@@ -115,7 +115,7 @@ You will get a blue warning saying this was published by an unknown developer.
 
 Linux: First install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0), then either the Chia Plot Status [deb](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.deb) or [rpm](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.rpm) package depending on your linux distribution (deb for ubuntu)
 
-For Mac you currently have to [build it yourself](#Build-it-yourself).
+For Mac you currently have to [build it](#Build-it-).
 
 ## Getting Log Files from PowerShell
 
@@ -198,6 +198,8 @@ MIT opensource licence, free to keep or change.
 
 
 ## Build it yourself
+
+This **should** work on x86_64bit, x86_32bit, ARM 64bit and ARM 32 bit Systems. If not, open an [Issue](https://github.com/grayfallstown/Chia-Plot-Status/issues/new) to tell me whats wrong.
 
 Download and install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0) and [git](https://git-scm.com/).
 
