@@ -1,5 +1,4 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
-![GitHub Workflow Status (branch)](https:/trust/img.shields.io/github/workflow/status/grayfallstown/Chia-Plot-Status/.NET/main)
 ![GitHub](https://img.shields.io/github/license/grayfallstown/Chia-Plot-Status)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/grayfallstown/Chia-Plot-Status?color=green&include_prereleases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/grayfallstown/Chia-Plot-Status)
