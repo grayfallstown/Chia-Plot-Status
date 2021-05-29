@@ -66,11 +66,11 @@ Other Options: Mount the log folders of all rigs as network shares (via samba on
 
 ## Security / Trustworthiness
 
-See [a reddit comment made by the Chia Plot Status Core Developer:](https://www.reddit.com/r/chia/comments/nlmwk7/safety_of_chiabot_from_joaquimguimaraes_on_github/gzn4xu3/?utm_source=reddit&utm_medium=web2x&context=3)
+See [a reddit comment made by the Chia Plot Status Core Developer (summarized in the following:)](https://www.reddit.com/r/chia/comments/nlmwk7/safety_of_chiabot_from_joaquimguimaraes_on_github/gzn4xu3/?utm_source=reddit&utm_medium=web2x&context=3)
 
-There are multiple attack vectors to consider:
+### There are multiple attack vectors to consider:
 
-**1. The possibility that the core developer (me) is or becomes malicious**
+##### 1. The possibility that the core developer (me) is or becomes malicious
 
 There is a saying: Where is a money trail, there is a way to sue/prosecute someone.
 
@@ -84,13 +84,13 @@ Even if you think you would not sue the core developer as he (me) might sit in a
 
 This should be more than enough to deter the core developer (me) from doing anything malicious.
 
-**2. The core developer (me) merges a pull request (code changes made by someone else) which contains malicious code without noticing.**
+#### 2. The core developer (me) merges a pull request (code changes made by someone else) which contains malicious code without noticing
 
 As seen on [https://github.com/grayfallstown/Chia-Plot-Status/graphs/contributors](https://github.com/grayfallstown/Chia-Plot-Status/graphs/contributors) there is only one other person who contributed a pull request so far and that wasn't code but a documentation change.
 
 The core developer (me) will check each pull request before merging as he (me) would have to run the code himself to check if the application works properly after merging that pull request and by that he (I) would get attacked by any malicious code that was contained in that pull request.
 
-**3. External Dependencies (as in libraries / code written by someone else) the application uses to do certain things (like to create the graphical user interface) become malicious.**
+#### 3. External Dependencies (as in libraries / code written by someone else) the application uses to do certain things (like to create the graphical user interface) become malicious.
 
 Well, this is a tough one as even the core developer (me) has very little means to check external binaries for malicious code. The core developer (me) and every other developer using those libraries will get attacked by any malicious code in those libraries before they (we) distribute a new version of their (our) software containing that library to the users of their (our) softwares, as they (we) generally test their (our) applications before each release.
 
@@ -100,7 +100,7 @@ The core developer (me) takes the following precautions to mitigate that risk:
 
 - Every release build is build on the same system and previously downloaded dependencies are never deleted/redownloaded. This prevents pulling in malicious code if the external dependency version used gets replaced with malicious code. But it also prevents  reproducible builds that everyone can follow and reproduce step by step on their system, if the external dependency version actually does get changed. Well, this should raise concern anyway and in any case.
 
-- Updating Dependencies (external libraries / code written by someone esle) is delayed (possibly indefinitely) until an update is required to implement a feature or to fix a bug. This gives anti virus providers time to determine if that library version is malicious, which would prevent an update.
+- Updating Dependencies (external libraries / code written by someone else) is delayed (possibly indefinitely) until an update is required to implement a feature or to fix a bug. This gives anti virus providers time to determine if that library version is malicious, which would prevent an update.
 
 
 
