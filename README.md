@@ -230,6 +230,7 @@ alternatively try `dotnet run --build`.
 - @Hellfall1
 - @Jazeon
 - @Jonesyj83
+- @JoseAngelB
 - @KJP Gaming
 - @Lucky_Length2676
 - @Lyushen
