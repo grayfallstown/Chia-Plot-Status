@@ -1,5 +1,4 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/grayfallstown/Chia-Plot-Status/.NET/main)
 ![GitHub](https://img.shields.io/github/license/grayfallstown/Chia-Plot-Status)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/grayfallstown/Chia-Plot-Status?color=green&include_prereleases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/grayfallstown/Chia-Plot-Status)
@@ -12,7 +11,7 @@
 
 # [Chia Plot Status](https://grayfallstown.github.io/Chia-Plot-Status/)
 
-Tool to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion
+GUI Tool for beginners and experts to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion. No setup, configuration or installation of python or whatever required. Just install and enjoy.
 
 ![Screenshot](./Screenshots/Screenshot.jpg)
 ![Screenshot](./Screenshots/Screenshot-Dark.jpg)
@@ -33,14 +32,14 @@ Tool to Monitor and Analyse Chia Plotting log files, show health and progress of
 ### On Upside Down Crypto (YouTube):
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=lK0o3KyGFW8" target="_blank">
- <img src="http://img.youtube.com/vi/lK0o3KyGFW8/mqdefault.jpg" alt="Watch the video" />
+ <img src="http://img.youtube.com/vi/lK0o3KyGFW8/hqdefault.jpg" alt="Watch the video" />
 </a>
 
 
 ### On Patro TV (YouTube):
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=JLVhG86-4UI" target="_blank">
- <img src="http://img.youtube.com/vi/JLVhG86-4UI/mqdefault.jpg" alt="Watch the video" />
+ <img src="http://img.youtube.com/vi/JLVhG86-4UI/hqdefault.jpg" alt="Watch the video" />
 </a>
 
 ## How it works
@@ -64,6 +63,45 @@ Other Options: Mount the log folders of all rigs as network shares (via samba on
 - Always log locally. If you log directly to a network share / NAS your plotting processes will crash if the connection becomes flaky. Prefer connecting your host machine (which runs Chia Plot Status) to networkshares on the plotting rigs, not the other way around.
 
 
+## Security / Trustworthiness
+
+See [a reddit comment made by the Chia Plot Status Core Developer, summarized in the following:](https://www.reddit.com/r/chia/comments/nlmwk7/safety_of_chiabot_from_joaquimguimaraes_on_github/gzn4xu3/?utm_source=reddit&utm_medium=web2x&context=3)
+
+### There are multiple attack vectors to consider:
+
+##### 1. The possibility that the core developer (me) is or becomes malicious
+
+There is a saying: Where is a money trail, there is a way to sue/prosecute someone.
+
+Chia Plot Status has buttons to donate via paypal both in the application itself and on the website.
+
+Should the core developer (me) turn malicious, people could easily sue the core developer (me) and by that get the necessary details as in full name, address and day of birth, IBAN/Bic, everything from paypal.
+
+If the core developer (me) becomes malicious this would be basically a how to get imprisoned speedrun (any %)
+
+Even if you think you would not sue the core developer as he (me) might sit in a different country (germany), someone will as the Chia Plot Status Github Repository has between 2k to 4k visits daily and currently 18k downloads.
+
+This should be more than enough to deter the core developer (me) from doing anything malicious.
+
+#### 2. The core developer (me) merges a pull request (code changes made by someone else) which contains malicious code without noticing
+
+As seen on [https://github.com/grayfallstown/Chia-Plot-Status/graphs/contributors](https://github.com/grayfallstown/Chia-Plot-Status/graphs/contributors) there is only one other person who contributed a pull request so far and that wasn't code but a documentation change.
+
+The core developer (me) will check each pull request before merging as he (me) would have to run the code himself to check if the application works properly after merging that pull request and by that he (I) would get attacked by any malicious code that was contained in that pull request.
+
+#### 3. External Dependencies (as in libraries / code written by someone else) the application uses to do certain things (like to create the graphical user interface) become malicious.
+
+Well, this is a tough one as even the core developer (me) has very little means to check external binaries for malicious code. The core developer (me) and every other developer using those libraries will get attacked by any malicious code in those libraries before they (we) distribute a new version of their (our) software containing that library to the users of their (our) softwares, as they (we) generally test their (our) applications before each release.
+
+The core developer (me) takes the following precautions to mitigate that risk:
+
+- External dependencies are kept at a minimum to reduce this attack vector (chia-blockchain devs do the same)
+
+- Every release build is build on the same system and previously downloaded dependencies are never deleted/redownloaded. This prevents pulling in malicious code if the external dependency version used gets replaced with malicious code. But it also prevents  reproducible builds that everyone can follow and reproduce step by step on their system, if the external dependency version actually does get changed. Well, this should raise concern anyway and in any case.
+
+- Updating Dependencies (external libraries / code written by someone else) is delayed (possibly indefinitely) until an update is required to implement a feature or to fix a bug. This gives anti virus providers time to determine if that library version is malicious, which would prevent an update.
+
+
 ## Installation / Download
 
 ![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
@@ -73,7 +111,7 @@ You will get a blue warning saying this was published by an unknown developer.
 
 Linux: First install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0), then either the Chia Plot Status [deb](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.deb) or [rpm](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.rpm) package depending on your linux distribution (deb for ubuntu)
 
-For Mac you currently have to [build it yourself](#Build-it-yourself).
+For Mac you currently have to [build it](#Build-it-).
 
 ## Getting Log Files from PowerShell
 
@@ -143,19 +181,14 @@ File 'test.json' written
 Note: Write your tools or home automation in a way that new fields/properties/columns added to the exported files do not crash it.
 
 
-## Avalonia Incident
-
-Chia Plot Status uses an external library to provide a graphical user interface that runs on Windows, Linux and MacOS called [AvaloniaUI](https://avaloniaui.net/). ~~Avalonia currently gets flagged as Trojan by Windows Defender~~ and as far as currently known, only by Windows Defender. The file was already [deemed safe by microsoft malware analysts](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-842849470), but then got [flagged again](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-843005699). ~~I am currently trying to resolve this issue, but feel free to postpone the installation of Chia Plot Status until the issue is resolved.~~
-
-**UPDATE**: Users who have Chia Plot Status installed or tried to install it during that time were NOT in any danger. The files were safe and clean all along and falsely reported by Windows Defender. Windows Defender no longer reports Avalonia as a Trojan **IF** one updates the Dynamic Signatures of Windows Defender. For transparency I am leaving this notice for the time being and I have documented the entire situation in an [incident report](https://github.com/grayfallstown/Chia-Plot-Status/issues/2#issuecomment-843279417)
-
-
 ## Open Source
 
 MIT opensource licence, free to keep or change.
 
 
 ## Build it yourself
+
+This **should** work on x86_64bit, x86_32bit, ARM 64bit and ARM 32 bit Systems. If not, open an [Issue](https://github.com/grayfallstown/Chia-Plot-Status/issues/new) to tell me whats wrong.
 
 Download and install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0) and [git](https://git-scm.com/).
 
@@ -225,7 +258,9 @@ alternatively try `dotnet run --build`.
 - @douwebusschops
 - @dvlzgrmz
 - @j.spracher
+- @jcmarco
 - @jimshank
+- @johnamtl
 - @jonnnny
 - @kata32
 - @littleneko
