@@ -21,7 +21,7 @@ GUI Tool for beginners and experts to Monitor and Analyse Chia Plotting log file
  - Monitor Progress of running plots
  - Show estimated time to completion based on your already finished plots best matching your current plot config
  - Monitor Health of plot processes
- - Compatible with all plotters that use or are based on the official chia plotter (see Troubleshooting if something does not work from the get go)
+ - Compatible with all plotters and plotting managers that use or are based on the official chia plotter (see Troubleshooting if something does not work from the get go)
  - Show important information from log file in easy to read table
  - Multiple folders with log files supported (multiple plotting rigs, anyone?)
  - Multiple plots per log file supported (plot create --num n)
