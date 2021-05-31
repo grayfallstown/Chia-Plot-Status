@@ -101,8 +101,6 @@ The core developer (me) takes the following precautions to mitigate that risk:
 
 - Updating Dependencies (external libraries / code written by someone else) is delayed (possibly indefinitely) until an update is required to implement a feature or to fix a bug. This gives anti virus providers time to determine if that library version is malicious, which would prevent an update.
 
-**Note:** It is possible to build binaries with [Github Actions](https://github.com/features/actions) and thereby preventing the core developer (me) to create an installation package / Setup.exe that contains additional malicious code that is not inside the source code on github. While this could increase security, the core developer (I) is (am) simply fed up trying to debug remote building processes (so called CI-Pipelines) that he (I) can not accesss directly, as this actually takes (a lot) more time than implementing at least two more features each time a problem occurs. Feel free to [build Chia Plot Status yourself](https://github.com/grayfallstown/Chia-Plot-Status#build-it-yourself) if that is just not enough security for you, or if you need 32bit or raspberry pi/ARM builds.
-
 
 ## Installation / Download
 
@@ -181,13 +179,6 @@ File 'test.json' written
 ```
 
 Note: Write your tools or home automation in a way that new fields/properties/columns added to the exported files do not crash it.
-
-
-## Avalonia Incident
-
-Chia Plot Status uses an external library to provide a graphical user interface that runs on Windows, Linux and MacOS called [AvaloniaUI](https://avaloniaui.net/). ~~Avalonia currently gets flagged as Trojan by Windows Defender~~ and as far as currently known, only by Windows Defender. The file was already [deemed safe by microsoft malware analysts](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-842849470), but then got [flagged again](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-843005699). ~~I am currently trying to resolve this issue, but feel free to postpone the installation of Chia Plot Status until the issue is resolved.~~
-
-**UPDATE**: Users who have Chia Plot Status installed or tried to install it during that time were NOT in any danger. The files were safe and clean all along and falsely reported by Windows Defender. Windows Defender no longer reports Avalonia as a Trojan **IF** one updates the Dynamic Signatures of Windows Defender. For transparency I am leaving this notice for the time being and I have documented the entire situation in an [incident report](https://github.com/grayfallstown/Chia-Plot-Status/issues/2#issuecomment-843279417)
 
 
 ## Open Source
