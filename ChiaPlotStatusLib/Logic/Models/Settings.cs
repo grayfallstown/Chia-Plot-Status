@@ -17,6 +17,8 @@ namespace ChiaPlotStatus.GUI.Models
         public bool? AlwaysDoFullRead { get; set; } = false;
         public string? Theme { get; set; } = "Light";
         public ObservableCollection<string> LogDirectories { get; set; } = new();
+        public double? MaxHarvestLookupSeconds { get; set; } = 5d;
+        public ObservableCollection<string> HarvesterLogDirectories { get; set; } = new();
         public Columns Columns { get; set; } = Columns.Default();
         public PlottingStatisticsIdRelevanceWeights Weigths { get; set; } = new();
         public Filter Filter { get; set; } = new();
@@ -65,6 +67,10 @@ namespace ChiaPlotStatus.GUI.Models
                         this.Weigths = fromFile.Weigths;
                     if (fromFile.Notes != null)
                         this.Notes = fromFile.Notes;
+                    if (fromFile.HarvesterLogDirectories != null)
+                        this.HarvesterLogDirectories = fromFile.HarvesterLogDirectories;
+                    if (fromFile.MaxHarvestLookupSeconds != null)
+                        this.MaxHarvestLookupSeconds = fromFile.MaxHarvestLookupSeconds;
                     if (fromFile.Columns != null)
                     {
                         this.Columns = fromFile.Columns;

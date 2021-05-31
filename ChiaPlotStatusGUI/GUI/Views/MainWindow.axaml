@@ -165,6 +165,7 @@
           <MenuItem Header="Update" Name="UpdateButton" />
           <MenuItem Header="Donate" Name="DonateButton" />
           <MenuItem Header="Statistics" Name="StatisticsButton" />
+          <MenuItem Header="Harvesters" Name="HarvestersButton" />
         </Menu>
       </DockPanel>
 			<StackPanel Orientation="Horizontal">

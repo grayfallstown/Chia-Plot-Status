@@ -307,6 +307,17 @@ namespace ChiaPlotStatus.ViewModels
             HandleFinishDateVisibility();
             MainWindow.Instance.Find<DataGrid>("LogDataGrid").EndBatchUpdate();
             this.RaisePropertyChanged("PlotCounts");
+
+            try
+            {
+                // https://stackoverflow.com/a/4257387
+                // NOT recommended but I just need to keep memory footprint low since this runs
+                // on plotting rigs that overtax memory by definition
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+            }
+            catch { }
         }
 
 
@@ -475,6 +486,13 @@ namespace ChiaPlotStatus.ViewModels
                     dialog.Show();
                 });
 
+            var harvestersButton = MainWindow.Instance.Find<MenuItem>("HarvestersButton");
+            if (harvestersButton != null)
+                harvestersButton.Command = ReactiveCommand.Create(() =>
+                {
+                    var dialog = new HarvestDialog(this.Language, this.PlotManager.Settings, this.PlotManager.Settings.Theme);
+                    dialog.Show();
+                });
 
         }
 

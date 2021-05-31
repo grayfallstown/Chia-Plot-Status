@@ -33,6 +33,18 @@ namespace ChiaPlotStatusLib.Logic.Utils
                 return TimeSpan.FromSeconds(seconds).ToString(@"ss\s");
         }
 
+        public static string formatDouble(double value, int decimalPlaces, string? suffix)
+        {
+            var format = "0";
+            if (decimalPlaces > 0)
+                format += ".";
+            for (int i = 0; i < decimalPlaces; i++) format += "0";
+            var val = value.ToString(format, CultureInfo.CurrentCulture);
+            if (suffix == null)
+                return val;
+            else return val + suffix;
+        }
+
         public static string formatDateTime(DateTime? dateTime)
         {
             if (dateTime == null)

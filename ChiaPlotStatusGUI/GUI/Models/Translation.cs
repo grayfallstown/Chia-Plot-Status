@@ -114,6 +114,18 @@ namespace ChiaPlotStatus.GUI.Models
         public string LastLogLine { get; set; } = "";
         public string PlaceInLogFile { get; set; } = "";
         public string Note { get; set; } = "";
+        public string TotalEligiblePlots { get; set; } = "";
+        public string AvgEligiblePlots { get; set; } = "";
+        public string FoundProofs { get; set; } = "";
+        public string BestLookupTime { get; set; } = "";
+        public string WorstLookupTime { get; set; } = "";
+        public string AvgLookupTime { get; set; } = "";
+        public string FilterRatio { get; set; } = "";
+        public string TotalPlots { get; set; } = "";
+        public string ChallengesPerMinute { get; set; } = "";
+        public string AvgHeat { get; set; } = "";
+        public string MaxHeat { get; set; } = "";
+        public string MinHeat { get; set; } = "";
     }
 
     public class Columns
@@ -161,5 +173,17 @@ namespace ChiaPlotStatus.GUI.Models
         public string TotalAvgTimeNeed { get; set; } = "";
         public string Phase1Completed { get; set; } = "";
         public string Note { get; set; } = "";
+        public string TotalEligiblePlots { get; set; } = "";
+        public string AvgEligiblePlots { get; set; } = "";
+        public string FoundProofs { get; set; } = "";
+        public string BestLookupTime { get; set; } = "";
+        public string WorstLookupTime { get; set; } = "";
+        public string AvgLookupTime { get; set; } = "";
+        public string FilterRatio { get; set; } = "";
+        public string TotalPlots { get; set; } = "";
+        public string ChallengesPerMinute { get; set; } = "";
+        public string AvgHeat { get; set; } = "";
+        public string MaxHeat { get; set; } = "";
+        public string MinHeat { get; set; } = "";
     }
 }
