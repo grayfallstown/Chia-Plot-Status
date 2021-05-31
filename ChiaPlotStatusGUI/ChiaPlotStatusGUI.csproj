@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
@@ -10,7 +10,7 @@
     <Company>grayfallstown</Company>
     <Authors>grayfallstown</Authors>
     <ApplicationIcon>Icon - Color changed.ico</ApplicationIcon>
-    <Version>0.10.2</Version>
+    <Version>0.10.3</Version>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="GUI\Assets\**" />
@@ -45,6 +45,9 @@
     </Compile>
     <Compile Update="GUI\Views\MainWindow.axaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="GUI\Views\HarvestDialog.axaml.cs">
+      <DependentUpon>HarvestDialog.axaml</DependentUpon>
     </Compile>
     <Compile Update="GUI\Views\NoteDialog.axaml.cs">
       <DependentUpon>NoteDialog.axaml</DependentUpon>
