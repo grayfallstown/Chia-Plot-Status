@@ -137,6 +137,8 @@ See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843
 
 If you use Cloud Sync Services, rsync/scp cronjobs or tools like Syncthing to collect your log files you might run into an issue with the files not properly syncing. Sonething like `The process cannot access the file because it is being used by another process.`. See [Issue #40](https://github.com/grayfallstown/Chia-Plot-Status/issues/40#issuecomment-841025993) for how to fix that, or even better, use sshfs instead.
 
+The same works if you use harry plotter as plotting manager.
+
 If Chia Plot Status does no longer start, try renaming `ChiaPlotStatu.config.json` to `ChiaPlotStatu.config.json.backup`. The file is located in your home directory at `C:\Users\<your username>\ChiaPlotStatu.config.json` on windows, `/home/<your username>/ChiaPlotStatu.config.json` on linux and `<your user profile directory>/ChiaPlotStatu.config.json` on mac.
 
 ## Custom tools / Home automation
@@ -228,6 +230,7 @@ alternatively try `dotnet run --build`.
 - @Hellfall1
 - @Jazeon
 - @Jonesyj83
+- @JoseAngelB
 - @KJP Gaming
 - @Lucky_Length2676
 - @Lyushen
