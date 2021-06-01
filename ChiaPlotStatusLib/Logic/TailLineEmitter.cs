@@ -24,20 +24,29 @@ namespace ChiaPlotStatus
         private string file;
         private bool closeOnEndOfFile;
         private bool firstRead = true;
+        private bool initialized = false;
+        private bool closed = false;
 
         public TailLineEmitter(string file, bool closeOnEndOfFile, TailLineEmitterCallback callback)
         {
             this.file = file;
             this.Callback = callback;
             this.closeOnEndOfFile = closeOnEndOfFile;
-            var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            var bufferedFs = new BufferedStream(fs, 256 * 1024);
-            this.StreamReader = new StreamReader(bufferedFs);
         }
 
         ~TailLineEmitter()
         {
-            this.StreamReader.Close();
+            Close();
+        }
+
+        public void Close()
+        {
+            if (!closed)
+            {
+                closed = true;
+                if (this.StreamReader != null)
+                    this.StreamReader.Close();
+            }
         }
 
         /**
@@ -45,6 +54,13 @@ namespace ChiaPlotStatus
          */
         public void ReadMore()
         {
+            if (!initialized)
+            {
+                var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                var bufferedFs = new BufferedStream(fs, 128 * 1024);
+                this.StreamReader = new StreamReader(bufferedFs);
+                initialized = true;
+            }
             if (!closeOnEndOfFile ||firstRead)
             {
                 firstRead = false;
@@ -65,10 +81,7 @@ namespace ChiaPlotStatus
                     Debug.WriteLine(e);
                 }
                 if (closeOnEndOfFile)
-                {
-                    this.StreamReader.Close();
-                }
-
+                    Close();
             }
         }
 

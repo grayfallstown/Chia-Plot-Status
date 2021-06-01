@@ -81,6 +81,8 @@ namespace ChiaPlotStatus.ViewModels
             InitializeFilterUpdates();
             SortColumns();
             HandleColumnWidths();
+
+            RegisterOnCloseHandler();
         }
 
         private void HandleFinishDateVisibility()
@@ -307,17 +309,6 @@ namespace ChiaPlotStatus.ViewModels
             HandleFinishDateVisibility();
             MainWindow.Instance.Find<DataGrid>("LogDataGrid").EndBatchUpdate();
             this.RaisePropertyChanged("PlotCounts");
-
-            try
-            {
-                // https://stackoverflow.com/a/4257387
-                // NOT recommended but I just need to keep memory footprint low since this runs
-                // on plotting rigs that overtax memory by definition
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                GC.Collect();
-            }
-            catch { }
         }
 
 
@@ -533,7 +524,7 @@ namespace ChiaPlotStatus.ViewModels
 
         public void InitializeRefreshInterval()
         {
-            RefreshTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
+            RefreshTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
             RefreshTimer.Tick += (sender, e) =>
             {
                 // Somehow this ticks twice
@@ -573,5 +564,14 @@ namespace ChiaPlotStatus.ViewModels
                     .Subscribe((x) => update());
             }
         }
+
+        public void RegisterOnCloseHandler()
+        {
+            MainWindow.Instance.Closing += (sender, e) =>
+            {
+                PlotManager.Persist();
+            };
+        }
+
     }
 }

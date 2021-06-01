@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChiaPlotStatusLib.Logic;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -19,15 +20,18 @@ namespace ChiaPlotStatus
     public class PlotLogFileParser
     {
         private TailLineEmitter TailLineEmitter { get; }
-        private List<PlotLog> PlotLogs { get; } = new List<PlotLog>();
+        protected List<PlotLog> PlotLogs { get; } = new List<PlotLog>();
         public string LogFile;
         public string LogFolder;
         public bool firstRead = true;
         public bool lineRead = true;
+        public bool closed = false;
+        public PlotParserCache cache;
         public DateTime? lastGrown;
 
-        public PlotLogFileParser(string path, bool closeOnEndOfFile)
+        public PlotLogFileParser(string path, bool closeOnEndOfFile, ref PlotParserCache cache)
         {
+            this.cache = cache;
             this.LogFile = path;
             this.LogFolder = path.Substring(0, path.LastIndexOf(Path.DirectorySeparatorChar));
             this.TailLineEmitter = new TailLineEmitter(path, closeOnEndOfFile, (line) =>
@@ -154,24 +158,48 @@ namespace ChiaPlotStatus
          */
         public List<PlotLog> ParsePlotLog()
         {
+            if (closed)
+                return PlotLogs;
+            var fromCache = cache.Get(this);
+            if (fromCache != null)
+            {
+                Debug.WriteLine("Plotlog was already in cache. Not reading again.");
+                firstRead = false;
+                Close();
+                foreach (var plotLog in fromCache)
+                    PlotLogs.Add(plotLog);
+                return PlotLogs;
+            }
             lineRead = false;
             this.TailLineEmitter.ReadMore();
             CurrentPlotLog().FileLastWritten = File.GetLastWriteTime(this.LogFile);
-            if (lineRead && !firstRead) {
-                lastGrown = DateTime.Now;
+            if (CurrentPlotLog().FileLastWritten != null && ((DateTime.Now - (DateTime)CurrentPlotLog().FileLastWritten).TotalDays > 1d))
+            {
+                cache.Add(this, PlotLogs);
+                Close();
             }
+            if (lineRead && !firstRead)
+                lastGrown = DateTime.Now;
             if (lastGrown != null)
                 CurrentPlotLog().FileLastWritten = lastGrown;
             firstRead = false;
+
             return PlotLogs;
+        }
+
+        private void Close()
+        {
+            if (closed)
+                return;
+            Debug.WriteLine("PlotLog " + LogFile + " has not been updated for more than a day. Closing file.");
+            this.TailLineEmitter.Close();
+            closed = true;
         }
 
         private PlotLog CurrentPlotLog()
         {
             if (PlotLogs.Count == 0)
-            {
                 PlotLogs.Add(new PlotLog());
-            }
             return PlotLogs[PlotLogs.Count - 1];
         }
 

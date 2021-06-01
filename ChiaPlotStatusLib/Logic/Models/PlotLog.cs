@@ -2,6 +2,7 @@
 using ChiaPlotStatusLib.Logic.Models;
 using System;
 using System.Diagnostics;
+using System.Text.Json.Serialization;
 
 namespace ChiaPlotStatus
 {
@@ -47,6 +48,7 @@ namespace ChiaPlotStatus
         public string ApproximateWorkingSpace { get; set; } = "";
         public string FinalFileSize { get; set; } = "";
         public DateTime? FileLastWritten { get; set; }
+        [JsonIgnore]
         public HealthIndicator Health { get; set; } = Healthy.Instance;
         public bool IsLastInLogFile { get; set; } = true;
         public bool IsLastLineTempError { get; set; } = false;

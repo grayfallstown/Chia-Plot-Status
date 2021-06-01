@@ -1,6 +1,7 @@
 ﻿using ChiaPlotStatus.GUI.Models;
 using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatus.Logic.Utils;
+using ChiaPlotStatusLib.Logic;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -19,12 +20,17 @@ namespace ChiaPlotStatus
     public class ChiaPlotStatus
     {
         public Settings Settings { get; }
+        private PlotParserCache cache;
         private Dictionary<string, PlotLogFileParser> PlotLogFiles { get; } = new Dictionary<string, PlotLogFileParser>();
         public PlottingStatisticsHolder Statistics { get; set; }
 
         public ChiaPlotStatus(Settings settings) {
             this.Settings = settings;
             Statistics = new PlottingStatisticsHolder(new List<PlotLog>(), Settings.Weigths, new List<MarkOfDeath>());
+
+            string cachePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + Path.DirectorySeparatorChar +
+                "ChiaPlotStatus.cache.json";
+            cache = new PlotParserCache(cachePath);
         }
 
         public void AddDefaultLogFolder()
@@ -94,7 +100,7 @@ namespace ChiaPlotStatus
                     {
                         if (!PlotLogFiles.ContainsKey(filePath) && LooksLikeAPlotLog(filePath))
                         {
-                            PlotLogFiles[filePath] = new PlotLogFileParser(filePath, Settings.AlwaysDoFullRead == true);
+                            PlotLogFiles[filePath] = new PlotLogFileParser(filePath, Settings.AlwaysDoFullRead == true, ref cache);
                         }
                     }
                 } else
@@ -114,9 +120,7 @@ namespace ChiaPlotStatus
             Parallel.ForEach(PlotLogFiles.Values, (plotLogFile) =>
             {
                 foreach (var plotLog in plotLogFile.ParsePlotLog())
-                {
                     plotLogs.Add(plotLog);
-                }
             });
             return plotLogs;
         }
@@ -219,6 +223,11 @@ namespace ChiaPlotStatus
             return Encoding.ASCII;
         }
 
+        public void Persist()
+        {
+            this.Settings.Persist();
+            this.cache.Persist();
+        }
     }
 
 }
