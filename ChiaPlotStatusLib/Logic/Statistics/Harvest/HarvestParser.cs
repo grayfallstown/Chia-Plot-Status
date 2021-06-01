@@ -79,7 +79,7 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
                 Debug.WriteLine("Only found a single harvest! Need at least two!");
                 return null;
             }
-            harvests.Sort((a, b) => -1 * a.DateTime.CompareTo(b.DateTime));
+            harvests.Sort((a, b) => a.DateTime.CompareTo(b.DateTime));
             var first = harvests[0];
             var last = harvests[harvests.Count - 1];
             var runtimeMinutes = (first.DateTime - last.DateTime).TotalMinutes;
