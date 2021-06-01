@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RuntimeIdentifiers>win7-x64;ubuntu.16.10-x64;linux-x64</RuntimeIdentifiers>
     <Company>grayfallstown</Company>
     <Authors>grayfallstown</Authors>
     <Product>ChiaPlotStatusLib</Product>
-    <Version>0.10.3</Version>
+    <Version>0.10.4</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="27.0.2" />
