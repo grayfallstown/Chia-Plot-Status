@@ -19,16 +19,20 @@ namespace ChiaPlotStatusLib.Logic.Utils
                 return usage.ToString("0.0 '%'");
         }
 
-        public static string formatSeconds(int seconds)
+        public static string formatSeconds(int seconds, bool hideSeconds)
         {
+            var secondsPart = "\\ ss\\s";
+            if (hideSeconds)
+                secondsPart = "";
+
             if (seconds == 0)
                 return "";
             else if (seconds > 24 * 60 * 60)
-                return TimeSpan.FromSeconds(seconds).ToString(@"dd\d\ hh\h\ mm\m\ ss\s");
+                return TimeSpan.FromSeconds(seconds).ToString(@"dd\d\ hh\h\ mm\m" + secondsPart);
             else if (seconds > 60 * 60)
-                return TimeSpan.FromSeconds(seconds).ToString(@"hh\h\ mm\m\ ss\s");
+                return TimeSpan.FromSeconds(seconds).ToString(@"hh\h\ mm\m" + secondsPart);
             else if (seconds > 60)
-                return TimeSpan.FromSeconds(seconds).ToString(@"mm\m\ ss\s");
+                return TimeSpan.FromSeconds(seconds).ToString(@"mm\m" + secondsPart);
             else
                 return TimeSpan.FromSeconds(seconds).ToString(@"ss\s");
         }
