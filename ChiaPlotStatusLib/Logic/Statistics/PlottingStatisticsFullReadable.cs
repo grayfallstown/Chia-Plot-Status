@@ -39,17 +39,17 @@ namespace ChiaPlotStatusGUI.GUI.ViewModels
             this.Threads = stats.Threads;
             this.BufferSize = stats.BufferSize + "MB";
             this.Buckets = stats.Buckets;
-            this.Phase1AvgTimeNeed = Formatter.formatSeconds(stats.Phase1AvgTimeNeed);
+            this.Phase1AvgTimeNeed = Formatter.formatSeconds(stats.Phase1AvgTimeNeed, true);
             this.Phase1Completed = stats.Phase1Completed;
-            this.Phase2AvgTimeNeed = Formatter.formatSeconds(stats.Phase2AvgTimeNeed);
+            this.Phase2AvgTimeNeed = Formatter.formatSeconds(stats.Phase2AvgTimeNeed, true);
             this.Phase2Completed = stats.Phase2Completed;
-            this.Phase3AvgTimeNeed = Formatter.formatSeconds(stats.Phase3AvgTimeNeed);
+            this.Phase3AvgTimeNeed = Formatter.formatSeconds(stats.Phase3AvgTimeNeed, true);
             this.Phase3Completed = stats.Phase3Completed;
-            this.Phase4AvgTimeNeed = Formatter.formatSeconds(stats.Phase4AvgTimeNeed);
+            this.Phase4AvgTimeNeed = Formatter.formatSeconds(stats.Phase4AvgTimeNeed, false);
             this.Phase4Completed = stats.Phase4Completed;
-            this.CopyTimeAvgTimeNeed = Formatter.formatSeconds(stats.CopyTimeAvgTimeNeed);
+            this.CopyTimeAvgTimeNeed = Formatter.formatSeconds(stats.CopyTimeAvgTimeNeed, false);
             this.CopyTimeCompleted = stats.CopyTimeCompleted;
-            this.TotalAvgTimeNeed = Formatter.formatSeconds(stats.TotalAvgTimeNeed);
+            this.TotalAvgTimeNeed = Formatter.formatSeconds(stats.TotalAvgTimeNeed, true);
         }
     }
 }
