@@ -80,7 +80,7 @@ Should the core developer (me) turn malicious, people could easily sue the core 
 
 If the core developer (me) becomes malicious this would be basically a how to get imprisoned speedrun (any %)
 
-Even if you think you would not sue the core developer as he (me) might sit in a different country (germany), someone will as the Chia Plot Status Github Repository has between 2k to 4k visits daily and currently 18k downloads.
+Even if you think you would not sue the core developer as he (me) might sit in a different country (germany), someone will as the Chia Plot Status Github Repository has between 2k to 4k visits daily and currently 24k downloads.
 
 This should be more than enough to deter the core developer (me) from doing anything malicious.
 
