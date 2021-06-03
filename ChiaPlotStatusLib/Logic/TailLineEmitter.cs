@@ -20,7 +20,6 @@ namespace ChiaPlotStatus
     {
         StreamReader StreamReader { get; set; }
         TailLineEmitterCallback Callback { get; set; }
-        int CurrentLine { get; set; } = 0;
         private string file;
         private bool closeOnEndOfFile;
         private bool firstRead = true;
