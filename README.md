@@ -105,6 +105,11 @@ The core developer (me) takes the following precautions to mitigate that risk:
 
 ## Installation / Download
 
+
+### Important Note:
+
+Please wait a moment before installing this. While the Setup.exe is reported as clean, Windows Defender - and only Windows Defender - currently reports an external dependency used to build the graphical interface as a Trojan. This is likely a false positive as the library was [manually tested by Microsofts Malware Analysts and deemed safe a few days ago](https://github.com/grayfallstown/Chia-Plot-Status/issues/2#issuecomment-843279417), when this already happened once. Well, now the Windows Defender AI flagged it again. The flagged files were submitted to microsoft for another manual review. Feel free to postpone the installation untils this is resolved. Further details in [ticket #91](https://github.com/grayfallstown/Chia-Plot-Status/issues/91)
+
 ![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
 
 Windows: [Download latest version](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/Setup.exe)
