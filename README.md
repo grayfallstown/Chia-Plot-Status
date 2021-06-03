@@ -247,6 +247,7 @@ alternatively try `dotnet run --build`.
 - @Manic!
 - @Mr pq
 - @Ok-Studio5311
+- @Oguzhan Oda
 - @Patro TV
 - @R3htribution
 - @RaySmalley
@@ -291,6 +292,7 @@ alternatively try `dotnet run --build`.
 - @rul3s
 - @sirdeekay
 - @tajchert
+- @tiberiu puscas
 - @whitetechnologies
 - @Vera Toro
 - @whoismos3s
