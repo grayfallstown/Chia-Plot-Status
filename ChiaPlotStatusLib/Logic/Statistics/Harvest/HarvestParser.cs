@@ -20,14 +20,14 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
                      + Path.DirectorySeparatorChar + ".chia" + Path.DirectorySeparatorChar + "mainnet" +
                      Path.DirectorySeparatorChar + "log";
 
-        public List<Tuple<string, HarvestSummary, List<Harvest>>?> ParseLogs(List<string> paths, double maxAllowedLookupTime)
+        public List<Tuple<string, HarvestSummary, List<Harvest>>?> ParseLogs(List<string> paths, double maxAllowedLookupTime, int nrOfRecentEntries)
         {
             ConcurrentBag<Tuple<string, HarvestSummary, List<Harvest>>?> results = new();
-            Parallel.ForEach(paths, (path) => results.Add(ParseLogs(path, maxAllowedLookupTime)));
+            Parallel.ForEach(paths, (path) => results.Add(ParseLogs(path, maxAllowedLookupTime, nrOfRecentEntries)));
             return results.ToList();
         }
 
-        public Tuple<string, HarvestSummary, List<Harvest>>? ParseLogs(string path, double maxAllowedLookupTime)
+        public Tuple<string, HarvestSummary, List<Harvest>>? ParseLogs(string path, double maxAllowedLookupTime, int nrOfRecentEntries)
         {
             var debugLogFiles = Directory.GetFiles(path, "debug.log*");
 
@@ -80,9 +80,10 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
                 return null;
             }
             harvests.Sort((a, b) => a.DateTime.CompareTo(b.DateTime));
+            harvests = new(harvests.Skip(Math.Max(0, harvests.Count() - nrOfRecentEntries)));
             var first = harvests[0];
             var last = harvests[harvests.Count - 1];
-            var runtimeMinutes = (first.DateTime - last.DateTime).TotalMinutes;
+            var runtimeMinutes = (last.DateTime - first.DateTime).TotalMinutes;
 
             var summary = new HarvestSummary
             {

@@ -111,7 +111,7 @@ namespace ChiaPlotStatus.Views
             PathsWithoutResults.Clear();
 
             Results = new HarvestParser().ParseLogs(new List<string>(this.Settings.HarvesterLogDirectories),
-                (double)this.Settings.MaxHarvestLookupSeconds);
+                (double)this.Settings.MaxHarvestLookupSeconds, 500);
 
             // assume all are missing until a result is found
             foreach (var path in this.Settings.HarvesterLogDirectories)
