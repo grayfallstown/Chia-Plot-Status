@@ -22,7 +22,7 @@ namespace ChiaPlotStatus.Views
     public class DonationDialog : Window
     {
         public Language Language { get; set; }
-        public string ChiaAddress { get; set; } = "xch1sxgmrrmq95klztd5796ysz8c6jattd6k70z4gxuet5a9792s24hqf4jdtn";
+        public string ChiaAddress { get; set; } = "xch15p8swrrdt5ujv0dxy4hwjrvpjseyvuquwtfwnrjhxqt6ws9uf90qzq4axl";
         public string PaypalURL { get; set; } = "https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC";
         public string LiberapayURL { get; set; } = "https://liberapay.com/grayfallstown/donate";
 
