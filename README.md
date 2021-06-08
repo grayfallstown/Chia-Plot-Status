@@ -20,8 +20,8 @@ GUI Tool for beginners and experts to Monitor and Analyse Chia Plotting log file
 
  - Monitor Progress of running plots
  - Show estimated time to completion based on your already finished plots best matching your current plot config
- - Monitor Health of plot processes
- - Compatibility with madMAx43v3r/chia-plotter coming soon! (ETA: Today GMT+2)
+ - Monitor Health of plotting processes
+ - Already compatible with madMAx43v3r/chia-plotter (currently getting improved)
  - Compatible with all plotters and plotting managers that use or are based on the official chia plotter (see Troubleshooting if something does not work from the get go)
  - Show important information from log file in easy to read table
  - Multiple folders with log files supported (multiple plotting rigs, anyone?)
@@ -138,6 +138,31 @@ The last part with `2>&1 | % ToString | Tee-Object` writes the log to the PowerS
 
 You can download a [full example script with Tee-Object](https://gist.github.com/grayfallstown/8530acb84eb131d3dae074e4be23badb) as well.
 
+
+## Getting Log Files from madMAx43v3r/chia-plotter
+
+On Windows with WSL:
+
+```
+# use 'chia keys show' to get this keys:
+export POOL_KEY="ac8e049..."
+export FARMER_KEY="85b956c22..."
+export TMP_DIR="/mnt/d/PlotTemp"
+export WINDOWS_USERNAME="username"
+export THREADS="$(expr $(nproc) / 2)" # this detects nr of threads automatically. You can simply use 'export THREADS="4"' instead
+./chia_plot $POOL_KEY $FARMER_KEY $TMP_DIR $TMP_DIR $THREADS 7 2>&1 | tee /mnt/c/Users/$WINDOWS_USERNAME/.chia/mainnet/plotter/chia-plotter-$(uuid).log
+```
+
+On Linux directly:
+
+```
+# use 'chia keys show' to get this keys:
+export POOL_KEY="ac8e049..."
+export FARMER_KEY="85b956c22..."
+export TMP_DIR="/mnt/d/PlotTemp"
+export THREADS="$(expr $(nproc) / 2)" # this detects nr of threads automatically. You can simply use 'export THREADS="4"' instead
+./chia_plot $POOL_KEY $FARMER_KEY $TMP_DIR $TMP_DIR $THREADS 7 2>&1 | tee "/home/$(whoami)/.chia/mainnet/plotter/chia-plotter-$(uuid).log"
+```
 
 ## Need the columns in a different order?
 
