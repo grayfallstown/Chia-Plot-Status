@@ -21,6 +21,7 @@ GUI Tool for beginners and experts to Monitor and Analyse Chia Plotting log file
  - Monitor Progress of running plots
  - Show estimated time to completion based on your already finished plots best matching your current plot config
  - Monitor Health of plot processes
+ - Compatibility with madMAx43v3r/chia-plotter coming soon! (ETA: Today GMT+2)
  - Compatible with all plotters and plotting managers that use or are based on the official chia plotter (see Troubleshooting if something does not work from the get go)
  - Show important information from log file in easy to read table
  - Multiple folders with log files supported (multiple plotting rigs, anyone?)
@@ -266,6 +267,7 @@ alternatively try `dotnet run --build`.
 - @buettgenbach
 - @c-pool
 - @carfnann
+- @chefsas
 - @chiaxch
 - @cyperbg
 - @darkfriend77
@@ -293,6 +295,7 @@ alternatively try `dotnet run --build`.
 - @sirdeekay
 - @tajchert
 - @tiberiu puscas
+- @toddouimet
 - @whitetechnologies
 - @Vera Toro
 - @whoismos3s
