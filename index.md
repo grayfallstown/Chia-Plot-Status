@@ -10,18 +10,13 @@
   <img width="200" alt="Chia Plot Status Log" src="./Icon%20-%20Color%20changed.svg">
 </p>
 
-GUI Tool for beginners and experts to Monitor and Analyse Chia Plotting log files, show health and progress of running plots and estimated time to completion. No setup, configuration or installation of python or whatever required. Just install and enjoy.
-
-# [Chia](https://www.chia.net/) Plot Status
-
-![Screenshot](./Screenshot.jpg)
-![Screenshot](./Screenshot-Dark.jpg)
-
 ## Features
 
  - Monitor Progress of running plots
  - Show estimated time to completion based on your already finished plots best matching your current plot config
- - Monitor Health of plot processes
+ - Monitor Health of plotting processes
+ - Already compatible with madMAx43v3r/chia-plotter (currently getting improved)
+ - Compatible with all plotters and plotting managers that use or are based on the official chia plotter (see Troubleshooting if something does not work from the get go)
  - Show important information from log file in easy to read table
  - Multiple folders with log files supported (multiple plotting rigs, anyone?)
  - Multiple plots per log file supported (plot create --num n)
@@ -66,11 +61,11 @@ Other Options: Mount the log folders of all rigs as network shares (via samba on
 
 ## Security / Trustworthiness
 
-See [a reddit comment made by the Chia Plot Status Core Developer:](https://www.reddit.com/r/chia/comments/nlmwk7/safety_of_chiabot_from_joaquimguimaraes_on_github/gzn4xu3/?utm_source=reddit&utm_medium=web2x&context=3)
+See [a reddit comment made by the Chia Plot Status Core Developer, summarized in the following:](https://www.reddit.com/r/chia/comments/nlmwk7/safety_of_chiabot_from_joaquimguimaraes_on_github/gzn4xu3/?utm_source=reddit&utm_medium=web2x&context=3)
 
-There are multiple attack vectors to consider:
+### There are multiple attack vectors to consider:
 
-**1. The possibility that the core developer (me) is or becomes malicious**
+##### 1. The possibility that the core developer (me) is or becomes malicious
 
 There is a saying: Where is a money trail, there is a way to sue/prosecute someone.
 
@@ -80,17 +75,17 @@ Should the core developer (me) turn malicious, people could easily sue the core 
 
 If the core developer (me) becomes malicious this would be basically a how to get imprisoned speedrun (any %)
 
-Even if you think you would not sue the core developer as he (me) might sit in a different country (germany), someone will as the Chia Plot Status Github Repository has between 2k to 4k visits daily and currently >19k downloads.
+Even if you think you would not sue the core developer as he (me) might sit in a different country (germany), someone will as the Chia Plot Status Github Repository has between 2k to 4k visits daily and currently 24k downloads.
 
 This should be more than enough to deter the core developer (me) from doing anything malicious.
 
-**2. The core developer (me) merges a pull request (code changes made by someone else) which contains malicious code without noticing.**
+#### 2. The core developer (me) merges a pull request (code changes made by someone else) which contains malicious code without noticing
 
 As seen on [https://github.com/grayfallstown/Chia-Plot-Status/graphs/contributors](https://github.com/grayfallstown/Chia-Plot-Status/graphs/contributors) there is only one other person who contributed a pull request so far and that wasn't code but a documentation change.
 
 The core developer (me) will check each pull request before merging as he (me) would have to run the code himself to check if the application works properly after merging that pull request and by that he (I) would get attacked by any malicious code that was contained in that pull request.
 
-**3. External Dependencies (as in libraries / code written by someone else) the application uses to do certain things (like to create the graphical user interface) become malicious.**
+#### 3. External Dependencies (as in libraries / code written by someone else) the application uses to do certain things (like to create the graphical user interface) become malicious.
 
 Well, this is a tough one as even the core developer (me) has very little means to check external binaries for malicious code. The core developer (me) and every other developer using those libraries will get attacked by any malicious code in those libraries before they (we) distribute a new version of their (our) software containing that library to the users of their (our) softwares, as they (we) generally test their (our) applications before each release.
 
@@ -100,8 +95,7 @@ The core developer (me) takes the following precautions to mitigate that risk:
 
 - Every release build is build on the same system and previously downloaded dependencies are never deleted/redownloaded. This prevents pulling in malicious code if the external dependency version used gets replaced with malicious code. But it also prevents  reproducible builds that everyone can follow and reproduce step by step on their system, if the external dependency version actually does get changed. Well, this should raise concern anyway and in any case.
 
-- Updating Dependencies (external libraries / code written by someone esle) is delayed (possibly indefinitely) until an update is required to implement a feature or to fix a bug. This gives anti virus providers time to determine if that library version is malicious, which would prevent an update.
-
+- Updating Dependencies (external libraries / code written by someone else) is delayed (possibly indefinitely) until an update is required to implement a feature or to fix a bug. This gives anti virus providers time to determine if that library version is malicious, which would prevent an update.
 
 
 ## Installation / Download
@@ -113,7 +107,7 @@ You will get a blue warning saying this was published by an unknown developer.
 
 Linux: First install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0), then either the Chia Plot Status [deb](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.deb) or [rpm](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/ChiaPlotStatus.linux-x64.rpm) package depending on your linux distribution (deb for ubuntu)
 
-For Mac you currently have to [build it yourself](#Build-it-yourself).
+For Mac you currently have to [build it](#Build-it-).
 
 ## Getting Log Files from PowerShell
 
@@ -130,6 +124,31 @@ The last part with `2>&1 | % ToString | Tee-Object` writes the log to the PowerS
 You can download a [full example script with Tee-Object](https://gist.github.com/grayfallstown/8530acb84eb131d3dae074e4be23badb) as well.
 
 
+## Getting Log Files from madMAx43v3r/chia-plotter
+
+On Windows with WSL:
+
+```
+# use 'chia keys show' to get this keys:
+export POOL_KEY="ac8e049..."
+export FARMER_KEY="85b956c22..."
+export TMP_DIR="/mnt/d/PlotTemp"
+export WINDOWS_USERNAME="username"
+export THREADS="$(expr $(nproc) / 2)" # this detects nr of threads automatically. You can simply use 'export THREADS="4"' instead
+./chia_plot $POOL_KEY $FARMER_KEY $TMP_DIR $TMP_DIR $THREADS 7 2>&1 | tee /mnt/c/Users/$WINDOWS_USERNAME/.chia/mainnet/plotter/chia-plotter-$(uuid).log
+```
+
+On Linux directly:
+
+```
+# use 'chia keys show' to get this keys:
+export POOL_KEY="ac8e049..."
+export FARMER_KEY="85b956c22..."
+export TMP_DIR="/mnt/d/PlotTemp"
+export THREADS="$(expr $(nproc) / 2)" # this detects nr of threads automatically. You can simply use 'export THREADS="4"' instead
+./chia_plot $POOL_KEY $FARMER_KEY $TMP_DIR $TMP_DIR $THREADS 7 2>&1 | tee "/home/$(whoami)/.chia/mainnet/plotter/chia-plotter-$(uuid).log"
+```
+
 ## Need the columns in a different order?
 
 See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843351280
@@ -138,6 +157,8 @@ See https://github.com/grayfallstown/Chia-Plot-Status/issues/36#issuecomment-843
 ## Troubleshooting
 
 If you use Cloud Sync Services, rsync/scp cronjobs or tools like Syncthing to collect your log files you might run into an issue with the files not properly syncing. Sonething like `The process cannot access the file because it is being used by another process.`. See [Issue #40](https://github.com/grayfallstown/Chia-Plot-Status/issues/40#issuecomment-841025993) for how to fix that, or even better, use sshfs instead.
+
+The same works if you use harry plotter as plotting manager.
 
 If Chia Plot Status does no longer start, try renaming `ChiaPlotStatu.config.json` to `ChiaPlotStatu.config.json.backup`. The file is located in your home directory at `C:\Users\<your username>\ChiaPlotStatu.config.json` on windows, `/home/<your username>/ChiaPlotStatu.config.json` on linux and `<your user profile directory>/ChiaPlotStatu.config.json` on mac.
 
@@ -183,19 +204,14 @@ File 'test.json' written
 Note: Write your tools or home automation in a way that new fields/properties/columns added to the exported files do not crash it.
 
 
-## Avalonia Incident
-
-Chia Plot Status uses an external library to provide a graphical user interface that runs on Windows, Linux and MacOS called [AvaloniaUI](https://avaloniaui.net/). ~~Avalonia currently gets flagged as Trojan by Windows Defender~~ and as far as currently known, only by Windows Defender. The file was already [deemed safe by microsoft malware analysts](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-842849470), but then got [flagged again](https://github.com/grayfallstown/Chia-Plot-Status/issues/50#issuecomment-843005699). ~~I am currently trying to resolve this issue, but feel free to postpone the installation of Chia Plot Status until the issue is resolved.~~
-
-**UPDATE**: Users who have Chia Plot Status installed or tried to install it during that time were NOT in any danger. The files were safe and clean all along and falsely reported by Windows Defender. Windows Defender no longer reports Avalonia as a Trojan **IF** one updates the Dynamic Signatures of Windows Defender. For transparency I am leaving this notice for the time being and I have documented the entire situation in an [incident report](https://github.com/grayfallstown/Chia-Plot-Status/issues/2#issuecomment-843279417)
-
-
 ## Open Source
 
 MIT opensource licence, free to keep or change.
 
 
 ## Build it yourself
+
+This **should** work on x86_64bit, x86_32bit, ARM 64bit and ARM 32 bit Systems. If not, open an [Issue](https://github.com/grayfallstown/Chia-Plot-Status/issues/new) to tell me whats wrong.
 
 Download and install [dotnet 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0) and [git](https://git-scm.com/).
 
@@ -235,12 +251,14 @@ alternatively try `dotnet run --build`.
 - @Hellfall1
 - @Jazeon
 - @Jonesyj83
+- @JoseAngelB
 - @KJP Gaming
 - @Lucky_Length2676
 - @Lyushen
 - @Manic!
 - @Mr pq
 - @Ok-Studio5311
+- @Oguzhan Oda
 - @Patro TV
 - @R3htribution
 - @RaySmalley
@@ -255,17 +273,22 @@ alternatively try `dotnet run --build`.
 - @badi95
 - @bathrobehero
 - @bestq8.com
+- @blood5322
 - @buettgenbach
 - @c-pool
 - @carfnann
+- @chefsas
 - @chiaxch
+- @cyperbg
 - @darkfriend77
 - @djdookie81
 - @dorofino
 - @douwebusschops
 - @dvlzgrmz
 - @j.spracher
+- @jcmarco
 - @jimshank
+- @johnamtl
 - @jonnnny
 - @kata32
 - @littleneko
@@ -281,6 +304,8 @@ alternatively try `dotnet run --build`.
 - @rul3s
 - @sirdeekay
 - @tajchert
+- @tiberiu puscas
+- @toddouimet
 - @whitetechnologies
 - @Vera Toro
 - @whoismos3s
