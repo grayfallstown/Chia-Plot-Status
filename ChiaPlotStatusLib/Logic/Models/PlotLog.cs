@@ -10,8 +10,9 @@ namespace ChiaPlotStatus
      * Stores informations about a plotting process.
      * This is the object shown in the ui table.
      */
-    public class PlotLog
+    public class PlotLog: IsPlotLog
     {
+        public string UsedPlotter { get; set; } = "chiapos";
         public string? Tmp1Drive { get; set; }
         public string? Tmp2Drive { get; set; }
         public string? DestDrive { get; set; }
@@ -121,6 +122,8 @@ namespace ChiaPlotStatus
 
         public void UpdateEta(PlottingStatistics stats)
         {
+            if (this.UsedPlotter == "chia-plotter")
+                return; // TODO
             this.TimeRemaining = 0;
             if (this.Buckets == 0)
             {
@@ -194,6 +197,8 @@ namespace ChiaPlotStatus
 
         public void UpdateHealth(PlottingStatistics stats)
         {
+            if (this.UsedPlotter == "chia-plotter")
+                return; // TODO
             int lastModifiedAtWarningThreashold = 0;
             int lastModifiedAtErrorThreashold = 0;
 
@@ -266,5 +271,14 @@ namespace ChiaPlotStatus
                 this.Health = Healthy.Instance;
         }
 
+        public override int GetCurrentPhase()
+        {
+            return CurrentPhase;
+        }
+
+        public override HealthIndicator GetHealth()
+        {
+            return Health;
+        }
     }
 }

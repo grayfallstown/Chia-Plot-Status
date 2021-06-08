@@ -166,6 +166,7 @@
           <MenuItem Header="Donate" Name="DonateButton" />
           <MenuItem Header="Statistics" Name="StatisticsButton" />
           <MenuItem Header="Harvesters" Name="HarvestersButton" />
+          <MenuItem Header="Chia-Plotter" Name="ChiaPlotterButton" />
         </Menu>
       </DockPanel>
 			<StackPanel Orientation="Horizontal">
@@ -366,6 +367,19 @@
               <DataTemplate>
                 <StackPanel>
                   <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Checked="OnSelectionChanged"></CheckBox>
+                </StackPanel>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn SortMemberPath="Note">
+            <DataGridTemplateColumn.Header>
+              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Note}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate >
+                <StackPanel>
+                  <Button Content="{Binding Note}" HorizontalAlignment="Left" Classes="Compact" Command="{Binding ElementName=WindowContext, Path=DataContext.NoteCommand}" CommandParameter="{Binding}"
+                    ></Button>
                 </StackPanel>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
@@ -920,19 +934,6 @@
                     </StackPanel>
                   </ToolTip.Tip>
                   <TextBlock Text="{Binding LastLogLine}" HorizontalAlignment="Left" ></TextBlock>
-                </StackPanel>
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTemplateColumn SortMemberPath="Note">
-            <DataGridTemplateColumn.Header>
-              <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.Note}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
-            </DataGridTemplateColumn.Header>
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate >
-                <StackPanel>
-                  <Button Content="{Binding Note}" HorizontalAlignment="Left" Classes="Compact" Command="{Binding ElementName=WindowContext, Path=DataContext.NoteCommand}" CommandParameter="{Binding}"
-                    ></Button>
                 </StackPanel>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>

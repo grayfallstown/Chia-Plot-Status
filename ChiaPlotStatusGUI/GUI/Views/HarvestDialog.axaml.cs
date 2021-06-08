@@ -91,10 +91,7 @@ namespace ChiaPlotStatus.Views
             {
                 OpenFolderDialog picker = new OpenFolderDialog();
                 var result = await picker.ShowAsync(this);
-                Dispatcher.UIThread.InvokeAsync(() =>
-                {
-                    AddFolder(result);
-                });
+                Dispatcher.UIThread.InvokeAsync(() => AddFolder(result));
             });
         }
 

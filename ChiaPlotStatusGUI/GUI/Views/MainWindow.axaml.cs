@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
+using ChiaPlotStatusGUI.GUI.Utils;
 using ReactiveUI;
 using System;
 using System.Diagnostics;
@@ -93,45 +94,11 @@ namespace ChiaPlotStatus.Views
             SelectionChangedAction();
         }
 
-
         public void OpenLogViewerWindow(object sender, RoutedEventArgs e)
         {
             var plotLogReadable = (PlotLogReadable)((Button)sender).Tag;
             var path = plotLogReadable.LogFolder + Path.DirectorySeparatorChar + plotLogReadable.LogFile;
-
-            OpenFile(path);
-            // var dialog = new LogViewerWindow(path);
-            // dialog.Show();
-        }
-
-        private void OpenFile(string url)
-        {
-            try
-            {
-                Process.Start(url);
-            }
-            catch
-            {
-                // hack because of this: https://github.com/dotnet/corefx/issues/10361
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    url = url.Replace("&", "^&");
-                    // force notepad or it will not open log files of running plots
-                    Process.Start(new ProcessStartInfo("cmd", $"/c start notepad {url}") { CreateNoWindow = true });
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    Process.Start("xdg-open", url);
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    Process.Start("open", url);
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            Utils.OpenLogFile(path);
         }
 
     }

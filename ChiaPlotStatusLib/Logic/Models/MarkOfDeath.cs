@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChiaPlotStatusLib.Logic.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,6 +28,14 @@ namespace ChiaPlotStatus.Logic.Models
             this.DiedAt = DateTime.Now;
         }
 
+        public MarkOfDeath(CPPlotLogReadable plotLogReadable)
+        {
+            this.LogFolder = plotLogReadable.LogFolder;
+            this.LogFile = plotLogReadable.LogFile;
+            this.PlaceInLogFile = 1;
+            this.DiedAt = DateTime.Now;
+        }
+
         public bool IsMatch(PlotLog plotLog)
         {
             if (!string.Equals(this.LogFolder, plotLog.LogFolder)) return false;
@@ -41,6 +50,21 @@ namespace ChiaPlotStatus.Logic.Models
             if (!string.Equals(this.LogFolder, plotLog.LogFolder)) return false;
             if (!string.Equals(this.LogFile, plotLog.LogFile)) return false;
             if (!string.Equals(this.PlaceInLogFile, plotLog.PlaceInLogFile)) return false;
+            return true;
+        }
+
+        public bool IsMatch(CPPlotLog plotLog)
+        {
+            if (!string.Equals(this.LogFolder, plotLog.LogFolder)) return false;
+            string logFileName = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf(Path.DirectorySeparatorChar) + 1);
+            if (!string.Equals(this.LogFile, logFileName)) return false;
+            return true;
+        }
+
+        public bool IsMatch(CPPlotLogReadable plotLog)
+        {
+            if (!string.Equals(this.LogFolder, plotLog.LogFolder)) return false;
+            if (!string.Equals(this.LogFile, plotLog.LogFile)) return false;
             return true;
         }
 

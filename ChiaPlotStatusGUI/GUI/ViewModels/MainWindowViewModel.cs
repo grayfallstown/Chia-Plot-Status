@@ -485,6 +485,14 @@ namespace ChiaPlotStatus.ViewModels
                     dialog.Show();
                 });
 
+            var chiaPlotterButton = MainWindow.Instance.Find<MenuItem>("ChiaPlotterButton");
+            if (chiaPlotterButton != null)
+                chiaPlotterButton.Command = ReactiveCommand.Create(() =>
+                {
+                    var dialog = new ChiaPlotterDialog(this.PlotManager, this.Language, this.PlotManager.Settings.Theme);
+                    dialog.Show();
+                });
+
         }
 
         public void InitializeSearchBox()

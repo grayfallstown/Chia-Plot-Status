@@ -73,7 +73,7 @@ namespace ChiaPlotStatus
                         {
                             this.Callback(line);
                         }
-                    } while (line != null);
+                    } while (line != null && !closed);
                 }
                 catch (Exception e)
                 {

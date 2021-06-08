@@ -2,6 +2,8 @@
 using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatus.Logic.Utils;
 using ChiaPlotStatusLib.Logic;
+using ChiaPlotStatusLib.Logic.Models;
+using ChiaPlotStatusLib.Logic.Parser;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -21,8 +23,10 @@ namespace ChiaPlotStatus
     {
         public Settings Settings { get; }
         private PlotParserCache cache;
-        private Dictionary<string, PlotLogFileParser> PlotLogFiles { get; } = new Dictionary<string, PlotLogFileParser>();
+        private Dictionary<string, PlotLogFileParser> PlotLogFiles { get; } = new();
+        private Dictionary<string, CPPlotLogFileParser> CPPlotLogFiles { get; } = new();
         public PlottingStatisticsHolder Statistics { get; set; }
+        public CPPlottingStatisticsHolder CPStatistics { get; set; }
 
         public ChiaPlotStatus(Settings settings) {
             this.Settings = settings;
@@ -65,6 +69,8 @@ namespace ChiaPlotStatus
         {
             SearchForNewLogFiles();
             ConcurrentBag<PlotLog> plotLogs = ParseTheLogs();
+            foreach (var cpPlotLog in ParseTheCPLogs())
+                plotLogs.Add(cpPlotLog.AsPlotLog());
             if (Settings.AlwaysDoFullRead == true) // nullable, so == true
                 PlotLogFiles.Clear();
             HandleStatistics(plotLogs.ToList());
@@ -88,6 +94,33 @@ namespace ChiaPlotStatus
             return result;
         }
 
+        public List<(CPPlotLog, CPPlotLogReadable)> PollCPPlotLogs(string sortPropertyName, bool sortAsc, string? searchString, Filter filter)
+        {
+            SearchForNewLogFiles();
+            ConcurrentBag<CPPlotLog> cpPlotLogs = ParseTheCPLogs();
+            if (Settings.AlwaysDoFullRead == true) // nullable, so == true
+                CPPlotLogFiles.Clear();
+            HandleStatistics(cpPlotLogs.ToList());
+            List<(CPPlotLog, CPPlotLogReadable)> plusReadable = new();
+            foreach (var cpPlotLog in cpPlotLogs)
+            {
+                foreach (var markOfDeath in Settings.MarksOfDeath)
+                    if (markOfDeath.IsMatch(cpPlotLog))
+                        cpPlotLog.Health = new ConfirmedDead(true);
+                foreach (var note in Settings.Notes)
+                    if (note.IsMatch(cpPlotLog))
+                        cpPlotLog.Note = note.text;
+                if (!cpPlotLog.IsRunning())
+                    cpPlotLog.RunTimeSeconds = 0;
+                else if (cpPlotLog.StartDate != null)
+                    cpPlotLog.RunTimeSeconds = (int)((TimeSpan)(DateTime.Now - cpPlotLog.StartDate)).TotalSeconds;
+                plusReadable.Add((cpPlotLog, new CPPlotLogReadable(cpPlotLog)));
+            }
+            List<(CPPlotLog, CPPlotLogReadable)> result = Filter(searchString, filter, plusReadable);
+            SortPlotLogs(sortPropertyName, sortAsc, result);
+            return result;
+        }
+
         private void SearchForNewLogFiles()
         {
             List<string> directoriesToDrop = new();
@@ -101,6 +134,10 @@ namespace ChiaPlotStatus
                         if (!PlotLogFiles.ContainsKey(filePath) && LooksLikeAPlotLog(filePath))
                         {
                             PlotLogFiles[filePath] = new PlotLogFileParser(filePath, Settings.AlwaysDoFullRead == true, ref cache);
+                        }
+                        else if (!CPPlotLogFiles.ContainsKey(filePath) && LooksLikeACPPlotLog(filePath))
+                        {
+                            CPPlotLogFiles[filePath] = new CPPlotLogFileParser(filePath, Settings.AlwaysDoFullRead == true);
                         }
                     }
                 } else
@@ -125,18 +162,25 @@ namespace ChiaPlotStatus
             return plotLogs;
         }
 
-        private List<(PlotLog, PlotLogReadable)> Filter(string? searchString, Filter filter, List<(PlotLog, PlotLogReadable)> plotLogs)
+        private ConcurrentBag<CPPlotLog> ParseTheCPLogs()
         {
-            List<(PlotLog, PlotLogReadable)> searchResults = SearchFilter.Search<PlotLog, PlotLogReadable>(searchString, plotLogs);
-            List<(PlotLog, PlotLogReadable)> filterResults = new();
+            ConcurrentBag<CPPlotLog> cpPlotLogs = new ConcurrentBag<CPPlotLog>();
+            Parallel.ForEach(CPPlotLogFiles.Values, (cpPlotLogFile) => cpPlotLogs.Add(cpPlotLogFile.ParseCPPlotLog()));
+            return cpPlotLogs;
+        }
+
+        private List<(A, B)> Filter<A, B> (string? searchString, Filter filter, List<(A, B)> plotLogs) where A : IsPlotLog
+        {
+            List<(A, B)> searchResults = SearchFilter.Search<A, B>(searchString, plotLogs);
+            List<(A, B)> filterResults = new();
             foreach (var tuple in searchResults)
             {
-                if (filter.HideFinished && tuple.Item1.CurrentPhase == 6)
+                if (filter.HideFinished && tuple.Item1.GetCurrentPhase() == 6)
                     continue;
-                switch (tuple.Item1.Health)
+                switch (tuple.Item1.GetHealth())
                 {
                     case Healthy:
-                        if (!filter.HideHealthy || (tuple.Item1.CurrentPhase == 6 && !filter.HideFinished)) filterResults.Add(tuple);
+                        if (!filter.HideHealthy || (tuple.Item1.GetCurrentPhase() == 6 && !filter.HideFinished)) filterResults.Add(tuple);
                         break;
                     case TempError:
                         // well, you have to take action here.
@@ -162,6 +206,11 @@ namespace ChiaPlotStatus
             Sorter.Sort(propertyName, sortAsc, plotLogs);
         }
 
+        private static void SortPlotLogs(string propertyName, bool sortAsc, List<(CPPlotLog, CPPlotLogReadable)> plotLogs)
+        {
+            Sorter.Sort(propertyName, sortAsc, plotLogs);
+        }
+
         private void HandleStatistics(List<PlotLog> plotLogs)
         {
             Statistics = new PlottingStatisticsHolder(plotLogs, Settings.Weigths, Settings.MarksOfDeath);
@@ -170,6 +219,17 @@ namespace ChiaPlotStatus
                 PlottingStatistics stats = Statistics.GetMostRelevantStatistics(plotLog);
                 plotLog.UpdateEta(stats);
                 plotLog.UpdateHealth(stats);
+            }
+        }
+
+        private void HandleStatistics(List<CPPlotLog> cpPlotLogs)
+        {
+            CPStatistics = new CPPlottingStatisticsHolder(cpPlotLogs, Settings.Weigths, Settings.MarksOfDeath);
+            foreach (var cpPlotLog in cpPlotLogs)
+            {
+                CPPlottingStatistics stats = CPStatistics.GetMostRelevantStatistics(cpPlotLog);
+                cpPlotLog.UpdateEta(stats);
+                cpPlotLog.UpdateHealth(stats);
             }
         }
 
@@ -197,7 +257,38 @@ namespace ChiaPlotStatus
                 Debug.WriteLine(e);
                 return false;
             }
-            Debug.WriteLine("File " + file + " was detected as a non plotlog file and will be ignored for now");
+            Debug.WriteLine("File " + file + " was detected as a non plotlog file and will not be parsed as such");
+            return false;
+        }
+
+        private bool LooksLikeACPPlotLog(string file)
+        {
+            byte[] buffer = new byte[4096];
+            try
+            {
+                using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    var bytes_read = fs.Read(buffer, 0, buffer.Length);
+                    fs.Close();
+                    if (bytes_read > 63)
+                    {
+                        string asString = GetEncoding(file).GetString(buffer);
+                        bool hasNewLine = asString.Contains("\n");
+                        bool hasThreads = asString.Contains("Number of Threads: ");
+                        bool hasBuckets = asString.Contains("Number of Sort Buckets: ");
+                        bool hasDirectory = asString.Contains("Working Directory:");
+                        bool hasStartingSentence = asString.Contains("Number of Threads: ");
+                        if (hasNewLine && hasThreads && hasBuckets && hasDirectory)
+                            return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return false;
+            }
+            Debug.WriteLine("File " + file + " was detected as a non cpPlotlog file and will not be parsed as such");
             return false;
         }
 

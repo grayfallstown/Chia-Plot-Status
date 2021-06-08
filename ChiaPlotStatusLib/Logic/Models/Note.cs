@@ -44,6 +44,21 @@ namespace ChiaPlotStatusLib.Logic.Models
             return true;
         }
 
+        public bool IsMatch(CPPlotLog plotLog)
+        {
+            if (!string.Equals(this.LogFolder, plotLog.LogFolder)) return false;
+            string logFileName = plotLog.LogFile.Substring(plotLog.LogFile.LastIndexOf(Path.DirectorySeparatorChar) + 1);
+            if (!string.Equals(this.LogFile, logFileName)) return false;
+            return true;
+        }
+
+        public bool IsMatch(CPPlotLogReadable plotLog)
+        {
+            if (!string.Equals(this.LogFolder, plotLog.LogFolder)) return false;
+            if (!string.Equals(this.LogFile, plotLog.LogFile)) return false;
+            return true;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Note note &&

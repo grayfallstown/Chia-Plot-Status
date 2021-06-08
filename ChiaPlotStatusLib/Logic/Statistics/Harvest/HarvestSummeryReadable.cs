@@ -25,7 +25,7 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
         public HarvestSummeryReadable(HarvestSummary summery)
         {
             this.LogFolder = summery.LogFolder;
-            this.AvgEligiblePlots = Formatter.formatDouble(summery.AvgEligiblePlots, 2, null);
+            this.AvgEligiblePlots = Formatter.formatDouble(summery.AvgEligiblePlots, 5, null);
             this.FoundProofs = summery.FoundProofs;
             this.BestLookupTime = Formatter.formatDouble(summery.BestLookupTime, 5, "s");
             this.WorstLookupTime = Formatter.formatDouble(summery.WorstLookupTime, 5, "s");
