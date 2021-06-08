@@ -166,7 +166,9 @@
           <MenuItem Header="Donate" Name="DonateButton" />
           <MenuItem Header="Statistics" Name="StatisticsButton" />
           <MenuItem Header="Harvesters" Name="HarvestersButton" />
+          <!--
           <MenuItem Header="Chia-Plotter" Name="ChiaPlotterButton" />
+          -->
         </Menu>
       </DockPanel>
 			<StackPanel Orientation="Horizontal">
