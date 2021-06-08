@@ -20,8 +20,8 @@ GUI Tool for beginners and experts to Monitor and Analyse Chia Plotting log file
 
  - Monitor Progress of running plots
  - Show estimated time to completion based on your already finished plots best matching your current plot config
- - Monitor Health of plot processes
- - Compatibility with madMAx43v3r/chia-plotter coming soon! (ETA: Today GMT+2)
+ - Monitor Health of plotting processes
+ - Already compatible with madMAx43v3r/chia-plotter (currently getting improved)
  - Compatible with all plotters and plotting managers that use or are based on the official chia plotter (see Troubleshooting if something does not work from the get go)
  - Show important information from log file in easy to read table
  - Multiple folders with log files supported (multiple plotting rigs, anyone?)
@@ -106,15 +106,6 @@ The core developer (me) takes the following precautions to mitigate that risk:
 
 ## Installation / Download
 
-
-### Important Note:
-
-Please wait a moment before installing this. While the Setup.exe is reported as clean, ~~Windows Defender - and only Windows Defender - currently reports an external dependency used to build the graphical interface as a Trojan~~. This is likely a false positive as the library was [manually tested by Microsofts Malware Analysts and deemed safe a few days ago](https://github.com/grayfallstown/Chia-Plot-Status/issues/2#issuecomment-843279417), when this already happened once. Well, now the Windows Defender AI flagged it again. The flagged files were submitted to microsoft for another manual review. Feel free to postpone the installation untils this is resolved. Further details in [ticket #91](https://github.com/grayfallstown/Chia-Plot-Status/issues/91)
-
-### Update:
-
-You need to update the virus definition database of Windows Defender. After that the files should no longer trigger an alert, as [microsofts malware analysts deemed the files safe and removed the reporting from Windows Defender](https://github.com/grayfallstown/Chia-Plot-Status/issues/91#issuecomment-854183167). Therefor users of Chia Plot Status were and still are safe the whole time.
-
 ![GitHub all releases](https://img.shields.io/github/downloads/grayfallstown/Chia-Plot-Status/total)
 
 Windows: [Download latest version](https://github.com/grayfallstown/Chia-Plot-Status/releases/latest/download/Setup.exe)
@@ -138,6 +129,31 @@ The last part with `2>&1 | % ToString | Tee-Object` writes the log to the PowerS
 
 You can download a [full example script with Tee-Object](https://gist.github.com/grayfallstown/8530acb84eb131d3dae074e4be23badb) as well.
 
+
+## Getting Log Files from madMAx43v3r/chia-plotter
+
+On Windows with WSL:
+
+```
+# use 'chia keys show' to get this keys:
+export POOL_KEY="ac8e049..."
+export FARMER_KEY="85b956c22..."
+export TMP_DIR="/mnt/d/PlotTemp"
+export WINDOWS_USERNAME="username"
+export THREADS="$(expr $(nproc) / 2)" # this detects nr of threads automatically. You can simply use 'export THREADS="4"' instead
+./chia_plot $POOL_KEY $FARMER_KEY $TMP_DIR $TMP_DIR $THREADS 7 2>&1 | tee /mnt/c/Users/$WINDOWS_USERNAME/.chia/mainnet/plotter/chia-plotter-$(uuid).log
+```
+
+On Linux directly:
+
+```
+# use 'chia keys show' to get this keys:
+export POOL_KEY="ac8e049..."
+export FARMER_KEY="85b956c22..."
+export TMP_DIR="/mnt/d/PlotTemp"
+export THREADS="$(expr $(nproc) / 2)" # this detects nr of threads automatically. You can simply use 'export THREADS="4"' instead
+./chia_plot $POOL_KEY $FARMER_KEY $TMP_DIR $TMP_DIR $THREADS 7 2>&1 | tee "/home/$(whoami)/.chia/mainnet/plotter/chia-plotter-$(uuid).log"
+```
 
 ## Need the columns in a different order?
 
