@@ -37,6 +37,7 @@ namespace ChiaPlotStatusLib.Logic.Models
         public float Progress { get; set; } = 0.0f;
         public string Note { get; set; } = "";
         public int RunTimeSeconds { get; set; } = 0;
+        public bool CaughtPlottingError { get; set; } = false;
 
 
         public int CurrentPhase { get; set; } = 1;
@@ -165,7 +166,7 @@ namespace ChiaPlotStatusLib.Logic.Models
             plotLog.IsLastLineTempError = false; // TODO
             plotLog.Health = this.Health;
             plotLog.RunTimeSeconds = this.RunTimeSeconds;
-            plotLog.CaughtPlottingError = false; // TODO
+            plotLog.CaughtPlottingError = CaughtPlottingError;
             plotLog.LastLogLine = this.LastLogLine;
             plotLog.Note = this.Note;
             return plotLog;

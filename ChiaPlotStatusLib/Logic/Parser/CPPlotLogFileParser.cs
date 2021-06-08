@@ -1,4 +1,5 @@
 ﻿using ChiaPlotStatus;
+using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatusLib.Logic.Models;
 using System;
 using System.Collections.Generic;
@@ -325,43 +326,43 @@ namespace ChiaPlotStatusLib.Logic.Parser
                     case var _ when p31table2Rg.IsMatch(line):
                         matches = p31table2Rg.Matches(line);
                         CPPlotLog.P31Table2 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
-                        CPPlotLog.P31Table2Entries = long.Parse(matches[0].Groups[1].Value);
+                        CPPlotLog.P31Table2Entries = long.Parse(matches[0].Groups[2].Value);
                         CPPlotLog.NextPhasePart();
                         break;
                     case var _ when p32table2Rg.IsMatch(line):
                         matches = p32table2Rg.Matches(line);
                         CPPlotLog.P32Table2 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
-                        CPPlotLog.P32Table2Entries = long.Parse(matches[0].Groups[1].Value);
+                        CPPlotLog.P32Table2Entries = long.Parse(matches[0].Groups[2].Value);
                         CPPlotLog.NextPhasePart();
                         break;
                     case var _ when p32table3Rg.IsMatch(line):
                         matches = p32table3Rg.Matches(line);
                         CPPlotLog.P32Table3 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
-                        CPPlotLog.P32Table3Entries = long.Parse(matches[0].Groups[1].Value);
+                        CPPlotLog.P32Table3Entries = long.Parse(matches[0].Groups[2].Value);
                         CPPlotLog.NextPhasePart();
                         break;
                     case var _ when p32table4Rg.IsMatch(line):
                         matches = p32table4Rg.Matches(line);
                         CPPlotLog.P32Table4 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
-                        CPPlotLog.P32Table4Entries = long.Parse(matches[0].Groups[1].Value);
+                        CPPlotLog.P32Table4Entries = long.Parse(matches[0].Groups[2].Value);
                         CPPlotLog.NextPhasePart();
                         break;
                     case var _ when p32table5Rg.IsMatch(line):
                         matches = p32table5Rg.Matches(line);
                         CPPlotLog.P32Table5 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
-                        CPPlotLog.P32Table5Entries = long.Parse(matches[0].Groups[1].Value);
+                        CPPlotLog.P32Table5Entries = long.Parse(matches[0].Groups[2].Value);
                         CPPlotLog.NextPhasePart();
                         break;
                     case var _ when p32table6Rg.IsMatch(line):
                         matches = p32table6Rg.Matches(line);
                         CPPlotLog.P32Table6 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
-                        CPPlotLog.P32Table6Entries = long.Parse(matches[0].Groups[1].Value);
+                        CPPlotLog.P32Table6Entries = long.Parse(matches[0].Groups[2].Value);
                         CPPlotLog.NextPhasePart();
                         break;
                     case var _ when p32table7Rg.IsMatch(line):
                         matches = p32table7Rg.Matches(line);
                         CPPlotLog.P32Table7 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
-                        CPPlotLog.P32Table7Entries = long.Parse(matches[0].Groups[1].Value);
+                        CPPlotLog.P32Table7Entries = long.Parse(matches[0].Groups[2].Value);
                         CPPlotLog.NextPhasePart();
                         CPPlotLog.CurrentTable = 1;
                         break;
@@ -384,6 +385,17 @@ namespace ChiaPlotStatusLib.Logic.Parser
                         matches = p4finish2Rg.Matches(line);
                         CPPlotLog.NextPhasePart();
                         CPPlotLog.CurrentTable = 0;
+                        break;
+
+                    // errors
+                    case var _ when segFaultRg.IsMatch(line):
+                    case var _ when coreDumpRg.IsMatch(line):
+                    case var _ when catchExceptionRg.IsMatch(line):
+                    case var _ when invalidArgumentRg.IsMatch(line):
+                    case var _ when terminateRg.IsMatch(line):
+                    case var _ when failedRg.IsMatch(line):
+                        CPPlotLog.CaughtPlottingError = true;
+                        CPPlotLog.Health = new ConfirmedDead(false);
                         break;
                 }
             });
@@ -469,5 +481,13 @@ namespace ChiaPlotStatusLib.Logic.Parser
         static Regex p4finish1Rg = new Regex("^\\[P4\\] Finished to write C1 and C3 tables", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex p4start2Rg = new Regex("^\\[P4\\] Starting to write C2 tables", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex p4finish2Rg = new Regex("^\\[P4\\] Finished to write C2 tables", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+        // errors
+        static Regex segFaultRg = new Regex("(Segmentation fault|SIGSEGV|segfault)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex coreDumpRg = new Regex("(core dumped|coredump)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex catchExceptionRg = new Regex("Error", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex invalidArgumentRg = new Regex("Invalid", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex terminateRg = new Regex("terminat", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex failedRg = new Regex("failed", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     }
 }

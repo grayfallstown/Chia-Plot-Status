@@ -197,8 +197,6 @@ namespace ChiaPlotStatus
 
         public void UpdateHealth(PlottingStatistics stats)
         {
-            if (this.UsedPlotter == "chia-plotter")
-                return; // TODO
             int lastModifiedAtWarningThreashold = 0;
             int lastModifiedAtErrorThreashold = 0;
 
