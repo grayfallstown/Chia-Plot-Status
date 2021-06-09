@@ -3,6 +3,7 @@ using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatusLib.Logic.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -10,38 +11,14 @@ using System.Threading.Tasks;
 
 namespace ChiaPlotStatusLib.Logic.Models
 {
-    public class CPPlotLog: IsPlotLog
+    public class CPPlotLog: PlotLog
     {
-        public static int P1PARTS = 42;
-        public static int P2PARTS = 42;
-        public static int P3PARTS = 42;
-        public static int P4PARTS = 42;
+        public static int P1PARTS = 12;
+        public static int P2PARTS = 15;
+        public static int P3PARTS = 14;
+        public static int P4PARTS = 6;
 
 
-        public int Threads { get; set; } = 0;
-        public int Buckets { get; set; } = 0;
-        public int PlotSize { get; set; } = 32;
-        public string LogFile { get; set; } = "";
-        public string LogFolder { get; set; } = "";
-        public string Tmp1Drive { get; set; } = "";
-        public string Tmp2Drive { get; set; } = "";
-        public string DestDrive { get; set; } = "";
-        public string LastLogLine { get; set; } = "";
-        public string PlotName { get; set; } = "";
-        public DateTime? FileLastWritten { get; set; }
-        public DateTime? StartDate { get; set; }
-        [JsonIgnore]
-        public HealthIndicator Health { get; set; } = Healthy.Instance;
-        public DateTime? ETA { get; set; }
-        public int TimeRemaining { get; set; } = 0;
-        public float Progress { get; set; } = 0.0f;
-        public string Note { get; set; } = "";
-        public int RunTimeSeconds { get; set; } = 0;
-        public bool CaughtPlottingError { get; set; } = false;
-
-
-        public int CurrentPhase { get; set; } = 1;
-        public int CurrentTable { get; set; } = 1;
         public int CurrentPhasePart { get; set; } = 1;
 
         public float P1 { get; set; } = 0.0f;
@@ -50,7 +27,6 @@ namespace ChiaPlotStatusLib.Logic.Models
         public long P3Entries { get; set; } = 0L;
         public float P4 { get; set; } = 0.0f;
         public float Total { get; set; } = 0.0f;
-        public long FinalFileSize { get; set; } = 0L;
 
         public float P1Table1 { get; set; } = 0.0f;
         public long P1Table1Found { get; set; } = 0L;
@@ -129,51 +105,9 @@ namespace ChiaPlotStatusLib.Logic.Models
         public long P32Table7Entries { get; set; } = 0L;
 
 
-        public PlotLog AsPlotLog()
-        {
-            PlotLog plotLog = new();
-            plotLog.UsedPlotter = "chia-plotter";
-            plotLog.Tmp1Drive = this.Tmp1Drive;
-            plotLog.Tmp2Drive = this.Tmp2Drive;
-            plotLog.DestDrive = this.DestDrive;
-            plotLog.Progress = this.Progress;
-            plotLog.TimeRemaining = this.TimeRemaining;
-            plotLog.ETA = this.ETA;
-            plotLog.CurrentTable = this.CurrentTable;
-            plotLog.CurrentPhase = this.CurrentPhase;
-            plotLog.CurrentBucket = 0;
-            plotLog.Phase1Seconds = (int) this.P1;
-            plotLog.Phase2Seconds = (int) this.P2;
-            plotLog.Phase3Seconds = (int) this.P3;
-            plotLog.Phase4Seconds = (int) this.P4;
-            // plotLog.CopyTimeSeconds = this.P5;
-            plotLog.PlotSize = this.PlotSize;
-            plotLog.Threads = this.Threads;
-            // plotLog.Buffer = this.Buffer;
-            plotLog.Buckets = this.Buckets;
-            plotLog.StartDate = this.StartDate;
-            // plotLog.FinishDate = this.FinishDate;
-            plotLog.PlotName = this.PlotName;
-            plotLog.LogFolder = this.LogFolder;
-            plotLog.LogFile = this.LogFile;
-            if (this.FinalFileSize == 0L)
-                plotLog.FinalFileSize = "";
-            else
-                plotLog.FinalFileSize = (this.FinalFileSize / 1024 / 1024) + " MB";
-            plotLog.Health = this.Health;
-            plotLog.IsLastInLogFile = true;
-            plotLog.PlaceInLogFile = 1;
-            plotLog.IsLastLineTempError = false; // TODO
-            plotLog.Health = this.Health;
-            plotLog.RunTimeSeconds = this.RunTimeSeconds;
-            plotLog.CaughtPlottingError = CaughtPlottingError;
-            plotLog.LastLogLine = this.LastLogLine;
-            plotLog.Note = this.Note;
-            return plotLog;
-        }
-
         public void EnterPhase(int phase)
         {
+            Debug.WriteLine("XXXXXX " + this.CurrentPhase + ": " + this.CurrentPhasePart);
             this.CurrentPhase = phase;
             this.CurrentPhasePart = 0;
         }
@@ -197,15 +131,37 @@ namespace ChiaPlotStatusLib.Logic.Models
         }
 
 
-        public override int GetCurrentPhase()
+        public void UpdateProgress()
         {
-            return CurrentPhase;
+            float part = 0;
+
+            switch (CurrentPhase)
+            {
+                case 6:
+                    part = 1 + CPPlotLog.P4PARTS + CPPlotLog.P3PARTS + CPPlotLog.P2PARTS + CPPlotLog.P1PARTS;
+                    break;
+                case 5:
+                    part = CPPlotLog.P4PARTS + CPPlotLog.P3PARTS + CPPlotLog.P2PARTS + CPPlotLog.P1PARTS;
+                    break;
+                case 4:
+                    part = part = CPPlotLog.P3PARTS + CPPlotLog.P2PARTS + CPPlotLog.P1PARTS;
+                    break;
+                case 3:
+                    int totalTablesIn3 = 7;
+                    part = part = CPPlotLog.P2PARTS + CPPlotLog.P1PARTS;
+                    break;
+                case 2:
+                    part = part = CPPlotLog.P1PARTS;
+                    break;
+                case 1:
+                    part = 0;
+                    break;
+            }
+            Progress = (part + CurrentPhasePart) / (1 + CPPlotLog.P4PARTS + CPPlotLog.P3PARTS + CPPlotLog.P2PARTS + CPPlotLog.P1PARTS) * 100;
+            if (Double.IsNaN(Progress))
+                Progress = 0;
         }
 
-        public override HealthIndicator GetHealth()
-        {
-            return Health;
-        }
 
         public void UpdateEta(CPPlottingStatistics stats)
         {

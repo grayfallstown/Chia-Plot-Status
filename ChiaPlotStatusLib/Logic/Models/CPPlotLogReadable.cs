@@ -1,4 +1,5 @@
-﻿using ChiaPlotStatusLib.Logic.Utils;
+﻿using ChiaPlotStatus;
+using ChiaPlotStatusLib.Logic.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,36 +9,11 @@ using System.Threading.Tasks;
 
 namespace ChiaPlotStatusLib.Logic.Models
 {
-    public class CPPlotLogReadable
+    public class CPPlotLogReadable: PlotLogReadable
     {
-        public int Threads { get; set; } = 0;
-        public int Buckets { get; set; } = 0;
-        public int PlotSize { get; set; } = 32;
-        public string LogFile { get; set; } = "";
-        public string LogFolder { get; set; } = "";
-        public string Tmp1Drive { get; set; } = "";
-        public string Tmp2Drive { get; set; } = "";
-        public string LastLogLine { get; set; } = "";
-        public string PlotName { get; set; } = "";
-        public string FileLastWritten { get; set; } = "";
-        public string StartDate { get; set; } = "";
-        public string Health { get; set; } = "";
-        public string ETA { get; set; } = "";
-        public string TimeRemaining { get; set; } = "";
-        public string Progress { get; set; } = "";
-        public string Note { get; set; } = "";
-
-        public string CurrentPhase { get; set; } = "";
-        public string CurrentTable { get; set; } = "";
         public string CurrentPhasePart { get; set; } = "";
 
-        public string P1 { get; set; } = "";
-        public string P2 { get; set; } = "";
-        public string P3 { get; set; } = "";
         public string P3Entries { get; set; } = "";
-        public string P4 { get; set; } = "";
-        public string Total { get; set; } = "";
-        public string FinalFileSize { get; set; } = "";
 
         public string P1Table1 { get; set; } = "";
         public string P1Table1Found { get; set; } = "";
@@ -116,26 +92,9 @@ namespace ChiaPlotStatusLib.Logic.Models
         public string P32Table7Entries { get; set; } = "";
 
 
-        public CPPlotLogReadable(CPPlotLog cpPlotLog)
+        public CPPlotLogReadable(CPPlotLog cpPlotLog): base(cpPlotLog)
         {
-            this.Threads = cpPlotLog.Threads;
-            this.Buckets = cpPlotLog.Buckets;
-            this.LogFile = cpPlotLog.LogFile.Substring(cpPlotLog.LogFile.LastIndexOf(Path.DirectorySeparatorChar) + 1);
-            this.LogFolder = cpPlotLog.LogFolder;
-            this.Tmp1Drive = cpPlotLog.Tmp1Drive;
-            this.Tmp2Drive = cpPlotLog.Tmp2Drive;
-            this.PlotName = cpPlotLog.PlotName;
-            this.LastLogLine = cpPlotLog.LastLogLine;
-            this.PlotSize = cpPlotLog.PlotSize;
-            this.FileLastWritten = Formatter.formatDateTime(cpPlotLog.FileLastWritten);
-            this.P1 = Formatter.formatSeconds((int) cpPlotLog.P1, false);
-            this.P2 = Formatter.formatSeconds((int) cpPlotLog.P2, false);
-            this.P3 = Formatter.formatSeconds((int) cpPlotLog.P3, false);
-            this.P4 = Formatter.formatSeconds((int) cpPlotLog.P4, false);
-            this.StartDate = Formatter.formatDateTime(cpPlotLog.StartDate);
-            this.Progress = string.Format("{0:0.00}", cpPlotLog.Progress) + "%";
-
-
+            this.CurrentBucket = "";
             if (cpPlotLog.CurrentTable == 0)
                 this.CurrentTable = "";
             else

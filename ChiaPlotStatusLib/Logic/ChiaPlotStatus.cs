@@ -70,7 +70,7 @@ namespace ChiaPlotStatus
             SearchForNewLogFiles();
             ConcurrentBag<PlotLog> plotLogs = ParseTheLogs();
             foreach (var cpPlotLog in ParseTheCPLogs())
-                plotLogs.Add(cpPlotLog.AsPlotLog());
+                plotLogs.Add(cpPlotLog);
             if (Settings.AlwaysDoFullRead == true) // nullable, so == true
                 PlotLogFiles.Clear();
             HandleStatistics(plotLogs.ToList());
@@ -87,7 +87,10 @@ namespace ChiaPlotStatus
                     plotLog.RunTimeSeconds = 0;
                 else if (plotLog.StartDate != null)
                     plotLog.RunTimeSeconds = (int)((TimeSpan)(DateTime.Now - plotLog.StartDate)).TotalSeconds;
-                plusReadable.Add((plotLog, new PlotLogReadable(plotLog)));
+                if (typeof(CPPlotLog) == plotLog.GetType())
+                    plusReadable.Add((plotLog, new CPPlotLogReadable((CPPlotLog)plotLog)));
+                else
+                    plusReadable.Add((plotLog, new PlotLogReadable(plotLog)));
             }
             List<(PlotLog, PlotLogReadable)> result = Filter(searchString, filter, plusReadable);
             SortPlotLogs(sortPropertyName, sortAsc, result);
@@ -165,7 +168,10 @@ namespace ChiaPlotStatus
         private ConcurrentBag<CPPlotLog> ParseTheCPLogs()
         {
             ConcurrentBag<CPPlotLog> cpPlotLogs = new ConcurrentBag<CPPlotLog>();
-            Parallel.ForEach(CPPlotLogFiles.Values, (cpPlotLogFile) => cpPlotLogs.Add(cpPlotLogFile.ParseCPPlotLog()));
+            Parallel.ForEach(CPPlotLogFiles.Values, (cpPlotLogFile) => {
+                foreach (var cpPlotLog in cpPlotLogFile.ParseCPPlotLog())
+                    cpPlotLogs.Add(cpPlotLog);
+            });
             return cpPlotLogs;
         }
 
