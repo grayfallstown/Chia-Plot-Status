@@ -14,6 +14,8 @@ namespace ChiaPlotStatus
      */
     public class PlottingStatistics
     {
+        private List<PlotLog> plotLogs;
+
         // in seconds
         public int Phase1AvgTimeNeed { get; set; }
         public int Phase1Completed { get; set; }
@@ -28,6 +30,7 @@ namespace ChiaPlotStatus
 
         public PlottingStatistics(List<PlotLog> plotLogs)
         {
+            this.plotLogs = plotLogs;
             foreach (var plotLog in plotLogs)
             {
                 if (plotLog.Phase1Seconds != 0)

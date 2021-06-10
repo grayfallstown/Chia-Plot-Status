@@ -26,7 +26,6 @@ namespace ChiaPlotStatusLib.Logic.Models
         public float P3 { get; set; } = 0.0f;
         public long P3Entries { get; set; } = 0L;
         public float P4 { get; set; } = 0.0f;
-        public float Total { get; set; } = 0.0f;
 
         public float P1Table1 { get; set; } = 0.0f;
         public long P1Table1Found { get; set; } = 0L;
@@ -105,6 +104,11 @@ namespace ChiaPlotStatusLib.Logic.Models
         public long P32Table7Entries { get; set; } = 0L;
 
 
+        public CPPlotLog()
+        {
+            UsedPlotter = "chia-plotter";
+        }
+
         public void EnterPhase(int phase)
         {
             Debug.WriteLine("XXXXXX " + this.CurrentPhase + ": " + this.CurrentPhasePart);
@@ -117,21 +121,8 @@ namespace ChiaPlotStatusLib.Logic.Models
             this.CurrentPhasePart++;
         }
 
-        public bool IsRunning()
-        {
-            if (this.CurrentPhase == 6)
-                return true;
-            switch (this.Health)
-            {
-                case ConfirmedDead:
-                    return false;
-                default:
-                    return true;
-            }
-        }
 
-
-        public void UpdateProgress()
+        public override void UpdateProgress()
         {
             float part = 0;
 
@@ -163,14 +154,63 @@ namespace ChiaPlotStatusLib.Logic.Models
         }
 
 
-        public void UpdateEta(CPPlottingStatistics stats)
+        public override void UpdateEta(PlottingStatistics stats)
         {
-            // TODO
+            this.TimeRemaining = 0;
+            if (CurrentPhase == 6)
+            {
+                this.TimeRemaining = 0;
+            }
+            if (CurrentPhase <= 5)
+            {
+                float factor = 1;
+                if (CurrentPhase == 5)
+                {
+                    // TODO: if more can be known
+
+                }
+                this.TimeRemaining += (int)(factor * (float)stats.CopyTimeAvgTimeNeed);
+            }
+            if (CurrentPhase <= 4)
+            {
+                float factor = 1;
+                if (CurrentPhase == 4)
+                    factor = (float)this.CurrentPhasePart / CPPlotLog.P4PARTS;
+                this.TimeRemaining += (int)(factor * stats.Phase4AvgTimeNeed);
+            }
+            if (CurrentPhase <= 3)
+            {
+                float factor = 1;
+                if (CurrentPhase == 3)
+                    factor = (float)this.CurrentPhasePart / CPPlotLog.P3PARTS;
+                this.TimeRemaining += (int)(factor * stats.Phase3AvgTimeNeed);
+            }
+            if (CurrentPhase <= 2)
+            {
+                float factor = 1;
+                if (CurrentPhase == 2)
+                    factor = (float)this.CurrentPhasePart / CPPlotLog.P2PARTS;
+                this.TimeRemaining += (int)(factor * stats.Phase2AvgTimeNeed);
+            }
+            if (CurrentPhase == 1)
+            {
+                var factor = (float)this.CurrentPhasePart / CPPlotLog.P1PARTS;
+                this.TimeRemaining += (int)(factor * stats.Phase2AvgTimeNeed);
+            }
+            if (this.TimeRemaining > 0)
+            {
+                DateTime dt = DateTime.Now;
+                dt = dt.AddSeconds(this.TimeRemaining);
+                this.ETA = dt;
+            }
+            else
+                this.ETA = null;
         }
 
-        public void UpdateHealth(CPPlottingStatistics stats)
+        public override void UpdateHealth(PlottingStatistics stats)
         {
             // TODO
+            base.UpdateHealth(stats);
         }
     }
 }

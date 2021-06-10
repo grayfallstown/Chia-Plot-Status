@@ -15,7 +15,6 @@ namespace ChiaPlotStatusLib.Logic.Parser
 {
     class CPPlotLogFileParser
     {
-
         private TailLineEmitter TailLineEmitter { get; }
         protected List<CPPlotLog> PlotLogs { get; } = new();
         public string LogFile;
@@ -160,28 +159,32 @@ namespace ChiaPlotStatusLib.Logic.Parser
                     case var _ when p1timeRg.IsMatch(line):
                         matches = p1timeRg.Matches(line);
                         CurrentPlotLog().P1 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
+                        CurrentPlotLog().Phase1Seconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().EnterPhase(2);
                         break;
                     case var _ when p2timeRg.IsMatch(line):
                         matches = p2timeRg.Matches(line);
                         CurrentPlotLog().P2 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
+                        CurrentPlotLog().Phase4Seconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().EnterPhase(3);
                         break;
                     case var _ when p3timeRg.IsMatch(line):
                         matches = p3timeRg.Matches(line);
                         CurrentPlotLog().P3 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
+                        CurrentPlotLog().Phase3Seconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().P3Entries = long.Parse(matches[0].Groups[2].Value);
                         CurrentPlotLog().EnterPhase(4);
                         break;
                     case var _ when p4timeRg.IsMatch(line):
                         matches = p4timeRg.Matches(line);
                         CurrentPlotLog().P4 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
+                        CurrentPlotLog().Phase4Seconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().FinalFileSize = (long.Parse(matches[0].Groups[2].Value) / 1024 / 1024) + " MB";
                         CurrentPlotLog().EnterPhase(5);
                         break;
                     case var _ when totaltimeRg.IsMatch(line):
                         matches = totaltimeRg.Matches(line);
-                        CurrentPlotLog().Total = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
+                        CurrentPlotLog().TotalSeconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().EnterPhase(6);
                         this.Close();
                         break;

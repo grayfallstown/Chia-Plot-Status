@@ -10,7 +10,7 @@ namespace ChiaPlotStatus
      * Stores informations about a plotting process.
      * This is the object shown in the ui table.
      */
-    public class PlotLog: IsPlotLog
+    public class PlotLog
     {
         public string UsedPlotter { get; set; } = "chiapos";
         public string? Tmp1Drive { get; set; }
@@ -60,7 +60,7 @@ namespace ChiaPlotStatus
         public string LastLogLine { get; set; } = "";
         public string Note { get; set; } = "Notice / Tags";
 
-        public void UpdateProgress()
+        public virtual void UpdateProgress()
         {
             float part = 0;
             // 22 parts total:
@@ -106,7 +106,7 @@ namespace ChiaPlotStatus
         /**
          * Run UpdateHealth before calling
          */
-        public bool IsRunning()
+        public virtual bool IsRunning()
         {
             switch (Health)
             {
@@ -120,10 +120,8 @@ namespace ChiaPlotStatus
             }
         }
 
-        public void UpdateEta(PlottingStatistics stats)
+        public virtual void UpdateEta(PlottingStatistics stats)
         {
-            if (this.UsedPlotter == "chia-plotter")
-                return; // TODO
             this.TimeRemaining = 0;
             if (this.Buckets == 0)
             {
@@ -195,7 +193,7 @@ namespace ChiaPlotStatus
                 this.ETA = null;
         }
 
-        public void UpdateHealth(PlottingStatistics stats)
+        public virtual void UpdateHealth(PlottingStatistics stats)
         {
             int lastModifiedAtWarningThreashold = 0;
             int lastModifiedAtErrorThreashold = 0;
@@ -267,16 +265,6 @@ namespace ChiaPlotStatus
                 this.Health = TempError.Instance;
             else
                 this.Health = Healthy.Instance;
-        }
-
-        public override int GetCurrentPhase()
-        {
-            return CurrentPhase;
-        }
-
-        public override HealthIndicator GetHealth()
-        {
-            return Health;
         }
     }
 }

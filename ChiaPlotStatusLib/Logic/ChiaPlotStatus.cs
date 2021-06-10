@@ -26,7 +26,6 @@ namespace ChiaPlotStatus
         private Dictionary<string, PlotLogFileParser> PlotLogFiles { get; } = new();
         private Dictionary<string, CPPlotLogFileParser> CPPlotLogFiles { get; } = new();
         public PlottingStatisticsHolder Statistics { get; set; }
-        public CPPlottingStatisticsHolder CPStatistics { get; set; }
 
         public ChiaPlotStatus(Settings settings) {
             this.Settings = settings;
@@ -103,7 +102,7 @@ namespace ChiaPlotStatus
             ConcurrentBag<CPPlotLog> cpPlotLogs = ParseTheCPLogs();
             if (Settings.AlwaysDoFullRead == true) // nullable, so == true
                 CPPlotLogFiles.Clear();
-            HandleStatistics(cpPlotLogs.ToList());
+            HandleStatistics(new(cpPlotLogs.ToArray()));
             List<(CPPlotLog, CPPlotLogReadable)> plusReadable = new();
             foreach (var cpPlotLog in cpPlotLogs)
             {
@@ -175,18 +174,18 @@ namespace ChiaPlotStatus
             return cpPlotLogs;
         }
 
-        private List<(A, B)> Filter<A, B> (string? searchString, Filter filter, List<(A, B)> plotLogs) where A : IsPlotLog
+        private List<(A, B)> Filter<A, B> (string? searchString, Filter filter, List<(A, B)> plotLogs) where A : PlotLog
         {
             List<(A, B)> searchResults = SearchFilter.Search<A, B>(searchString, plotLogs);
             List<(A, B)> filterResults = new();
             foreach (var tuple in searchResults)
             {
-                if (filter.HideFinished && tuple.Item1.GetCurrentPhase() == 6)
+                if (filter.HideFinished && tuple.Item1.CurrentPhase == 6)
                     continue;
-                switch (tuple.Item1.GetHealth())
+                switch (tuple.Item1.Health)
                 {
                     case Healthy:
-                        if (!filter.HideHealthy || (tuple.Item1.GetCurrentPhase() == 6 && !filter.HideFinished)) filterResults.Add(tuple);
+                        if (!filter.HideHealthy || (tuple.Item1.CurrentPhase == 6 && !filter.HideFinished)) filterResults.Add(tuple);
                         break;
                     case TempError:
                         // well, you have to take action here.
@@ -228,17 +227,6 @@ namespace ChiaPlotStatus
             }
         }
 
-        private void HandleStatistics(List<CPPlotLog> cpPlotLogs)
-        {
-            CPStatistics = new CPPlottingStatisticsHolder(cpPlotLogs, Settings.Weigths, Settings.MarksOfDeath);
-            foreach (var cpPlotLog in cpPlotLogs)
-            {
-                CPPlottingStatistics stats = CPStatistics.GetMostRelevantStatistics(cpPlotLog);
-                cpPlotLog.UpdateEta(stats);
-                cpPlotLog.UpdateHealth(stats);
-            }
-        }
-
         private bool LooksLikeAPlotLog(string file)
         {
             byte[] buffer = new byte[4096];
@@ -263,7 +251,7 @@ namespace ChiaPlotStatus
                 Debug.WriteLine(e);
                 return false;
             }
-            Debug.WriteLine("File " + file + " was detected as a non plotlog file and will not be parsed as such");
+            // Debug.WriteLine("File " + file + " was detected as a non plotlog file and will not be parsed as such");
             return false;
         }
 
@@ -294,7 +282,7 @@ namespace ChiaPlotStatus
                 Debug.WriteLine(e);
                 return false;
             }
-            Debug.WriteLine("File " + file + " was detected as a non cpPlotlog file and will not be parsed as such");
+           // Debug.WriteLine("File " + file + " was detected as a non cpPlotlog file and will not be parsed as such");
             return false;
         }
 

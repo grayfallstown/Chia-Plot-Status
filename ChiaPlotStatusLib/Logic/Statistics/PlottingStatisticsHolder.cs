@@ -116,22 +116,24 @@ namespace ChiaPlotStatus
 
             int highestRelevance = -1;
             foreach (var relevance in byRelevance.Keys)
-            {
                 if (relevance > highestRelevance)
-                {
                     highestRelevance = relevance;
-                }
-            }
 
             if (highestRelevance > -1)
             {
                 List<PlotLog> plotLogs = byRelevance[highestRelevance];
-                return new PlottingStatistics(plotLogs.ToList());
+                if (id.UsedPlotter == "chia-plotter")
+                    return new CPPlottingStatistics(plotLogs.ToList());
+                else
+                    return new PlottingStatistics(plotLogs.ToList());
             }
             if (FinishedPlotLogs.Count > 0)
-                return new PlottingStatistics(FinishedPlotLogs.ToList());
+                if (id.UsedPlotter == "chia-plotter")
+                    return new CPPlottingStatistics(FinishedPlotLogs.ToList());
+                else
+                    return new PlottingStatistics(FinishedPlotLogs.ToList());
             else
-                return MagicNumbers();
+                return MagicNumbers(id.UsedPlotter);
         }
 
         /**
@@ -143,15 +145,27 @@ namespace ChiaPlotStatus
          * from the beginning too, as they were diced before.
          * See Issue #23
          */
-        private PlottingStatistics MagicNumbers()
+        private PlottingStatistics MagicNumbers(string usedPlotter)
         {
             List<PlotLog> plotLogs = new List<PlotLog>();
             var magicPlotLog = new PlotLog();
-            magicPlotLog.Phase1Seconds = 31573;
-            magicPlotLog.Phase2Seconds = 12298;
-            magicPlotLog.Phase3Seconds = 34925;
-            magicPlotLog.Phase4Seconds = 3024;
-            magicPlotLog.CopyTimeSeconds = 934;
+            if (usedPlotter == "chiapos")
+            {
+                magicPlotLog.Phase1Seconds = 31573;
+                magicPlotLog.Phase2Seconds = 12298;
+                magicPlotLog.Phase3Seconds = 34925;
+                magicPlotLog.Phase4Seconds = 3024;
+                magicPlotLog.CopyTimeSeconds = 934;
+            }
+            else
+            {
+                // from chia-plotter readme times 3 as most people will use ssds and not ramdisk
+                magicPlotLog.Phase1Seconds = 1143 * 3;
+                magicPlotLog.Phase2Seconds = 635 * 3;
+                magicPlotLog.Phase3Seconds = 946 * 3;
+                magicPlotLog.Phase4Seconds = 80 * 3;
+                magicPlotLog.CopyTimeSeconds = 2804 * 3;
+            }
             plotLogs.Add(magicPlotLog);
             return new PlottingStatistics(plotLogs);
         }

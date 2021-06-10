@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace ChiaPlotStatus
      */
     public class PlottingStatisticsID
     {
+        public string UsedPlotter { get; set; }
         public string LogFolder { get; set; }
         public string Tmp1Drive { get; set; }
         public string Tmp2Drive { get; set; }
@@ -24,6 +26,7 @@ namespace ChiaPlotStatus
 
         public PlottingStatisticsID(PlotLog plotLog)
         {
+            UsedPlotter = plotLog.UsedPlotter;
             LogFolder = plotLog.LogFolder;
             Tmp1Drive = plotLog.Tmp1Drive;
             Tmp2Drive = plotLog.Tmp2Drive;
@@ -37,11 +40,19 @@ namespace ChiaPlotStatus
         public int CalcRelevance(PlottingStatisticsID other, PlottingStatisticsIdRelevanceWeights weights)
         {
             var relevance = 0;
+            relevance += UsedPlotterRelevance(other) * (weights.TmpDir + weights.ComputeConfiguration) * 10;
             relevance += PlotSizeRelevance(other) * weights.PlotSize;
             relevance += LogFolderRelevance(other) * weights.LogFolder;
             relevance += TmpDirRelevance(other) * weights.TmpDir;
             relevance += ComputeConfiguration(other) * weights.ComputeConfiguration;
             return relevance;
+        }
+
+        private int UsedPlotterRelevance(PlottingStatisticsID other)
+        {
+            if (this.UsedPlotter == other.UsedPlotter)
+                return 1;
+            return 0;
         }
 
         private int PlotSizeRelevance(PlottingStatisticsID other)
