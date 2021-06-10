@@ -250,7 +250,7 @@
                       <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.Buffer}"></TextBlock>
                     </StackPanel>
                   </ToolTip.Tip>
-                  <TextBlock Text="{Binding BufferSize}" HorizontalAlignment="Right" ></TextBlock>
+                  <TextBlock Text="{Binding Buffer}" HorizontalAlignment="Right" ></TextBlock>
                 </StackPanel>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>

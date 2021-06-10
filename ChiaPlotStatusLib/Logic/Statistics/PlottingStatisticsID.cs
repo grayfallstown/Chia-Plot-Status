@@ -21,7 +21,7 @@ namespace ChiaPlotStatus
         public string Tmp2Drive { get; set; }
         public int PlotSize { get; set; }
         public int Threads { get; set; }
-        public int BufferSize { get; set; }
+        public int Buffer { get; set; }
         public int Buckets { get; set; }
 
         public PlottingStatisticsID(PlotLog plotLog)
@@ -32,7 +32,7 @@ namespace ChiaPlotStatus
             Tmp2Drive = plotLog.Tmp2Drive;
             PlotSize = plotLog.PlotSize;
             Threads = plotLog.Threads;
-            BufferSize = plotLog.Buffer;
+            Buffer = plotLog.Buffer;
             Tmp2Drive = plotLog.Tmp2Drive;
             Buckets = plotLog.Buckets;
         }
@@ -85,7 +85,7 @@ namespace ChiaPlotStatus
             int relevance = 0;
             if (this.Threads == other.Threads) relevance++;
             if (this.Buckets == other.Buckets) relevance++;
-            if (this.BufferSize == other.BufferSize) relevance++;
+            if (this.Buffer == other.Buffer) relevance++;
             return relevance;
         }
 
@@ -97,13 +97,13 @@ namespace ChiaPlotStatus
                    Tmp2Drive == iD.Tmp2Drive &&
                    PlotSize == iD.PlotSize &&
                    Threads == iD.Threads &&
-                   BufferSize == iD.BufferSize &&
+                   Buffer == iD.Buffer &&
                    Buckets == iD.Buckets;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(LogFolder, Tmp1Drive, Tmp2Drive, PlotSize, Threads, BufferSize, Buckets);
+            return HashCode.Combine(LogFolder, Tmp1Drive, Tmp2Drive, PlotSize, Threads, Buffer, Buckets);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ChiaPlotStatusGUI.GUI.ViewModels
         public string Tmp2Drive { get; set; }
         public int PlotSize { get; set; }
         public int Threads { get; set; }
-        public string BufferSize { get; set; }
+        public string Buffer { get; set; }
         public int Buckets { get; set; }
 
         public string Phase1AvgTimeNeed { get; set; }
@@ -37,7 +37,7 @@ namespace ChiaPlotStatusGUI.GUI.ViewModels
             this.Tmp2Drive = stats.Tmp2Drive;
             this.PlotSize = stats.PlotSize;
             this.Threads = stats.Threads;
-            this.BufferSize = stats.BufferSize + "MB";
+            this.Buffer = stats.Buffer + "MB";
             this.Buckets = stats.Buckets;
             this.Phase1AvgTimeNeed = Formatter.formatSeconds(stats.Phase1AvgTimeNeed, true);
             this.Phase1Completed = stats.Phase1Completed;
