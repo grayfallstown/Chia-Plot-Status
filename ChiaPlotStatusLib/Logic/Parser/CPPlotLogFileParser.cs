@@ -165,7 +165,7 @@ namespace ChiaPlotStatusLib.Logic.Parser
                     case var _ when p2timeRg.IsMatch(line):
                         matches = p2timeRg.Matches(line);
                         CurrentPlotLog().P2 = float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
-                        CurrentPlotLog().Phase4Seconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
+                        CurrentPlotLog().Phase2Seconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().EnterPhase(3);
                         break;
                     case var _ when p3timeRg.IsMatch(line):
