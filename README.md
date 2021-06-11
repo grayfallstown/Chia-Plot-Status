@@ -136,24 +136,41 @@ On Windows with WSL:
 
 ```
 # use 'chia keys show' to get this keys:
-export POOL_KEY="ac8e049..."
-export FARMER_KEY="85b956c22..."
-export TMP_DIR="/mnt/d/PlotTemp"
-export WINDOWS_USERNAME="username"
-export THREADS="$(expr $(nproc) / 2)" # this detects nr of threads automatically. You can simply use 'export THREADS="4"' instead
-./chia_plot $POOL_KEY $FARMER_KEY $TMP_DIR $TMP_DIR $THREADS 7 2>&1 | tee /mnt/c/Users/$WINDOWS_USERNAME/.chia/mainnet/plotter/chia-plotter-$(uuid).log
+export POOLKEY="replace-me"; \
+export FARMERKEY="replace-me"; \
+export WINDOWS_USERNAME="replace-me" \
+export THREADS="$(expr $(nproc) / 2)"; \
+/home/mk/chia-plotter/build2/chia_plot \
+--poolkey=$POOLKEY \
+--farmerkey=$FARMERKEY \
+--tmpdir2=replace-me \
+--tmpdir=replace-me \
+--finaldir=replace-me/ \
+--count=-1 \
+--threads=$THREADS \
+--buckets=7 \
+ 2>&1  | tee /mnt/c/Users/$WINDOWS_USERNAME/.chia/mainnet/plotter/chia-plotter-$(uuid).log
 ```
 
 On Linux directly:
 
 ```
 # use 'chia keys show' to get this keys:
-export POOL_KEY="ac8e049..."
-export FARMER_KEY="85b956c22..."
-export TMP_DIR="/mnt/d/PlotTemp"
-export THREADS="$(expr $(nproc) / 2)" # this detects nr of threads automatically. You can simply use 'export THREADS="4"' instead
-./chia_plot $POOL_KEY $FARMER_KEY $TMP_DIR $TMP_DIR $THREADS 7 2>&1 | tee "/home/$(whoami)/.chia/mainnet/plotter/chia-plotter-$(uuid).log"
+export POOLKEY="replace-me"; \
+export FARMERKEY="replace-me"; \
+export THREADS="$(expr $(nproc) / 2)"; \
+/home/mk/chia-plotter/build2/chia_plot \
+--poolkey=$POOLKEY \
+--farmerkey=$FARMERKEY \
+--tmpdir2=replace-me \
+--tmpdir=replace-me \
+--finaldir=replace-me/ \
+--count=-1 \
+--threads=$THREADS \
+--buckets=7 \
+ 2>&1 | tee /home/$(whoami)/.chia/mainnet/plotter/chia-plotter-$(uuid).log;
 ```
+
 
 ## Need the columns in a different order?
 
