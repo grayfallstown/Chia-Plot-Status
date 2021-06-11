@@ -135,6 +135,7 @@ You can download a [full example script with Tee-Object](https://gist.github.com
 On Windows with WSL:
 
 ```
+# make sure you have got uuid installed
 # use 'chia keys show' to get this keys:
 export POOLKEY="replace-me"; \
 export FARMERKEY="replace-me"; \
@@ -155,6 +156,7 @@ export THREADS="$(expr $(nproc) / 2)"; \
 On Linux directly:
 
 ```
+# make sure you have got uuid installed
 # use 'chia keys show' to get this keys:
 export POOLKEY="replace-me"; \
 export FARMERKEY="replace-me"; \
