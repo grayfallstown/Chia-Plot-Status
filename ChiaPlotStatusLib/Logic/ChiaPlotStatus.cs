@@ -62,6 +62,15 @@ namespace ChiaPlotStatus
                 if (string.Equals(folder, path))
                     PlotLogFiles.Remove(plotLogFile.LogFile);
             }
+            foreach (var plotLogFile in CPPlotLogFiles.Values)
+            {
+                var folder = plotLogFile.LogFolder;
+                if (string.Equals(folder, path))
+                    PlotLogFiles.Remove(plotLogFile.LogFile);
+                folder = folder + "\\";
+                if (string.Equals(folder, path))
+                    PlotLogFiles.Remove(plotLogFile.LogFile);
+            }
         }
 
         public List<(PlotLog, PlotLogReadable)> PollPlotLogs(string sortPropertyName, bool sortAsc, string? searchString, Filter filter)

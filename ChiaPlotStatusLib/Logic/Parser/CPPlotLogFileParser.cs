@@ -186,7 +186,9 @@ namespace ChiaPlotStatusLib.Logic.Parser
                         matches = totaltimeRg.Matches(line);
                         CurrentPlotLog().TotalSeconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().EnterPhase(6);
-                        this.Close();
+                        // TODO:
+                        //if (CurrentPlotLog().QueueSize == 1 || CurrentPlotLog().QueueSize == 0)
+                        //    this.Close();
                         break;
 
                     // phase 2
@@ -456,6 +458,7 @@ namespace ChiaPlotStatusLib.Logic.Parser
             newPlotLog.LogFolder = oldPlotLog.LogFolder;
             newPlotLog.PlaceInLogFile = oldPlotLog.PlaceInLogFile + 1;
             newPlotLog.QueueSize = oldPlotLog.QueueSize;
+            newPlotLog.StartDate = oldPlotLog.StartDate.Value.AddSeconds(oldPlotLog.TotalSeconds);
             PlotLogs.Add(newPlotLog);
             return newPlotLog;
         }

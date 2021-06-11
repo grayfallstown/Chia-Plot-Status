@@ -111,7 +111,7 @@ namespace ChiaPlotStatusLib.Logic.Models
 
         public void EnterPhase(int phase)
         {
-            Debug.WriteLine("XXXXXX " + this.CurrentPhase + ": " + this.CurrentPhasePart);
+            //Debug.WriteLine("XXXXXX " + this.CurrentPhase + ": " + this.CurrentPhasePart);
             this.CurrentPhase = phase;
             this.CurrentPhasePart = 0;
         }
