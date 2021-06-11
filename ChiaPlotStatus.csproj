@@ -12,7 +12,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>grayfallstown</Authors>
     <Company>none</Company>
-    <Version>0.11.2</Version>
+    <Version>0.11.3</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningLevel>5</WarningLevel>
