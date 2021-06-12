@@ -134,7 +134,7 @@ You can download a [full example script with Tee-Object](https://gist.github.com
 
 On Windows without WSL:
 
-Take the same command you are currently using and just add 2>&1 | % ToString | Tee-Object -FilePath "C:\Users\$env:UserName\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log" at the end.
+Take the same command you are currently using and just add ` 2>&1 | % ToString | Tee-Object -FilePath "C:\Users\$env:UserName\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log"` at the end.
 Note: there must be a whitespace between your command and this.
 
 On Windows with WSL:
