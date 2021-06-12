@@ -135,7 +135,7 @@ You can download a [full example script with Tee-Object](https://gist.github.com
 On Windows without WSL:
 
 Take the same command you are currently using and just add ` 2>&1 | % ToString | Tee-Object -FilePath "C:\Users\$env:UserName\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log"` at the end.
-Note: there must be a whitespace between your command and this.
+Note: there must be a whitespace between your command and this and there is nothing to be replaced in this line. Just leave it as it is.
 
 On Windows with WSL:
 
@@ -157,6 +157,8 @@ export THREADS="$(expr $(nproc) / 2)"; \
 --buckets=7 \
  2>&1  | tee /mnt/c/Users/$WINDOWS_USERNAME/.chia/mainnet/plotter/chia-plotter-$(uuid).log
 ```
+Note: There is nothing to be replaced in the last line. Just leave it as it is.
+
 
 On Linux directly:
 
@@ -177,6 +179,8 @@ export THREADS="$(expr $(nproc) / 2)"; \
 --buckets=7 \
  2>&1 | tee /home/$(whoami)/.chia/mainnet/plotter/chia-plotter-$(uuid).log;
 ```
+
+Note: There is nothing to be replaced in the last line. Just leave it as it is.
 
 
 ## Need the columns in a different order?
