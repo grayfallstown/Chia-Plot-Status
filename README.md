@@ -140,7 +140,7 @@ Note: there must be a whitespace between your command and this and there is noth
 On Windows with WSL:
 
 ```
-# make sure you have got uuid installed
+# make sure you have got uuid installed (sudo apt install uuid -y)
 # use 'chia keys show' to get this keys:
 export POOLKEY="replace-me"; \
 export FARMERKEY="replace-me"; \
@@ -163,7 +163,7 @@ Note: There is nothing to be replaced in the last line. Just leave it as it is.
 On Linux directly:
 
 ```
-# make sure you have got uuid installed
+# make sure you have got uuid installed (sudo apt install uuid -y)
 # use 'chia keys show' to get this keys:
 export POOLKEY="replace-me"; \
 export FARMERKEY="replace-me"; \
