@@ -132,10 +132,15 @@ You can download a [full example script with Tee-Object](https://gist.github.com
 
 ## Getting Log Files from madMAx43v3r/chia-plotter
 
+On Windows without WSL:
+
+Take the same command you are currently using and just add ` 2>&1 | % ToString | Tee-Object -FilePath "C:\Users\$env:UserName\.chia\mainnet\plotter\$([GUID]::NewGUID().ToString('D')).log"` at the end and run it in PowerShell, not CMD.
+Note: there must be a whitespace between your command and this and there is nothing to be replaced in this line. Just leave it as it is.
+
 On Windows with WSL:
 
 ```
-# make sure you have got uuid installed
+# make sure you have got uuid installed (sudo apt install uuid -y)
 # use 'chia keys show' to get this keys:
 export POOLKEY="replace-me"; \
 export FARMERKEY="replace-me"; \
@@ -152,11 +157,13 @@ export THREADS="$(expr $(nproc) / 2)"; \
 --buckets=7 \
  2>&1  | tee /mnt/c/Users/$WINDOWS_USERNAME/.chia/mainnet/plotter/chia-plotter-$(uuid).log
 ```
+Note: There is nothing to be replaced in the last line. Just leave it as it is.
+
 
 On Linux directly:
 
 ```
-# make sure you have got uuid installed
+# make sure you have got uuid installed (sudo apt install uuid -y)
 # use 'chia keys show' to get this keys:
 export POOLKEY="replace-me"; \
 export FARMERKEY="replace-me"; \
@@ -172,6 +179,8 @@ export THREADS="$(expr $(nproc) / 2)"; \
 --buckets=7 \
  2>&1 | tee /home/$(whoami)/.chia/mainnet/plotter/chia-plotter-$(uuid).log;
 ```
+
+Note: There is nothing to be replaced in the last line. Just leave it as it is.
 
 
 ## Need the columns in a different order?
@@ -317,6 +326,7 @@ alternatively try `dotnet run --build`.
 - @jonnnny
 - @kata32
 - @littleneko
+- @magallanesrafa
 - @magnusmyklebost
 - @massimo de rovere
 - @mmoingame
@@ -341,3 +351,56 @@ alternatively try `dotnet run --build`.
 - @The Malware Analysts of Microsoft and Malwarebytes for checking Chia Plot Status after every false positive
 
 For contributing to Chia Plot Status either by [donating](https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC) or otherwise.
+
+
+## Donations
+
+PayPal: https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC
+
+Bitcoin/BTC bc1qy2fvr0js9xunlcgndlz9m9yu2qrydtlnlh4fgm
+
+Etherium/ETH 0x0e07b5A73F571a98bAf19Fc42EBDE15d6B1664f0
+
+Chia/XCH xch15p8swrrdt5ujv0dxy4hwjrvpjseyvuquwtfwnrjhxqt6ws9uf90qzq4axl
+
+Tether/USDT 0x0e07b5A73F571a98bAf19Fc42EBDE15d6B1664f0
+
+Binance Coin/BNB bnb1pes46l2jkw8dd9tw6j7sc4r9muzv5kuepnal0r
+
+Cardano/ADA addr1q86sat0hpuvg5mp85qwke5kk6rjf6yntvr7epaz8j3k2g784p6klwrcc3fkz0gqadnfdd58yn5fxkc8ajr6y09rv53uqzjzv2r
+
+XRP r9Wrpa2JsHh74nKqmcjJduy9GXDgmX44ic
+
+USD Coin/USDC 0x0e07b5A73F571a98bAf19Fc42EBDE15d6B1664f0
+
+Polkadot/DOT 16Mp3siK7qFJ9567R6ynPMNf3W9SYcumgUMXacMkH9UC7817
+
+Uniswap/UNI 0x0e07b5A73F571a98bAf19Fc42EBDE15d6B1664f0
+
+Litecoin/LTC LdbWCtQu7L9J9sYeDcp3M1qTWyA6Acck28
+
+Bitcoin Cash/BCH qrxfzf3dact3crqu8l8uvxdp639scekw9qn20akrdc
+
+Chainlink/LINK 0x0e07b5A73F571a98bAf19Fc42EBDE15d6B1664f0
+
+Stellar/XLM GAIEQ6N7V77WLDYNFBESCGONNURKGCQZ2GS6THEENOWUSBVHQBBFL4XJ
+
+VeChain/VET 0xBf8AC5799333a8B14A51228Be9E02629e034A039
+
+Tron/TRX TKMnrH4P2L4PigJVNijZz9BQiSewrABosc
+
+Dai/DAI 0x0e07b5A73F571a98bAf19Fc42EBDE15d6B1664f0
+
+Neo/NEO ANZiysMZZS3PgzKpqTs8jATRcrpujZTBsB
+
+Tezos/XTZ tz1XhtmaVr6RnqbTGPmPvD1XgsK7kHt8rUuH
+
+Cosmos/ATOM cosmos1mu89q07xv9m8furg06f7tsw3u32da553wh0uv2
+
+NEM/XEM NDM7SU2CVAN6CNOEFRMPPOIZSXQVYHIQ3BVJGH7T
+
+0x/ZRX 0x0e07b5A73F571a98bAf19Fc42EBDE15d6B1664f0
+
+Monero/XMR 43RbqKt37UUgY62ow4N3ptTT263zK1sfC88szAhThihU6bQKeURF3TrYLDumSak5gkX8Bj2FNzeWiduoEcPjLppHHSoBQi5
+
+Etherium Classic/ETC 0x9347727443e8808c14062A7Fb95625B0284F2F8d
