@@ -277,12 +277,13 @@ namespace ChiaPlotStatus
                     {
                         string asString = GetEncoding(file).GetString(buffer);
                         bool hasNewLine = asString.Contains("\n");
+                        bool hasPlotterName = asString.Contains("Multi-threaded pipelined Chia k32 plotter");
                         bool hasFinalDirectory = asString.Contains("Final Directory: ");
                         bool hasThreads = asString.Contains("Number of Threads: ");
                         bool hasBuckets = asString.Contains("Number of Sort Buckets: ");
                         bool hasDirectory = asString.Contains("Working Directory:");
                         bool hasStartingSentence = asString.Contains("Number of Threads: ");
-                        if (hasNewLine && (hasThreads || hasBuckets || hasDirectory || hasFinalDirectory))
+                        if (hasNewLine && (hasPlotterName || hasThreads || hasBuckets || hasDirectory || hasFinalDirectory))
                             return true;
                     }
                 }
