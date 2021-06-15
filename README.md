@@ -270,89 +270,6 @@ macOS: `dotnet ./ChiaPlotStatusGUI/bin/Release/net5.0/ChiaPlotStatus.dll` (thank
 alternatively try `dotnet run --build`.
 
 
-## Special Thanks
-
-- [@charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
-- @ใครๆก็ทําได้ DiY
-- @Alpha One
-- @Çağlar
-- @Cuello
-- @DazEB2
-- @DjMuffin_top
-- @Dujapan
-- @Gridjump
-- @@getchiaplot
-- @Hellfall1
-- @Jazeon
-- @Jonesyj83
-- @JoseAngelB
-- @KJP Gaming
-- @Lucky_Length2676
-- @Lyushen
-- @Manic!
-- @Mr pq
-- @Ok-Studio5311
-- @Oguzhan Oda
-- @Patro TV
-- @R3htribution
-- @RaySmalley
-- @RedxLus
-- @SERVAK
-- @TormodSan
-- @Upside Down Crypto
-- @Waloumi
-- @WeAreNotAngels
-- @Worldly-Mind3108
-- @Zubon102
-- @badi95
-- @bathrobehero
-- @bestq8.com
-- @blood5322
-- @buettgenbach
-- @c-pool
-- @carfnann
-- @chefsas
-- @chiaxch
-- @cyperbg
-- @darkfriend77
-- @djdookie81
-- @dorofino
-- @douwebusschops
-- @dvlzgrmz
-- @j.spracher
-- @jcmarco
-- @jimshank
-- @johnamtl
-- @jonnnny
-- @kata32
-- @littleneko
-- @magallanesrafa
-- @magnusmyklebost
-- @massimo de rovere
-- @mmoingame
-- @ouoam
-- @ozulu
-- @puperinoo
-- @raf-cr
-- @revlisoft
-- @rsegrest77
-- @rul3s
-- @sirdeekay
-- @tajchert
-- @tiberiu puscas
-- @toddouimet
-- @whitetechnologies
-- @Vera Toro
-- @whoismos3s
-- @wild9
-- @wizbowes
-- @z.ostroff
-- @zeroarst
-- @The Malware Analysts of Microsoft and Malwarebytes for checking Chia Plot Status after every false positive
-
-For contributing to Chia Plot Status either by [donating](https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC) or otherwise.
-
-
 ## Donations
 
 PayPal: https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC
@@ -404,3 +321,88 @@ NEM/XEM NDM7SU2CVAN6CNOEFRMPPOIZSXQVYHIQ3BVJGH7T
 Monero/XMR 43RbqKt37UUgY62ow4N3ptTT263zK1sfC88szAhThihU6bQKeURF3TrYLDumSak5gkX8Bj2FNzeWiduoEcPjLppHHSoBQi5
 
 Etherium Classic/ETC 0x9347727443e8808c14062A7Fb95625B0284F2F8d
+
+
+
+## Special Thanks
+
+- [@charlie](https://freeicons.io/profile/740) on [freeicons.io](https://freeicons.io) for the Logo [(details)](https://github.com/grayfallstown/Chia-Plot-Status/blob/main/Logo/Icon%20-%20Readme.txt)
+- @ใครๆก็ทําได้ DiY
+- @Alpha One
+- @Çağlar
+- @Cuello
+- @DazEB2
+- @DjMuffin_top
+- @Dujapan
+- @Gridjump
+- @@getchiaplot
+- @Hellfall1
+- @Jazeon
+- @Jonesyj83
+- @JoseAngelB
+- @KJP Gaming
+- @Lucky_Length2676
+- @Lyushen
+- @Manic!
+- @Mr pq
+- @Ok-Studio5311
+- @Oguzhan Oda
+- @Patro TV
+- @R3htribution
+- @RaySmalley
+- @RedxLus
+- @SERVAK
+- @TormodSan
+- @Upside Down Crypto
+- @Waloumi
+- @WeAreNotAngels
+- @Worldly-Mind3108
+- @Zubon102
+- @aDilly
+- @badi95
+- @bathrobehero
+- @bestq8.com
+- @blood5322
+- @buettgenbach
+- @c-pool
+- @carfnann
+- @chefsas
+- @chiaxch
+- @cyperbg
+- @darkfriend77
+- @djdookie81
+- @dorofino
+- @douwebusschops
+- @dvlzgrmz
+- @j.spracher
+- @jcmarco
+- @jimshank
+- @johnamtl
+- @jonnnny
+- @kata32
+- @littleneko
+- @magallanesrafa
+- @magnusmyklebost
+- @massimo de rovere
+- @mmoingame
+- @ouoam
+- @ozulu
+- @puperinoo
+- @raf-cr
+- @revlisoft
+- @rsegrest77
+- @rul3s
+- @sirdeekay
+- @tajchert
+- @tiberiu puscas
+- @toddouimet
+- @whitetechnologies
+- @Vera Toro
+- @whoismos3s
+- @wild9
+- @wizbowes
+- @z.ostroff
+- @zeroarst
+- @The Malware Analysts of Microsoft and Malwarebytes for checking Chia Plot Status after every false positive
+
+For contributing to Chia Plot Status either by [donating](https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC) or otherwise.
