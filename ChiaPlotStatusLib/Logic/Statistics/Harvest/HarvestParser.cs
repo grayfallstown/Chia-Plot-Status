@@ -91,7 +91,7 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
                 WorstLookupTime = harvests.Aggregate((a, b) => a.LookupTime > b.LookupTime ? a : b).LookupTime,
                 BestLookupTime = harvests.Aggregate((a, b) => a.LookupTime < b.LookupTime ? a : b).LookupTime,
                 AvgLookupTime = harvests.Average(a => a.LookupTime),
-                AvgEligiblePlots = (int)harvests.Average(a => a.ElgiblePlots),
+                AvgEligiblePlots = harvests.Average(a => a.ElgiblePlots),
                 TotalPlots = last.TotalPlots,
                 FoundProofs = (int)harvests.Sum(a => a.FoundProofs),
                 FilterRatio = harvests.Average(a => a.FilterRatio),

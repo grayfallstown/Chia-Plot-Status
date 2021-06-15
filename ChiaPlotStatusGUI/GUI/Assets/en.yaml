@@ -239,7 +239,7 @@ Tooltips:
         Even if, this does not mean you earned Chia as the best proof provided by anyone gets rewarded, not everyone who delivers a proof.
     AvgEligiblePlots: >
         Average number of plots that can provide proofs for the challanges (for a reward) given in the timeframe from begin to end of your logfiles.
-        1/512 chance per plot, therefor should be somewhere around 0.001953125.
+        1/512 chance per plot, therefor should be somewhere around 0.001953125 times the nr of total plots.
         If the number is higher, luccky you.
         If it is a lot lower, well something is wrong unless you do not have many plots, like less than 50 or so or if you do not have a lot of data.
         if you have just set the log level to INFO, this means practically nothing.

@@ -9,7 +9,7 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
     public class HarvestSummary
     {
         public string LogFolder { get; set; }
-        public int AvgEligiblePlots { get; set; }
+        public double AvgEligiblePlots { get; set; }
         public int FoundProofs { get; set; }
         public double BestLookupTime { get; set; }
         public double WorstLookupTime { get; set; }
