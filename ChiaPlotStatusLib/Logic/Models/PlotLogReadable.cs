@@ -110,7 +110,8 @@ namespace ChiaPlotStatus
             this.Threads = plotLog.Threads.ToString();
             this.Buffer = plotLog.Buffer + " MB";
             this.LastLogLine = plotLog.LastLogLine;
-            this.PID = "" + plotLog.PID;
+            if (plotLog.PID != 0)
+                this.PID = "" + plotLog.PID;
             switch (plotLog.CurrentPhase)
             {
                 case 1:

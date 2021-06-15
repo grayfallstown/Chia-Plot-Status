@@ -410,7 +410,6 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					<!--
 					<DataGridTemplateColumn SortMemberPath="DestDrive">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.DestDrive}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>
@@ -428,7 +427,6 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-					-->
           <DataGridTemplateColumn SortMemberPath="StartDate">
 						<DataGridTemplateColumn.Header>
 							<Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.StartDate}" HorizontalAlignment="Left" Click="LogDataGridHeaderClick"></Button>

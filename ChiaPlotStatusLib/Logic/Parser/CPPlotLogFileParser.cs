@@ -66,6 +66,10 @@ namespace ChiaPlotStatusLib.Logic.Parser
                         matches = tmp2Rg.Matches(line);
                         CurrentPlotLog().Tmp2Drive = matches[0].Groups[1].Value;
                         break;
+                    case var _ when destRg.IsMatch(line):
+                        matches = destRg.Matches(line);
+                        CurrentPlotLog().DestDrive = matches[0].Groups[1].Value;
+                        break;
                     case var _ when pidRg.IsMatch(line):
                         matches = pidRg.Matches(line);
                         CurrentPlotLog().PID = int.Parse(matches[0].Groups[1].Value);
@@ -483,6 +487,7 @@ namespace ChiaPlotStatusLib.Logic.Parser
         static Regex plotNameRg = new Regex("Plot Name: (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex tmp1Rg = new Regex("Working Directory:\\s*(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex tmp2Rg = new Regex("Working Directory 2:\\s*(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex destRg = new Regex("Final Directory:\\s*(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex pidRg = new Regex("Process ID:\\s*(\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex p1table1Rg = new Regex("\\[P1\\] Table 1 took ([0-9.]+) sec", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex p1table2Rg = new Regex("\\[P1\\] Table 2 took ([0-9.]+) sec, found (\\d+) matches", RegexOptions.Compiled | RegexOptions.IgnoreCase);

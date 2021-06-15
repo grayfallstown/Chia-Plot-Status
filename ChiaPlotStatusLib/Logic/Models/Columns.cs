@@ -49,7 +49,7 @@ namespace ChiaPlotStatusLib.Logic.Models
             columns.Order.Add("Note");
             columns.Order.Add("Tmp1Drive");
             columns.Order.Add("Tmp2Drive");
-            // columns.cols.Add("DestDrive", false);
+            columns.Order.Add("DestDrive");
             columns.Order.Add("StartDate");
             columns.Order.Add("FinishDate");
             columns.Order.Add("Health");
