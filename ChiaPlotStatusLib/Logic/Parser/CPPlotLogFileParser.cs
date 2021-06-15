@@ -185,6 +185,7 @@ namespace ChiaPlotStatusLib.Logic.Parser
                     case var _ when totaltimeRg.IsMatch(line):
                         matches = totaltimeRg.Matches(line);
                         CurrentPlotLog().TotalSeconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
+                        CurrentPlotLog().FinishDate = CurrentPlotLog().StartDate.Value.AddSeconds(CurrentPlotLog().TotalSeconds);
                         CurrentPlotLog().EnterPhase(6);
                         // TODO:
                         //if (CurrentPlotLog().QueueSize == 1 || CurrentPlotLog().QueueSize == 0)
