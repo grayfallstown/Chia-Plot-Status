@@ -105,10 +105,11 @@ namespace ChiaPlotStatus.Views
         public void InitDailyStatsTable()
         {
             Dictionary<DateTime, PlottingStatisticsDay> dailyStats = PlotManager.Statistics.GetDailyStats();
+            List<PlottingStatisticsDay> days = new(dailyStats.Values);
+            days.Sort((a, b) => -1 * a.Day.CompareTo(b.Day));
             DailyStats = new();
-            foreach (var stat in dailyStats.Values)
+            foreach (var stat in days)
                 DailyStats.Add(new(stat));
-            DailyStats.Sort((a, b) => -1 * a.Day.CompareTo(b.Day));
         }
 
         /*
