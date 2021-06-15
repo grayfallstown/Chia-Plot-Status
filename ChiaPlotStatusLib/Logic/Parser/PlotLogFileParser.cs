@@ -55,6 +55,9 @@ namespace ChiaPlotStatus
                     case var _ when threadsRg.IsMatch(line):
                         CurrentPlotLog().Threads = int.Parse(threadsRg.Matches(line)[0].Groups[1].Value);
                         break;
+                    case var _ when pidRG.IsMatch(line):
+                        CurrentPlotLog().PID = int.Parse(pidRG.Matches(line)[0].Groups[1].Value);
+                        break;
                     case var _ when startDateRg.IsMatch(line):
                         var dateTimeStr = startDateRg.Matches(line)[0].Groups[1].Value;
                         CurrentPlotLog().StartDate = DateTime.ParseExact(dateTimeStr, "ddd MMM d HH:mm:ss yyyy", new System.Globalization.CultureInfo("en-US"), DateTimeStyles.AllowWhiteSpaces);
@@ -229,6 +232,7 @@ namespace ChiaPlotStatus
         public static Regex bufferSizeRg = new Regex("^Buffer size is: (\\d+)MiB", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex bucketsRg = new Regex("^Using (\\d+) buckets", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex threadsRg = new Regex("^Using (\\d+) threads of stripe size (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex pidRG = new Regex("^Process ID is: (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex startDateRg = new Regex("^Starting phase 1/4: Forward Propagation into tmp files\\.\\.\\. (.+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex phase1Rg = new Regex("^Time for phase 1 = (\\d+)\\.\\d+ seconds. CPU \\((\\d+\\.\\d+)%\\) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex phase2Rg = new Regex("^Time for phase 2 = (\\d+)\\.\\d+ seconds. CPU \\((\\d+\\.\\d+)%\\) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);

@@ -17,6 +17,7 @@ namespace ChiaPlotStatus
         public string Tmp2Drive { get; set; } = "";
         public string DestDrive { get; set; }
         public string Errors { get; set; } = "";
+        public string PID { get; set; } = "";
         public string Progress { get; set; } = "";
         public string TimeRemaining { get; set; } = "";
         public string ETA { get; set; } = "";
@@ -109,6 +110,7 @@ namespace ChiaPlotStatus
             this.Threads = plotLog.Threads.ToString();
             this.Buffer = plotLog.Buffer + " MB";
             this.LastLogLine = plotLog.LastLogLine;
+            this.PID = "" + plotLog.PID;
             switch (plotLog.CurrentPhase)
             {
                 case 1:

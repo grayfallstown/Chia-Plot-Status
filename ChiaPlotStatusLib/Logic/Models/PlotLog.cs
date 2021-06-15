@@ -17,6 +17,7 @@ namespace ChiaPlotStatus
         public string? Tmp2Drive { get; set; }
         public string? DestDrive { get; set; }
         public int Errors { get; set; } = 0;
+        public int PID { get; set; } = 0;
         public float Progress { get; set; } = 0;
         public int TimeRemaining { get; set; } = 0;
         public DateTime? ETA { get; set; }

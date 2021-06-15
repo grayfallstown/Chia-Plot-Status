@@ -32,6 +32,7 @@ Columns:
     Tmp2Drive: "Tmp2"
     DestDrive: "Destination"
     Errors: "Errors"
+    PID: "PID"
     Progress: "Progress"
     TimeRemaining: "Remaining 🕐"
     RunTimeSeconds: "Runtime 🕐"
@@ -98,6 +99,8 @@ Tooltips:
         The chia plotter will retry in case of such an error after a short Seconds. One is not that bad.
         If you use external harddrives or network attached Storage this usally means the connection
         dropped. Reattach the device and chia will continue. If the error count keeps rising you need to troubleshoot.
+    PID: >
+        Process ID if the running plotter process. You can use this nr to find and kill the process if it misbehaves.
     Progress: >
         Shows the progression defined by the number of steps done vs the number of steps left to completion.
         The number of steps tells you nothing about how long the process will take to completion.

@@ -82,6 +82,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string Tmp2Drive { get; set; } = "";
         public string DestDrive { get; set; } = "";
         public string Errors { get; set; } = "";
+        public string PID { get; set; } = "";
         public string Progress { get; set; } = "";
         public string TimeRemaining { get; set; } = "";
         public string RunTimeSeconds { get; set; } = "";
@@ -134,6 +135,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string Tmp2Drive { get; set; } = "";
         public string DestDrive { get; set; } = "";
         public string Errors { get; set; } = "";
+        public string PID { get; set; } = "";
         public string Progress { get; set; } = "";
         public string TimeRemaining { get; set; } = "";
         public string RunTimeSeconds { get; set; } = "";
