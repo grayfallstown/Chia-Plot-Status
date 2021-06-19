@@ -62,7 +62,7 @@ namespace ChiaPlotStatus.CLI
             if (folders.Count() == 0)
             {
                 if (PlotManager.Settings.LogDirectories.Count == 0)
-                    PlotManager.AddDefaultLogFolder();
+                    PlotManager.AddDefaultLogFolders();
             }
             else
             {
