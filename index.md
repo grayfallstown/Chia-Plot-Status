@@ -17,6 +17,7 @@
 
 ## Features
 
+ - Support for Chia, Flax, Spare and ChainGreen
  - Monitor Progress of running plots
  - Show estimated time to completion based on your already finished plots best matching your current plot config
  - Monitor Health of plotting processes
