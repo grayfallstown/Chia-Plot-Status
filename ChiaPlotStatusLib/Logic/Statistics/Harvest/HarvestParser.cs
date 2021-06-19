@@ -52,7 +52,7 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
             if (Directory.Exists(path))
                 debugLogFiles = Directory.GetFiles(path, "debug.log*");
 
-            var regex = new Regex("([0-9:.\\-T]*) harvester chia.harvester.harvester: INFO\\s*([0-9]*) " +
+            var regex = new Regex("([0-9:.\\-T]*) harvester .*.harvester.harvester: INFO\\s*([0-9]*) " +
                  "plots were eligible for farming ([a-z0-9.]*) Found ([0-9]*) proofs. " +
                  "Time: ([0-9.]*) s. Total ([0-9]*) plots", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             ConcurrentBag<Harvest> harvestsBag = new();
