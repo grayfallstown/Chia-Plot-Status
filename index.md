@@ -11,8 +11,8 @@
 </p>
 
 
-![Screenshot](./Screenshots/Screenshot.jpg)
-![Screenshot](./Screenshots/Screenshot-Dark.jpg)
+![Screenshot](./Screenshot.jpg)
+![Screenshot](./Screenshot-Dark.jpg)
 
 
 ## Features
