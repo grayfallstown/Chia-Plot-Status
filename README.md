@@ -322,6 +322,10 @@ Monero/XMR 43RbqKt37UUgY62ow4N3ptTT263zK1sfC88szAhThihU6bQKeURF3TrYLDumSak5gkX8B
 
 Etherium Classic/ETC 0x9347727443e8808c14062A7Fb95625B0284F2F8d
 
+Flax/XFX xfx1622u30na4n83rya7nxkn5rpm78f4988e7cscl47ypct7wgnd7wus747nmk
+
+ChainGreen/CGN cgn1zsfna95ju03juzpfcgyrfg4ljj2tq4ydpsdfxaegxx5dd6k3rjlqjgu9rr
+
 
 
 ## Special Thanks
