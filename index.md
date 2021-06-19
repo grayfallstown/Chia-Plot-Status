@@ -10,6 +10,11 @@
   <img width="200" alt="Chia Plot Status Log" src="./Icon%20-%20Color%20changed.svg">
 </p>
 
+
+![Screenshot](./Screenshots/Screenshot.jpg)
+![Screenshot](./Screenshots/Screenshot-Dark.jpg)
+
+
 ## Features
 
  - Monitor Progress of running plots
