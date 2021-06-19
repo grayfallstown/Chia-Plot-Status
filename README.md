@@ -3,7 +3,7 @@
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/grayfallstown/Chia-Plot-Status?color=green&include_prereleases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/grayfallstown/Chia-Plot-Status)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=PDLLVF5XVMJPC)
-[![Liberapay](https://img.shields.io/liberapay/patrons/grayfallstown?label=Donate%20via%20Liberapay)](https://liberapay.com/grayfallstown/donate)
+
 
 <p align="center">
   <img width="200" alt="Chia Plot Status Log" src="./Logo/Icon%20-%20Color%20changed.svg">
@@ -18,6 +18,7 @@ GUI Tool for beginners and experts to Monitor and Analyse Chia Plotting log file
 
 ## Features
 
+ - Support for Chia, Flax, Spare and ChainGreen
  - Monitor Progress of running plots
  - Show estimated time to completion based on your already finished plots best matching your current plot config
  - Monitor Health of plotting processes
