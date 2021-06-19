@@ -291,7 +291,7 @@ namespace ChiaPlotStatus.ViewModels
             Settings.Load();
             PlotManager = new(Settings);
             if (PlotManager.Settings.LogDirectories.Count == 0)
-                PlotManager.AddDefaultLogFolder();
+                PlotManager.AddDefaultLogFolders();
             LoadPlotLogs();
         }
 

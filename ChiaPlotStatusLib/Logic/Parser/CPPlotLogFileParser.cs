@@ -194,6 +194,15 @@ namespace ChiaPlotStatusLib.Logic.Parser
                         matches = totaltimeRg.Matches(line);
                         CurrentPlotLog().TotalSeconds = (int)float.Parse(matches[0].Groups[1].Value, CultureInfo.InvariantCulture);
                         CurrentPlotLog().FinishDate = CurrentPlotLog().StartDate.Value.AddSeconds(CurrentPlotLog().TotalSeconds);
+                        if (CurrentPlotLog().FinishDate > DateTime.Now)
+                        {
+                            using (var file = File.AppendText(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + Path.DirectorySeparatorChar +
+                                "ChiaPlotStatus.chia-plotter-finishdate.log"))
+                            {
+                                file.WriteLine((DateTime.Now - CurrentPlotLog().FinishDate.Value).TotalSeconds + "\n");
+                            }
+                            CurrentPlotLog().FinishDate = DateTime.Now;
+                        }
                         CurrentPlotLog().EnterPhase(6);
                         // TODO:
                         //if (CurrentPlotLog().QueueSize == 1 || CurrentPlotLog().QueueSize == 0)
@@ -467,7 +476,7 @@ namespace ChiaPlotStatusLib.Logic.Parser
             newPlotLog.LogFolder = oldPlotLog.LogFolder;
             newPlotLog.PlaceInLogFile = oldPlotLog.PlaceInLogFile + 1;
             newPlotLog.QueueSize = oldPlotLog.QueueSize;
-            newPlotLog.StartDate = oldPlotLog.StartDate.Value.AddSeconds(oldPlotLog.TotalSeconds);
+            newPlotLog.StartDate = oldPlotLog.FinishDate;
             PlotLogs.Add(newPlotLog);
             return newPlotLog;
         }

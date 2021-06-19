@@ -36,12 +36,19 @@ namespace ChiaPlotStatus
             cache = new PlotParserCache(cachePath);
         }
 
-        public void AddDefaultLogFolder()
+        public void AddDefaultLogFolders()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
-                     + Path.DirectorySeparatorChar + ".chia" + Path.DirectorySeparatorChar + "mainnet" +
-                     Path.DirectorySeparatorChar + "plotter";
-            AddLogFolder(path);
+            void add(string blockchain)
+            {
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                         + Path.DirectorySeparatorChar + "." + blockchain + Path.DirectorySeparatorChar + "mainnet" +
+                         Path.DirectorySeparatorChar + "plotter";
+                AddLogFolder(path);
+            }
+            add("chia");
+            add("flax");
+            add("spare");
+            add("chaingreen");
         }
 
         public void AddLogFolder(string path)
@@ -66,10 +73,10 @@ namespace ChiaPlotStatus
             {
                 var folder = plotLogFile.LogFolder;
                 if (string.Equals(folder, path))
-                    PlotLogFiles.Remove(plotLogFile.LogFile);
+                    CPPlotLogFiles.Remove(plotLogFile.LogFile);
                 folder = folder + "\\";
                 if (string.Equals(folder, path))
-                    PlotLogFiles.Remove(plotLogFile.LogFile);
+                    CPPlotLogFiles.Remove(plotLogFile.LogFile);
             }
         }
 

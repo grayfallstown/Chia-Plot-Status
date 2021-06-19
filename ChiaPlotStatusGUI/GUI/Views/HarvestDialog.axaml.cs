@@ -50,8 +50,9 @@ namespace ChiaPlotStatus.Views
             this.DataContext = this;
             this.Language = language;
             this.Settings = settings;
-            if (this.Settings.HarvesterLogDirectories.Count == 0)
-                this.Settings.HarvesterLogDirectories.Add(HarvestParser.DefaultPath);
+            foreach (var path in HarvestParser.DefaultPaths())
+                if (Directory.Exists(path))
+                    this.Settings.HarvesterLogDirectories.Add(path);
             InitializeComponent();
             KeepGridScrollbarOnScreen();
 #if DEBUG

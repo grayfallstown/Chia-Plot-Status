@@ -16,9 +16,28 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
     // partially ported from https://github.com/MrPig91/PSChiaPlotter/blob/main/PSChiaPlotter/Public/Get-ChiaHarvesterActivity.ps1
     public class HarvestParser
     {
-        public static string DefaultPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
-                     + Path.DirectorySeparatorChar + ".chia" + Path.DirectorySeparatorChar + "mainnet" +
-                     Path.DirectorySeparatorChar + "log";
+       // public static string DefaultPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+       //              + Path.DirectorySeparatorChar + ".chia" + Path.DirectorySeparatorChar + "mainnet" +
+       ///              Path.DirectorySeparatorChar + "log";
+       ///              
+
+        public static List<string> DefaultPaths()
+        {
+            List<string> result = new();
+
+            void add(string blockchain)
+            {
+                result.Add(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                     + Path.DirectorySeparatorChar + "." + blockchain + Path.DirectorySeparatorChar + "mainnet" +
+                              Path.DirectorySeparatorChar + "log");
+            }
+            add("chia");
+            add("flax");
+            add("spare");
+            add("chaingreen");
+
+            return result;
+        }
 
         public List<Tuple<string, HarvestSummary, List<Harvest>>?> ParseLogs(List<string> paths, double maxAllowedLookupTime, int nrOfRecentEntries)
         {
@@ -29,7 +48,9 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
 
         public Tuple<string, HarvestSummary, List<Harvest>>? ParseLogs(string path, double maxAllowedLookupTime, int nrOfRecentEntries)
         {
-            var debugLogFiles = Directory.GetFiles(path, "debug.log*");
+            string[] debugLogFiles = { };
+            if (Directory.Exists(path))
+                debugLogFiles = Directory.GetFiles(path, "debug.log*");
 
             var regex = new Regex("([0-9:.\\-T]*) harvester chia.harvester.harvester: INFO\\s*([0-9]*) " +
                  "plots were eligible for farming ([a-z0-9.]*) Found ([0-9]*) proofs. " +
