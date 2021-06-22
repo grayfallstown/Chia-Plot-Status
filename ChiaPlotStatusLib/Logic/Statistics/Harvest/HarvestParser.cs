@@ -33,8 +33,8 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
             }
             add("chia");
             add("flax");
-            add("spare");
             add("chaingreen");
+            add("spare-blockchain");
 
             return result;
         }

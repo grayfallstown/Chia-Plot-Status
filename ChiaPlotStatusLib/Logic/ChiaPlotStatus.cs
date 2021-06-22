@@ -47,8 +47,8 @@ namespace ChiaPlotStatus
             }
             add("chia");
             add("flax");
-            add("spare");
             add("chaingreen");
+            add("spare-blockchain");
         }
 
         public void AddLogFolder(string path)
