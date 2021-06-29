@@ -1,5 +1,4 @@
-﻿using ChiaPlotStatus.GUI.Models;
-using ChiaPlotStatus.Logic.Models;
+﻿using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatus.Logic.Utils;
 using CommandLine;
 using System;

@@ -54,6 +54,10 @@ namespace ChiaPlotStatusLib.Logic.Parser
                         matches = bucketsRg.Matches(line);
                         CurrentPlotLog().Buckets = int.Parse(matches[0].Groups[1].Value);
                         break;
+                    case var _ when buckets2Rg.IsMatch(line):
+                        matches = buckets2Rg.Matches(line);
+                        CurrentPlotLog().Buckets = int.Parse(matches[0].Groups[1].Value);
+                        break;
                     case var _ when plotNameRg.IsMatch(line):
                         matches = plotNameRg.Matches(line);
                         CurrentPlotLog().PlotName = matches[0].Groups[1].Value;
@@ -493,6 +497,7 @@ namespace ChiaPlotStatusLib.Logic.Parser
 
         static Regex threadsRg = new Regex("Number of Threads: (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex bucketsRg = new Regex("Number of Sort Buckets: 2\\^\\d+ \\((\\d+)\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex buckets2Rg = new Regex("Number of Buckets P1:\\s*2\\^\\d+ \\((\\d+)\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex plotNameRg = new Regex("Plot Name: (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex tmp1Rg = new Regex("Working Directory:\\s*(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex tmp2Rg = new Regex("Working Directory 2:\\s*(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);

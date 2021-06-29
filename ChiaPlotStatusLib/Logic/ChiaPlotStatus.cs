@@ -1,5 +1,4 @@
-﻿using ChiaPlotStatus.GUI.Models;
-using ChiaPlotStatus.Logic.Models;
+﻿using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatus.Logic.Utils;
 using ChiaPlotStatusLib.Logic;
 using ChiaPlotStatusLib.Logic.Models;
@@ -48,6 +47,9 @@ namespace ChiaPlotStatus
             add("chia");
             add("flax");
             add("chaingreen");
+            add("seno2");
+            add("chiarose");
+            add("goji-blockchain");
             add("spare-blockchain");
         }
 
@@ -141,12 +143,11 @@ namespace ChiaPlotStatus
 
         private void SearchForNewLogFiles()
         {
-            List<string> directoriesToDrop = new();
             foreach (var directory in Settings.LogDirectories)
             {
+                // when a logfolder gets deleted that was added to Settings Chia Plot Status failed to start
                 if (Directory.Exists(directory))
                 {
-                    // when a logfolder gets deleted that was added to Settings Chia Plot Status failed to start
                     foreach (var filePath in Directory.GetFiles(directory))
                     {
                         if (!PlotLogFiles.ContainsKey(filePath) && LooksLikeAPlotLog(filePath))
@@ -158,14 +159,7 @@ namespace ChiaPlotStatus
                             CPPlotLogFiles[filePath] = new CPPlotLogFileParser(filePath, Settings.AlwaysDoFullRead == true);
                         }
                     }
-                } else
-                {
-                    directoriesToDrop.Add(directory);
                 }
-            }
-            foreach (var directory in directoriesToDrop)
-            {
-                Settings.LogDirectories.Remove(directory);
             }
         }
 

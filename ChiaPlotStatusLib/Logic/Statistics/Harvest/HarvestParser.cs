@@ -34,6 +34,9 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
             add("chia");
             add("flax");
             add("chaingreen");
+            add("seno2");
+            add("chiarose");
+            add("goji-blockchain");
             add("spare-blockchain");
 
             return result;

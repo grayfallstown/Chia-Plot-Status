@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ChiaPlotStatus.GUI.Models
+namespace ChiaPlotStatus.Logic.Models
 {
     public class Settings
     {

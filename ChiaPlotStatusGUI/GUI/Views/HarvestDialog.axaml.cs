@@ -51,8 +51,7 @@ namespace ChiaPlotStatus.Views
             this.Language = language;
             this.Settings = settings;
             foreach (var path in HarvestParser.DefaultPaths())
-                if (Directory.Exists(path))
-                    this.Settings.HarvesterLogDirectories.Add(path);
+                 this.Settings.HarvesterLogDirectories.Add(path);
             InitializeComponent();
             KeepGridScrollbarOnScreen();
 #if DEBUG
@@ -78,7 +77,7 @@ namespace ChiaPlotStatus.Views
 
         public void AddFolder(string folder)
         {
-            if (Directory.Exists(folder) && !Settings.HarvesterLogDirectories.Contains(folder))
+            if (!Settings.HarvesterLogDirectories.Contains(folder))
             {
                 Settings.HarvesterLogDirectories.Add(folder);
                 Settings.Persist();

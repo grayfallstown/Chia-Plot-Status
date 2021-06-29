@@ -514,7 +514,7 @@ namespace ChiaPlotStatus.ViewModels
 
         public void AddFolder(string folder)
         {
-            if (Directory.Exists(folder) && !PlotManager.Settings.LogDirectories.Contains(folder))
+            if (!PlotManager.Settings.LogDirectories.Contains(folder))
             {
                 PlotManager.AddLogFolder(folder);
                 PlotManager.Settings.Persist();
