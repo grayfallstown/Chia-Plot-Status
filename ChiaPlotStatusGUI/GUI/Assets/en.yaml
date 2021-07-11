@@ -28,6 +28,7 @@ Buttons:
     Save: "Save"
 
 Columns:
+    PoolPuzzleHash: "Pool Puzzle / Address"
     Tmp1Drive: "Tmp1"
     Tmp2Drive: "Tmp2"
     DestDrive: "Destination"
@@ -87,6 +88,7 @@ Columns:
 
 
 Tooltips:
+    PoolPuzzleHash: "The Pool Puzzle Hash if you plot with madmax and the pool address if you still use chiapos."
     JsonExport: "Export shown data to Json. Check <Raw Export> if you want plain unformatted numbers."
     YamlExport: "Export shown data to Yaml. Check <Raw Export> if you want plain unformatted numbers."
     CsvExport: "Export shown data to Csv. Check <Raw Export> if you want plain unformatted numbers."

@@ -51,6 +51,7 @@ namespace ChiaPlotStatus
         public string LastLogLine { get; set; } = "";
         public bool IsSelected { get; set; } = false;
         public string Note { get; set; } = "";
+        public string PoolPuzzleHash { get; set; } = "";
 
 
         public PlotLogReadable(PlotLog plotLog)
@@ -109,6 +110,7 @@ namespace ChiaPlotStatus
             this.Buckets = plotLog.Buckets.ToString();
             this.Threads = plotLog.Threads.ToString();
             this.Buffer = plotLog.Buffer + " MB";
+            this.PoolPuzzleHash = plotLog.PoolPuzzleHash;
             this.LastLogLine = plotLog.LastLogLine;
             if (plotLog.PID != 0)
                 this.PID = "" + plotLog.PID;

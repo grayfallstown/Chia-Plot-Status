@@ -127,6 +127,7 @@ namespace ChiaPlotStatus.GUI.Models
         public string AvgHeat { get; set; } = "";
         public string MaxHeat { get; set; } = "";
         public string MinHeat { get; set; } = "";
+        public string PoolPuzzleHash { get; set; } = "";
     }
 
     public class Columns
@@ -187,5 +188,6 @@ namespace ChiaPlotStatus.GUI.Models
         public string AvgHeat { get; set; } = "";
         public string MaxHeat { get; set; } = "";
         public string MinHeat { get; set; } = "";
+        public string PoolPuzzleHash { get; set; } = "";
     }
 }

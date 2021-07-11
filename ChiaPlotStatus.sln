@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusCli", "ChiaPl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusGUI", "ChiaPlotStatusGUI\ChiaPlotStatusGUI.csproj", "{38F6EA6C-7E72-439B-B548-AFB5591DCEE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChiaPlotStatusLib", "ChiaPlotStatusLib\ChiaPlotStatusLib.csproj", "{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusLib", "ChiaPlotStatusLib\ChiaPlotStatusLib.csproj", "{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusGUI2", "ChiaPlotStatusGUI2\ChiaPlotStatusGUI2.csproj", "{91BD97DE-BA91-4BED-97C6-1AC8B306FFA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91BD97DE-BA91-4BED-97C6-1AC8B306FFA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91BD97DE-BA91-4BED-97C6-1AC8B306FFA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91BD97DE-BA91-4BED-97C6-1AC8B306FFA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91BD97DE-BA91-4BED-97C6-1AC8B306FFA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

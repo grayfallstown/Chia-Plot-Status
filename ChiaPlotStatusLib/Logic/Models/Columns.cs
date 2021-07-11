@@ -81,6 +81,7 @@ namespace ChiaPlotStatusLib.Logic.Models
             columns.Order.Add("ApproximateWorkingSpace");
             columns.Order.Add("FinalFileSize");
             columns.Order.Add("LastLogLine");
+            columns.Order.Add("PoolPuzzleHash");
 
             return columns;
         }

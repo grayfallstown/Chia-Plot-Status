@@ -60,6 +60,7 @@ namespace ChiaPlotStatus
         public bool CaughtPlottingError { get; set; } = false;
         public string LastLogLine { get; set; } = "";
         public string Note { get; set; } = "Notice / Tags";
+        public string PoolPuzzleHash { get; set; } = "";
 
         public virtual void UpdateProgress()
         {

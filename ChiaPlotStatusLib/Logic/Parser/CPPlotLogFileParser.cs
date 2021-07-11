@@ -43,6 +43,10 @@ namespace ChiaPlotStatusLib.Logic.Parser
                 MatchCollection matches;
                 switch (line)
                 {
+                    case var _ when poolPuzzleHashRg.IsMatch(line):
+                        matches = poolPuzzleHashRg.Matches(line);
+                        CurrentPlotLog().PoolPuzzleHash = matches[0].Groups[1].Value;
+                        break;
                     case var _ when threadsRg.IsMatch(line):
                         matches = threadsRg.Matches(line);
                         if (CurrentPlotLog().Threads != 0)
@@ -495,14 +499,15 @@ namespace ChiaPlotStatusLib.Logic.Parser
             closed = true;
         }
 
+        static Regex poolPuzzleHashRg = new Regex("Pool Puzzle Hash:\\s+(.+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex threadsRg = new Regex("Number of Threads: (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex bucketsRg = new Regex("Number of Sort Buckets: 2\\^\\d+ \\((\\d+)\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex buckets2Rg = new Regex("Number of Buckets P1:\\s*2\\^\\d+ \\((\\d+)\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex plotNameRg = new Regex("Plot Name: (.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex tmp1Rg = new Regex("Working Directory:\\s*(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex tmp2Rg = new Regex("Working Directory 2:\\s*(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex destRg = new Regex("Final Directory:\\s*(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        static Regex pidRg = new Regex("Process ID:\\s*(\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex tmp1Rg = new Regex("Working Directory:\\s+(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex tmp2Rg = new Regex("Working Directory 2:\\s+(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex destRg = new Regex("Final Directory:\\s+(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        static Regex pidRg = new Regex("Process ID:\\s+(\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex p1table1Rg = new Regex("\\[P1\\] Table 1 took ([0-9.]+) sec", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex p1table2Rg = new Regex("\\[P1\\] Table 2 took ([0-9.]+) sec, found (\\d+) matches", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex p1table3Rg = new Regex("\\[P1\\] Table 3 took ([0-9.]+) sec, found (\\d+) matches", RegexOptions.Compiled | RegexOptions.IgnoreCase);

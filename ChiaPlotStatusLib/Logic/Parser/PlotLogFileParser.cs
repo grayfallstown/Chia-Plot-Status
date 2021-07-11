@@ -43,6 +43,9 @@ namespace ChiaPlotStatus
                     case var _ when plotSizeRg.IsMatch(line):
                         CurrentPlotLog().PlotSize = int.Parse(plotSizeRg.Matches(line)[0].Groups[1].Value);
                         break;
+                    case var _ when poolPuzzleHashRg.IsMatch(line):
+                        CurrentPlotLog().PoolPuzzleHash = poolPuzzleHashRg.Matches(line)[0].Groups[1].Value;
+                        break;
                     case var _ when bufferSizeRg.IsMatch(line):
                         CurrentPlotLog().Buffer = int.Parse(bufferSizeRg.Matches(line)[0].Groups[1].Value);
                         break;
@@ -226,8 +229,8 @@ namespace ChiaPlotStatus
             return newPlotLog;
         }
 
-
         // interesting data from logfiles as regex
+        public static Regex poolPuzzleHashRg = new Regex("pool contract address:\\s+([a-z0-9]+)\\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex plotSizeRg = new Regex("^Plot size is: (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex bufferSizeRg = new Regex("^Buffer size is: (\\d+)MiB", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static Regex bucketsRg = new Regex("^Using (\\d+) buckets", RegexOptions.Compiled | RegexOptions.IgnoreCase);
