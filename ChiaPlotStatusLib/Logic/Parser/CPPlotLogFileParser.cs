@@ -43,6 +43,10 @@ namespace ChiaPlotStatusLib.Logic.Parser
                 MatchCollection matches;
                 switch (line)
                 {
+                    case var _ when copyTimeRG.IsMatch(line):
+                        matches = copyTimeRG.Matches(line);
+                        CurrentPlotLog().CopyTimeSeconds = int.Parse(matches[0].Groups[1].Value);
+                        break;
                     case var _ when poolPuzzleHashRg.IsMatch(line):
                         matches = poolPuzzleHashRg.Matches(line);
                         CurrentPlotLog().PoolPuzzleHash = matches[0].Groups[1].Value;
@@ -499,6 +503,7 @@ namespace ChiaPlotStatusLib.Logic.Parser
             closed = true;
         }
 
+        static Regex copyTimeRG = new Regex("Copy to .* finished, took (\\d+).?\\d* sec,", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex poolPuzzleHashRg = new Regex("Pool Puzzle Hash:\\s+(.+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex threadsRg = new Regex("Number of Threads: (\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         static Regex bucketsRg = new Regex("Number of Sort Buckets: 2\\^\\d+ \\((\\d+)\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
