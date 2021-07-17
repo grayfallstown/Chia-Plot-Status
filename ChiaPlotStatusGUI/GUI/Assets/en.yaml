@@ -28,6 +28,7 @@ Buttons:
     Save: "Save"
 
 Columns:
+    RuntimeMinutes: "Time Frame Minutes"
     PoolPuzzleHash: "Pool Puzzle / Address"
     Tmp1Drive: "Tmp1"
     Tmp2Drive: "Tmp2"
@@ -88,6 +89,7 @@ Columns:
 
 
 Tooltips:
+    RuntimeMinutes: "This statistic uses the last n minutes from the log for its calculations"
     PoolPuzzleHash: "The Pool Puzzle Hash if you plot with madmax and the pool address if you still use chiapos."
     JsonExport: "Export shown data to Json. Check <Raw Export> if you want plain unformatted numbers."
     YamlExport: "Export shown data to Yaml. Check <Raw Export> if you want plain unformatted numbers."

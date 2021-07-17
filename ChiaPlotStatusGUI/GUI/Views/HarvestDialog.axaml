@@ -128,6 +128,23 @@
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
+            <DataGridTemplateColumn SortMemberPath="RuntimeMinutes">
+              <DataGridTemplateColumn.Header>
+                <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.RuntimeMinutes}" HorizontalAlignment="Left" Click="DataGridHeaderClick"></Button>
+              </DataGridTemplateColumn.Header>
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <StackPanel>
+                    <ToolTip.Tip>
+                      <StackPanel>
+                        <TextBlock Text="{Binding ElementName=WindowContext, Path=DataContext.Language.Tooltips.RuntimeMinutes}"></TextBlock>
+                      </StackPanel>
+                    </ToolTip.Tip>
+                    <TextBlock Text="{Binding RuntimeMinutes}" HorizontalAlignment="Left" ></TextBlock>
+                  </StackPanel>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
             <DataGridTemplateColumn SortMemberPath="AvgLookupTime">
               <DataGridTemplateColumn.Header>
                 <Button Content="{Binding ElementName=WindowContext, Path=DataContext.Language.Columns.AvgLookupTime}" HorizontalAlignment="Left" Click="DataGridHeaderClick"></Button>

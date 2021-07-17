@@ -123,6 +123,7 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
                 AvgHeat = harvests.Average(a => a.Heat),
                 MaxHeat = harvests.Aggregate((a, b) => a.LookupTime > b.LookupTime ? a : b).LookupTime,
                 MinHeat = harvests.Aggregate((a, b) => a.LookupTime < b.LookupTime ? a : b).LookupTime,
+                RuntimeMinutes = runtimeMinutes,
             };
 
             return new(path, summary, harvests);

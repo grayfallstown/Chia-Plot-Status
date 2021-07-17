@@ -20,5 +20,6 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
         public double AvgHeat { get; set; }
         public double MaxHeat { get; set; }
         public double MinHeat { get; set; }
+        public double RuntimeMinutes { get; set; }
     }
 }

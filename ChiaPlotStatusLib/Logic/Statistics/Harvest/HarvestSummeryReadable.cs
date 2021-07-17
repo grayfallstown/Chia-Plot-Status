@@ -21,6 +21,7 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
         public string AvgHeat { get; set; }
         public string MaxHeat { get; set; }
         public string MinHeat { get; set; }
+        public string RuntimeMinutes { get; set; }
 
         public HarvestSummeryReadable(HarvestSummary summery)
         {
@@ -36,6 +37,7 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
             this.AvgHeat = Formatter.formatDouble(summery.AvgHeat, 5, null);
             this.MaxHeat = Formatter.formatDouble(summery.MaxHeat, 5, null);
             this.MinHeat = Formatter.formatDouble(summery.MinHeat, 5, null);
+            this.RuntimeMinutes = Formatter.formatDouble(summery.RuntimeMinutes, 2, null);
         }
     }
 }
