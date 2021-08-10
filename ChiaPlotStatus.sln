@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusGUI", "ChiaPl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusLib", "ChiaPlotStatusLib\ChiaPlotStatusLib.csproj", "{1CD172CB-184B-4C41-BB7A-4F68B61E80DE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChiaPlotStatusGUI2", "ChiaPlotStatusGUI2\ChiaPlotStatusGUI2.csproj", "{91BD97DE-BA91-4BED-97C6-1AC8B306FFA1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
