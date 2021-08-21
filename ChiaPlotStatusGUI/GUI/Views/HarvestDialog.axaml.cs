@@ -9,6 +9,7 @@ using Avalonia.Threading;
 using ChiaPlotStatus.GUI.Models;
 using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatusGUI.GUI.Utils;
+using ChiaPlotStatusLib.Logic.Models.Lang;
 using ChiaPlotStatusLib.Logic.Models;
 using ChiaPlotStatusLib.Logic.Statistics.Harvest;
 using ReactiveUI;

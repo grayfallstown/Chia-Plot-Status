@@ -1,0 +1,37 @@
+﻿@page "/HarvestStats"
+
+@using ChiaPlotStatusGUI2.Data
+@using ChiaPlotStatus
+@using ChiaPlotStatus.Logic.Models
+@inject ChiaPlotStatusService ChiaPlotStatusService
+
+<div class="table-wrapper">
+    <div class="table-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Asd</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var summary in ChiaPlotStatusService.Summaries)
+                {
+                    <tr>
+                        <td nowrap="nowrap">@summary.AvgEligiblePlots</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        ChiaPlotStatusService.OnUpdate += (_, _) =>
+        {
+            InvokeAsync(() => this.StateHasChanged());
+        };
+    }
+}

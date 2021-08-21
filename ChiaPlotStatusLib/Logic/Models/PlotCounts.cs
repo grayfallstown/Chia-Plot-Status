@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChiaPlotStatusGUI.GUI.Models
+namespace ChiaPlotStatus.Logic.Models
 {
     public class PlotCounts
     {

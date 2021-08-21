@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
@@ -44,8 +45,10 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
 
         public List<Tuple<string, HarvestSummary, List<Harvest>>?> ParseLogs(List<string> paths, double maxAllowedLookupTime, int nrOfRecentEntries)
         {
+            var start = DateTime.Now;
             ConcurrentBag<Tuple<string, HarvestSummary, List<Harvest>>?> results = new();
             Parallel.ForEach(paths, (path) => results.Add(ParseLogs(path, maxAllowedLookupTime, nrOfRecentEntries)));
+            Console.WriteLine("parsing harvest stats took " + (DateTime.Now - start).TotalSeconds + "s");
             return results.ToList();
         }
 
@@ -53,7 +56,7 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
         {
             string[] debugLogFiles = { };
             if (Directory.Exists(path))
-                debugLogFiles = Directory.GetFiles(path, "debug.log*");
+                debugLogFiles = Directory.GetFiles(path, "debug.log");
 
             var regex = new Regex("([0-9:.\\-T]*) harvester .*.harvester.harvester: INFO\\s*([0-9]*) " +
                  "plots were eligible for farming ([a-z0-9.]*) Found ([0-9]*) proofs. " +
@@ -68,6 +71,14 @@ namespace ChiaPlotStatusLib.Logic.Statistics.Harvest
                     // react if they run or get restarted while we keep a shared lock on those files
                     new TailLineEmitter(file, true, (line) =>
                     {
+                        if (!line.Contains("plots were eligible for farming"))
+                            return;
+                        var dateStr = line.Split(" ")[0];
+                        var date = DateTime.Parse(dateStr);
+                        // skip old data.
+                        if ((date < DateTime.Now.AddDays(-1)))
+                            return;
+
                         if (regex.IsMatch(line))
                         {
                             var matches = regex.Matches(line)[0];

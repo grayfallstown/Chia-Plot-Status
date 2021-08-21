@@ -9,7 +9,7 @@ using ChiaPlotStatus.GUI.Models;
 using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatus.Logic.Utils;
 using ChiaPlotStatusGUI.GUI.Utils;
-using ChiaPlotStatusGUI.GUI.ViewModels;
+using ChiaPlotStatusLib.Logic.Models.Lang;
 using ChiaPlotStatusLib.Logic.Models;
 using ReactiveUI;
 using System;
@@ -93,7 +93,7 @@ namespace ChiaPlotStatus.Views
             Button header = ((Button)sender);
             string headerText = (string)header.Content;
             var oldSortProperty = SortProperty;
-            foreach (var property in typeof(GUI.Models.Columns).GetProperties())
+            foreach (var property in typeof(ChiaPlotStatusLib.Logic.Models.Lang.Columns).GetProperties())
             {
                 string translation = (string)property.GetValue(Language.Columns);
                 if (string.Equals(headerText, translation))

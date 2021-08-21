@@ -1,0 +1,162 @@
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 100vh;
+    font-size: 85%;
+}
+
+a, .btn-link {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.inline {
+    display: inline;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.form-check.form-switch {
+    padding-left: 2.5em;
+}
+
+.form-switch .form-check-input {
+    position: relative;
+    bottom: 2px;
+}
+
+.table-wrapper {
+    width: 98vw;
+}
+
+body table.table td {
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+th.clickable, td.clickable {
+    cursor: pointer;
+}
+
+.table-scroll {
+    overflow-x: scroll;
+}
+
+.nav-item:first-of-type[b-orfan7426t] {
+    padding-top: inherit;
+}
+
+.accordion-button {
+    padding: 2px;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.glass {
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(3px);
+    border-radius: 9px;
+    padding: 10px;
+}
+
+.icon-only-button {
+    zoom: 120%;
+    border: none;
+    display: inline-block;
+    width: 10px;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+#main-menu i.bi {
+    margin-right: 5px;
+}
+
+body.dark.animated, body.dark .accordion-body, body.dark .accordion-button, body.dark input[type=text] {
+    color: #ddd;
+    background: linear-gradient(-45deg, rgba(0,0,0,1), rgba(34,34,34,1), rgba(17,17,17,1), rgba(51,51,51,1));
+    background-size: 200% 200%;
+    animation: page-gradient 30s ease infinite;
+}
+
+body.dark.animated .background-overlay {
+    background: linear-gradient(45deg, rgba(0,0,0,.2), rgba(66,66,66,.2), rgba(0,0,0,.2), rgba(44,44,44,.2), rgba(0,0,0,.2));
+    background-size: 400% 400%;
+    animation: page-gradient 25s ease infinite;
+    height: 100vh;
+}
+
+
+body.light.animated, body.light .accordion-body, body.light .accordion-button, body.light input[type=text] {
+    color: #333;
+    background: linear-gradient(-45deg, rgba(255,255,255,1), rgba(221,221,221,1), rgba(238,238,238,1), rgba(204,204,204,1));
+    background-size: 200% 200%;
+    animation: page-gradient 30s ease infinite;
+}
+
+body.light.animated .background-overlay {
+    background: linear-gradient(-45deg, rgba(255,255,255,.3), rgba(221,221,221,.3), rgba(238,238,238,.3), rgba(204,204,204,.3));
+    background-size: 400% 400%;
+    animation: page-gradient 25s ease infinite;
+    height: 100vh;
+}
+
+
+
+@keyframes page-gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}

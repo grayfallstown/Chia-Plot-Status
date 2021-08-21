@@ -10,6 +10,7 @@ using Avalonia.Platform;
 using Avalonia.Threading;
 using ChiaPlotStatus.GUI.Models;
 using ChiaPlotStatus.Logic.Models;
+using ChiaPlotStatusLib.Logic.Models.Lang;
 using ChiaPlotStatusGUI.GUI.Utils;
 using Octokit;
 using ReactiveUI;
@@ -37,14 +38,14 @@ namespace ChiaPlotStatus.Views
 
     public class UpdateDialog : Window
     {
-        public GUI.Models.Language Language { get; set; }
+        public ChiaPlotStatusLib.Logic.Models.Lang.Language Language { get; set; }
         public Release Latest { get; set; }
         public string Current { get; set; }
         public string current { get; set; }
 
         public UpdateDialog() { }
 
-        public UpdateDialog(GUI.Models.Language language, string theme)
+        public UpdateDialog(ChiaPlotStatusLib.Logic.Models.Lang.Language language, string theme)
         {
             this.DataContext = this;
             this.Language = language;

@@ -1,0 +1,155 @@
+﻿@page "/Statistics"
+
+@using ChiaPlotStatusGUI2.Data
+@using ChiaPlotStatus
+@using ChiaPlotStatus.Logic.Models
+@using ChiaPlotStatus.Logic
+@using ChiaPlotStatus.Logic.Utils
+@using ChiaPlotStatusLib.Logic.Models.Lang
+@using ChiaPlotStatus.Logic.Models
+@using System.Collections.Generic
+@using System.Collections.ObjectModel
+@using ChartJs.Blazor
+@using ChartJs.Blazor.Common
+@using ChartJs.Blazor.Common.Axes
+@using ChartJs.Blazor.Common.Axes.Ticks
+@using ChartJs.Blazor.Common.Enums
+@using ChartJs.Blazor.Common.Handlers
+@using ChartJs.Blazor.Common.Time
+@using ChartJs.Blazor.Util
+@using ChartJs.Blazor.Interop
+@using System.Linq
+@using System.Drawing
+@using ElectronNET.API.Entities
+@using ElectronNET.API
+@using ElectronNET
+@inject ChiaPlotStatusService ChiaPlotStatusService
+
+
+<Chart Config="DayChartsConfig" @ref="DayChart"></Chart>
+
+@code {
+    public Language Language { get; set; }
+    public List<(PlottingStatisticsFull, PlottingStatisticsFullReadable)> StatsTuples { get; set; }
+    public ObservableCollection<PlottingStatisticsFullReadable> Stats { get; set; } = new();
+    public List<PlottingStatisticsDayReadable> DailyStats { get; set; }
+    public ChiaPlotStatus PlotManager { get; set; }
+    public string SortProperty { get; set; } = "Tmp1Drive";
+    public bool SortAsc { get; set; } = true;
+    public LineConfig DayChartsConfig { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(LoadData);
+    }
+
+    private void LoadData()
+    {
+        this.StatsTuples = ChiaPlotStatusService.PlotManager.Statistics.AllStatistics();
+        Sorter.Sort(SortProperty, SortAsc, StatsTuples);
+        Stats.Clear();
+        foreach (var tuple in this.StatsTuples)
+            Stats.Add(tuple.Item2);
+        DayChartsConfig = new LineConfig
+        {
+            Options = new LineOptions
+            {
+                Responsive = true,
+                Title = new OptionsTitle
+                {
+                    Display = true,
+                    Text = "ChartJs.Blazor Pie Chart"
+                }
+            }
+        };
+
+        /*
+
+public string Day { get; set; }
+public int Phase1 { get; set; } = 0;
+public int Phase2 { get; set; } = 0;
+public int Phase3 { get; set; } = 0;
+public int Phase4 { get; set; } = 0;
+public int Phase5 { get; set; } = 0;
+public int Finished { get; set; } = 0;
+public int Died { get; set; } = 0;
+        */
+        IDataset<int> phase1 = new LineDataset<int>()
+        {
+            Label = "Phase 1",
+            BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Pink),
+            BorderColor = ColorUtil.FromDrawingColor(ChartColors.Pink),
+            Fill = FillingMode.Disabled
+        };
+        IDataset<int> phase2 = new LineDataset<int>()
+        {
+            Label = "Phase 2",
+            BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Orange),
+            BorderColor = ColorUtil.FromDrawingColor(ChartColors.Orange),
+            Fill = FillingMode.Disabled
+        };
+        IDataset<int> phase3 = new LineDataset<int>()
+        {
+            Label = "Phase 3",
+            BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Purple),
+            BorderColor = ColorUtil.FromDrawingColor(ChartColors.Purple),
+            Fill = FillingMode.Disabled
+        };
+        IDataset<int> phase4 = new LineDataset<int>()
+        {
+            Label = "Phase 4",
+            BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Yellow),
+            BorderColor = ColorUtil.FromDrawingColor(ChartColors.Yellow),
+            Fill = FillingMode.Disabled
+        };
+        IDataset<int> phase5 = new LineDataset<int>()
+        {
+            Label = "Phase 5",
+            BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Gray),
+            BorderColor = ColorUtil.FromDrawingColor(ChartColors.Gray),
+            Fill = FillingMode.Disabled
+        };
+        IDataset<int> finished = new LineDataset<int>()
+        {
+            Label = "Finished",
+            BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Green),
+            BorderColor = ColorUtil.FromDrawingColor(ChartColors.Green),
+            Fill = FillingMode.Disabled
+        };
+        IDataset<int> died = new LineDataset<int>()
+        {
+            Label = "Died",
+            BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Red),
+            BorderColor = ColorUtil.FromDrawingColor(ChartColors.Red),
+            Fill = FillingMode.Disabled
+        };
+
+        //DayChartsConfig.Data.Labels.AddRange(Months.Take(InitalCount));
+        DayChartsConfig.Data.Datasets.Add(finished);
+        DayChartsConfig.Data.Datasets.Add(died);
+        DayChartsConfig.Data.Datasets.Add(phase1);
+        DayChartsConfig.Data.Datasets.Add(phase2);
+        DayChartsConfig.Data.Datasets.Add(phase3);
+        DayChartsConfig.Data.Datasets.Add(phase4);
+        DayChartsConfig.Data.Datasets.Add(phase5);
+    }
+
+    public static class ChartColors
+    {
+        private static readonly Lazy<IReadOnlyList<Color>> _all = new Lazy<IReadOnlyList<Color>>(() => new Color[7]
+        {
+                Red, Orange, Yellow, Green, Blue, Purple, Grey
+                });
+
+        public static IReadOnlyList<Color> All => _all.Value;
+
+        public static readonly Color Red = Color.FromArgb(255, 99, 132);
+        public static readonly Color Orange = Color.FromArgb(255, 159, 64);
+        public static readonly Color Yellow = Color.FromArgb(255, 205, 86);
+        public static readonly Color Green = Color.FromArgb(75, 192, 192);
+        public static readonly Color Blue = Color.FromArgb(54, 162, 235);
+        public static readonly Color Purple = Color.FromArgb(153, 102, 255);
+        public static readonly Color Grey = Color.FromArgb(201, 203, 207);
+    }
+
+}

@@ -1,0 +1,80 @@
+﻿@page "/LogFolders"
+
+@using ChiaPlotStatusGUI2.Data
+@using ChiaPlotStatus
+@using ChiaPlotStatus.Logic.Models
+@using ElectronNET.API.Entities;
+@using ElectronNET.API
+@using ElectronNET
+@inject ChiaPlotStatusService ChiaPlotStatusService
+
+<div class="table-wrapper">
+    <div class="table-scroll">
+        <table class="table">
+<thead>
+    <tr>
+        <th nowrap="nowrap" style="width: 20px">
+            <button class="icon-only-button text-success" @onclick="() => AddFolder()">
+                <i class="bi bi-plus-circle-fill"></i>
+            </button>
+        </th>
+        <th>Folder</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var folder in ChiaPlotStatusService.PlotManager.Settings.LogDirectories)
+    {
+        <tr>
+            <td nowrap="nowrap">
+                 <button class="icon-only-button" @onclick="() => RemoveFolder(folder)">
+                    <i class="bi bi-x-circle-fill text-danger"></i>
+                </button>
+            </td>
+            <td nowrap="nowrap">@folder</td>
+        </tr>
+    }
+</tbody>
+</table>
+</div>
+</div>
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+    }
+
+
+
+    public async void AddFolder()
+    {
+
+        var mainWindow = Electron.WindowManager.BrowserWindows.First();
+        var options = new OpenDialogOptions
+        {
+            Properties = new OpenDialogProperty[] {
+                    OpenDialogProperty.openDirectory
+                }
+        };
+
+        string[] folders = await Electron.Dialog.ShowOpenDialogAsync(mainWindow, options);
+        foreach (var folder in folders) AddFolder(folder);
+    }
+
+    public void AddFolder(string folder)
+    {
+        if (!ChiaPlotStatusService.PlotManager.Settings.LogDirectories.Contains(folder))
+        {
+            ChiaPlotStatusService.PlotManager.AddLogFolder(folder);
+            ChiaPlotStatusService.PlotManager.Settings.Persist();
+            ChiaPlotStatusService.LoadPlotData();
+        }
+    }
+
+    public void RemoveFolder(string folder)
+    {
+        ChiaPlotStatusService.PlotManager.RemoveLogFolder(folder);
+        ChiaPlotStatusService.PlotManager.Settings.Persist();
+        ChiaPlotStatusService.LoadPlotData();
+    }
+
+}

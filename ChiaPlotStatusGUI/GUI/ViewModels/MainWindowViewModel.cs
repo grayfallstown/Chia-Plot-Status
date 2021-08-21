@@ -6,6 +6,7 @@ using ChiaPlotStatus;
 using ChiaPlotStatus.Logic.Utils;
 using ChiaPlotStatus.GUI.Models;
 using ChiaPlotStatus.Views;
+using ChiaPlotStatusLib.Logic.Models.Lang;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;

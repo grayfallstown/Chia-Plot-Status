@@ -1,5 +1,4 @@
 ﻿using ChiaPlotStatus.Logic.Models;
-using ChiaPlotStatusGUI.GUI.ViewModels;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

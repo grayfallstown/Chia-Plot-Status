@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChiaPlotStatusGUI.GUI.ViewModels
+namespace ChiaPlotStatus
 {
     public class PlottingStatisticsFull
     {

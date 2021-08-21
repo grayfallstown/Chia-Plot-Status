@@ -1,0 +1,286 @@
+﻿Name: English
+
+
+Fields:
+    Search: "Search"
+    Light: "Light"
+    Dark: "Dark"
+    LogFolder: "Log Folders"
+    RawExport: "Raw Export"
+    HideHealthy: "Hide healthy"
+    HideFinished: "Hide finished"
+    HidePossiblyDead: "Hide possibly Dead"
+    HideConfirmedDead: "Hide confirmed Dead"
+
+Buttons:
+    Add: "Add"
+    Remove: "Remove"
+    Json: "Json"
+    Yaml: "Yaml"
+    CSV: "CSV"
+    MarkAsDead: "Mark as dead"
+    SelectAllConcerningCommand: "Select concerning"
+    SelectAllPossiblyDeadCommand: "Selected possibly dead"
+    MarkSelectionAsDead: "Mark selected logs as dead"
+    UnmarkAsDead: "Unmark as dead"
+    Abort: "Cancel"
+    Copy: "Copy"
+    Save: "Save"
+
+Columns:
+    Tmp1Drive: "Tmp1"
+    Tmp2Drive: "Tmp2"
+    DestDrive: "Destination"
+    Errors: "Errors"
+    PID: "PID"
+    Progress: "Progress"
+    TimeRemaining: "Remaining 🕐"
+    RunTimeSeconds: "Runtime 🕐"
+    ETA: "ETA"
+    CurrentTable: "Cur. Table"
+    CurrentBucket: "Cur. Bucket"
+    CurrentPhase: "Cur. Phase"
+    Phase1Cpu: "P1 CPU"
+    Phase2Cpu: "P2 CPU"
+    Phase3Cpu: "P3 CPU"
+    Phase4Cpu: "P4 CPU"
+    Phase1Seconds: "Phase 1 🕐"
+    Phase2Seconds: "Phase 2 🕐"
+    Phase3Seconds: "Phase 3 🕐"
+    Phase4Seconds: "Phase 4 🕐"
+    CopyTimeSeconds: "Copy 🕐"
+    TotalSeconds: "Total 🕐"
+    PlotSize: "K-Size"
+    Threads: "Threads"
+    Buffer: "Buffer"
+    Buckets: "Buckets"
+    StartDate: "Started"
+    FinishDate: "Finished"
+    PlotName: "Plot Name"
+    LogFolder: "Log Folder"
+    LogFile: "Log File"
+    ApproximateWorkingSpace: "Workingspace"
+    FinalFileSize: "Final Size"
+    Health: "Health"
+    LastLogLine: "Last Log Line"
+    PlaceInLogFile: "Nr"
+    Phase1AvgTimeNeed: "Phase 1 avg 🕐"
+    Phase2AvgTimeNeed: "Phase 2 avg 🕐"
+    Phase3AvgTimeNeed: "Phase 3 avg 🕐"
+    Phase4AvgTimeNeed: "Phase 4 avg 🕐"
+    CopyTimeAvgTimeNeed: "Copy avg 🕐"
+    TotalAvgTimeNeed: "Total avg 🕐"
+    Phase1Completed: "Sample Size"
+    Note: "Note/Tags"
+    TotalEligiblePlots: "Eligible Plots"
+    FoundProofs: "Found Proofs"
+    BestLookupTime: "Best Lookup Time"
+    WorstLookupTime: "Worst Lookup Time"
+    AvgLookupTime: "Avg Lookup Time"
+    FilterRatio: "Filter Ratio"
+    TotalPlots: "Total Plots"
+    ChallengesPerMinute: "Challenges per Minute"
+    AvgHeat: "Avg Heat"
+    MaxHeat: "Max Heat"
+    MinHeat: "Min Heat"
+    AvgEligiblePlots: "Avg eligible Plots"
+
+
+Tooltips:
+    JsonExport: "Export shown data to Json. Check <Raw Export> if you want plain unformatted numbers."
+    YamlExport: "Export shown data to Yaml. Check <Raw Export> if you want plain unformatted numbers."
+    CsvExport: "Export shown data to Csv. Check <Raw Export> if you want plain unformatted numbers."
+    RawExport: "Export shown data as plain unformatted numbers."
+    Tmp1Drive: null
+    Tmp2Drive: null
+    DestDrive: "Directory where the plot file was/will be written to."
+    Errors: >
+        Errors that occured in the plotting process while reading from or writing data to disk.
+        The chia plotter will retry in case of such an error after a short Seconds. One is not that bad.
+        If you use external harddrives or network attached Storage this usally means the connection
+        dropped. Reattach the device and chia will continue. If the error count keeps rising you need to troubleshoot.
+    PID: >
+        Process ID if the running plotter process. You can use this nr to find and kill the process if it misbehaves.
+    Progress: >
+        Shows the progression defined by the number of steps done vs the number of steps left to completion.
+        The number of steps tells you nothing about how long the process will take to completion.
+    TimeRemaining: >
+        An estimate on how long it will take for the plot to complete. It is based on the plots progress and all
+        the data extracted from your finished plots. It will try to use the data of those plots that match the
+        configuration of that plot most closely to make a better prediction if you mix hard disks, ssd, internal
+        and external drives and even network attached storage.
+    RunTimeSeconds: >
+        "How long the process is running already"
+    ETA: >
+        An estimate on when the plotting process completes formatted MM/dd HH:mm. It is based on the plots
+        progress and all the data extracted from your finished plots. It will try to use the data of those plots
+        that match the configuration of that plot most closely to make a better prediction if you mix hard disks,
+        ssd, internal and external drives and even network attached storage.
+    CurrentTable: >
+        The table number currently worked on. On phase 1 and 3 it will start with table 1 and work its way up to 7. In
+        Phase 2 it will start with table 7 and work its way back to table 1. An arrow shows in which way it currently
+        progresses.
+    CurrentBucket: >
+        The Chia plotter will work through each table in the phases 1 and 3 and will process each bucket in each table.
+        This shows which bucket in the current table is currently worked on.
+    CurrentPhase: >
+        Shows in which of the four phases the plotting process is. It does not go back to a previous phase.
+    Phase1Cpu: >
+        "CPU Usage during phase 1."
+    Phase2Cpu: >
+        "CPU Usage during phase 2."
+    Phase3Cpu: >
+        "CPU Usage during phase 3."
+    Phase4Cpu: >
+        "CPU Usage during phase 4."
+    Phase1Seconds: >
+        The time this plot process took to complete phase 1.
+        This is the only phase with multithreading enabled and the only one you can optimize with the threads option.
+    Phase2Seconds: >
+        The time this plot process took to complete phase 2
+    Phase3Seconds: >
+        The time this plot process took to complete phase 3
+    Phase4Seconds: >
+        The time this plot process took to complete phase 4
+    CopyTimeSeconds: >
+        Unofficial phase 5.
+        The time this plot process took to copy the final file to the destination.
+        It gets copied from temp folder 2 to destination unless temp folder 2 and the destination are identical.
+        If you are using a remote destination you can optimize this process by using a local ssd or even just a
+        hdd as destination and then moving the plot to its remote destination by other means.
+        This way your plotting process is completed before the plot slowly gets moved to its final destination
+        and the plotter can already begin the next plot.
+        Google "windows task scheduler" or "linux chron jobs" to see how to set up automatic jobs that move the
+        files for you.
+    TotalSeconds: >
+        The time this plot process took to fully complete
+    PlotSize: >
+        The k-size of the plot. Usally 32, which produces a 100GB plot file. Apparently there is very little
+        reason to use a larger k-size for now.
+    Threads: >
+        The number of threads used to complete phase 1. As of now the other phases are not multithreaded
+        and will only use one cpu core, tweaking this only affects phase 1
+    Buffer: >
+        This buffer size the plotter uses. It is used to sort the data within the buckets in memory.
+        It will resort to a different sort algorithm which is slower on most tables. Too small buffer
+        sizes will slow down the plotter, too large ones will bring no additional benefit, but lower
+        the number on plotting processes you can run in parallel with the ram installed in your
+        system.
+    Buckets: >
+        The number of parts a table will be split into. Each bucket is sorted individually. Each bucket
+        gets written in its own file.
+    StartDate: >
+        When the plotting process was started.
+    FinishDate: >
+        When the plotting process finished.
+    PlotName: >
+        Name of the final plot file.
+    LogFolder: >
+        The folder in which this log file in stored. If you have multiple log folder for multiple rigs,
+        this tells you which rig it is from.
+    LogFile: >
+        The name of the logfile.
+    ApproximateWorkingSpace: >
+        An estimate on how much temporary space was used during the creation of the plot.
+    FinalFileSize: >
+        The size of the finished plot file. Varies little over the same k-size.
+    Health: >
+        Read catefully! Don't be rushed into making a decision here!
+        This feature requires existing logs of finished plots from the same log directory
+        to run correctly or it uses default warning thresholds that are pretty much diced at the moment!
+        If your system does not update "last modfied at" on files (some deactivate it on SSDs) ignore
+        the warnings with time in it. Chia Plot Status doesn't know any better.
+
+
+        An Estimate on the processes health. In some cases it is not clear if the process is still running,
+        this can happen especially in phase 4.
+
+
+        "⚠ Temp Errors": Usually not so serious, but you need to take action.
+        It means the last line in the logfile is a read or write error (look at Errors column).
+        You might be out of disk space for temp1, temp2 or the destination, so free up some space.
+        Another reason could be your external hard disk / network attached storage is detached or the
+        connection is flaky.
+        The plotter retries every 5 minutes, so it continues once you fixed the error.
+
+
+        "⚠ Slow 20m/15m": Usually not serious, just have an eye on it.
+        It means last update to the logfile was 20 minutes ago, but Chia Plot Status expected a new log line
+        within 15 minutes.
+        Process is likely still running.
+        Maybe you gave your temp drives more IO than they can handle this time?
+        If you only have finished plots that ran on SSDs and this one is on a HDD now, it is expected to be
+        slower and throw that warning.
+        Chia Plot Status will learn that this drive is slower once this plot is done.
+
+
+        "⚠ Dead? 40m/10m": This is scary. It means last update to the logFile was way too long ago.
+        Process might be still running!
+        If your system is not really slow/overtaxed at the moment the process could be dead (check to be sure).
+        Chia Plot Status considers it possibly dead until it logs something again.
+
+
+        "✗ Dead (m)": You manually marked this process as dead.
+
+
+        "✗ Dead": Ouch. The chia plotter produced a fatal error. There will be something like "Caught plotting
+        error" in your logfile or it means the processes is not done and a new process appeared in the same logfile.
+        If your logging is not messed up and logging multiple processes in parallel to the same file this means
+        the process is dead.
+    LastLogLine: >
+        Last line in this plots log file
+    PlaceInLogFile: >
+        When using --num 20 to plot 20 plots in a row this shows you the current plot nr on the left and the
+        size of the queue on the right
+    Note: >
+        Here you can add notes and tags to group plot logs and compare performance.
+
+    TotalEligiblePlots: >
+        Plots that could have provided proofs for the challanges (for a reward).
+        1/512 chance per plot, per challenge.
+        Maybe they did actually contain a proof, maybe not.
+        Even if, this does not mean you earned Chia as the best proof provided by anyone gets rewarded, not everyone who delivers a proof.
+    AvgEligiblePlots: >
+        Average number of plots that can provide proofs for the challanges (for a reward) given in the timeframe from begin to end of your logfiles.
+        1/512 chance per plot, therefor should be somewhere around 0.001953125 times the nr of total plots.
+        If the number is higher, lucky you.
+        If it is a lot lower, well something is wrong unless you do not have many plots, like less than 50 or so or if you do not have a lot of data.
+        if you have just set the log level to INFO, this means practically nothing.
+        Wait a few hours to see any relevant value.
+        The less plots you have, the longer it takes for this value to become relevant.
+        Do you have a thousand plots? This value could become meaningfull after one to three hours.
+        Do you have less than 100 plots? Wait at least a day, maybe a week.
+    FoundProofs: >
+        Number of Proofs found.
+        A found proof does not necessarily mean you won chia, as the best submitted proof is picked.
+    BestLookupTime: >
+        Lookup time increases when a plot does actually contain proofs.
+        Best lookup time does therefor not tell you much unless it is high.
+    WorstLookupTime: >
+        Lookup time increases when a plot does actually contain proofs.
+        You have 30 seconds to submit a proof once a challenge is started.
+        Keep in mind that the proof needs to be transfered to a lot of nodes to be successfull.
+        Because of this the worst lookup time should not be larger that 5 seconds.
+    AvgLookupTime: >
+        Lookup time increases when a plot does actually contain proofs.
+        You have 30 seconds to submit a proof once a challenge is started.
+        Keep in mind that the proof needs to be transfered to a lot of nodes to be successfull.
+        Because of this the avg lookup time should not be larger that ~2 seconds.
+    FilterRatio: >
+        Number of elgible plots divided by the total nr of plots.
+        Shout be somewhere around 1/512 (0.001953125).
+        Higher is better, way lower means something is seriously wrong.
+    TotalPlots: >
+        Total nr of plots that harvester uses to harvest.
+    ChallengesPerMinute: >
+        Number of challenges this harvester handled per minute
+    AvgHeat: >
+        The nearer this gets to 5 (or even above 5) the worse your harvester works.
+        NAS does not work well with chia.
+    MaxHeat: >
+        The nearer this gets to 5 (or even above 5) the worse your harvester works, but Avg Heat is more important.
+        NAS does not work well with chia.
+    MinHeat: >
+        Should be as low as possible.
+        The nearer this gets to 5 (or even above 5) the worse your harvester works, but Avg and Max Heat are more important.
+        NAS does not work well with chia.

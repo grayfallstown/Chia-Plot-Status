@@ -9,7 +9,7 @@ using ChiaPlotStatus.GUI.Models;
 using ChiaPlotStatus.Logic.Models;
 using ChiaPlotStatus.Logic.Utils;
 using ChiaPlotStatusGUI.GUI.Utils;
-using ChiaPlotStatusGUI.GUI.ViewModels;
+using ChiaPlotStatusGUI;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Reactive;
 using System.Text.RegularExpressions;
+using ChiaPlotStatusLib.Logic.Models.Lang;
 
 namespace ChiaPlotStatus.Views
 {

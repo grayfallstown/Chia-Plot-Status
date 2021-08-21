@@ -14,6 +14,7 @@ namespace ChiaPlotStatusLib.Logic.Models
     public class Columns
     {
         public List<string> Order { get; set; } = new();
+        public Dictionary<string, bool> ShowColumn { get; set; } = new();
         public Dictionary<string, int> Widths { get; set; } = new();
 
         public Columns() {  }
@@ -30,8 +31,12 @@ namespace ChiaPlotStatusLib.Logic.Models
             var defaultColumns = Default();
             // add columns that are new in this release
             foreach (var defaultCol in defaultColumns.Order)
+            {
                 if (!this.Order.Contains(defaultCol))
                     this.Order.Add(defaultCol);
+                if (!this.ShowColumn.ContainsKey(defaultCol))
+                    this.ShowColumn.Add(defaultCol, true);
+            }
 
             // remove saved columns that were removed in this release
             List<string> colsToRemove = new();
@@ -46,42 +51,48 @@ namespace ChiaPlotStatusLib.Logic.Models
         {
             Columns columns = new();
 
-            columns.Order.Add("Note");
-            columns.Order.Add("Tmp1Drive");
-            columns.Order.Add("Tmp2Drive");
-            columns.Order.Add("DestDrive");
-            columns.Order.Add("StartDate");
-            columns.Order.Add("FinishDate");
-            columns.Order.Add("Health");
-            columns.Order.Add("Errors");
-            columns.Order.Add("Progress");
-            columns.Order.Add("ETA");
-            columns.Order.Add("TimeRemaining");
-            columns.Order.Add("RunTimeSeconds");
-            columns.Order.Add("CurrentPhase");
-            columns.Order.Add("CurrentTable");
-            columns.Order.Add("CurrentBucket");
-            columns.Order.Add("Phase1Seconds");
-            columns.Order.Add("Phase1Cpu");
-            columns.Order.Add("Phase2Seconds");
-            columns.Order.Add("Phase2Cpu");
-            columns.Order.Add("Phase3Seconds");
-            columns.Order.Add("Phase3Cpu");
-            columns.Order.Add("Phase4Seconds");
-            columns.Order.Add("Phase4Cpu");
-            columns.Order.Add("CopyTimeSeconds");
-            columns.Order.Add("TotalSeconds");
-            columns.Order.Add("Buffer");
-            columns.Order.Add("Buckets");
-            columns.Order.Add("Threads");
-            columns.Order.Add("LogFolder");
-            columns.Order.Add("LogFile");
-            columns.Order.Add("PlaceInLogFile");
-            columns.Order.Add("PID");
-            columns.Order.Add("ApproximateWorkingSpace");
-            columns.Order.Add("FinalFileSize");
-            columns.Order.Add("LastLogLine");
-            columns.Order.Add("PoolPuzzleHash");
+            void Add(string col) {
+                columns.Order.Add(col);
+                if (!columns.ShowColumn.ContainsKey(col))
+                    columns.ShowColumn.Add(col, true);
+            }
+
+            Add("Note");
+            Add("Tmp1Drive");
+            Add("Tmp2Drive");
+            Add("DestDrive");
+            Add("StartDate");
+            Add("FinishDate");
+            Add("Health");
+            Add("Errors");
+            Add("Progress");
+            Add("ETA");
+            Add("TimeRemaining");
+            Add("RunTimeSeconds");
+            Add("CurrentPhase");
+            Add("CurrentTable");
+            Add("CurrentBucket");
+            Add("Phase1Seconds");
+            Add("Phase1Cpu");
+            Add("Phase2Seconds");
+            Add("Phase2Cpu");
+            Add("Phase3Seconds");
+            Add("Phase3Cpu");
+            Add("Phase4Seconds");
+            Add("Phase4Cpu");
+            Add("CopyTimeSeconds");
+            Add("TotalSeconds");
+            Add("Buffer");
+            Add("Buckets");
+            Add("Threads");
+            Add("LogFolder");
+            Add("LogFile");
+            Add("PlaceInLogFile");
+            Add("PID");
+            Add("ApproximateWorkingSpace");
+            Add("FinalFileSize");
+            Add("LastLogLine");
+            Add("PoolPuzzleHash");
 
             return columns;
         }

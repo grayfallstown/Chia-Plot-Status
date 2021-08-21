@@ -1,0 +1,96 @@
+﻿@page "/"
+
+@using ChiaPlotStatusGUI2.Data
+@using ChiaPlotStatus
+@using ChiaPlotStatus.Logic.Models
+@inject ChiaPlotStatusService ChiaPlotStatusService
+<!--
+
+        public int PlotsInPhase1 { get; set; } = 0;
+        public int PlotsInPhase2 { get; set; } = 0;
+        public int PlotsInPhase3 { get; set; } = 0;
+        public int PlotsInPhase4 { get; set; } = 0;
+        public int PlotsInPhase5 { get; set; } = 0;
+        public int Finished { get; set; } = 0;
+        public int Running { get; set; } = 0;
+        public int Concerning { get; set; } = 0;
+        public int Failed { get; set; } = 0;
+    -->
+<div>
+    <span>Phase1: @ChiaPlotStatusService.PlotCounts.PlotsInPhase1,</span>
+    <span>Phase2: @ChiaPlotStatusService.PlotCounts.PlotsInPhase2,</span>
+    <span>Phase3: @ChiaPlotStatusService.PlotCounts.PlotsInPhase3,</span>
+    <span>Phase4: @ChiaPlotStatusService.PlotCounts.PlotsInPhase4,</span>
+    <span>Phase5: @ChiaPlotStatusService.PlotCounts.PlotsInPhase5,</span>
+    <span>Finished: @ChiaPlotStatusService.PlotCounts.Finished,</span>
+    <span>Running: @ChiaPlotStatusService.PlotCounts.Running,</span>
+    <span>Concerning: @ChiaPlotStatusService.PlotCounts.Concerning,</span>
+    <span>Failed: @ChiaPlotStatusService.PlotCounts.Failed,</span>
+</div>
+
+<div>
+    <div class="inline-block">
+        <input type="text" autofocus="autofocus" Placeholder="Search..." @bind-value=ChiaPlotStatusService.SearchString @bind-value:event="oninput" />
+    </div>
+    <div class="inline-block">
+        <div class="form-check form-switch inline-block">
+            <input type="checkbox" data-toggle="toggle" class="form-check-input" @bind-value=ChiaPlotStatusService.HideFinished />
+            <label class="form-check-text">Hide Finished,</label>
+        </div>
+        <div class="form-check form-switch inline-block">
+            <input type="checkbox" data-toggle="toggle" class="form-check-input" @bind-value=ChiaPlotStatusService.HideConfirmedDead />
+            <label class="form-check-text">Hide Confirmed Dead,</label>
+        </div>
+        <div class="form-check form-switch inline-block">
+            <input type="checkbox" data-toggle="toggle" class="form-check-input" @bind-value=ChiaPlotStatusService.HidePossiblyDead />
+            <label class="form-check-text">Hide Possibly Dead,</label>
+        </div>
+        <div class="form-check form-switch inline-block">
+            <input type="checkbox" data-toggle="toggle" class="form-check-input" @bind-value=ChiaPlotStatusService.HideHealthy />
+            <label class="form-check-text">Hide Healthy</label>
+        </div>
+    </div>
+</div>
+<div class="table-wrapper">
+    <div class="table-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    @foreach (var col in ChiaPlotStatusService.ColumnOrder)
+                    {
+                        @if (ChiaPlotStatusService.ColumnShow[col])
+                        {
+                            <!--<th style="width: @(ColumnWidths[col])px">@col</th>-->
+                            <th class="clickable" @onclick="() => ChiaPlotStatusService.SortFn(col)" style="width: auto">@col</th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var plotLog in ChiaPlotStatusService.readables)
+                {
+                    <tr>
+                        @foreach (var col in ChiaPlotStatusService.ColumnOrder)
+                        {
+                            @if (ChiaPlotStatusService.ColumnShow[col])
+                            {
+                                <td nowrap="nowrap">@ChiaPlotStatusService.Content(plotLog, col)</td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        ChiaPlotStatusService.OnUpdate += (_, _) => {
+            InvokeAsync(() => this.StateHasChanged());
+        };
+    }
+
+}
